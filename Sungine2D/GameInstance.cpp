@@ -61,7 +61,7 @@ void GameInstance::UpdateImGui()
 	{
 		ImGui::Begin("About", &mDisplayAbout, ImGuiWindowFlags_AlwaysAutoResize);
 		ImGui::Separator();
-		ImGui::TextColored(ImVec4(0.5f, 0.f, 0.5f, 1.f), "ExcerEngine2D");
+		ImGui::TextColored(ImVec4(0.5f, 0.f, 0.5f, 1.f), "Sungine2D");
 		ImGui::Text("Developed by Ramin Amiri");
 		ImGui::NewLine();
 		ImGui::Text("Developed using:");
@@ -69,7 +69,7 @@ void GameInstance::UpdateImGui()
 		ImGui::Text("- OpenGL 3.3");
 		ImGui::Text("- ImGui");
 		ImGui::NewLine();
-		ImGui::Text("https://github.com/suibun-code/excerengine-2d");
+		ImGui::Text("https://github.com/suibun-code/Sungine2D");
 		ImGui::End();
 	}
 
