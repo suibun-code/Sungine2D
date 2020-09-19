@@ -19,6 +19,7 @@
 #include "imgui_impl_opengl3.h"
 
 #include "GameInstance.h"
+#include "ResourceManager.h"
 #include "TestState.h"
 
 Core* Core::mspInstance = nullptr;
@@ -127,6 +128,11 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 			printf("Error initializing GLEW. %s\n", glewGetErrorString(glewError));
 		}
 	}
+
+	//OpenGL configuration.
+	glViewport(0, 0, mWindowWidth, mWindowHeight);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//ImGui.
 	mImGuiContext = ImGui::CreateContext();
@@ -371,7 +377,10 @@ void Core::Quit()
 
 void Core::Clean()
 {
-	//Cleanup ImGui.
+	//Clean-up ResourceManager.
+	ResourceManager::Clear();
+
+	//Clean-up ImGui.
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
@@ -379,7 +388,7 @@ void Core::Clean()
 	//deallocate program
 	//shaderUtil.delete_shaders();
 
-	//cleanup sdl
+	//Clean-up SDL.
 	SDL_DestroyRenderer(mpSDLRenderer);
 	SDL_GL_DeleteContext(mGLContext);
 	SDL_DestroyWindow(mpSDLWindow);
