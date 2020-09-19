@@ -5,6 +5,7 @@
 #include "Core.h"
 #include "GameInstance.h"
 
+//State
 void State::Update(float deltaTime)
 {
 	//if (Core::Instance()->KeyDown(SDL_SCANCODE_GRAVE))
@@ -17,7 +18,6 @@ void State::Update(float deltaTime)
 		GameInstance::Instance()->Update(deltaTime);
 }
 
-//State
 void State::Render()
 {
 	if (Core::Instance()->GameInstanceEnabled() == true)

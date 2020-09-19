@@ -163,9 +163,9 @@ private:
 	static GameInstance* mspGameInstance;
 
 	// ImGui menu variables
-	bool mDisplayAbout = false;
+	bool mDisplayAbout = true;
 	bool mDisplayUI = true;
-	bool mDisplayLog = false;
+	bool mDisplayLog = true;
 
 	// ImGui log variables
 	AppLog mLog;
@@ -193,6 +193,7 @@ public:
 	void HandleEvents(const SDL_Event* event);
 	void DumpStartupLog();
 	void AddLog(const char* fmt, ...) IM_FMTARGS(2);
+	void AddLog(const char* state, const char* stateName);
 
 	void SetUIFont(ImFont* font) { mUIFont = font; }
 };

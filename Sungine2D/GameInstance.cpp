@@ -5,7 +5,7 @@
 #include "imgui_impl_sdl.h"
 
 #include "Core.h"
-
+#include <iostream>
 //Initialzie game instance.
 GameInstance* GameInstance::mspGameInstance = nullptr;
 
@@ -120,13 +120,16 @@ void GameInstance::DumpStartupLog()
 	{
 		while (!mLogInputBuffer.empty())
 		{
-			mLog.AddLog("[%.1f sec]: %s", ImGui::GetTime(), mLogInputBuffer.back());
-			mLogInputBuffer.pop_back();
+			
+			mLog.AddLog("[%.1f sec]: %s", ImGui::GetTime(), mLogInputBuffer.front());
+			mLogInputBuffer.erase(mLogInputBuffer.begin());
+			//mLogInputBuffer.front() = std::move(mLogInputBuffer.back());
+			//mLogInputBuffer.pop_back();
 			mLog.AddLog("\n");
 		}
 	}
 	else
-		mLog.AddLog("GameInstance::dump_startup_log() called. Buffer is empty.");
+		mLog.AddLog("GameInstance::DumpStartupLog() called. Buffer is empty.");
 }
 
 void GameInstance::AddLog(const char* fmt, ...)

@@ -31,7 +31,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		GameInstance::Instance()->AddLog("[OK] SDL Core Initialization");
+		GameInstance::Instance()->AddLog("[OK] SDL Core Initialization.");
 
 		//Use OpenGL 3.3 core.
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -43,25 +43,25 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	}
 	else
 	{
-		GameInstance::Instance()->AddLog("[FAIL] SDL Core Initialization");
+		GameInstance::Instance()->AddLog("[FAIL] SDL Core Initialization.");
 		return false;
 	}
 
 	if (mpSDLWindow != nullptr)
 	{
-		GameInstance::Instance()->AddLog("[OK] SDL Window Initialization");
+		GameInstance::Instance()->AddLog("[OK] SDL Window Initialization.");
 		mpSDLRenderer = SDL_CreateRenderer(mpSDLWindow, -1, SDL_RENDERER_ACCELERATED);
 	}
 	else
 	{
-		GameInstance::Instance()->AddLog("[FAIL] SDL Window Initialization");
+		GameInstance::Instance()->AddLog("[FAIL] SDL Window Initialization.");
 		return false;
 	}
 
 	if (mpSDLRenderer != nullptr)
 	{
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
-		GameInstance::Instance()->AddLog("[OK] SDL Renderer Initialization");
+		GameInstance::Instance()->AddLog("[OK] SDL Renderer Initialization.");
 		SDL_SetRenderDrawColor(mpSDLRenderer, 255, 0, 0, 255);
 		SDL_RenderSetLogicalSize(mpSDLRenderer, mWindowWidth, mWindowHeight);
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
@@ -69,13 +69,13 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	}
 	else
 	{
-		GameInstance::Instance()->AddLog("[FAIL] SDL Renderer Initialization");
+		GameInstance::Instance()->AddLog("[FAIL] SDL Renderer Initialization.");
 		return false;
 	}
 
 	if (IMG_Init(IMG_INIT_PNG) != 0)
 	{
-		GameInstance::Instance()->AddLog("[OK] SDL Image Initialization");
+		GameInstance::Instance()->AddLog("[OK] SDL Image Initialization.");
 
 		mpSDLSurface = IMG_Load("res/img/icon.png");
 		SDL_SetWindowIcon(mpSDLWindow, mpSDLSurface);
@@ -83,7 +83,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	}
 	else
 	{
-		GameInstance::Instance()->AddLog("[FAIL] SDL Image Initialization");
+		GameInstance::Instance()->AddLog("[FAIL] SDL Image Initialization.");
 		return false;
 	}
 
@@ -92,21 +92,21 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
 		Mix_AllocateChannels(16);
 
-		GameInstance::Instance()->AddLog("[OK] SDL Mixer Initialization");
+		GameInstance::Instance()->AddLog("[OK] SDL Mixer Initialization.");
 	}
 	else
 	{
-		GameInstance::Instance()->AddLog("[FAIL] SDL Mixer Initialization");
+		GameInstance::Instance()->AddLog("[FAIL] SDL Mixer Initialization.");
 		return false;
 	}
 
 	if (TTF_Init() == 0)
 	{
-		GameInstance::Instance()->AddLog("[OK] SDL Font Initialization");
+		GameInstance::Instance()->AddLog("[OK] SDL Font Initialization.");
 	}
 	else
 	{
-		GameInstance::Instance()->AddLog("[FAIL] SDL Font Initialization");
+		GameInstance::Instance()->AddLog("[FAIL] SDL Font Initialization.");
 		return false;
 	}
 
@@ -145,19 +145,19 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	//Set random seed.
 	srand((unsigned)time(NULL));
 
-	mpKeyStates = SDL_GetKeyboardState(nullptr);
-	mpFSM = new StateMachine();
-	//mpAM = new AudioManager();
-	//mpAM->SetMusicVolume(15);
-	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
-	mpFSM->ChangeState(new TestState());
-
 	//Start engine and enable the game instance.
 	mIsRunning = true;
 	mGameInstanceEnabled = true;
 
 	GameInstance::Instance()->DumpStartupLog();
 	GameInstance::Instance()->AddLog("Welcome to Sungine2D.\n");
+
+	mpKeyStates = SDL_GetKeyboardState(nullptr);
+	mpFSM = new StateMachine();
+	//mpAM = new AudioManager();
+	//mpAM->SetMusicVolume(15);
+	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
+	mpFSM->ChangeState(new TestState());
 
 	return true;
 }

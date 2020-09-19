@@ -4,6 +4,7 @@
 #include "glew.h"
 
 #include "Core.h"
+#include "GameInstance.h"
 #include "ResourceManager.h"
 #include "SuSprite.h"
 #include "Player.h"
@@ -13,6 +14,13 @@ Player* player;
 
 void TestState::Enter()
 {
+	char buffer[256];
+	strncpy_s(buffer, "[ENTER] ", sizeof(buffer));
+	strncat_s(buffer, " State '", sizeof(buffer));
+	strncat_s(buffer, mStateName, sizeof(buffer));
+	strncat_s(buffer, "'.", sizeof(buffer));
+	GameInstance::Instance()->AddLog(buffer);
+
 	glClearColor(.294f, .0f, .509f, 1.f);
 
 	ResourceManager::LoadShader("shaders/sprite.vert", "shaders/sprite.frag", nullptr, "sprite");

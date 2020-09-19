@@ -14,10 +14,10 @@ protected:
 	SDL_Texture* mSDLFontText = nullptr;
 	SDL_Rect mSDLFontRect = { 0, 0, 0, 0 };
 
-	std::string mStateName = "State";
+	const char* mStateName = "State";
 
 public:
-	State(std::string mStateName) : mStateName(mStateName) {}
+	State(const char* mStateName) : mStateName(mStateName) {}
 
 	virtual void Enter() = 0;
 	virtual void Update(float deltaTime);
