@@ -6,8 +6,10 @@
 #include "Core.h"
 #include "ResourceManager.h"
 #include "SuSprite.h"
+#include "Player.h"
 
-SuSprite* pSuSprite;
+//SuSprite* pSuSprite;
+Player* player;
 
 void TestState::Enter()
 {
@@ -21,13 +23,35 @@ void TestState::Enter()
 	ShaderUtil myShader;
 	myShader = ResourceManager::GetShader("sprite");
 
-	pSuSprite = new SuSprite(myShader);
+	//pSuSprite = new SuSprite(myShader);
+	player = new Player(glm::vec2(200.f, 200.f), myShader);
 
-	ResourceManager::LoadTexture("res/img/sample.png", true, "cat");
+	ResourceManager::LoadTexture("res/img/player.png", true, "player");
 }
 
 void TestState::Update(float deltaTime)
 {
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_A))
+	{
+		player->SetDirection(-1);
+		player->MoveX(deltaTime);
+	}
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_D))
+	{
+		player->SetDirection(1);
+		player->MoveX(deltaTime);
+	}
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_W))
+	{
+		player->SetDirection(-1);
+		player->MoveY(deltaTime);
+	}
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_S))
+	{
+		player->SetDirection(1);
+		player->MoveY(deltaTime);
+	}
+
 	State::Update(deltaTime);
 }
 
@@ -36,14 +60,16 @@ void TestState::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	SuTexture2D myTexture;
-	myTexture = ResourceManager::GetTexture("cat");
+	myTexture = ResourceManager::GetTexture("player");
 
-	pSuSprite->DrawSprite(myTexture, glm::vec2(250.0f, 150.0f), glm::vec2(myTexture.Width, myTexture.Height), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+	//pSuSprite->DrawSprite(myTexture, glm::vec2(250.0f, 150.0f), glm::vec2(myTexture.Width, myTexture.Height), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+	player->DrawSprite2(myTexture, player->GetPosition(), glm::vec2(myTexture.Width, myTexture.Height));
 
 	State::Render();
 }
 
 void TestState::Exit()
 {
-	delete pSuSprite;
+	//delete pSuSprite;
+	delete player;
 }

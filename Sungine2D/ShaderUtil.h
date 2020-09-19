@@ -12,19 +12,22 @@
 class ShaderUtil
 {
 private:
-	// checks if compilation or linking failed and if so, print the error logs
+	//Check for errors and print if detected.
 	void checkCompileErrors(unsigned int object, std::string type);
 
 public:
-	// state
+	//Texture ID.
 	unsigned int ID = 0;
-	// constructor
+
 	ShaderUtil() {}
-	// sets the current shader as active
+
+	//Sets the current shader as active.
 	ShaderUtil& Use();
-	// compiles the shader from given source code
-	void Compile(const char* vertexSource, const char* fragmentSource, const char* geometrySource = nullptr); // note: geometry source code is optional 
-	// utility functions
+
+	//Compiles the shader from the source code. Geometry source is optional.
+	void Compile(const char* vertexSource, const char* fragmentSource, const char* geometrySource = nullptr);
+
+	//Utility functions.
 	void SetFloat(const char* name, float value, bool useShader = false);
 	void SetInteger(const char* name, int value, bool useShader = false);
 	void SetVector2f(const char* name, float x, float y, bool useShader = false);

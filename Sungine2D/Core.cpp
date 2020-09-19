@@ -162,7 +162,6 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	return true;
 }
 
-
 void Core::InitImGui()
 {
 	//*****Input*****
@@ -273,24 +272,32 @@ bool Core::Tick()
 {
 	mPreviousTime = mCurrentTime;
 	mCurrentTime = SDL_GetPerformanceCounter();
-	mDeltaTime = mDeltaTime = ((mCurrentTime - mPreviousTime) * 1000 / (float)SDL_GetPerformanceFrequency());
+	mDeltaTime = (float)((mCurrentTime - mPreviousTime) * 1000 / (float)SDL_GetPerformanceFrequency());
 	mFramesPerSecond = 1000 / mDeltaTime;
-
+	std::cout << "d: " << mDeltaTime << "\n";
 	auto duration = std::chrono::steady_clock::now().time_since_epoch();
 	auto count = std::chrono::duration_cast<std::chrono::microseconds>(duration).count();
 	mTick = 1000000 / FPS;
-	if (count % mTick < 325) // Margin of error for modulus.
-	{
-		if (mGotTick == false) // Drops potential duplicate frames.
-			mGotTick = true;
-	}
-	else mGotTick = false;
+	//if (count % mTick < 325) // Margin of error for modulus.
+	//{
+	//	if (mGotTick == false) // Drops potential duplicate frames.
+	//		mGotTick = true;
+	//}
+	//else mGotTick = false;
+	mGotTick = true;
 
 	return mGotTick;
 }
 
 bool Core::KeyDown(SDL_Scancode k)
 {
+	if (mpKeyStates != nullptr)
+	{
+		if (mpKeyStates[k] == 1)
+			return true;
+		else
+			return false;
+	}
 	return false;
 }
 

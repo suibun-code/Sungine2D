@@ -39,17 +39,20 @@ ShaderUtil& ShaderUtil::Use()
 void ShaderUtil::Compile(const char* vertexSource, const char* fragmentSource, const char* geometrySource)
 {
     unsigned int sVertex, sFragment, gShader;
-    // vertex Shader
+
+    //Vertex shader.
     sVertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(sVertex, 1, &vertexSource, NULL);
     glCompileShader(sVertex);
     checkCompileErrors(sVertex, "VERTEX");
-    // fragment Shader
+
+    //Fragment shader.
     sFragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(sFragment, 1, &fragmentSource, NULL);
     glCompileShader(sFragment);
     checkCompileErrors(sFragment, "FRAGMENT");
-    // if geometry shader source code is given, also compile geometry shader
+
+    //If geometry source is given, compile it as well.
     if (geometrySource != nullptr)
     {
         gShader = glCreateShader(GL_GEOMETRY_SHADER);
@@ -57,15 +60,20 @@ void ShaderUtil::Compile(const char* vertexSource, const char* fragmentSource, c
         glCompileShader(gShader);
         checkCompileErrors(gShader, "GEOMETRY");
     }
-    // shader program
+
+    //Shader program.
     this->ID = glCreateProgram();
+
     glAttachShader(this->ID, sVertex);
     glAttachShader(this->ID, sFragment);
     if (geometrySource != nullptr)
         glAttachShader(this->ID, gShader);
+
     glLinkProgram(this->ID);
+
     checkCompileErrors(this->ID, "PROGRAM");
-    // delete the shaders as they're linked into our program now and no longer necessery
+
+    //Delete the shaders, they are linked into the program and now no longer needed.
     glDeleteShader(sVertex);
     glDeleteShader(sFragment);
     if (geometrySource != nullptr)

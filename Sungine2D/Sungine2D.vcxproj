@@ -155,6 +155,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="GameInstance.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="SuSprite.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="SuSprite.cpp" />

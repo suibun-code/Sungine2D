@@ -2,10 +2,9 @@
 
 void SuSprite::initRenderData()
 {
-    // configure VAO/VBO
-    unsigned int VBO;
+    //Configure the VAO & VBO.
     float vertices[] = {
-        // pos      // tex
+        //Pos       //Tex
         0.0f, 1.0f, 0.0f, 1.0f,
         1.0f, 0.0f, 1.0f, 0.0f,
         0.0f, 0.0f, 0.0f, 0.0f,
@@ -15,35 +14,36 @@ void SuSprite::initRenderData()
         1.0f, 0.0f, 1.0f, 0.0f
     };
 
-    glGenVertexArrays(1, &this->quadVAO);
-    glGenBuffers(1, &VBO);
+    glGenVertexArrays(1, &this->mQuadVAO);
+    glGenBuffers(1, &mVBO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, mVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindVertexArray(this->quadVAO);
+    glBindVertexArray(this->mQuadVAO);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
 
-SuSprite::SuSprite(ShaderUtil& shaderUtil)
+SuSprite::SuSprite(ShaderUtil& mShaderUtil)
 {
-	this->shaderUtil = shaderUtil;
+	this->mShaderUtil = mShaderUtil;
 	this->initRenderData();
 }
 
 SuSprite::~SuSprite()
 {
-	glDeleteVertexArrays(1, &this->quadVAO);
+	glDeleteVertexArrays(1, &this->mQuadVAO);
 }
 
 void SuSprite::DrawSprite(SuTexture2D& texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color)
 {
-    // prepare transformations
-    this->shaderUtil.Use();
+    //Prepare transformations.
+    this->mShaderUtil.Use();
     glm::mat4 model = glm::mat4(1.0f);
+
     model = glm::translate(model, glm::vec3(position, 0.0f));  // first translate (transformations are: scale happens first, then rotation, and then final translation happens; reversed order)
 
     model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // move origin of rotation to center of quad
@@ -52,15 +52,35 @@ void SuSprite::DrawSprite(SuTexture2D& texture, glm::vec2 position, glm::vec2 si
 
     model = glm::scale(model, glm::vec3(size, 1.0f)); // last scale
 
-    this->shaderUtil.SetMatrix4("model", model);
+    this->mShaderUtil.SetMatrix4("model", model);
 
     // render textured quad
-    this->shaderUtil.SetVector3f("spriteColor", color);
+    this->mShaderUtil.SetVector3f("spriteColor", color);
 
     glActiveTexture(GL_TEXTURE0);
     texture.Bind();
 
-    glBindVertexArray(this->quadVAO);
+    glBindVertexArray(this->mQuadVAO);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glBindVertexArray(0);
+}
+
+void SuSprite::DrawSprite2(SuTexture2D& texture, glm::vec2 position, glm::vec2 size)
+{
+    //Prepare transformations.
+    this->mShaderUtil.Use();
+    glm::mat4 model = glm::mat4(1.0f);
+
+    model = glm::translate(model, glm::vec3(position, 0.0f));
+    model = glm::scale(model, glm::vec3(size, 1.0f));
+
+    this->mShaderUtil.SetMatrix4("model", model);
+    this->mShaderUtil.SetVector3f("spriteColor", glm::vec3(1.f));
+
+    glActiveTexture(GL_TEXTURE0);
+    texture.Bind();
+
+    glBindVertexArray(this->mQuadVAO);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
 }

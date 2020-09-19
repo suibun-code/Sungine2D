@@ -39,6 +39,8 @@ private:
 	float mDeltaTime = 0;
 	float mFramesPerSecond = 0;
 
+	Uint64 fps_frames = 0; //DELETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
 	//Unused old variables for capping framerate.
 	int mTick = 0; 
 	int mFrame = 0;
