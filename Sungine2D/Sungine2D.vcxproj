@@ -154,6 +154,7 @@
     <ClInclude Include="..\include\imgui_sdl\imgui_sdl.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="GameInstance.h" />
     <ClInclude Include="MainMenu.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="..\include\imgui_sdl\imgui_sdl.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
     <ClCompile Include="Main.cpp" />

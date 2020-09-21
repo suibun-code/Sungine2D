@@ -14,8 +14,3 @@ void Player::MoveY(float deltaTime)
 {
 	mPosition.y += (mSpeed * deltaTime) * mDirection;
 }
-
-void Player::SetDirection(int direction)
-{
-	mDirection = direction;
-}

@@ -5,15 +5,10 @@
 
 //SDL
 #include "SDL.h"
-#include "SDL_ttf.h"
 
 class State
 {
 protected:
-	TTF_Font* mSDLFont = nullptr;
-	SDL_Texture* mSDLFontText = nullptr;
-	SDL_Rect mSDLFontRect = { 0, 0, 0, 0 };
-
 	const char* mStateName = "State";
 
 public:
@@ -28,8 +23,6 @@ public:
 
 	template <class T>
 	void CleanVector(std::vector<T> vec);
-
-	void RenderFont(bool, const char*, int, int);
 
 	std::string GetStateName() { return mStateName; }
 };

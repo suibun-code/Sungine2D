@@ -5,7 +5,9 @@
 #include <fstream>
 
 //SDL
-#include "SDL_image.h"
+#include "SDL_ttf.h"
+
+#include "Core.h"
 
 // Instantiate static variables
 std::map<std::string, SuTexture2D>    ResourceManager::Textures;
@@ -80,6 +82,33 @@ SuTexture2D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
     return texture;
 }
 
+SuTexture2D ResourceManager::loadTextureFromFont(const char* text, bool alpha)
+{
+    SuTexture2D texture;
+    TTF_Font* mpSDLFont = TTF_OpenFont("font/CircularStd-Black.ttf", 14);
+    //SDL_Texture* mpSDLFontText = nullptr;
+
+    if (alpha)
+    {
+        texture.Internal_Format = GL_RGBA;
+        texture.Image_Format = GL_RGBA;
+    }
+
+    SDL_Color textcolor = { 0, 0, 0, 255 };
+    SDL_Surface* fontsurface;
+
+    fontsurface = TTF_RenderText_Blended(mpSDLFont, text, textcolor);
+
+    //SDL_DestroyTexture(mpSDLFontText); //de-allocate previous font texture
+    //mpSDLFontText = SDL_CreateTextureFromSurface(Core::Instance()->GetRenderer(), fontsurface);
+
+    texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
+
+    SDL_FreeSurface(fontsurface);
+
+    return texture;
+}
+
 ShaderUtil ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
 {
     Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
@@ -94,6 +123,12 @@ ShaderUtil ResourceManager::GetShader(std::string name)
 SuTexture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
 {
     Textures[name] = loadTextureFromFile(file, alpha);
+    return Textures[name];
+}
+
+SuTexture2D ResourceManager::LoadTextureFont(const char* text, bool alpha, std::string name)
+{
+    Textures[name] = loadTextureFromFont(text, alpha);
     return Textures[name];
 }
 

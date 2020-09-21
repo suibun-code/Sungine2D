@@ -10,6 +10,7 @@
 #include "ResourceManager.h"
 #include "TestState.h"
 
+SuSprite* textenter;
 SuSprite* pSuSprite;
 
 void MainMenu::Enter()
@@ -25,14 +26,17 @@ void MainMenu::Enter()
 
 	ShaderUtil myShader;
 	myShader = ResourceManager::GetShader("sprite");
+
+	textenter = new SuSprite(myShader);
 	pSuSprite = new SuSprite(myShader);
 
+	ResourceManager::LoadTextureFont("Press Enter To Start", true, "enter");
 	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
 }
 
 void MainMenu::Update(float deltaTime)
 {
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_G))
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
 	{
 		Core::Instance()->GetFSM()->ChangeState(new TestState);
 	}
@@ -45,6 +49,10 @@ void MainMenu::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	SuTexture2D myTexture;
+
+	myTexture = ResourceManager::GetTexture("enter");
+	textenter->DrawSprite(myTexture, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25), glm::vec2(myTexture.Width, myTexture.Height));
+
 	myTexture = ResourceManager::GetTexture("logo"); 
 	pSuSprite->DrawSprite(myTexture, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (myTexture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (myTexture.Height / 2)), glm::vec2(myTexture.Width, myTexture.Height));
 
@@ -58,5 +66,6 @@ void MainMenu::Exit()
 
 	Core::Instance()->GetAM()->ClearMusic();
 
+	delete textenter;
 	delete pSuSprite;
 }

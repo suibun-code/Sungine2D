@@ -31,20 +31,6 @@ void State::HandleStateEvents(const SDL_Event* event)
 	if (Core::Instance()->GameInstanceEnabled() == true)
 	GameInstance::Instance()->HandleEvents(event);
 }
-
-void State::RenderFont(bool render, const char* text, int x, int y)
-{
-	if (render)
-	{
-		SDL_Color text_color = { 255, 255, 255, 255 };
-		SDL_Surface* font_surface = TTF_RenderText_Solid(mSDLFont, text, text_color);
-		SDL_DestroyTexture(mSDLFontText); //de-allocate previous font texture
-		mSDLFontText = SDL_CreateTextureFromSurface(Core::Instance()->GetRenderer(), font_surface);
-		mSDLFontRect = { x - font_surface->w, y - font_surface->h, font_surface->w, font_surface->h };
-		SDL_FreeSurface(font_surface);
-	}
-	SDL_RenderCopy(Core::Instance()->GetRenderer(), mSDLFontText, 0, &mSDLFontRect);
-}
 //End State
 
 template<class T>
