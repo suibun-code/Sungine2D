@@ -64,23 +64,3 @@ void SuSprite::DrawSprite(SuTexture2D& texture, glm::vec2 position, glm::vec2 si
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
 }
-
-void SuSprite::DrawSprite2(SuTexture2D& texture, glm::vec2 position, glm::vec2 size)
-{
-    //Prepare transformations.
-    this->mShaderUtil.Use();
-    glm::mat4 model = glm::mat4(1.0f);
-
-    model = glm::translate(model, glm::vec3(position, 0.0f));
-    model = glm::scale(model, glm::vec3(size, 1.0f));
-
-    this->mShaderUtil.SetMatrix4("model", model);
-    this->mShaderUtil.SetVector3f("spriteColor", glm::vec3(1.f));
-
-    glActiveTexture(GL_TEXTURE0);
-    texture.Bind();
-
-    glBindVertexArray(this->mQuadVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    glBindVertexArray(0);
-}

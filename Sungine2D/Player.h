@@ -5,12 +5,16 @@
 class Player : public SuSprite
 {
 private:
-	glm::vec2 mPosition = { 0, 0 };
+	int mMaxHealth, mHealth = 100;
 	int mDirection = 1; //Negative for left, positive for right.
+	glm::vec2 mPosition = { 0, 0 };
 	float mSpeed = 0.5f;
 
 public:
 	Player(glm::vec2 position, ShaderUtil shaderUtil);
+
+	void SetHealth(int health) { mHealth = health; }
+	int GetHealth() { return mHealth; }
 
 	void MoveX(float deltaTime);
 	void MoveY(float deltaTime);

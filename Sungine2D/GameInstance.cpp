@@ -6,6 +6,7 @@
 
 #include "Core.h"
 #include <iostream>
+
 //Initialzie game instance.
 GameInstance* GameInstance::mspGameInstance = nullptr;
 
@@ -61,7 +62,7 @@ void GameInstance::UpdateImGui()
 	{
 		ImGui::Begin("About", &mDisplayAbout, ImGuiWindowFlags_AlwaysAutoResize);
 		ImGui::Separator();
-		ImGui::TextColored(ImVec4(0.5f, 0.f, 0.5f, 1.f), "Sungine2D");
+		ImGui::TextColored(ImVec4(0.55f, 0.235f, 0.75f, 0.95f), "Sungine2D");
 		ImGui::Text("Developed by Ramin Amiri");
 		ImGui::NewLine();
 		ImGui::Text("Developed using:");
@@ -130,6 +131,18 @@ void GameInstance::DumpStartupLog()
 	}
 	else
 		mLog.AddLog("GameInstance::DumpStartupLog() called. Buffer is empty.");
+}
+
+void GameInstance::LogBuffer(const char* arr[], int len)
+{
+	char buffer[256];
+
+	strncpy_s(buffer, arr[0], sizeof(buffer));
+	
+	for (int i = 1; i < len; i++)
+		strncat_s(buffer, arr[i], sizeof(buffer));
+
+	GameInstance::Instance()->AddLog(buffer);
 }
 
 void GameInstance::AddLog(const char* fmt, ...)

@@ -5,7 +5,7 @@
 
 #include "Core.h"
 #include "GameInstance.h"
-#include "ResourceManager.h"
+#include "ResourceManager.h"  
 #include "SuSprite.h"
 #include "Player.h"
 
@@ -14,24 +14,18 @@ Player* player;
 
 void TestState::Enter()
 {
-	char buffer[256];
-	strncpy_s(buffer, "[ENTER] ", sizeof(buffer));
-	strncat_s(buffer, " State '", sizeof(buffer));
-	strncat_s(buffer, mStateName, sizeof(buffer));
-	strncat_s(buffer, "'.", sizeof(buffer));
-	GameInstance::Instance()->AddLog(buffer);
+	//Print entrance to log.
+	const char* test[] = { "[ENTER] ", " '", mStateName, "'.\n" };
+	GameInstance::LogBuffer(test, sizeof(test) / sizeof(test[0]));
 
+	//Clear the screen with specific color.
 	glClearColor(.294f, .0f, .509f, 1.f);
 
-	ResourceManager::LoadShader("shaders/sprite.vert", "shaders/sprite.frag", nullptr, "sprite");
-	glm::mat4 projection = projection = glm::ortho(0.f, 1280.f, 720.f, 0.f, -5.f, 5.f);
-	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
-	ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
+	Core::Instance()->GetAM()->LoadMusic("res/audio/music/hydrogen.mp3");
+	Core::Instance()->GetAM()->PlayMusic(0, -1);
 
 	ShaderUtil myShader;
 	myShader = ResourceManager::GetShader("sprite");
-
-	//pSuSprite = new SuSprite(myShader);
 	player = new Player(glm::vec2(200.f, 200.f), myShader);
 
 	ResourceManager::LoadTexture("res/img/player.png", true, "player");
@@ -69,15 +63,18 @@ void TestState::Render()
 
 	SuTexture2D myTexture;
 	myTexture = ResourceManager::GetTexture("player");
-
-	//pSuSprite->DrawSprite(myTexture, glm::vec2(250.0f, 150.0f), glm::vec2(myTexture.Width, myTexture.Height), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-	player->DrawSprite2(myTexture, player->GetPosition(), glm::vec2(myTexture.Width, myTexture.Height));
+	player->DrawSprite(myTexture, player->GetPosition(), glm::vec2(myTexture.Width, myTexture.Height));
 
 	State::Render();
 }
 
 void TestState::Exit()
 {
+	const char* test[] = { "[EXIT] ", " '", mStateName, "'.\n" };
+	GameInstance::LogBuffer(test, sizeof(test) / sizeof(test[0]));
+
+	Core::Instance()->GetAM()->ClearMusic();
+
 	//delete pSuSprite;
 	delete player;
 }

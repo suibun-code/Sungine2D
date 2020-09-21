@@ -9,6 +9,7 @@
 #include "imgui.h"
 
 #include "FSM.h"
+#include "AudioManager.h"
 
 class Core
 {
@@ -39,10 +40,8 @@ private:
 	float mDeltaTime = 0;
 	float mFramesPerSecond = 0;
 
-	Uint64 fps_frames = 0; //DELETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-
 	//Unused old variables for capping framerate.
-	int mTick = 0; 
+	int mTick = 0;
 	int mFrame = 0;
 	bool mCap = true;
 
@@ -51,7 +50,7 @@ private:
 	Sint32 mMousePosY = 0;
 
 	//Window dimensions.
-	int mWindowWidth = 1280; 
+	int mWindowWidth = 1280;
 	int mWindowHeight = 720;
 
 	//SDL variables.
@@ -63,8 +62,8 @@ private:
 	const uint8_t* mpKeyStates = nullptr;
 
 	//State machine and audio manager.
-	StateMachine *mpFSM = nullptr;
-	//AudioManager* mpAM = nullptr;
+	StateMachine* mpFSM = nullptr;
+	AudioManager* mpAM = nullptr;
 
 public:
 	const char* mVersion = "v0.0.1";
@@ -90,7 +89,7 @@ public:
 	SDL_Renderer* GetRenderer() { return mpSDLRenderer; }
 
 	StateMachine* GetFSM() { return mpFSM; }
-	//AudioManager* GetAM() { return mpAM; }
+	AudioManager* GetAM() { return mpAM; }
 
 	Sint32 GetMousePosX() { return mMousePosX; }
 	Sint32 GetMousePosY() { return mMousePosY; }

@@ -96,8 +96,8 @@ struct AppLog
 				ImGui::LogToClipboard();
 
 			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
-			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.75f, 0.75f, 0.f, 0.95f));
-
+			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.55f, 0.235f, 0.75f, 0.95f));
+				
 			const char* buf = Buffer.begin();
 			const char* buf_end = Buffer.end();
 			if (Filter.IsActive())
@@ -193,7 +193,7 @@ public:
 	void HandleEvents(const SDL_Event* event);
 	void DumpStartupLog();
 	void AddLog(const char* fmt, ...) IM_FMTARGS(2);
-	void AddLog(const char* state, const char* stateName);
+	static void LogBuffer(const char* arr[], int len);
 
 	void SetUIFont(ImFont* font) { mUIFont = font; }
 };

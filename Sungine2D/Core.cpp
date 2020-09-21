@@ -20,6 +20,7 @@
 
 #include "GameInstance.h"
 #include "ResourceManager.h"
+#include "MainMenu.h"
 #include "TestState.h"
 
 Core* Core::mspInstance = nullptr;
@@ -140,6 +141,12 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	ImGui_ImplSDL2_InitForOpenGL(mpSDLWindow, mGLContext);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
+	//Load shaders and attach variables/values to variables within the shader source code.
+	ResourceManager::LoadShader("shaders/sprite.vert", "shaders/sprite.frag", nullptr, "sprite");
+	glm::mat4 projection = projection = glm::ortho(0.f, 1280.f, 720.f, 0.f, -5.f, 5.f);
+	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
+	ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
+
 	InitImGui();
 
 	//Set random seed.
@@ -154,10 +161,10 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
-	//mpAM = new AudioManager();
-	//mpAM->SetMusicVolume(15);
+	mpAM = new AudioManager();
+	mpAM->SetMusicVolume(MIX_MAX_VOLUME);
 	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
-	mpFSM->ChangeState(new TestState());
+	mpFSM->ChangeState(new MainMenu());
 
 	return true;
 }
@@ -198,13 +205,13 @@ void Core::InitImGui()
 	//*****Style*****
 
 	// purple colors, 3 intensities
-	#define HI(v)   ImVec4(0.333f, 0.102f, 0.545f, v)
-	#define MED(v)  ImVec4(0.392f, 0.325f, 0.580f, v)
-	#define LOW(v)  ImVec4(0.222f, 0.051f, 0.470f, v)
-	// backgrounds (@todo: complete with BG_MED, BG_LOW)
-	#define BG(v)   ImVec4(0.20f, 0.220f, 0.270f, v)
-	// text
-	#define TEXTT(v) ImVec4(0.860f, 0.930f, 0.890f, v)
+#define HI(v)   ImVec4(0.333f, 0.102f, 0.545f, v)
+#define MED(v)  ImVec4(0.392f, 0.325f, 0.580f, v)
+#define LOW(v)  ImVec4(0.222f, 0.051f, 0.470f, v)
+// backgrounds (@todo: complete with BG_MED, BG_LOW)
+#define BG(v)   ImVec4(0.20f, 0.220f, 0.270f, v)
+// text
+#define TEXTT(v) ImVec4(0.860f, 0.930f, 0.890f, v)
 
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.Colors[ImGuiCol_Text] = TEXTT(0.78f);
@@ -274,9 +281,10 @@ bool Core::Tick()
 	mCurrentTime = SDL_GetPerformanceCounter();
 	mDeltaTime = (float)((mCurrentTime - mPreviousTime) * 1000 / (float)SDL_GetPerformanceFrequency());
 	mFramesPerSecond = 1000 / mDeltaTime;
-	std::cout << "d: " << mDeltaTime << "\n";
+
 	auto duration = std::chrono::steady_clock::now().time_since_epoch();
 	auto count = std::chrono::duration_cast<std::chrono::microseconds>(duration).count();
+
 	mTick = 1000000 / FPS;
 	//if (count % mTick < 325) // Margin of error for modulus.
 	//{
@@ -318,13 +326,12 @@ void Core::Render()
 
 void Core::HandleEvents()
 {
-	//std::cout << "H: " << mGameInstanceEnabled << "\n";
-
 	ImGuiIO& io = ImGui::GetIO();
 
 	if (SDL_PollEvent(&mEvent))
 	{
-		ImGui_ImplSDL2_ProcessEvent(&mEvent); //does most of the input/event processing
+		//Does most of the input/event processing.
+		ImGui_ImplSDL2_ProcessEvent(&mEvent);
 
 		if (mEvent.type == SDL_WINDOWEVENT)
 		{
@@ -335,18 +342,18 @@ void Core::HandleEvents()
 				break;
 
 			case SDL_WINDOWEVENT_FOCUS_LOST:
-				//if (!mpAM->is_paused())
-				//{
-				//	mMusicEnabled = false;
-				//	mpAM->pause_music();
-				//}
-				//else
-				//	mMusicEnabled = true;
+				if (!mpAM->IsPaused())
+				{
+					mMusicEnabled = false;
+					mpAM->PauseMusic();
+				}
+				else
+					mMusicEnabled = true;
 				break;
 
 			case SDL_WINDOWEVENT_FOCUS_GAINED:
-				//if (mpAM->IsPaused() && mMusicEnabled == false)
-				//	mpAM->ResumeMusic();
+				if (mpAM->IsPaused() && mMusicEnabled == false)
+					mpAM->ResumeMusic();
 				break;
 			}
 		}

@@ -84,6 +84,12 @@
     <ClInclude Include="Core.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -136,6 +142,12 @@
     </ClCompile>
     <ClCompile Include="Core.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
