@@ -39,6 +39,8 @@ void TestState::Enter()
 	ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
 	ResourceManager::LoadTextureFont("hello", true, "text");
 	ResourceManager::LoadTexture("res/img/player.png", true, "player");
+
+	player->SetAlpha(0.5f);
 }
 
 void TestState::Update(float deltaTime)
@@ -79,13 +81,13 @@ void TestState::Render()
 	SuTexture2D myTexture;
 
 	myTexture = ResourceManager::GetTexture("enemy");
-	enemy->DrawSprite(myTexture, enemy->GetPosition(), glm::vec2(myTexture.Width, myTexture.Height));
+	enemy->DrawSprite(myTexture, enemy->GetPosition());
 
 	myTexture = ResourceManager::GetTexture("text");
-	text->DrawSprite(myTexture, glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), glm::vec2(myTexture.Width, myTexture.Height));
+	text->DrawSprite(myTexture, glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25));
 
 	myTexture = ResourceManager::GetTexture("player");
-	player->DrawSprite(myTexture, player->GetPosition(), glm::vec2(myTexture.Width, myTexture.Height));
+	player->DrawSprite(myTexture, player->GetPosition(), player->GetScale());
 
 	std::string s = std::to_string(enemy->GetHealth());
 	char const* c = s.c_str();

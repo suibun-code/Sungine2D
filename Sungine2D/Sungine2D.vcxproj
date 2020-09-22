@@ -157,6 +157,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="GameInstance.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="SuSprite.h" />
     <ClInclude Include="SuTexture2D.h" />
     <ClInclude Include="TestState.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp" />
@@ -178,6 +180,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -189,11 +192,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
-    <None Include="shaders\fragment.frag">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    <None Include="shaders\sprite.frag">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="shaders\vertex.vert">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    <None Include="shaders\sprite.vert">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -51,10 +51,10 @@ void MainMenu::Render()
 	SuTexture2D myTexture;
 
 	myTexture = ResourceManager::GetTexture("enter");
-	textenter->DrawSprite(myTexture, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25), glm::vec2(myTexture.Width, myTexture.Height));
+	textenter->DrawSprite(myTexture, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25));
 
 	myTexture = ResourceManager::GetTexture("logo"); 
-	pSuSprite->DrawSprite(myTexture, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (myTexture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (myTexture.Height / 2)), glm::vec2(myTexture.Width, myTexture.Height));
+	pSuSprite->DrawSprite(myTexture, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (myTexture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (myTexture.Height / 2)));
 
 	State::Render();
 }

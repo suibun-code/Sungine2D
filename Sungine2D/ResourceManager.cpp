@@ -10,8 +10,8 @@
 #include "Core.h"
 
 // Instantiate static variables
-std::map<std::string, SuTexture2D>    ResourceManager::Textures;
-std::map<std::string, ShaderUtil>       ResourceManager::Shaders;
+std::map<std::string, ShaderUtil> ResourceManager::Shaders;
+std::map<std::string, SuTexture2D> ResourceManager::Textures;
 
 ShaderUtil ResourceManager::loadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile)
 {

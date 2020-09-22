@@ -2,29 +2,63 @@
 
 void SuSprite::initRenderData()
 {
-    //Configure the VAO & VBO.
-    float vertices[] = {
-        //Pos       //Tex
-        0.0f, 1.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 0.0f, 0.0f,
-
-        0.0f, 1.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        1.0f, 0.0f, 1.0f, 0.0f
+    //Indices mapping.
+    GLuint indexData[] =
+    {
+        2, 3, 1,
+        1, 0, 2
     };
 
-    glGenVertexArrays(1, &this->mQuadVAO);
-    glGenBuffers(1, &mVBO);
+    //Vertex positions.
+    float vertices[] = {
+        0.f, 0.f, //Top left.
+        1.f, 0.f, //Top right.
+        0.f, 1.f, //Bottom left.
+        1.f, 1.f  //Bottom right.
+        
+        //REVERSED
+        //1.f, 0.f,  //top right
+        //0.f, 0.f,  //top left
+        //0.f, 1.f,  //bottom left
+        //1.f, 1.f   //bottom right
+    };
 
+    //Texture coordinates.
+    float texture[] = {
+        0.f, 0.f, //Top left.
+        1.f, 0.f, //Top right.
+        0.f, 1.f, //Bottom left.
+        1.f, 1.f  //Bottom right.
+    };
+
+    //VAO.
+    glGenVertexArrays(1, &this->mQuadVAO);
+    glBindVertexArray(this->mQuadVAO);
+
+    //IBO.
+    glGenBuffers(1, &IBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexData), indexData, GL_STATIC_DRAW);
+
+    //Vertex VBO.
+    glGenBuffers(1, &mVBO);
     glBindBuffer(GL_ARRAY_BUFFER, mVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindVertexArray(this->mQuadVAO);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, NULL, NULL);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+
+    //Texture VBO.
+    glGenBuffers(1, &mTVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, mTVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(texture), texture, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, NULL, NULL);
+    glEnableVertexAttribArray(1);
+    
+    //Unbind buffer and vertex array.
+    glBindBuffer(GL_ARRAY_BUFFER, NULL);
+    glBindVertexArray(NULL);
+
+    this->mShaderUtil.SetFloat("alpha", 1.f);
 }
 
 SuSprite::SuSprite(ShaderUtil& mShaderUtil)
@@ -50,6 +84,7 @@ void SuSprite::DrawSprite(SuTexture2D& texture, glm::vec2 position, glm::vec2 si
     model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // then rotate
     model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // move origin back
 
+    size = glm::vec2(texture.Width, texture.Height) * size;
     model = glm::scale(model, glm::vec3(size, 1.0f)); // last scale
 
     this->mShaderUtil.SetMatrix4("model", model);
@@ -57,10 +92,19 @@ void SuSprite::DrawSprite(SuTexture2D& texture, glm::vec2 position, glm::vec2 si
     // render textured quad
     this->mShaderUtil.SetVector3f("spriteColor", color);
 
+    this->mShaderUtil.SetFloat("alpha", mAlpha);
+
     glActiveTexture(GL_TEXTURE0);
     texture.Bind();
 
     glBindVertexArray(this->mQuadVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+    //glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
+}
+
+void SuSprite::SetAlpha(float alpha)
+{
+    mAlpha = alpha;
+    this->mShaderUtil.SetFloat("alpha", mAlpha);
 }

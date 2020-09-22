@@ -93,6 +93,12 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -155,13 +161,16 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
-    <None Include="shaders\fragment.frag">
+    <None Include="shaders\sprite.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\vertex.vert">
+    <None Include="shaders\sprite.vert">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

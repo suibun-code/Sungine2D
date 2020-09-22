@@ -1,13 +1,12 @@
 #pragma once
 
-#include "SuSprite.h"
+#include "Entity.h"
 
-class Player : public SuSprite
+class Player : public Entity
 {
 private:
 	int mMaxHealt = 100, mHealth = 100;
 	int mDirection = 1; //Negative for left, positive for right.
-	glm::vec2 mPosition = { 0, 0 };
 	float mSpeed = 0.5f;
 
 public:
@@ -19,8 +18,6 @@ public:
 	void MoveX(float deltaTime);
 	void MoveY(float deltaTime);
 
-	void SetDirection(int direction) { mDirection = direction; }
-
-	glm::vec2 GetPosition() { return mPosition; }
+	void SetDirection(int direction);
 };
 

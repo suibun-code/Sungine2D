@@ -1,16 +1,26 @@
 #include "Player.h"
 
-Player::Player(glm::vec2 position, ShaderUtil shaderUtil) : SuSprite(shaderUtil)
+Player::Player(glm::vec2 position, ShaderUtil shaderUtil) : Entity(shaderUtil)
 {
-	mPosition = position;
+	transform.position = position;
 }
 
 void Player::MoveX(float deltaTime)
 {
-	mPosition.x += (mSpeed * deltaTime) * mDirection;
+	transform.position.x += (mSpeed * deltaTime) * mDirection;
 }
 
 void Player::MoveY(float deltaTime)
 {
-	mPosition.y += (mSpeed * deltaTime) * mDirection;
+	transform.position.y += (mSpeed * deltaTime) * mDirection;
+}
+
+void Player::SetDirection(int direction)
+{ 
+	if (mDirection != direction)
+	{
+		
+	}
+
+	mDirection = direction;
 }

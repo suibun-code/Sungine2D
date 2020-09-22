@@ -1,12 +1,11 @@
 #pragma once
 
-#include "SuSprite.h"
+#include "Entity.h"
 
-class Enemy : public SuSprite
+class Enemy : public Entity
 {
 private:
 	int mMaxHealth = 100, mHealth = 100;
-	glm::vec2 mPosition = { 0, 0 };
 	float mSpeed = 0.5f;
 
 public:
@@ -14,7 +13,5 @@ public:
 
 	void SetHealth(int health) { mHealth = health; }
 	int GetHealth() { return mHealth; }
-
-	glm::vec2 GetPosition() { return mPosition; }
 };
 

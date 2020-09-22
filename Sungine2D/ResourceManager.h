@@ -23,7 +23,7 @@ private:
 
 public:
     // resource storage
-    static std::map<std::string, ShaderUtil>    Shaders;
+    static std::map<std::string, ShaderUtil> Shaders;
     static std::map<std::string, SuTexture2D> Textures;
     // loads (and generates) a shader program from file loading vertex, fragment (and geometry) shader's source code. If gShaderFile is not nullptr, it also loads a geometry shader
     static ShaderUtil LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
