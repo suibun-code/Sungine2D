@@ -16,6 +16,8 @@ public:
 	Entity(ShaderUtil& shader);
 	~Entity();
 
+	static int GetGameObjectCount() { return msGameObjectCount; }
+
 	void SetPosition(glm::vec2 position) { transform.position = position; }
 	void SetScale(glm::vec2 scale) { transform.scale = scale; }
 	void SetRotation(float rotation) { transform.rotation = rotation; }

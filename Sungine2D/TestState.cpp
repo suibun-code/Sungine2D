@@ -5,7 +5,8 @@
 
 #include "Core.h"
 #include "GameInstance.h"
-#include "ResourceManager.h"  
+#include "ResourceManager.h"
+#include "MainMenu.h"
 #include "SuSprite.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -69,6 +70,11 @@ void TestState::Update(float deltaTime)
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
 	{
 		enemy->SetHealth(50);
+	}
+
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
+	{
+		Core::Instance()->GetFSM()->ChangeState(new MainMenu);
 	}
 
 	State::Update(deltaTime);

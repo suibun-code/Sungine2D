@@ -5,6 +5,7 @@
 #include "imgui_impl_sdl.h"
 
 #include "Core.h"
+#include "Entity.h"
 #include <iostream>
 
 //Initialzie game instance.
@@ -71,6 +72,10 @@ void GameInstance::UpdateImGui()
 		ImGui::Text("- ImGui");
 		ImGui::NewLine();
 		ImGui::Text("https://github.com/suibun-code/Sungine2D");
+		ImGui::NewLine();
+		std::string s = "Number of active entities: " + std::to_string(Entity::GetGameObjectCount());
+		const char* c = s.c_str();
+		ImGui::Text(c);
 		ImGui::End();
 	}
 
