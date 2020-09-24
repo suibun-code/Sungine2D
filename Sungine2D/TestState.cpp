@@ -69,7 +69,7 @@ void TestState::Update(float deltaTime)
 		else
 		{
 			enemy->SetDestroyed(true);
-			delete enemy;
+			text2->SetDestroyed(true);
 		}
 	}
 
@@ -112,10 +112,9 @@ void TestState::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	if (enemy->GetDestroyed() == false)
-	{
 		enemy->Draw(*renderer);
+	if (text2->GetDestroyed() == false)
 		text2->Draw(*renderer, enemy->GetHealth(), glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
-	}
 		
 	player->Draw(*renderer);
 	text->Draw(*renderer, player->GetHealth(), glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
@@ -134,4 +133,5 @@ void TestState::Exit()
 	delete enemy;
 	delete player;
 	delete text;
+	delete text2;
 }
