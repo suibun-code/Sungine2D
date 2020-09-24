@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(glm::vec2 position, ShaderUtil shaderUtil) : Entity(shaderUtil)
+Enemy::Enemy(SuTexture2D sprite, glm::vec2 pos, glm::vec2 size) : Entity(sprite, pos, size)
 {
-	transform.position = position;
+	mTransform.position = pos;
 }

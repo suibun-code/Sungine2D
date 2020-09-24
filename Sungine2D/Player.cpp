@@ -1,26 +1,21 @@
 #include "Player.h"
 
-Player::Player(glm::vec2 position, ShaderUtil shaderUtil) : Entity(shaderUtil)
+Player::Player(SuTexture2D sprite, glm::vec2 pos, glm::vec2 size) : Entity(sprite, pos, size)
 {
-	transform.position = position;
+	mTransform.position = pos;
 }
 
 void Player::MoveX(float deltaTime)
 {
-	transform.position.x += (mSpeed * deltaTime) * mDirection;
+	mTransform.position.x += (mSpeed * deltaTime) * mDirection;
 }
 
 void Player::MoveY(float deltaTime)
 {
-	transform.position.y += (mSpeed * deltaTime) * mDirection;
+	mTransform.position.y += (mSpeed * deltaTime) * mDirection;
 }
 
 void Player::SetDirection(int direction)
 { 
-	if (mDirection != direction)
-	{
-		
-	}
-
 	mDirection = direction;
 }

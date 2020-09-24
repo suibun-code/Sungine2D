@@ -5,7 +5,7 @@ out vec4 color;
 
 uniform sampler2D image;
 uniform vec3 spriteColor;
-uniform float alpha;
+uniform float alpha = 1.f;
 
 void main()
 {    

@@ -73,8 +73,8 @@ void GameInstance::UpdateImGui()
 		ImGui::NewLine();
 		ImGui::Text("https://github.com/suibun-code/Sungine2D");
 		ImGui::NewLine();
-		std::string s = "Number of active entities: " + std::to_string(Entity::GetGameObjectCount());
-		const char* c = s.c_str();
+		s = "Number of active entities: " + std::to_string(Entity::GetGameObjectCount());
+		c = s.c_str();
 		ImGui::Text(c);
 		ImGui::End();
 	}

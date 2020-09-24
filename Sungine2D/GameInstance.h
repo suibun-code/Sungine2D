@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <vector>
 
 //SDL
@@ -161,6 +162,10 @@ class GameInstance
 {
 private:
 	static GameInstance* mspGameInstance;
+
+	//Variables for printing variables by turning them into a string and then into a const char*.
+	std::string s;
+	const char* c;
 
 	// ImGui menu variables
 	bool mDisplayAbout = true;

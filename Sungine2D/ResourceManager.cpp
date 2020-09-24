@@ -4,37 +4,39 @@
 #include <sstream>
 #include <fstream>
 
-//SDL
-#include "SDL_ttf.h"
-
 #include "Core.h"
 
-// Instantiate static variables
+//Instantiate static variables for keeping shaders and textures.
 std::map<std::string, ShaderUtil> ResourceManager::Shaders;
 std::map<std::string, SuTexture2D> ResourceManager::Textures;
+std::map<std::string, SuFont> ResourceManager::test;
 
-ShaderUtil ResourceManager::loadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile)
+ShaderUtil ResourceManager::LoadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile)
 {
-    // 1. retrieve the vertex/fragment source code from filePath
+    //Retrieve vertex & fragment source code from the file path.
     std::string vertexCode;
     std::string fragmentCode;
     std::string geometryCode;
     try
     {
-        // open files
+        //Open the files.
         std::ifstream vertexShaderFile(vShaderFile);
         std::ifstream fragmentShaderFile(fShaderFile);
         std::stringstream vShaderStream, fShaderStream;
-        // read file's buffer contents into streams
+
+        //Read the file's buffer content into streams.
         vShaderStream << vertexShaderFile.rdbuf();
         fShaderStream << fragmentShaderFile.rdbuf();
-        // close file handlers
+
+        //Close files.
         vertexShaderFile.close();
         fragmentShaderFile.close();
-        // convert stream into string
+
+        //Convert the streams into strings.
         vertexCode = vShaderStream.str();
         fragmentCode = fShaderStream.str();
-        // if geometry shader path is present, also load a geometry shader
+
+        //Load geometry shader is present.
         if (gShaderFile != nullptr)
         {
             std::ifstream geometryShaderFile(gShaderFile);
@@ -48,18 +50,20 @@ ShaderUtil ResourceManager::loadShaderFromFile(const char* vShaderFile, const ch
     {
         std::cout << "ERROR::SHADER: Failed to read shader files" << std::endl;
     }
+
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
     const char* gShaderCode = geometryCode.c_str();
-    // 2. now create shader object from source code
+
+    //Create shader objects from source code.
     ShaderUtil shader;
     shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr);
+
     return shader;
 }
-
-SuTexture2D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
+SuTexture2D ResourceManager::LoadTextureFromFile(const char* file, bool alpha)
 {
-    // create texture object
+    //Create texture object.
     SuTexture2D texture;
 
     if (alpha)
@@ -68,53 +72,35 @@ SuTexture2D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
         texture.Image_Format = GL_RGBA;
     }
 
-    SDL_Surface* test;
+    SDL_Surface* surf;
 
-    // load image
-    test = IMG_Load(file);
+    //Load the image.
+    surf = IMG_Load(file);
 
-    // now generate texture
-    texture.Generate(test->w, test->h, test->pixels);
+    //Generate the texture using the SDL_Surface* properties.
+    texture.Generate(surf->w, surf->h, surf->pixels);
 
-    // and finally free image data
-    SDL_FreeSurface(test);
+    //Free the SDL_Surface*.
+    SDL_FreeSurface(surf);
 
     return texture;
 }
-
-SuTexture2D ResourceManager::loadTextureFromFont(const char* text, bool alpha)
+SuFont ResourceManager::LoadFontFromFile(const char* path, int size, SDL_Color color)
 {
-    SuTexture2D texture;
-    TTF_Font* mpSDLFont = TTF_OpenFont("font/CircularStd-Black.ttf", 14);
-    //SDL_Texture* mpSDLFontText = nullptr;
+    SuFont font;
 
-    if (alpha)
-    {
-        texture.Internal_Format = GL_RGBA;
-        texture.Image_Format = GL_RGBA;
-    }
+    font.mPath = path;
+    font.mSize = size;
+    font.mTextColor = color;
 
-    SDL_Color textcolor = { 0, 0, 0, 255 };
-    SDL_Surface* fontsurface;
-
-    fontsurface = TTF_RenderText_Blended(mpSDLFont, text, textcolor);
-
-    //SDL_DestroyTexture(mpSDLFontText); //de-allocate previous font texture
-    //mpSDLFontText = SDL_CreateTextureFromSurface(Core::Instance()->GetRenderer(), fontsurface);
-
-    texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
-
-    SDL_FreeSurface(fontsurface);
-
-    return texture;
+    return font;
 }
 
 ShaderUtil ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
 {
-    Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
+    Shaders[name] = LoadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
     return Shaders[name];
 }
-
 ShaderUtil ResourceManager::GetShader(std::string name)
 {
     return Shaders[name];
@@ -122,27 +108,51 @@ ShaderUtil ResourceManager::GetShader(std::string name)
 
 SuTexture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
 {
-    Textures[name] = loadTextureFromFile(file, alpha);
+    Textures[name] = LoadTextureFromFile(file, alpha);
     return Textures[name];
 }
-
-SuTexture2D ResourceManager::LoadTextureFont(const char* text, bool alpha, std::string name)
-{
-    Textures[name] = loadTextureFromFont(text, alpha);
-    return Textures[name];
-}
-
 SuTexture2D ResourceManager::GetTexture(std::string name)
 {
     return Textures[name];
 }
 
+SuFont ResourceManager::LoadFont(const char* path, int size, SDL_Color color, std::string name)
+{
+    test[name] = LoadFontFromFile(path, size, color);
+    return test[name];
+}
+SuFont ResourceManager::GetFont(std::string name)
+{
+    return test[name];
+}
+
+SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)
+{
+    SuTexture2D texture;
+    TTF_Font* ttffont = TTF_OpenFont(font.mPath, font.mSize);
+
+    if (alpha)
+    {
+        texture.Internal_Format = GL_RGBA;
+        texture.Image_Format = GL_RGBA;
+    }
+
+    //Create SDL_Surface*, then apply a blend function to it, and generate a texture from it. Then free the surface and return the texture.
+    SDL_Surface* fontsurface;
+    fontsurface = TTF_RenderText_Blended(ttffont, text, font.mTextColor);
+    texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
+    SDL_FreeSurface(fontsurface);
+
+    return texture;
+}
+
 void ResourceManager::Clear()
 {
-    // (properly) delete all shaders	
+    //Delete all shaders.
     for (auto iter : Shaders)
         glDeleteProgram(iter.second.ID);
-    // (properly) delete all textures
+
+    //Delete all textures.
     for (auto iter : Textures)
         glDeleteTextures(1, &iter.second.ID);
 }

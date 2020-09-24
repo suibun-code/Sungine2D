@@ -89,6 +89,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include\glew-2.1.0\include\GL;$(SolutionDir)include\;$(SolutionDir)include\SDL2-2.0.12\include\;$(SolutionDir)include\imgui-1.78\;$(SolutionDir)include\imgui_sdl\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <PreprocessorDefinitions>WINDOWS_IGNORE_PACKING_MISMATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +154,7 @@
     <ClInclude Include="..\include\imgui-1.78\imstb_truetype.h" />
     <ClInclude Include="..\include\imgui_sdl\imgui_sdl.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FSM.h" />
@@ -162,7 +164,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderUtil.h" />
+    <ClInclude Include="SuFont.h" />
     <ClInclude Include="SuSprite.h" />
+    <ClInclude Include="SuText.h" />
     <ClInclude Include="SuTexture2D.h" />
     <ClInclude Include="TestState.h" />
     <ClInclude Include="Transform.h" />
@@ -176,6 +180,7 @@
     <ClCompile Include="..\include\imgui-1.78\imgui_widgets.cpp" />
     <ClCompile Include="..\include\imgui_sdl\imgui_sdl.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FSM.cpp" />
@@ -187,11 +192,11 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="SuSprite.cpp" />
+    <ClCompile Include="SuText.cpp" />
     <ClCompile Include="SuTexture2D.cpp" />
     <ClCompile Include="TestState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
     <None Include="shaders\sprite.frag">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>

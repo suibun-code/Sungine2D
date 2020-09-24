@@ -10,15 +10,18 @@ void SuTexture2D::Generate(unsigned int width, unsigned int height, const void* 
 {
     this->Width = width;
     this->Height = height;
-    // create Texture
+
+    //Create texture.
     glBindTexture(GL_TEXTURE_2D, this->ID);
     glTexImage2D(GL_TEXTURE_2D, 0, this->Internal_Format, width, height, 0, this->Image_Format, GL_UNSIGNED_BYTE, data);
-    // set Texture wrap and filter modes
+
+    //Set texture wrap and filter modes.
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->Wrap_S);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this->Wrap_T);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this->Filter_Min);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this->Filter_Max);
-    // unbind texture
+
+    //Unbind texture.
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 

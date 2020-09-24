@@ -9,7 +9,7 @@ private:
 	float mSpeed = 0.5f;
 
 public:
-	Enemy(glm::vec2 position, ShaderUtil shaderUtil);
+	Enemy(SuTexture2D sprite, glm::vec2 pos, glm::vec2 size = glm::vec2(1.f));
 
 	void SetHealth(int health) { mHealth = health; }
 	int GetHealth() { return mHealth; }

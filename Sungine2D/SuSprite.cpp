@@ -57,8 +57,6 @@ void SuSprite::initRenderData()
     //Unbind buffer and vertex array.
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
     glBindVertexArray(NULL);
-
-    this->mShaderUtil.SetFloat("alpha", 1.f);
 }
 
 SuSprite::SuSprite(ShaderUtil& mShaderUtil)
@@ -78,33 +76,27 @@ void SuSprite::DrawSprite(SuTexture2D& texture, glm::vec2 position, glm::vec2 si
     this->mShaderUtil.Use();
     glm::mat4 model = glm::mat4(1.0f);
 
-    model = glm::translate(model, glm::vec3(position, 0.0f));  // first translate (transformations are: scale happens first, then rotation, and then final translation happens; reversed order)
+    //Translation.
+    model = glm::translate(model, glm::vec3(position, 0.0f));
 
-    model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // move origin of rotation to center of quad
-    model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // then rotate
-    model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // move origin back
+    //Rotation.
+    model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));
+    model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f));
 
-    size = glm::vec2(texture.Width, texture.Height) * size;
-    model = glm::scale(model, glm::vec3(size, 1.0f)); // last scale
+    //Scale.
+    //size = glm::vec2(texture.Width, texture.Height) * size;
+    model = glm::scale(model, glm::vec3(size, 1.0f));
 
     this->mShaderUtil.SetMatrix4("model", model);
 
-    // render textured quad
+    //Render.
     this->mShaderUtil.SetVector3f("spriteColor", color);
-
-    this->mShaderUtil.SetFloat("alpha", mAlpha);
 
     glActiveTexture(GL_TEXTURE0);
     texture.Bind();
 
     glBindVertexArray(this->mQuadVAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
-    //glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
-}
-
-void SuSprite::SetAlpha(float alpha)
-{
-    mAlpha = alpha;
-    this->mShaderUtil.SetFloat("alpha", mAlpha);
 }

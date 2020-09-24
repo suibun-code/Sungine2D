@@ -7,11 +7,14 @@
 #include "GameInstance.h"
 #include "ShaderUtil.h"
 #include "SuSprite.h"
+#include "Entity.h"
 #include "ResourceManager.h"
+
 #include "TestState.h"
 
-SuSprite* textenter;
-SuSprite* pSuSprite;
+SuSprite* renderer1;
+SuText* textenter;
+Entity* logo;
 
 void MainMenu::Enter()
 {
@@ -27,11 +30,18 @@ void MainMenu::Enter()
 	ShaderUtil myShader;
 	myShader = ResourceManager::GetShader("sprite");
 
-	textenter = new SuSprite(myShader);
-	pSuSprite = new SuSprite(myShader);
+	SuTexture2D myTexture;
+	SuFont myFont;
 
-	ResourceManager::LoadTextureFont("Press Enter To Start", true, "enter");
+	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, { 0, 0, 0, 255 }, "font2");
 	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
+
+	renderer1 = new SuSprite(myShader);
+
+	myTexture = ResourceManager::GetTexture("logo");
+	logo = new Entity(myTexture, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (myTexture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (myTexture.Height / 2)));
+
+	textenter = new SuText("Press Enter To Start", glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25), ResourceManager::GetFont("font2"));
 }
 
 void MainMenu::Update(float deltaTime)
@@ -48,13 +58,9 @@ void MainMenu::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	SuTexture2D myTexture;
+	logo->Draw(*renderer1);
 
-	myTexture = ResourceManager::GetTexture("enter");
-	textenter->DrawSprite(myTexture, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25));
-
-	myTexture = ResourceManager::GetTexture("logo"); 
-	pSuSprite->DrawSprite(myTexture, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (myTexture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (myTexture.Height / 2)));
+	textenter->DrawS(*renderer1);
 
 	State::Render();
 }
@@ -67,5 +73,6 @@ void MainMenu::Exit()
 	Core::Instance()->GetAM()->ClearMusic();
 
 	delete textenter;
-	delete pSuSprite;
+	delete renderer1;
+	delete logo;
 }

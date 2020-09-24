@@ -3,27 +3,41 @@
 #include "SuSprite.h"
 #include "ShaderUtil.h"
 #include "Transform.h"
+#include "SuTexture2D.h"
 
-class Entity : public SuSprite
+class Entity
 {
 private:
 	static int msGameObjectCount;
 
+	bool mDestroyed = false;
+
 protected:
-	Transform transform;
+	Transform mTransform;
+	SuTexture2D mTexture;
 
 public:
-	Entity(ShaderUtil& shader);
+	Entity();
+	Entity(SuTexture2D sprite, glm::vec2 pos, glm::vec2 size = glm::vec2(1.f));
+
 	~Entity();
+
+	virtual void Draw(SuSprite& renderer);
 
 	static int GetGameObjectCount() { return msGameObjectCount; }
 
-	void SetPosition(glm::vec2 position) { transform.position = position; }
-	void SetScale(glm::vec2 scale) { transform.scale = scale; }
-	void SetRotation(float rotation) { transform.rotation = rotation; }
+	void SetDestroyed(bool destroyed) { mDestroyed = destroyed; }
+	void SetTexture(SuTexture2D texture) { mTexture = texture; }
+	void SetPosition(glm::vec2 position) { mTransform.position = position; }
+	void SetSize(glm::vec2 size) { mTransform.size = size; }
+	void SetRotation(float rotation) { mTransform.rotation = rotation; }
+	void SetScale(float scale) { mTransform.scale = scale; }
 
-	glm::vec2 GetPosition() { return transform.position; }
-	glm::vec2 GetScale() { return transform.scale; }
-	float GetRotation() { return transform.rotation; }
+	bool GetDestroyed() { return mDestroyed; }
+	SuTexture2D GetTexture() { return mTexture; }
+	glm::vec2 GetPosition() { return mTransform.position; }
+	glm::vec2 GetSize() { return mTransform.size; }
+	float GetRotation() { return mTransform.rotation; }
+	float GetScale() { return mTransform.scale; }
 };
 
