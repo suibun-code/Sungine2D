@@ -75,4 +75,7 @@ void MainMenu::Exit()
 	delete textenter;
 	delete renderer1;
 	delete logo;
+	textenter = nullptr;
+	renderer1 = nullptr;
+	logo = nullptr;
 }

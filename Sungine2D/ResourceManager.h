@@ -17,11 +17,14 @@ class ResourceManager
 private:
     ResourceManager() {}
 
+    
+
     static ShaderUtil LoadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile = nullptr);
     static SuTexture2D LoadTextureFromFile(const char* file, bool alpha);
     static SuFont LoadFontFromFile(const char* path, int size, SDL_Color color);
 
 public:
+    static SuTexture2D texture;
     //Resource storage.
     static std::map<std::string, ShaderUtil> Shaders;
     static std::map<std::string, SuTexture2D> Textures;

@@ -7,6 +7,8 @@
 #include "Core.h"
 
 //Instantiate static variables for keeping shaders and textures.
+SuTexture2D ResourceManager::texture;
+
 std::map<std::string, ShaderUtil> ResourceManager::Shaders;
 std::map<std::string, SuTexture2D> ResourceManager::Textures;
 std::map<std::string, SuFont> ResourceManager::test;
@@ -128,7 +130,10 @@ SuFont ResourceManager::GetFont(std::string name)
 
 SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)
 {
-    SuTexture2D texture;
+    //delete texture;
+    //texture = nullptr;
+    //texture = new SuTexture2D();
+
     TTF_Font* ttffont = TTF_OpenFont(font.mPath, font.mSize);
 
     if (alpha)
@@ -141,7 +146,12 @@ SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, S
     SDL_Surface* fontsurface;
     fontsurface = TTF_RenderText_Blended(ttffont, text, font.mTextColor);
     texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
+
     SDL_FreeSurface(fontsurface);
+    fontsurface = nullptr;
+
+    TTF_CloseFont(ttffont);
+    ttffont = nullptr;
 
     return texture;
 }

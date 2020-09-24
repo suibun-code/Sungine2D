@@ -28,7 +28,7 @@ void TestState::Enter()
 	GameInstance::LogBuffer(test, sizeof(test) / sizeof(test[0]));
 
 	//Clear the screen with specific color.
-	glClearColor(.294f, .0f, .509f, 1.f);
+	glClearColor(.2f, .2f, .2f, 1.f);
 
 	Core::Instance()->GetAM()->LoadMusic("res/audio/music/hydrogen.mp3");
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
@@ -134,4 +134,9 @@ void TestState::Exit()
 	delete player;
 	delete text;
 	delete text2;
+	renderer = nullptr;
+	enemy = nullptr;
+	player = nullptr;
+	text = nullptr;
+	text2 = nullptr;
 }

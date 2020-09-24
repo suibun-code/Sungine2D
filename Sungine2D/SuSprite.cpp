@@ -88,15 +88,15 @@ void SuSprite::DrawSprite(SuTexture2D& texture, glm::vec2 position, glm::vec2 si
     //size = glm::vec2(texture.Width, texture.Height) * size;
     model = glm::scale(model, glm::vec3(size, 1.0f));
 
-    this->mShaderUtil.SetMatrix4("model", model);
+    mShaderUtil.SetMatrix4("model", model);
 
     //Render.
-    this->mShaderUtil.SetVector3f("spriteColor", color);
+    mShaderUtil.SetVector3f("spriteColor", color);
 
     glActiveTexture(GL_TEXTURE0);
     texture.Bind();
 
-    glBindVertexArray(this->mQuadVAO);
+    glBindVertexArray(mQuadVAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
     glBindVertexArray(0);
 }
