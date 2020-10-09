@@ -6,40 +6,43 @@
 //SDL
 #include "SDL.h"
 
-class State
+namespace Sungine
 {
-protected:
-	const char* mStateName = "State";
+	class State
+	{
+	protected:
+		const char* mStateName = "State";
 
-public:
-	State(const char* mStateName) : mStateName(mStateName) {}
+	public:
+		State(const char* mStateName) : mStateName(mStateName) {}
 
-	virtual void Enter() = 0;
-	virtual void Update(float deltaTime);
-	virtual void Render();
-	virtual void HandleStateEvents(const SDL_Event* event);
-	virtual void Resume() = 0;
-	virtual void Exit() = 0;
+		virtual void Enter() = 0;
+		virtual void Update(float deltaTime);
+		virtual void Render();
+		virtual void HandleStateEvents(const SDL_Event* event);
+		virtual void Resume() = 0;
+		virtual void Exit() = 0;
 
-	template <class T>
-	void CleanVector(std::vector<T> vec);
+		template <class T>
+		void CleanVector(std::vector<T> vec);
 
-	std::string GetStateName() { return mStateName; }
-};
+		std::string GetStateName() { return mStateName; }
+	};
 
-class StateMachine
-{
-private:
-	std::vector<State*> mStates;
+	class StateMachine
+	{
+	private:
+		std::vector<State*> mStates;
 
-public:
-	~StateMachine();
-	void Update(float deltaTime);
-	void Render();
-	void HandleStateEvents(SDL_Event* event);
-	void PushState(State* pState);
-	void ChangeState(State* pState);
-	void PopState();
-	void Clean();
-	std::vector<State*>& GetStates() { return mStates; }
-};
+	public:
+		~StateMachine();
+		void Update(float deltaTime);
+		void Render();
+		void HandleStateEvents(SDL_Event* event);
+		void PushState(State* pState);
+		void ChangeState(State* pState);
+		void PopState();
+		void Clean();
+		std::vector<State*>& GetStates() { return mStates; }
+	};
+}

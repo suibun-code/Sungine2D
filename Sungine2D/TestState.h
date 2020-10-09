@@ -2,6 +2,8 @@
 
 #include "FSM.h"
 
+using namespace Sungine;
+
 class TestState : public State
 {
 private:

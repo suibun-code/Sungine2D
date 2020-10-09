@@ -130,10 +130,6 @@ SuFont ResourceManager::GetFont(std::string name)
 
 SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)
 {
-    //delete texture;
-    //texture = nullptr;
-    //texture = new SuTexture2D();
-
     TTF_Font* ttffont = TTF_OpenFont(font.mPath, font.mSize);
 
     if (alpha)

@@ -8,43 +8,46 @@
 
 #include <iostream> //DELETETETETTETETETE
 
-class SuText : public Entity
+namespace Sungine
 {
-private:
-	std::string mInput = "Default";
-	const char* mOutput = "Default";
-
-public:
-	SuText(std::string input, glm::vec2 pos, SuFont font);
-	SuText();
-
-	void UpdateVars(glm::vec2 pos, SuFont font);
-
-	template <class T>
-	void Update(T input, glm::vec2 pos, SuFont font)
+	class SuText : public Entity
 	{
-		mInput = std::to_string(input);
-		mOutput = mInput.c_str();
-		
-		UpdateVars(pos, font);
-	}
+	private:
+		std::string mInput = "Default";
+		const char* mOutput = "Default";
 
-	void UpdateS(std::string input, glm::vec2 pos, SuFont font);
+	public:
+		SuText(std::string input, glm::vec2 pos, SuFont font);
+		SuText();
 
-	template <class T>
-	void Draw(SuSprite& renderer, T input, glm::vec2 pos, SuFont font)
-	{
-		Update(input, pos, font);
+		void UpdateVars(glm::vec2 pos, SuFont font);
 
-		Entity::Draw(renderer);
-	}
-	template <class T>
-	void Draw(SuSprite& renderer)
-	{
-		Entity::Draw(renderer);
-	}
+		template <class T>
+		void Update(T input, glm::vec2 pos, SuFont font)
+		{
+			mInput = std::to_string(input);
+			mOutput = mInput.c_str();
 
-	void DrawS(SuSprite& renderer, std::string input, glm::vec2 pos, SuFont font);
-	void DrawS(SuSprite& renderer);
-};
+			UpdateVars(pos, font);
+		}
+
+		void UpdateS(std::string input, glm::vec2 pos, SuFont font);
+
+		template <class T>
+		void Draw(SuSprite& renderer, T input, glm::vec2 pos, SuFont font)
+		{
+			Update(input, pos, font);
+
+			Entity::Draw(renderer);
+		}
+		template <class T>
+		void Draw(SuSprite& renderer)
+		{
+			Entity::Draw(renderer);
+		}
+
+		void DrawS(SuSprite& renderer, std::string input, glm::vec2 pos, SuFont font);
+		void DrawS(SuSprite& renderer);
+	};
+}
 

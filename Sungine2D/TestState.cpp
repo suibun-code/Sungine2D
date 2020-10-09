@@ -30,7 +30,7 @@ void TestState::Enter()
 	//Clear the screen with specific color.
 	glClearColor(.2f, .2f, .2f, 1.f);
 
-	Core::Instance()->GetAM()->LoadMusic("res/audio/music/hydrogen.mp3");
+	Core::Instance()->GetAM()->LoadMusic("res/audio/music/musikkperautomatikk.mp3");
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
 
 	ShaderUtil myShader;
