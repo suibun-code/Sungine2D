@@ -150,6 +150,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
 	ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
 
+	//Initialize ImGui.
 	InitImGui();
 
 	//Set random seed.

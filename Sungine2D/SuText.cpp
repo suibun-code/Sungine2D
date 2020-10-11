@@ -2,12 +2,12 @@
 
 SuText::SuText()
 {
-	Update(0, glm::vec2(1.f), SuFont());
+	Update("Default", glm::vec2(1.f), SuFont());
 }
 
 SuText::SuText(std::string input, glm::vec2 pos, SuFont font)
 {
-	UpdateS(input, pos, font);
+	Update(input, pos, font);
 }
 
 void SuText::UpdateVars(glm::vec2 pos, SuFont font)
@@ -17,21 +17,21 @@ void SuText::UpdateVars(glm::vec2 pos, SuFont font)
 	mTransform.size = glm::vec2(mTexture.Width, mTexture.Height) * mTransform.scale;
 }
 
-void SuText::UpdateS(std::string input, glm::vec2 pos, SuFont font)
+void SuText::Update(std::string input, glm::vec2 pos, SuFont font)
 {
 	mOutput = input.c_str();
 
 	UpdateVars(pos, font);
 }
 
-void SuText::DrawS(SuSprite& renderer, std::string input, glm::vec2 pos, SuFont font)
+void SuText::Draw(SuSprite& renderer, std::string input, glm::vec2 pos, SuFont font)
 {
-	UpdateS(input, pos, font);
+	Update(input, pos, font);
 
 	Entity::Draw(renderer);
 }
 
-void SuText::DrawS(SuSprite& renderer)
+void SuText::Draw(SuSprite& renderer)
 {
 	Entity::Draw(renderer);
 }

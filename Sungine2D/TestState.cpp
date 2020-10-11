@@ -23,10 +23,6 @@ SuText* text2;
 
 void TestState::Enter()
 {
-	//Print entrance to log.
-	const char* test[] = { "[ENTER] ", " '", mStateName, "'.\n" };
-	GameInstance::LogBuffer(test, sizeof(test) / sizeof(test[0]));
-
 	//Clear the screen with specific color.
 	glClearColor(.2f, .2f, .2f, 1.f);
 
@@ -55,6 +51,8 @@ void TestState::Enter()
 
 	myTexture = ResourceManager::GetTexture("player");
 	player = new Player(myTexture, glm::vec2(200.f, 200.f));
+
+	State::Enter();
 }
 
 void TestState::Update(float deltaTime)
@@ -114,10 +112,10 @@ void TestState::Render()
 	if (enemy->GetDestroyed() == false)
 		enemy->Draw(*renderer);
 	if (text2->GetDestroyed() == false)
-		text2->Draw(*renderer, enemy->GetHealth(), glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
+		text2->Draw(*renderer, std::to_string(enemy->GetHealth()), glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
 		
 	player->Draw(*renderer);
-	text->Draw(*renderer, player->GetHealth(), glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
+	text->Draw(*renderer, std::to_string(player->GetHealth()), glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
 
 	State::Render();
 }
@@ -139,4 +137,6 @@ void TestState::Exit()
 	player = nullptr;
 	text = nullptr;
 	text2 = nullptr;
+
+	State::Exit();
 }

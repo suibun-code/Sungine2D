@@ -8,6 +8,12 @@
 using namespace Sungine;
 
 //State
+void State::Enter()
+{
+	const char* msg[] = { "[ENTER] ", " '", mStateName, "'.\n" };
+	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
+}
+
 void State::Update(float deltaTime)
 {
 	//if (Core::Instance()->KeyDown(SDL_SCANCODE_GRAVE))
@@ -26,6 +32,12 @@ void State::Render()
 		GameInstance::Instance()->Render();
 
 	SDL_GL_SwapWindow(Core::Instance()->GetWindow());
+}
+
+void State::Exit()
+{
+	const char* msg[] = { "[EXIT] ", " '", mStateName, "'.\n" };
+	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
 }
 
 void State::HandleStateEvents(const SDL_Event* event)

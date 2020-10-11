@@ -11,7 +11,7 @@ SuTexture2D ResourceManager::texture;
 
 std::map<std::string, ShaderUtil> ResourceManager::Shaders;
 std::map<std::string, SuTexture2D> ResourceManager::Textures;
-std::map<std::string, SuFont> ResourceManager::test;
+std::map<std::string, SuFont> ResourceManager::Fonts;
 
 ShaderUtil ResourceManager::LoadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile)
 {
@@ -120,12 +120,12 @@ SuTexture2D ResourceManager::GetTexture(std::string name)
 
 SuFont ResourceManager::LoadFont(const char* path, int size, SDL_Color color, std::string name)
 {
-    test[name] = LoadFontFromFile(path, size, color);
-    return test[name];
+    Fonts[name] = LoadFontFromFile(path, size, color);
+    return Fonts[name];
 }
 SuFont ResourceManager::GetFont(std::string name)
 {
-    return test[name];
+    return Fonts[name];
 }
 
 SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)

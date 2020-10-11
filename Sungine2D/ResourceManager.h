@@ -28,7 +28,7 @@ public:
     //Resource storage.
     static std::map<std::string, ShaderUtil> Shaders;
     static std::map<std::string, SuTexture2D> Textures;
-    static std::map<std::string, SuFont> test;
+    static std::map<std::string, SuFont> Fonts;
 
     static SuTexture2D LoadTextureFromFont(const char* text, bool alpha, SuFont font);
 

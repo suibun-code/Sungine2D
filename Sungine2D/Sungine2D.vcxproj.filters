@@ -1,191 +1,200 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{841b5df8-a9cb-4021-9c5c-9fa8bb17e6d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{a44607c2-8940-4375-8308-605ff11ce32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Engine\imgui">
+      <UniqueIdentifier>{0dc31de6-0b35-47e3-a784-b29e9a1b3bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\imgui_sdl">
+      <UniqueIdentifier>{619b789e-6c20-42b3-a8c0-b344d5cedca2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\shaders">
+      <UniqueIdentifier>{9746b586-fabf-4266-aaaa-61bd93b582aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Engine\Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="imgui">
-      <UniqueIdentifier>{0dc31de6-0b35-47e3-a784-b29e9a1b3bff}</UniqueIdentifier>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a2ec0e11-92d9-433b-8c12-cd412a6c30bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="imgui_sdl">
-      <UniqueIdentifier>{619b789e-6c20-42b3-a8c0-b344d5cedca2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="shaders">
-      <UniqueIdentifier>{9746b586-fabf-4266-aaaa-61bd93b582aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States">
+    <Filter Include="Game\States">
       <UniqueIdentifier>{cd3443a8-30e3-418d-80da-d5f0b5191a88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{841b5df8-a9cb-4021-9c5c-9fa8bb17e6d8}</UniqueIdentifier>
+    <Filter Include="Game\Entities">
+      <UniqueIdentifier>{43fdff5b-b568-4618-bc95-312f2d86068a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\imgui-1.78\imconfig.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui-1.78\imgui.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui-1.78\imgui_internal.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui-1.78\imstb_rectpack.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui-1.78\imstb_textedit.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui-1.78\imstb_truetype.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui-1.78\imgui_impl_opengl3.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui-1.78\imgui_impl_sdl.h">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\include\imgui_sdl\imgui_sdl.h">
-      <Filter>imgui_sdl</Filter>
+      <Filter>Engine\imgui_sdl</Filter>
     </ClInclude>
     <ClInclude Include="FSM.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ShaderUtil.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SuTexture2D.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SuSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestState.h">
-      <Filter>States</Filter>
+      <Filter>Game\States</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameInstance.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>States</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Game\States</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SuText.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInstance.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="SuFont.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\include\imgui-1.78\imgui_demo.cpp">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\include\imgui-1.78\imgui_draw.cpp">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\include\imgui-1.78\imgui_widgets.cpp">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\include\imgui-1.78\imgui_impl_opengl3.cpp">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\include\imgui-1.78\imgui_impl_sdl.cpp">
-      <Filter>imgui</Filter>
+      <Filter>Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\include\imgui_sdl\imgui_sdl.cpp">
-      <Filter>imgui_sdl</Filter>
+      <Filter>Engine\imgui_sdl</Filter>
     </ClCompile>
     <ClCompile Include="FSM.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShaderUtil.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SuTexture2D.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SuSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestState.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Game\States</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameInstance.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Core.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Game\States</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SuText.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInstance.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\sprite.frag">
-      <Filter>shaders</Filter>
+      <Filter>Engine\shaders</Filter>
     </None>
     <None Include="shaders\sprite.vert">
-      <Filter>shaders</Filter>
+      <Filter>Engine\shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
