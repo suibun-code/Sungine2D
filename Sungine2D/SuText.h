@@ -4,7 +4,6 @@
 
 #include "Entity.h"
 #include "SuFont.h"
-#include "ResourceManager.h"
 
 namespace Sungine
 {
@@ -19,10 +18,10 @@ namespace Sungine
 		SuText();
 
 		void UpdateVars(glm::vec2 pos, SuFont font);
-
-		void Update(std::string input, glm::vec2 pos, SuFont font);
+		void Update(glm::vec2 pos, SuFont font);
 		void Draw(SuSprite& renderer);
 		void Draw(SuSprite& renderer, std::string input, glm::vec2 pos, SuFont font);
+		void ChangeText(std::string input);
 	};
 }
 

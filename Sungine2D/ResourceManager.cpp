@@ -6,159 +6,191 @@
 
 #include "Core.h"
 
-//Instantiate static variables for keeping shaders and textures.
+using namespace Sungine;
+
 SuTexture2D ResourceManager::texture;
 
+//Instantiate static variables for keeping shaders and textures.
 std::map<std::string, ShaderUtil> ResourceManager::Shaders;
 std::map<std::string, SuTexture2D> ResourceManager::Textures;
 std::map<std::string, SuFont> ResourceManager::Fonts;
+std::map<std::string, SuText*> ResourceManager::Texts;
 
 ShaderUtil ResourceManager::LoadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile)
 {
-    //Retrieve vertex & fragment source code from the file path.
-    std::string vertexCode;
-    std::string fragmentCode;
-    std::string geometryCode;
-    try
-    {
-        //Open the files.
-        std::ifstream vertexShaderFile(vShaderFile);
-        std::ifstream fragmentShaderFile(fShaderFile);
-        std::stringstream vShaderStream, fShaderStream;
+	//Retrieve vertex & fragment source code from the file path.
+	std::string vertexCode;
+	std::string fragmentCode;
+	std::string geometryCode;
+	try
+	{
+		//Open the files.
+		std::ifstream vertexShaderFile(vShaderFile);
+		std::ifstream fragmentShaderFile(fShaderFile);
+		std::stringstream vShaderStream, fShaderStream;
 
-        //Read the file's buffer content into streams.
-        vShaderStream << vertexShaderFile.rdbuf();
-        fShaderStream << fragmentShaderFile.rdbuf();
+		//Read the file's buffer content into streams.
+		vShaderStream << vertexShaderFile.rdbuf();
+		fShaderStream << fragmentShaderFile.rdbuf();
 
-        //Close files.
-        vertexShaderFile.close();
-        fragmentShaderFile.close();
+		//Close files.
+		vertexShaderFile.close();
+		fragmentShaderFile.close();
 
-        //Convert the streams into strings.
-        vertexCode = vShaderStream.str();
-        fragmentCode = fShaderStream.str();
+		//Convert the streams into strings.
+		vertexCode = vShaderStream.str();
+		fragmentCode = fShaderStream.str();
 
-        //Load geometry shader is present.
-        if (gShaderFile != nullptr)
-        {
-            std::ifstream geometryShaderFile(gShaderFile);
-            std::stringstream gShaderStream;
-            gShaderStream << geometryShaderFile.rdbuf();
-            geometryShaderFile.close();
-            geometryCode = gShaderStream.str();
-        }
-    }
-    catch (std::exception e)
-    {
-        std::cout << "ERROR::SHADER: Failed to read shader files" << std::endl;
-    }
+		//Load geometry shader is present.
+		if (gShaderFile != nullptr)
+		{
+			std::ifstream geometryShaderFile(gShaderFile);
+			std::stringstream gShaderStream;
+			gShaderStream << geometryShaderFile.rdbuf();
+			geometryShaderFile.close();
+			geometryCode = gShaderStream.str();
+		}
+	}
+	catch (std::exception e)
+	{
+		std::cout << "ERROR::SHADER: Failed to read shader files" << std::endl;
+	}
 
-    const char* vShaderCode = vertexCode.c_str();
-    const char* fShaderCode = fragmentCode.c_str();
-    const char* gShaderCode = geometryCode.c_str();
+	const char* vShaderCode = vertexCode.c_str();
+	const char* fShaderCode = fragmentCode.c_str();
+	const char* gShaderCode = geometryCode.c_str();
 
-    //Create shader objects from source code.
-    ShaderUtil shader;
-    shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr);
+	//Create shader objects from source code.
+	ShaderUtil shader;
+	shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr);
 
-    return shader;
+	return shader;
 }
 SuTexture2D ResourceManager::LoadTextureFromFile(const char* file, bool alpha)
 {
-    //Create texture object.
-    SuTexture2D texture;
+	//Create texture object.
+	SuTexture2D texture;
 
-    if (alpha)
-    {
-        texture.Internal_Format = GL_RGBA;
-        texture.Image_Format = GL_RGBA;
-    }
+	if (alpha)
+	{
+		texture.Internal_Format = GL_RGBA;
+		texture.Image_Format = GL_RGBA;
+	}
 
-    SDL_Surface* surf;
+	SDL_Surface* surf;
 
-    //Load the image.
-    surf = IMG_Load(file);
+	//Load the image.
+	surf = IMG_Load(file);
 
-    //Generate the texture using the SDL_Surface* properties.
-    texture.Generate(surf->w, surf->h, surf->pixels);
+	//Generate the texture using the SDL_Surface* properties.
+	texture.Generate(surf->w, surf->h, surf->pixels);
 
-    //Free the SDL_Surface*.
-    SDL_FreeSurface(surf);
+	//Free the SDL_Surface*.
+	SDL_FreeSurface(surf);
 
-    return texture;
+	return texture;
 }
 SuFont ResourceManager::LoadFontFromFile(const char* path, int size, SDL_Color color)
 {
-    SuFont font;
+	SuFont font;
 
-    font.mPath = path;
-    font.mSize = size;
-    font.mTextColor = color;
+	font.mPath = path;
+	font.mSize = size;
+	font.mTextColor = color;
 
-    return font;
+	return font;
 }
 
 ShaderUtil ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
 {
-    Shaders[name] = LoadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
-    return Shaders[name];
+	Shaders[name] = LoadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
+	return Shaders[name];
 }
 ShaderUtil ResourceManager::GetShader(std::string name)
 {
-    return Shaders[name];
+	return Shaders[name];
 }
 
 SuTexture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
 {
-    Textures[name] = LoadTextureFromFile(file, alpha);
-    return Textures[name];
+	Textures[name] = LoadTextureFromFile(file, alpha);
+	return Textures[name];
 }
 SuTexture2D ResourceManager::GetTexture(std::string name)
 {
-    return Textures[name];
+	return Textures[name];
 }
 
 SuFont ResourceManager::LoadFont(const char* path, int size, SDL_Color color, std::string name)
 {
-    Fonts[name] = LoadFontFromFile(path, size, color);
-    return Fonts[name];
+	Fonts[name] = LoadFontFromFile(path, size, color);
+	return Fonts[name];
 }
+
 SuFont ResourceManager::GetFont(std::string name)
 {
-    return Fonts[name];
+	return Fonts[name];
+}
+
+void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos, SuFont font)
+{
+	Texts[name] = new SuText(input, pos, font);
+}
+
+void Sungine::ResourceManager::ClearTexts()
+{
+	for (std::map<std::string, SuText*>::iterator it = Texts.begin(); it != Texts.end(); it++)
+	{
+		delete it->second;
+		it->second = nullptr;
+	}
+	Texts.clear();
+}
+
+void Sungine::ResourceManager::ClearText(std::string name)
+{
+	delete Texts[name];
+	Texts[name] = nullptr;
+	Texts.erase(name);
 }
 
 SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)
 {
-    TTF_Font* ttffont = TTF_OpenFont(font.mPath, font.mSize);
+	TTF_Font* ttffont = TTF_OpenFont(font.mPath, font.mSize);
 
-    if (alpha)
-    {
-        texture.Internal_Format = GL_RGBA;
-        texture.Image_Format = GL_RGBA;
-    }
+	if (alpha)
+	{
+		texture.Internal_Format = GL_RGBA;
+		texture.Image_Format = GL_RGBA;
+	}
 
-    //Create SDL_Surface*, then apply a blend function to it, and generate a texture from it. Then free the surface and return the texture.
-    SDL_Surface* fontsurface;
-    fontsurface = TTF_RenderText_Blended(ttffont, text, font.mTextColor);
-    texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
+	//Create SDL_Surface*, then apply a blend function to it, and generate a texture from it. Then free the surface and return the texture.
+	SDL_Surface* fontsurface;
+	fontsurface = TTF_RenderText_Blended(ttffont, text, font.mTextColor);
+	texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
 
-    SDL_FreeSurface(fontsurface);
-    fontsurface = nullptr;
+	SDL_FreeSurface(fontsurface);
+	fontsurface = nullptr;
 
-    TTF_CloseFont(ttffont);
-    ttffont = nullptr;
+	TTF_CloseFont(ttffont);
+	ttffont = nullptr;
 
-    return texture;
+	return texture;
 }
 
 void ResourceManager::Clear()
 {
-    //Delete all shaders.
-    for (auto iter : Shaders)
-        glDeleteProgram(iter.second.ID);
+	//Delete all shaders.
+	for (auto iter : Shaders)
+		glDeleteProgram(iter.second.ID);
 
-    //Delete all textures.
-    for (auto iter : Textures)
-        glDeleteTextures(1, &iter.second.ID);
+	//Delete all textures.
+	for (auto iter : Textures)
+		glDeleteTextures(1, &iter.second.ID);
+
+	//Destroy all fonts.
+	Fonts.clear();
+
+	//Destroy all texts.
+	ClearTexts();
 }

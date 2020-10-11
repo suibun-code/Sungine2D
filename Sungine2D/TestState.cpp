@@ -18,8 +18,6 @@
 SuSprite* renderer;
 Enemy* enemy;
 Player* player;
-SuText* text;
-SuText* text2;
 
 void TestState::Enter()
 {
@@ -33,7 +31,6 @@ void TestState::Enter()
 	myShader = ResourceManager::GetShader("sprite");
 
 	SuTexture2D myTexture;
-	SuFont myFont;
 
 	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 175, 0, 255 }, "playerHP");
 	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 0, 175, 255 }, "enemyHP");
@@ -42,9 +39,8 @@ void TestState::Enter()
 
 	renderer = new SuSprite(myShader);
 
-	myFont = ResourceManager::GetFont("font1");
-	text = new SuText();
-	text2 = new SuText();
+	ResourceManager::AddText("PlayerHP", "0", glm::vec2(0.f), ResourceManager::GetFont("playerHP"));
+	ResourceManager::AddText("EnemyHP", "0", glm::vec2(0.f), ResourceManager::GetFont("enemyHP"));
 
 	myTexture = ResourceManager::GetTexture("enemy");
 	enemy = new Enemy(myTexture, glm::vec2(500.f, 200.f));
@@ -58,16 +54,16 @@ void TestState::Enter()
 void TestState::Update(float deltaTime)
 {
 	//Collisions.
-	if (Collision::CheckCollision(*player, *enemy))
+	if (enemy != nullptr)
 	{
-		GameInstance::Instance()->AddLog("Collided!\n");
-
-		if (enemy->GetHealth() >= 0)
-			enemy->SetHealth(enemy->GetHealth() - 1);
-		else
+		if (Collision::CheckCollision(*player, *enemy))
 		{
-			enemy->SetDestroyed(true);
-			text2->SetDestroyed(true);
+			GameInstance::Instance()->AddLog("Collided!\n");
+
+			if (enemy->GetHealth() >= 0)
+				enemy->SetHealth(enemy->GetHealth() - 1);
+			else
+				enemy->SetDestroyed(true);
 		}
 	}
 
@@ -109,34 +105,43 @@ void TestState::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	if (enemy->GetDestroyed() == false)
-		enemy->Draw(*renderer);
-	if (text2->GetDestroyed() == false)
-		text2->Draw(*renderer, std::to_string(enemy->GetHealth()), glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
-		
+	if (enemy != nullptr)
+	{
+		if (enemy->GetDestroyed() == false)
+		{
+			enemy->Draw(*renderer);
+			ResourceManager::Texts["EnemyHP"]->ChangeText(std::to_string(enemy->GetHealth()));
+			ResourceManager::Texts["EnemyHP"]->Update(glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
+			ResourceManager::Texts["EnemyHP"]->Draw(*renderer);
+		}
+		else
+		{
+			ResourceManager::ClearText("EnemyHP");
+			delete enemy;
+			enemy = nullptr;
+		}
+	}
+
 	player->Draw(*renderer);
-	text->Draw(*renderer, std::to_string(player->GetHealth()), glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
+	ResourceManager::Texts["PlayerHP"]->ChangeText(std::to_string(player->GetHealth()));
+	ResourceManager::Texts["PlayerHP"]->Update(glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
+	ResourceManager::Texts["PlayerHP"]->Draw(*renderer);
 
 	State::Render();
 }
 
 void TestState::Exit()
 {
-	const char* test[] = { "[EXIT] ", " '", mStateName, "'.\n" };
-	GameInstance::LogBuffer(test, sizeof(test) / sizeof(test[0]));
+	ResourceManager::ClearTexts();
+
+	delete enemy;
+	delete renderer;
+	delete player;
+	enemy = nullptr;
+	renderer = nullptr;
+	player = nullptr;
 
 	Core::Instance()->GetAM()->ClearMusic();
-
-	delete renderer;
-	delete enemy;
-	delete player;
-	delete text;
-	delete text2;
-	renderer = nullptr;
-	enemy = nullptr;
-	player = nullptr;
-	text = nullptr;
-	text2 = nullptr;
 
 	State::Exit();
 }
