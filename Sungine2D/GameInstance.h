@@ -148,11 +148,11 @@ namespace Sungine
 					clipper.End();
 				}
 
-				ImGui::PopStyleVar();
-				ImGui::PopStyleColor();
-
 				if (AutoScroll && ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
 					ImGui::SetScrollHereY(1.0f);
+
+				ImGui::PopStyleVar();
+				ImGui::PopStyleColor();
 
 				ImGui::EndChild();
 				ImGui::End();
@@ -173,6 +173,7 @@ namespace Sungine
 		bool mDisplayAbout = true;
 		bool mDisplayUI = true;
 		bool mDisplayLog = true;
+		bool mDisplayEntityList = true;
 
 		// ImGui log variables
 		AppLog mLog;

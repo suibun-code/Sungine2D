@@ -51,10 +51,12 @@ void GameInstance::UpdateImGui()
 
 		ImGui::NextColumn();
 
-		if (ImGui::BeginMenu("Log"))
+		if (ImGui::BeginMenu("Tools"))
 		{
 			ImGui::Separator();
-			ImGui::MenuItem("Show", NULL, &mDisplayLog);
+			ImGui::MenuItem("Log", NULL, &mDisplayLog);
+			ImGui::Separator();
+			ImGui::MenuItem("Entity List", NULL, &mDisplayEntityList);
 			ImGui::EndMenu();
 		}
 
@@ -74,10 +76,27 @@ void GameInstance::UpdateImGui()
 		ImGui::Text("- ImGui");
 		ImGui::NewLine();
 		ImGui::Text("https://github.com/suibun-code/Sungine2D");
-		ImGui::NewLine();
+
+		ImGui::End();
+	}
+
+	{
+	if (mDisplayEntityList)
+		ImGui::Begin("Entity List", &mDisplayEntityList, ImGuiWindowFlags_AlwaysAutoResize);
+
 		s = "Number of active entities: " + std::to_string(Entity::GetGameObjectCount());
 		c = s.c_str();
 		ImGui::Text(c);
+
+		ImGui::NewLine();
+
+		for (unsigned int i = 0; i < Entity::GetAllEntities().size(); i++)
+		{
+			s = Entity::GetAllEntities().at(i)->GetName();
+			c = s.c_str();
+			ImGui::TextColored(ImVec4(0.55f, 0.235f, 0.75f, 0.95f), c);
+		}
+
 		ImGui::End();
 	}
 

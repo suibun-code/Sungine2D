@@ -60,7 +60,7 @@ void TestState::Update(float deltaTime)
 		{
 			GameInstance::Instance()->AddLog("Collided!\n");
 
-			if (enemy->GetHealth() >= 0)
+			if (enemy->GetHealth() > 0)
 				enemy->SetHealth(enemy->GetHealth() - 1);
 			else
 				enemy->SetDestroyed(true);
@@ -134,11 +134,11 @@ void TestState::Exit()
 {
 	ResourceManager::ClearTexts();
 
-	delete enemy;
 	delete renderer;
+	delete enemy;
 	delete player;
-	enemy = nullptr;
 	renderer = nullptr;
+	enemy = nullptr;
 	player = nullptr;
 
 	Core::Instance()->GetAM()->ClearMusic();

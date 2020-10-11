@@ -135,6 +135,7 @@ SuFont ResourceManager::GetFont(std::string name)
 void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos, SuFont font)
 {
 	Texts[name] = new SuText(input, pos, font);
+	Texts[name]->SetName("Text_" + name);
 }
 
 void Sungine::ResourceManager::ClearTexts()

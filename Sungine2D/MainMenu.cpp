@@ -38,6 +38,8 @@ void MainMenu::Enter()
 
 	ResourceManager::AddText("LogoText", "Press Enter To Start", glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25), ResourceManager::GetFont("CircularMedium"));
 
+	logo->SetName("logo");
+
 	State::Enter();
 }
 

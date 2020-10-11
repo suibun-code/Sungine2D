@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "SuSprite.h"
 #include "ShaderUtil.h"
 #include "Transform.h"
@@ -12,11 +14,15 @@ namespace Sungine
 	class Entity
 	{
 	private:
+		int mEntityID;
+
+		static std::vector<Entity*> msAllEntities;
 		static int msGameObjectCount;
 
 		bool mDestroyed = false;
 
 	protected:
+		std::string mName;
 		Transform mTransform;
 		SuTexture2D mTexture;
 
@@ -29,7 +35,9 @@ namespace Sungine
 		virtual void Draw(SuSprite& renderer);
 
 		static int GetGameObjectCount() { return msGameObjectCount; }
+		static std::vector <Entity*> GetAllEntities() { return msAllEntities; }
 
+		void SetName(std::string name) { mName = name; }
 		void SetDestroyed(bool destroyed) { mDestroyed = destroyed; }
 		void SetTexture(SuTexture2D texture) { mTexture = texture; }
 		void SetPosition(glm::vec2 position) { mTransform.position = position; }
@@ -37,6 +45,7 @@ namespace Sungine
 		void SetRotation(float rotation) { mTransform.rotation = rotation; }
 		void SetScale(float scale) { mTransform.scale = scale; }
 
+		std::string GetName() { return mName; }
 		bool GetDestroyed() { return mDestroyed; }
 		SuTexture2D GetTexture() { return mTexture; }
 		glm::vec2 GetPosition() { return mTransform.position; }
