@@ -40,7 +40,7 @@ Entity::~Entity()
 	msGameObjectCount--;
 }
 
-void Entity::Draw(SuSprite& renderer)
+void Entity::Draw(SuSpriteRenderer& renderer)
 {
 	renderer.DrawSprite(mTexture, mTransform.position, mTransform.size);
 }

@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "SuSprite.h"
+#include "SuSpriteRenderer.h"
 #include "ShaderUtil.h"
 #include "Transform.h"
 #include "SuTexture2D.h"
@@ -32,7 +32,7 @@ namespace Sungine
 
 		~Entity();
 
-		virtual void Draw(SuSprite& renderer);
+		virtual void Draw(SuSpriteRenderer& renderer);
 
 		static int GetGameObjectCount() { return msGameObjectCount; }
 		static std::vector <Entity*> GetAllEntities() { return msAllEntities; }
@@ -52,6 +52,12 @@ namespace Sungine
 		glm::vec2 GetSize() { return mTransform.size; }
 		float GetRotation() { return mTransform.rotation; }
 		float GetScale() { return mTransform.scale; }
+
+		template<class T>
+		void AddComponent(Component T)
+		{
+
+		}
 	};
 }
 

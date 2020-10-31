@@ -12,16 +12,12 @@ void State::Enter()
 {
 	const char* msg[] = { "[ENTER] ", " '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
+
+	renderer = new SuSpriteRenderer(shader);
 }
 
 void State::Update(float deltaTime)
 {
-	//if (Core::Instance()->KeyDown(SDL_SCANCODE_GRAVE))
-	//	if (Core::Instance()->GameInstanceEnabled() == false)
-	//		Core::Instance()->SetGameInstance(true);
-	//	else
-	//		Core::Instance()->SetGameInstance(false);
-
 	if (Core::Instance()->GameInstanceEnabled() == true)
 		GameInstance::Instance()->Update(deltaTime);
 }
@@ -38,12 +34,16 @@ void State::Exit()
 {
 	const char* msg[] = { "[EXIT] ", " '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
+
+	//Destroy renderer.
+	delete renderer;
+	renderer = nullptr;
 }
 
 void State::HandleStateEvents(const SDL_Event* event)
 {
 	if (Core::Instance()->GameInstanceEnabled() == true)
-	GameInstance::Instance()->HandleEvents(event);
+		GameInstance::Instance()->HandleEvents(event);
 }
 //End State
 

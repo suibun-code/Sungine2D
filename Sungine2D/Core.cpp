@@ -166,7 +166,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
 	mpAM = new AudioManager();
-	mpAM->SetMusicVolume(25);
+	mpAM->SetMusicVolume(15);
 	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
 	mpFSM->ChangeState(new MainMenu());
 
@@ -400,15 +400,12 @@ void Core::Clean()
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
 
-	//deallocate program
-	//shaderUtil.delete_shaders();
-
 	//Clean-up SDL.
 	SDL_DestroyRenderer(mpSDLRenderer);
 	SDL_GL_DeleteContext(mGLContext);
 	SDL_DestroyWindow(mpSDLWindow);
-	mpSDLWindow = NULL;
-	mpSDLRenderer = NULL;
+	mpSDLWindow = nullptr;
+	mpSDLRenderer = nullptr;
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();

@@ -48,6 +48,8 @@ namespace Sungine
 		static void ClearTexts();
 		static void ClearText(std::string name);
 
+		static void ClearEntities();
+
 		//De-allocates all loaded resources.
 		static void Clear();
 

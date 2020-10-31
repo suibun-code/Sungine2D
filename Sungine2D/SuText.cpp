@@ -28,12 +28,12 @@ void SuText::Update(glm::vec2 pos, SuFont font)
 	UpdateVars(pos, font);
 }
 
-void SuText::Draw(SuSprite& renderer)
+void SuText::Draw(SuSpriteRenderer& renderer)
 {
 	Entity::Draw(renderer);
 }
 
-void SuText::Draw(SuSprite& renderer, std::string input, glm::vec2 pos, SuFont font)
+void SuText::Draw(SuSpriteRenderer& renderer, std::string input, glm::vec2 pos, SuFont font)
 {
 	mInput = input;
 	Update(pos, font);

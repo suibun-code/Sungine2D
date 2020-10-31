@@ -138,6 +138,7 @@ void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos
 	Texts[name]->SetName("Text_" + name);
 }
 
+//Destroys text entities and clears the texts map.
 void Sungine::ResourceManager::ClearTexts()
 {
 	for (std::map<std::string, SuText*>::iterator it = Texts.begin(); it != Texts.end(); it++)
@@ -153,6 +154,19 @@ void Sungine::ResourceManager::ClearText(std::string name)
 	delete Texts[name];
 	Texts[name] = nullptr;
 	Texts.erase(name);
+}
+
+//Destroys all active entities.
+void Sungine::ResourceManager::ClearEntities()
+{
+	for (auto* entity : Entity::GetAllEntities())
+	{
+		if (entity != nullptr)
+		{
+			delete entity;
+			entity = nullptr;
+		}
+	}
 }
 
 SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)

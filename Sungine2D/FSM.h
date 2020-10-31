@@ -6,12 +6,17 @@
 //SDL
 #include "SDL.h"
 
+#include "SuSpriteRenderer.h"
+
 namespace Sungine
 {
 	class State
 	{
 	protected:
 		const char* mStateName = "State";
+
+		ShaderUtil shader;
+		SuSpriteRenderer* renderer;
 
 	public:
 		State(const char* mStateName) : mStateName(mStateName) {}

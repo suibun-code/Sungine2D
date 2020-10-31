@@ -9,13 +9,12 @@
 #include "Collision.h"
 
 #include "MainMenu.h"
-#include "SuSprite.h"
+#include "SuSpriteRenderer.h"
 
 #include "Player.h"
 #include "Enemy.h"
 #include "SuText.h"
 
-SuSprite* renderer;
 Enemy* enemy;
 Player* player;
 
@@ -27,26 +26,23 @@ void TestState::Enter()
 	Core::Instance()->GetAM()->LoadMusic("res/audio/music/musikkperautomatikk.mp3");
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
 
-	ShaderUtil myShader;
-	myShader = ResourceManager::GetShader("sprite");
+	shader = ResourceManager::GetShader("sprite");
 
-	SuTexture2D myTexture;
+	SuTexture2D texture;
 
 	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 175, 0, 255 }, "playerHP");
 	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 0, 175, 255 }, "enemyHP");
 	ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
 	ResourceManager::LoadTexture("res/img/player.png", true, "player");
 
-	renderer = new SuSprite(myShader);
-
 	ResourceManager::AddText("PlayerHP", "0", glm::vec2(0.f), ResourceManager::GetFont("playerHP"));
 	ResourceManager::AddText("EnemyHP", "0", glm::vec2(0.f), ResourceManager::GetFont("enemyHP"));
 
-	myTexture = ResourceManager::GetTexture("enemy");
-	enemy = new Enemy(myTexture, glm::vec2(500.f, 200.f));
+	texture = ResourceManager::GetTexture("enemy");
+	enemy = new Enemy(texture, glm::vec2(500.f, 200.f));
 
-	myTexture = ResourceManager::GetTexture("player");
-	player = new Player(myTexture, glm::vec2(200.f, 200.f));
+	texture = ResourceManager::GetTexture("player");
+	player = new Player(texture, glm::vec2(200.f, 200.f));
 
 	State::Enter();
 }
@@ -89,14 +85,10 @@ void TestState::Update(float deltaTime)
 	}
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
-	{
 		player->SetHealth(50);
-	}
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
-	{
 		Core::Instance()->GetFSM()->ChangeState(new MainMenu);
-	}
 
 	State::Update(deltaTime);
 }
@@ -132,16 +124,11 @@ void TestState::Render()
 
 void TestState::Exit()
 {
-	ResourceManager::ClearTexts();
-
-	delete renderer;
-	delete enemy;
-	delete player;
-	renderer = nullptr;
-	enemy = nullptr;
-	player = nullptr;
-
 	Core::Instance()->GetAM()->ClearMusic();
+
+	//Destroy text entities and all other entities.
+	ResourceManager::ClearTexts();
+	ResourceManager::ClearEntities();
 
 	State::Exit();
 }

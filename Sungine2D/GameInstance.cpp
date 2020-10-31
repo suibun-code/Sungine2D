@@ -75,18 +75,18 @@ void GameInstance::UpdateImGui()
 		ImGui::Text("- OpenGL 3.3");
 		ImGui::Text("- ImGui");
 		ImGui::NewLine();
-		ImGui::Text("https://github.com/suibun-code/Sungine2D");
+		ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 0.95f), "https://github.com/suibun-code/Sungine2D");
 
 		ImGui::End();
 	}
 
-	{
 	if (mDisplayEntityList)
+	{
 		ImGui::Begin("Entity List", &mDisplayEntityList, ImGuiWindowFlags_AlwaysAutoResize);
 
 		s = "Number of active entities: " + std::to_string(Entity::GetGameObjectCount());
 		c = s.c_str();
-		ImGui::Text(c);
+		ImGui::Text(c); 
 
 		ImGui::NewLine();
 
@@ -94,7 +94,7 @@ void GameInstance::UpdateImGui()
 		{
 			s = Entity::GetAllEntities().at(i)->GetName();
 			c = s.c_str();
-			ImGui::TextColored(ImVec4(0.55f, 0.235f, 0.75f, 0.95f), c);
+			ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 0.95f), c);
 		}
 
 		ImGui::End();
@@ -147,7 +147,7 @@ void GameInstance::DumpStartupLog()
 	{
 		while (!mLogInputBuffer.empty())
 		{
-			
+
 			mLog.AddLog("[%.1f sec]: %s", ImGui::GetTime(), mLogInputBuffer.front());
 			mLogInputBuffer.erase(mLogInputBuffer.begin());
 			//mLogInputBuffer.front() = std::move(mLogInputBuffer.back());
@@ -164,7 +164,7 @@ void GameInstance::LogBuffer(const char* arr[], int len)
 	char buffer[256];
 
 	strncpy_s(buffer, arr[0], sizeof(buffer));
-	
+
 	for (int i = 1; i < len; i++)
 		strncat_s(buffer, arr[i], sizeof(buffer));
 

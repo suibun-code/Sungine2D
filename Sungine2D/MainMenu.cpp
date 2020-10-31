@@ -6,13 +6,12 @@
 #include "Core.h"
 #include "GameInstance.h"
 #include "ShaderUtil.h"
-#include "SuSprite.h"
+#include "SuSpriteRenderer.h"
 #include "Entity.h"
 #include "ResourceManager.h"
 
 #include "TestState.h"
 
-SuSprite* renderer1;
 Entity* logo;
 
 void MainMenu::Enter()
@@ -23,22 +22,18 @@ void MainMenu::Enter()
 	Core::Instance()->GetAM()->LoadMusic("res/audio/music/CornerOfMemories.mp3");
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
 
-	ShaderUtil myShader;
-	myShader = ResourceManager::GetShader("sprite");
+	shader = ResourceManager::GetShader("sprite");
 
-	SuTexture2D myTexture;
+	SuTexture2D texture;
 
 	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, { 0, 0, 0, 255 }, "CircularMedium");
 	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
 
-	renderer1 = new SuSprite(myShader);
-
-	myTexture = ResourceManager::GetTexture("logo");
-	logo = new Entity(myTexture, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (myTexture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (myTexture.Height / 2)));
+	texture = ResourceManager::GetTexture("logo");
+	logo = new Entity(texture, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (texture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (texture.Height / 2)));
+	logo->SetName("Logo");
 
 	ResourceManager::AddText("LogoText", "Press Enter To Start", glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25), ResourceManager::GetFont("CircularMedium"));
-
-	logo->SetName("logo");
 
 	State::Enter();
 }
@@ -46,9 +41,7 @@ void MainMenu::Enter()
 void MainMenu::Update(float deltaTime)
 {
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
-	{
 		Core::Instance()->GetFSM()->ChangeState(new TestState);
-	}
 
 	State::Update(deltaTime);
 }
@@ -57,11 +50,11 @@ void MainMenu::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	logo->Draw(*renderer1);
+	logo->Draw(*renderer);
 
 	for (std::map<std::string, SuText*>::iterator it = ResourceManager::Texts.begin(); it != ResourceManager::Texts.end(); it++)
 	{
-		it->second->Draw(*renderer1);
+		it->second->Draw(*renderer);
 	}
 
 	State::Render();
@@ -71,12 +64,9 @@ void MainMenu::Exit()
 {
 	Core::Instance()->GetAM()->ClearMusic();
 
+	//Destroy text entities and all other entities.
 	ResourceManager::ClearTexts();
-
-	delete renderer1;
-	delete logo;
-	renderer1 = nullptr;
-	logo = nullptr;
+	ResourceManager::ClearEntities();
 
 	State::Exit();
 }
