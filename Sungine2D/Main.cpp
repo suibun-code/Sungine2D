@@ -1,7 +1,5 @@
 #include "Core.h"
 
-using namespace Sungine;
-
 int main(int argc, char* args[])
 {
 	Core::Instance()->InitAll("Sungine2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Core::Instance()->GetWindowWidth(),

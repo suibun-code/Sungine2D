@@ -37,6 +37,15 @@
     <Filter Include="Game\Entities">
       <UniqueIdentifier>{43fdff5b-b568-4618-bc95-312f2d86068a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems">
+      <UniqueIdentifier>{4eedfbdc-a418-490a-a6d3-d99a244a1ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Components">
+      <UniqueIdentifier>{92267671-4ddd-4f95-b43c-dff7f701d1f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ECS">
+      <UniqueIdentifier>{8868320f-1e38-4c81-8071-2fd428f06e61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\imgui-1.78\imconfig.h">
@@ -120,8 +129,38 @@
     <ClInclude Include="SuSpriteRenderer.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ECS.h">
-      <Filter>Engine\Header Files</Filter>
+    <ClInclude Include="MovementSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSEntityManager.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSComponentArray.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSComponentManager.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSSystem.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSSystemManager.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSHandler.h">
+      <Filter>Engine\ECS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,8 +236,11 @@
     <ClCompile Include="SuSpriteRenderer.cpp">
       <Filter>Engine\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ECS.cpp">
-      <Filter>Engine\Source Files</Filter>
+    <ClCompile Include="MovementSystem.cpp">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

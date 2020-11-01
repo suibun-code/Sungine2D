@@ -8,8 +8,6 @@
 #include "Entity.h"
 #include <iostream>
 
-using namespace Sungine;
-
 //Initialzie game instance.
 GameInstance* GameInstance::mspGameInstance = nullptr;
 

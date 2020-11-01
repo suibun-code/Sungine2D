@@ -2,8 +2,6 @@
 
 #include "GameInstance.h"
 
-using namespace Sungine;
-
 AudioManager::~AudioManager()
 {
 	GameInstance::Instance()->AddLog("Destroying the audio manager...\n");

@@ -1,5 +1,7 @@
 #include "MainMenu.h"
 
+#include <memory>
+
 //GLEW
 #include "glew.h"
 
@@ -10,14 +12,47 @@
 #include "Entity.h"
 #include "ResourceManager.h"
 
+/*ECS*/
+#include "TransformComponent.h"
+#include "MovementSystem.h"
+#include "ECSHandler.h"
+/*ECS*/
+
 #include "TestState.h"
 
 Entity* logo;
+
+/*ECS*/
+ECSHandler handler;
+std::shared_ptr<MovementSystem> movementSystem;
+/*ECS*/
 
 void MainMenu::Enter()
 {
 	//Clear the screen with specific color.
 	glClearColor(.294f, .0f, .509f, 1.f);
+
+	/*ECS*/
+	handler.Init();
+	handler.RegisterComponent<TransformComponent>();
+
+	movementSystem = handler.RegisterSystem<MovementSystem>();
+
+	Signature signature;
+	signature.set(handler.GetComponentType<TransformComponent>());
+	handler.SetSystemSignature<MovementSystem>(signature);
+
+	ECSEntity testECSEntity;
+	testECSEntity = handler.CreateEntity();
+	
+	TransformComponent trans;
+	trans.position = glm::vec2(200, 200);
+	trans.rotation = 0.f;
+	trans.scale = 1.f;
+	trans.size = glm::vec2(1.f, 1.f);
+
+	handler.AddComponent(testECSEntity, trans);
+	/*ECS*/
 
 	Core::Instance()->GetAM()->LoadMusic("res/audio/music/CornerOfMemories.mp3");
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
@@ -42,6 +77,10 @@ void MainMenu::Update(float deltaTime)
 {
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
 		Core::Instance()->GetFSM()->ChangeState(new TestState);
+
+	/*ECS*/
+	movementSystem->Update(deltaTime);
+	/*ECS*/
 
 	State::Update(deltaTime);
 }

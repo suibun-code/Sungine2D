@@ -23,8 +23,6 @@
 #include "MainMenu.h"
 #include "TestState.h"
 
-using namespace Sungine;
-
 Core* Core::mspInstance = nullptr;
 
 Core::Core() {}

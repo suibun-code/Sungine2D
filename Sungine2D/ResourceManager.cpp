@@ -6,8 +6,6 @@
 
 #include "Core.h"
 
-using namespace Sungine;
-
 SuTexture2D ResourceManager::texture;
 
 //Instantiate static variables for keeping shaders and textures.
@@ -139,7 +137,7 @@ void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos
 }
 
 //Destroys text entities and clears the texts map.
-void Sungine::ResourceManager::ClearTexts()
+void ResourceManager::ClearTexts()
 {
 	for (std::map<std::string, SuText*>::iterator it = Texts.begin(); it != Texts.end(); it++)
 	{
@@ -149,7 +147,7 @@ void Sungine::ResourceManager::ClearTexts()
 	Texts.clear();
 }
 
-void Sungine::ResourceManager::ClearText(std::string name)
+void ResourceManager::ClearText(std::string name)
 {
 	delete Texts[name];
 	Texts[name] = nullptr;
@@ -157,7 +155,7 @@ void Sungine::ResourceManager::ClearText(std::string name)
 }
 
 //Destroys all active entities.
-void Sungine::ResourceManager::ClearEntities()
+void ResourceManager::ClearEntities()
 {
 	for (auto* entity : Entity::GetAllEntities())
 	{

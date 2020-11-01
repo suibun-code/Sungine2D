@@ -1,7 +1,5 @@
 #include "SuSpriteRenderer.h"
 
-using namespace Sungine;
-
 void SuSpriteRenderer::initRenderData()
 {
     //Indices mapping.

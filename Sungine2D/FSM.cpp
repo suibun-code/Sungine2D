@@ -5,8 +5,6 @@
 #include "Core.h"
 #include "GameInstance.h"
 
-using namespace Sungine;
-
 //State
 void State::Enter()
 {

@@ -156,14 +156,22 @@
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Core.h" />
-    <ClInclude Include="ECS.h" />
+    <ClInclude Include="ECSComponentArray.h" />
+    <ClInclude Include="ECSComponentManager.h" />
+    <ClInclude Include="ECSEntityManager.h" />
+    <ClInclude Include="ECSHandler.h" />
+    <ClInclude Include="ECSSystem.h" />
+    <ClInclude Include="ECSSystemManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="GameInstance.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MovementSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="SuFont.h" />
@@ -172,6 +180,8 @@
     <ClInclude Include="SuTexture2D.h" />
     <ClInclude Include="TestState.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp" />
@@ -184,7 +194,6 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
@@ -192,7 +201,9 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MovementSystem.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="SuSpriteRenderer.cpp" />

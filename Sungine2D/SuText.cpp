@@ -2,8 +2,6 @@
 
 #include "ResourceManager.h"
 
-using namespace Sungine;
-
 SuText::SuText()
 {
 	Update(glm::vec2(1.f), SuFont());
