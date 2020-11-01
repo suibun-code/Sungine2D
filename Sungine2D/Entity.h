@@ -17,6 +17,7 @@ namespace Sungine
 		int mEntityID;
 
 		static std::vector<Entity*> msAllEntities;
+
 		static int msGameObjectCount;
 
 		bool mDestroyed = false;
@@ -52,12 +53,6 @@ namespace Sungine
 		glm::vec2 GetSize() { return mTransform.size; }
 		float GetRotation() { return mTransform.rotation; }
 		float GetScale() { return mTransform.scale; }
-
-		template<class T>
-		void AddComponent(Component T)
-		{
-
-		}
 	};
 }
 

@@ -156,6 +156,7 @@
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="ECS.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="GameInstance.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
