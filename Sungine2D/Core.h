@@ -14,10 +14,12 @@
 //Components
 #include "TransformComponent.h"
 #include "RenderComponent.h"
+#include "TextComponent.h"
 
 //Systems
 #include "MovementSystem.h"
 #include "RenderSystem.h"
+#include "TextSystem.h"
 
 #include "FSM.h"
 #include "AudioManager.h"
@@ -32,6 +34,7 @@ private:
 
 	std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<RenderSystem> mpRenderSystem;
+	std::shared_ptr<TextSystem> mpTextSystem;
 
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;
@@ -138,6 +141,5 @@ public:
 
 	template<class T>
 	std::shared_ptr<T> GetSystem() { return std::static_pointer_cast<T>(mpSystems[typeid(T).name()]); }
-	//std::shared_ptr<ECSComponentArray<T>> GetComponentArray()
 };
 

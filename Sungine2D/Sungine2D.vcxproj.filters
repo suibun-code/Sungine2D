@@ -165,6 +165,9 @@
     <ClInclude Include="TextComponent.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="TextSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -243,6 +246,9 @@
       <Filter>Engine\Systems</Filter>
     </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="TextSystem.cpp">
       <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>

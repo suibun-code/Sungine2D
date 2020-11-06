@@ -92,9 +92,9 @@ SuFont ResourceManager::LoadFontFromFile(const char* path, int size, SDL_Color c
 {
 	SuFont font;
 
-	font.mPath = path;
-	font.mSize = size;
-	font.mTextColor = color;
+	font.path = path;
+	font.size = size;
+	font.textColor = color;
 
 	return font;
 }
@@ -169,7 +169,7 @@ void ResourceManager::ClearEntities()
 
 SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)
 {
-	TTF_Font* ttffont = TTF_OpenFont(font.mPath, font.mSize);
+	TTF_Font* ttffont = TTF_OpenFont(font.path, font.size);
 
 	if (alpha)
 	{
@@ -179,7 +179,7 @@ SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, S
 
 	//Create SDL_Surface*, then apply a blend function to it, and generate a texture from it. Then free the surface and return the texture.
 	SDL_Surface* fontsurface;
-	fontsurface = TTF_RenderText_Blended(ttffont, text, font.mTextColor);
+	fontsurface = TTF_RenderText_Blended(ttffont, text, font.textColor);
 	texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
 
 	SDL_FreeSurface(fontsurface);

@@ -4,8 +4,6 @@
 
 struct TextComponent
 {
-private:
-	std::string mInput = "Default";
-	const char* mOutput = "Default";
+	const char* output = "Default";
 	SuFont font;
 };

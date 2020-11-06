@@ -6,6 +6,6 @@
 struct RenderComponent
 {
 	ShaderUtil shaderUtil;
-	SuTexture2D texture;
-	glm::vec3 color;
+	SuTexture2D texture = SuTexture2D();
+	glm::vec3 color = glm::vec3(1.f);
 };

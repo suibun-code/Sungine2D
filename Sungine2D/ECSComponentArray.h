@@ -47,6 +47,11 @@ public:
 		size_t indexOfLastElement = mSize - 1;
 		mComponentArray[indexOfRemovedEntity] = mComponentArray[indexOfLastElement];
 
+		// Update map to point to moved spot
+		ECSEntity entityOfLastElement = mIndexToEntityMap[indexOfLastElement];
+		mEntityToIndexMap[entityOfLastElement] = indexOfRemovedEntity;
+		mIndexToEntityMap[indexOfRemovedEntity] = entityOfLastElement;
+
 		mEntityToIndexMap.erase(entity);
 		mIndexToEntityMap.erase(indexOfLastElement);
 

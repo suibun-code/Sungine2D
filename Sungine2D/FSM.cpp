@@ -12,6 +12,9 @@ void State::Enter()
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
 
 	renderer = new SuSpriteRenderer(shader);
+
+	Core::Instance()->GetSystem<RenderSystem>()->Init();
+	Core::Instance()->GetSystem<TextSystem>()->Init();
 }
 
 void State::Update(float deltaTime)

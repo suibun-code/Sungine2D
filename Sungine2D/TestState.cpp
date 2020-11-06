@@ -84,7 +84,10 @@ void TestState::Update(float deltaTime)
 		player->SetHealth(50);
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
+	{
 		Core::Instance()->GetFSM()->ChangeState(new MainMenu);
+		return;
+	}
 
 	State::Update(deltaTime);
 }
