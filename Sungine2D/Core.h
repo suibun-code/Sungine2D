@@ -2,11 +2,22 @@
 
 #define FPS 144
 
+#include <memory>
+#include <map>
+
 //SDL
 #include "SDL.h"
 
 //IMGUi
 #include "imgui.h"
+
+//Components
+#include "TransformComponent.h"
+#include "RenderComponent.h"
+
+//Systems
+#include "MovementSystem.h"
+#include "RenderSystem.h"
 
 #include "FSM.h"
 #include "AudioManager.h"
@@ -14,9 +25,13 @@
 class Core
 {
 private:
-
 	//Global Core instance.
 	static Core* mspInstance;
+
+	std::map<std::string, std::shared_ptr<ECSSystem>> mpSystems;
+
+	std::shared_ptr<MovementSystem> mpMovementSystem;
+	std::shared_ptr<RenderSystem> mpRenderSystem;
 
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;
@@ -25,7 +40,7 @@ private:
 	ImGuiContext* mImGuiContext = nullptr;
 
 	//SDL event.
-	SDL_Event mEvent;
+	SDL_Event mEvent = SDL_Event();
 
 	//Boolean checks.
 	bool mGameInstanceEnabled = false;
@@ -107,7 +122,7 @@ public:
 	void HandleEvents();
 	void Quit();
 	void Clean();
-	void GetLocialSize() { SDL_RenderGetLogicalSize(mpSDLRenderer, &mWindowWidth, &mWindowHeight); }
+	void GetLogicalSize() { SDL_RenderGetLogicalSize(mpSDLRenderer, &mWindowWidth, &mWindowHeight); }
 	void SetLMBState(bool state) { mLMBState = state; }
 
 	int GetWindowWidth() { return mWindowWidth; }
@@ -116,5 +131,13 @@ public:
 
 	float GetDeltaTime() { return mDeltaTime; }
 	float GetFramesPerSecond() { return mFramesPerSecond; }
+
+	//Systems
+	std::shared_ptr<MovementSystem> GetMovementSystem() { return mpMovementSystem; }
+	std::shared_ptr<RenderSystem> GetRenderSystem() { return mpRenderSystem; }
+
+	template<class T>
+	std::shared_ptr<T> GetSystem() { return std::static_pointer_cast<T>(mpSystems[typeid(T).name()]); }
+	//std::shared_ptr<ECSComponentArray<T>> GetComponentArray()
 };
 

@@ -20,12 +20,17 @@
 
 #include "GameInstance.h"
 #include "ResourceManager.h"
+#include "ECSHandler.h"
 #include "MainMenu.h"
 #include "TestState.h"
 
+//Initialzie singleton instances.
 Core* Core::mspInstance = nullptr;
+ECSHandler* ECSHandler::mspHandlerInstance = nullptr;
+GameInstance* GameInstance::mspGameInstance = nullptr;
 
 Core::Core() {}
+
 Core::~Core() {}
 
 bool Core::InitAll(const char* title, const int xpos, const int ypos, const int width, const int height, const int flags)
@@ -160,6 +165,28 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	GameInstance::Instance()->DumpStartupLog();
 	GameInstance::Instance()->AddLog("Welcome to Sungine2D.\n");
+
+	Signature signature;
+
+	ECSHandler::Instance()->Init();
+
+	//Register components.
+	ECSHandler::Instance()->RegisterComponent<TransformComponent>();
+	ECSHandler::Instance()->RegisterComponent<RenderComponent>();
+	signature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
+	signature.set(ECSHandler::Instance()->GetComponentType<RenderComponent>());
+
+	//Register systems.
+	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();
+	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
+	ECSHandler::Instance()->SetSystemSignature<MovementSystem>(signature);
+	ECSHandler::Instance()->SetSystemSignature<RenderSystem>(signature);
+
+	mpMovementSystem->Init();
+	mpRenderSystem->Init();
+
+	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
+	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();

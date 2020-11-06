@@ -10,11 +10,21 @@
 class ECSHandler
 {
 private:
+	static ECSHandler* mspHandlerInstance;
+
 	std::unique_ptr<ECSComponentManager> mComponentManager;
 	std::unique_ptr<ECSEntityManager> mEntityManager;
 	std::unique_ptr<ECSSystemManager> mSystemManager;
 
 public:
+	//Singleton instance of ECSHandler.
+	static ECSHandler* Instance()
+	{
+		if (mspHandlerInstance == nullptr)
+			mspHandlerInstance = new ECSHandler();
+		return mspHandlerInstance;
+	}
+
 	void Init()
 	{
 		//Create pointers to each manager.

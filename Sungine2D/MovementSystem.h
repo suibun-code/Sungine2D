@@ -2,8 +2,12 @@
 
 #include "ECSSystem.h"
 
+#include "ECSHandler.h"
+
 class MovementSystem : public ECSSystem
 {
+private:
+
 public:
 	void Init();
 

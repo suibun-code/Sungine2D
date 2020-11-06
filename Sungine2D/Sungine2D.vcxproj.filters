@@ -162,6 +162,9 @@
     <ClInclude Include="ECSHandler.h">
       <Filter>Engine\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">

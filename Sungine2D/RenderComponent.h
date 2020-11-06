@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SuTexture2D.h"
+#include "ShaderUtil.h"
 
 struct RenderComponent
 {

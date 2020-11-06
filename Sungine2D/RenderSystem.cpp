@@ -3,11 +3,8 @@
 //GLM
 #include "glm/glm/glm.hpp"
 
-#include "ECSHandler.h"
 #include "RenderComponent.h"
 #include "TransformComponent.h"
-
-extern ECSHandler handler;
 
 void RenderSystem::Init()
 {
@@ -72,8 +69,8 @@ void RenderSystem::Draw()
 {
     for (auto const& entity : mEntities)
     {
-        auto& render = handler.GetComponent<RenderComponent>(entity);
-        auto& transform = handler.GetComponent<TransformComponent>(entity);
+        auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
+        auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
 
         transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 

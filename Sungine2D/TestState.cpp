@@ -3,20 +3,16 @@
 //GLEW
 #include "glew.h"
 
+//Misc
 #include "Core.h"
 #include "GameInstance.h"
 #include "ResourceManager.h"
 #include "Collision.h"
-
-#include "MainMenu.h"
 #include "SuSpriteRenderer.h"
-
-#include "Player.h"
-#include "Enemy.h"
 #include "SuText.h"
 
-Enemy* enemy;
-Player* player;
+//States
+#include "MainMenu.h"
 
 void TestState::Enter()
 {

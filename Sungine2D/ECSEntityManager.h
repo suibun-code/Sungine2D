@@ -49,6 +49,18 @@ public:
 		--mLivingEntityCount;
 	}
 
+	void DestroyAllEntities()
+	{
+		for (uint32_t i = 0; i < mSignatures.size(); i++)
+		{
+			mSignatures[i].reset();
+			mLivingEntityCount = 0;
+		}
+
+		for (ECSEntity entity = 0; entity < MAX_ENTITIES; ++entity)
+			mAvailableEntities.push(entity);
+	}
+
 	void SetSignature(ECSEntity entity, Signature signature)
 	{
 		assert(entity < MAX_ENTITIES && "Entity out of range.");

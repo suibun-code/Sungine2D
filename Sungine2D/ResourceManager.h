@@ -5,9 +5,9 @@
 #include <string>
 
 #include "SuFont.h"
+#include "SuText.h"
 #include "ShaderUtil.h"
 #include "SuTexture2D.h"
-#include "SuText.h"
 
 //SDL
 #include "SDL_image.h"

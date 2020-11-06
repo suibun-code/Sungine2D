@@ -134,5 +134,3 @@ void ShaderUtil::SetMatrix4(const char* name, const glm::mat4& matrix, bool useS
         this->Use();
     glUniformMatrix4fv(glGetUniformLocation(this->ID, name), 1, false, glm::value_ptr(matrix));
 }
-
-

@@ -179,6 +179,7 @@
     <ClInclude Include="SuText.h" />
     <ClInclude Include="SuTexture2D.h" />
     <ClInclude Include="TestState.h" />
+    <ClInclude Include="TextComponent.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="Types.h" />

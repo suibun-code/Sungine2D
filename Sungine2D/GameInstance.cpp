@@ -8,9 +8,6 @@
 #include "Entity.h"
 #include <iostream>
 
-//Initialzie game instance.
-GameInstance* GameInstance::mspGameInstance = nullptr;
-
 GameInstance::GameInstance()
 {
 	//Update ImGui.	

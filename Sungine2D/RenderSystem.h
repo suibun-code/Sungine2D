@@ -2,6 +2,8 @@
 
 #include "ECSSystem.h"
 
+#include "ECSHandler.h"
+
 #include "ShaderUtil.h"
 #include "SuTexture2D.h"
 

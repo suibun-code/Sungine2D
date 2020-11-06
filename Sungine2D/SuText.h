@@ -1,7 +1,5 @@
 #pragma once
 
-#include <typeinfo>
-
 #include "Entity.h"
 #include "SuFont.h"
 
