@@ -14,6 +14,9 @@
 //States
 #include "MainMenu.h"
 
+ECSEntity playerHP;
+ECSEntity enemyHP;
+
 void TestState::Enter()
 {
 	//Clear the screen with specific color.
@@ -33,6 +36,11 @@ void TestState::Enter()
 
 	ResourceManager::AddText("PlayerHP", "0", glm::vec2(0.f), ResourceManager::GetFont("playerHP"));
 	ResourceManager::AddText("EnemyHP", "0", glm::vec2(0.f), ResourceManager::GetFont("enemyHP"));
+
+	playerHP = ECSHandler::Instance()->CreateEntity();
+	ECSHandler::Instance()->AddComponent(playerHP, TransformComponent{ 1.f, 0.f, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25) });
+	ECSHandler::Instance()->AddComponent(playerHP, RenderComponent{ shader });
+	ECSHandler::Instance()->AddComponent(playerHP, TextComponent{ "Press Enter To Start", ResourceManager::GetFont("CircularMedium") });
 
 	texture = ResourceManager::GetTexture("enemy");
 	enemy = new Enemy(texture, glm::vec2(500.f, 200.f));
