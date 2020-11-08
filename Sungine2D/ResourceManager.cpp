@@ -135,37 +135,30 @@ void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos
 	ECSHandler::Instance()->AddComponent(text, RenderComponent{ ResourceManager::GetShader("sprite") });
 	ECSHandler::Instance()->AddComponent(text, TextComponent{ input, font });
 
+	ECSHandler::Instance()->GetComponent<EntityData>(text).name = "Text_ " + name;
+	ECSHandler::Instance()->GetComponent<EntityData>(text).tag = "Text";
+
 	Texts[name] = text;
 }
 
 //Destroys & clears the respective objects.
 void ResourceManager::ClearTexts()
 {
-	for (std::map<std::string, ECSEntity>::iterator it = Texts.begin(); it != Texts.end(); it++)
-	{
-		ECSHandler::Instance()->DestroyEntity(it->second);
-		//delete it->second;
-	}
-		//it->second = nullptr;
 	Texts.clear();
 }
 void ResourceManager::ClearText(std::string name)
 {
-	//delete Texts[name];
-	//Texts[name] = nullptr;
 	ECSHandler::Instance()->DestroyEntity(Texts[name]);
 	Texts.erase(name);
 }
 void ResourceManager::ClearEntities()
 {
 	for (auto* entity : Entity::GetAllEntities())
-	{
 		if (entity != nullptr)
 		{
 			delete entity;
 			entity = nullptr;
 		}
-	}
 }
 
 SuTexture2D ResourceManager::LoadTextureFromFont(std::string text, bool alpha, SuFont font)

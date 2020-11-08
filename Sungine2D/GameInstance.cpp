@@ -5,8 +5,8 @@
 #include "imgui_impl_sdl.h"
 
 #include "Core.h"
-#include "Entity.h"
-#include <iostream>
+//#include "Entity.h"
+#include "ECSEntityManager.h"
 
 GameInstance::GameInstance()
 {
@@ -79,15 +79,15 @@ void GameInstance::UpdateImGui()
 	{
 		ImGui::Begin("Entity List", &mDisplayEntityList, ImGuiWindowFlags_AlwaysAutoResize);
 
-		s = "Number of active entities: " + std::to_string(Entity::GetGameObjectCount());
+		s = "Number of active entities: " + std::to_string(ECSHandler::Instance()->ActiveEntityCount());
 		c = s.c_str();
 		ImGui::Text(c); 
 
 		ImGui::NewLine();
 
-		for (unsigned int i = 0; i < Entity::GetAllEntities().size(); i++)
+		for (unsigned int i = 0; i < Core::Instance()->GetCurrentState()->GetEntities().size(); i++)
 		{
-			s = Entity::GetAllEntities().at(i)->GetName();
+			s = ECSHandler::Instance()->GetComponent<EntityData>(Core::Instance()->GetCurrentState()->GetEntities().at(i)).name;
 			c = s.c_str();
 			ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 0.95f), c);
 		}

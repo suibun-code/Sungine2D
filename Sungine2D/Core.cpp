@@ -176,6 +176,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	ECSHandler::Instance()->RegisterComponent<TransformComponent>();
 	ECSHandler::Instance()->RegisterComponent<RenderComponent>();
 	ECSHandler::Instance()->RegisterComponent<TextComponent>();
+	ECSHandler::Instance()->RegisterComponent<EntityData>();
 
 	//Register systems.
 	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();

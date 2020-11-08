@@ -31,11 +31,14 @@ void MainMenu::Enter()
 	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
 
 	texture = ResourceManager::GetTexture("logo");
-	logo = ECSHandler::Instance()->CreateEntity();
+	ECSEntity logo = ECSHandler::Instance()->CreateEntity();
+	ECSHandler::Instance()->GetComponent<EntityData>(logo).name = "Logo";
 	ECSHandler::Instance()->AddComponent(logo, TransformComponent{ 1.f, 0.f, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (texture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (texture.Height / 2)), glm::vec2(1.f, 1.f) });
 	ECSHandler::Instance()->AddComponent(logo, RenderComponent{ shader, texture, glm::vec3(1.f) });
 
 	ResourceManager::AddText("enter", "Press Enter To Start", glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25), ResourceManager::GetFont("CircularMedium"));
+
+	std::cout << ECSHandler::Instance()->ActiveEntityCount() << "\n";
 
 	State::Enter();
 }
@@ -68,11 +71,19 @@ void MainMenu::Exit()
 {
 	Core::Instance()->GetAM()->ClearMusic();
 
-	ECSHandler::Instance()->DestroyEntity(logo);
+	//Clear all remaining entities.
+	for (auto& entity : mEntities)
+	{
+		ECSHandler::Instance()->DestroyEntity(entity);
+		mEntities.clear();
+	}
 
-	//Destroy text entities and all other entities.
+	//Clear text map.
 	ResourceManager::ClearTexts();
+
 	ResourceManager::ClearEntities();
+
+	std::cout << ECSHandler::Instance()->ActiveEntityCount() << "\n";
 
 	State::Exit();
 }

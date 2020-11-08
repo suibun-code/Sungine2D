@@ -26,17 +26,7 @@ public:
 			mAvailableEntities.push(entity);
 	}
 
-	ECSEntity CreateEntity()
-	{
-		assert(mLivingEntityCount < MAX_ENTITIES && "Too many entities exist.");
-
-		//Take an ID from the front of the queue.
-		ECSEntity id = mAvailableEntities.front();
-		mAvailableEntities.pop();
-		++mLivingEntityCount;
-
-		return id;
-	}
+	ECSEntity CreateEntity();
 
 	void DestroyEntity(ECSEntity entity)
 	{
@@ -76,5 +66,10 @@ public:
 
 		//Get this entit's signature from the array.
 		return mSignatures[entity];
+	}
+
+	ECSEntity ActiveEntityCount()
+	{
+		return mLivingEntityCount;
 	}
 };

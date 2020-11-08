@@ -8,10 +8,14 @@
 
 #include "SuSpriteRenderer.h"
 
+#include "ECSEntityManager.h"
+
 class State
 {
 protected:
 	const char* mStateName = "State";
+
+	std::vector<ECSEntity> mEntities;
 
 	ShaderUtil shader;
 	SuSpriteRenderer* renderer;
@@ -25,6 +29,9 @@ public:
 	virtual void HandleStateEvents(const SDL_Event* event);
 	virtual void Resume() = 0;
 	virtual void Exit() = 0;
+
+	std::vector<ECSEntity> GetEntities() { return mEntities; }
+	void AddEntity(ECSEntity entity) { mEntities.push_back(entity); }
 
 	template <class T>
 	void CleanVector(std::vector<T> vec);

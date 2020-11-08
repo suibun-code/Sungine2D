@@ -7,7 +7,6 @@
 class MainMenu :  public State
 {
 private:
-	ECSEntity logo;
 
 public:
 	MainMenu() : State("MainMenu") {}

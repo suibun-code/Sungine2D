@@ -163,6 +163,7 @@
     <ClInclude Include="ECSSystem.h" />
     <ClInclude Include="ECSSystemManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EntityData.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="GameInstance.h" />
     <ClInclude Include="Entity.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="ECSEntityManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />

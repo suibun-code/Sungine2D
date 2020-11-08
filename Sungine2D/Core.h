@@ -15,6 +15,7 @@
 #include "TransformComponent.h"
 #include "RenderComponent.h"
 #include "TextComponent.h"
+#include "EntityData.h"
 
 //Systems
 #include "MovementSystem.h"
@@ -83,6 +84,8 @@ private:
 	StateMachine* mpFSM = nullptr;
 	AudioManager* mpAM = nullptr;
 
+	State* mCurrentState;
+
 public:
 	const char* mVersion = "v0.0.1";
 
@@ -135,9 +138,8 @@ public:
 	float GetDeltaTime() { return mDeltaTime; }
 	float GetFramesPerSecond() { return mFramesPerSecond; }
 
-	//Systems
-	std::shared_ptr<MovementSystem> GetMovementSystem() { return mpMovementSystem; }
-	std::shared_ptr<RenderSystem> GetRenderSystem() { return mpRenderSystem; }
+	void SetCurrentState(State* state) { mCurrentState = state; }
+	State* GetCurrentState() { return mCurrentState; }
 
 	template<class T>
 	std::shared_ptr<T> GetSystem() { return std::static_pointer_cast<T>(mpSystems[typeid(T).name()]); }

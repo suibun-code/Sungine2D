@@ -168,6 +168,9 @@
     <ClInclude Include="TextSystem.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="EntityData.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -250,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="TextSystem.cpp">
       <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ECSEntityManager.cpp">
+      <Filter>Engine\ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

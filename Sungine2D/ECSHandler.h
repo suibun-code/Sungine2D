@@ -101,4 +101,9 @@ public:
 	{
 		mSystemManager->SetSignature<T>(signature);
 	}
+
+	ECSEntity ActiveEntityCount()
+	{
+		return mEntityManager->ActiveEntityCount();
+	}
 };
