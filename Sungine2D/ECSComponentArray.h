@@ -4,6 +4,8 @@
 
 #include "Types.h"
 
+#include <iostream>
+
 class IComponentArray
 {
 public:

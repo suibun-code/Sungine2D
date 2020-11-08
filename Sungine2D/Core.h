@@ -33,7 +33,7 @@ private:
 
 	std::map<std::string, std::shared_ptr<ECSSystem>> mpSystems;
 
-	std::shared_ptr<MovementSystem> mpMovementSystem;
+	//std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<RenderSystem> mpRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
 

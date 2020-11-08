@@ -135,7 +135,7 @@ void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos
 	ECSHandler::Instance()->AddComponent(text, RenderComponent{ ResourceManager::GetShader("sprite") });
 	ECSHandler::Instance()->AddComponent(text, TextComponent{ input, font });
 
-	ECSHandler::Instance()->GetComponent<EntityData>(text).name = "Text_ " + name;
+	ECSHandler::Instance()->GetComponent<EntityData>(text).name = "Text_" + name;
 	ECSHandler::Instance()->GetComponent<EntityData>(text).tag = "Text";
 
 	Texts[name] = text;
@@ -144,6 +144,9 @@ void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos
 //Destroys & clears the respective objects.
 void ResourceManager::ClearTexts()
 {
+	for (std::pair<std::string, ECSEntity> element : Texts)
+		ECSHandler::Instance()->DestroyEntity(element.second);
+
 	Texts.clear();
 }
 void ResourceManager::ClearText(std::string name)

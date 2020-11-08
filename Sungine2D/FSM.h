@@ -7,7 +7,6 @@
 #include "SDL.h"
 
 #include "SuSpriteRenderer.h"
-
 #include "ECSEntityManager.h"
 
 class State
@@ -31,7 +30,8 @@ public:
 	virtual void Exit() = 0;
 
 	std::vector<ECSEntity> GetEntities() { return mEntities; }
-	void AddEntity(ECSEntity entity) { mEntities.push_back(entity); }
+	void AddEntity(ECSEntity entity);
+	void RemoveEntity(ECSEntity entity);
 
 	template <class T>
 	void CleanVector(std::vector<T> vec);

@@ -257,6 +257,9 @@
     <ClCompile Include="ECSEntityManager.cpp">
       <Filter>Engine\ECS</Filter>
     </ClCompile>
+    <ClCompile Include="ECSHandler.cpp">
+      <Filter>Engine\ECS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\sprite.frag">

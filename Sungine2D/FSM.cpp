@@ -38,6 +38,18 @@ void State::Exit()
 	renderer = nullptr;
 }
 
+void State::AddEntity(ECSEntity entity)
+{
+	mEntities.push_back(entity);
+}
+
+void State::RemoveEntity(ECSEntity entity)
+{
+	for (ECSEntity i = 0; i < mEntities.size(); i++)
+		if (entity == mEntities.at(i))
+			mEntities.erase(mEntities.begin() + i);
+}
+
 void State::HandleStateEvents(const SDL_Event* event)
 {
 	if (Core::Instance()->GameInstanceEnabled() == true)
@@ -84,8 +96,6 @@ void StateMachine::PushState(State* pState)
 
 void StateMachine::ChangeState(State* pState)
 {
-	Core::Instance()->SetCurrentState(pState);
-
 	while (!mStates.empty())
 	{
 		mStates.back()->Exit();
@@ -93,8 +103,11 @@ void StateMachine::ChangeState(State* pState)
 		mStates.back() = nullptr;
 		mStates.pop_back();
 	}
-	pState->Enter();
+
+	Core::Instance()->SetCurrentState(pState);
+
 	mStates.push_back(pState);
+	pState->Enter();
 }
 
 void StateMachine::PopState()

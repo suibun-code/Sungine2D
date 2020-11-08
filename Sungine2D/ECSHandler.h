@@ -39,12 +39,7 @@ public:
 		return mEntityManager->CreateEntity();
 	}
 
-	void DestroyEntity(ECSEntity entity)
-	{
-		mEntityManager->DestroyEntity(entity);
-		mComponentManager->EntityDestroyed(entity);
-		mSystemManager->EntityDestroyed(entity);
-	}
+	void DestroyEntity(ECSEntity entity);
 
 	//***COMPONENT METHODS***
 	template<typename T>

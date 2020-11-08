@@ -168,6 +168,8 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Fonts.
 	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, { 0, 0, 0, 255 }, "CircularMedium");
+	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 175, 0, 255 }, "playerHP");
+	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 0, 175, 255 }, "enemyHP");
 	ResourceManager::LoadFont("font/droid.ttf", 14, { 0, 0, 0, 255 }, "Droid");
 
 	ECSHandler::Instance()->Init();

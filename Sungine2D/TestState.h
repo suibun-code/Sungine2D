@@ -2,29 +2,11 @@
 
 #include "FSM.h"
 
-#include "Player.h"
-#include "Enemy.h"
-
-//Components
-#include "TransformComponent.h"
-#include "RenderComponent.h"
-
-//Systems
-#include "MovementSystem.h"
-#include "RenderSystem.h"
-
-//ECSHandler
-#include "ECSHandler.h"
+#include "ECSEntityManager.h"
 
 class TestState : public State
 {
 private:
-	Enemy* enemy;
-	Player* player;
-
-	//ECSHandler handler;
-	//std::shared_ptr<MovementSystem> movementSystem;
-	//std::shared_ptr<RenderSystem> renderSystem;
 
 public:
 	TestState() : State("Test") {}

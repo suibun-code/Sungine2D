@@ -198,6 +198,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="ECSEntityManager.cpp" />
+    <ClCompile Include="ECSHandler.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
