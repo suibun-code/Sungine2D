@@ -6,13 +6,11 @@
 
 #include "Core.h"
 
-SuTexture2D ResourceManager::texture;
-
 //Instantiate static variables for keeping shaders and textures.
 std::map<std::string, ShaderUtil> ResourceManager::Shaders;
 std::map<std::string, SuTexture2D> ResourceManager::Textures;
 std::map<std::string, SuFont> ResourceManager::Fonts;
-std::map<std::string, SuText*> ResourceManager::Texts;
+std::map<std::string, ECSEntity> ResourceManager::Texts;
 
 ShaderUtil ResourceManager::LoadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile)
 {
@@ -124,7 +122,6 @@ SuFont ResourceManager::LoadFont(const char* path, int size, SDL_Color color, st
 	Fonts[name] = LoadFontFromFile(path, size, color);
 	return Fonts[name];
 }
-
 SuFont ResourceManager::GetFont(std::string name)
 {
 	return Fonts[name];
@@ -132,30 +129,33 @@ SuFont ResourceManager::GetFont(std::string name)
 
 void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos, SuFont font)
 {
+	ECSEntity text = ECSHandler::Instance()->CreateEntity();
 
-	Texts[name] = new SuText(input, pos, font);
-	Texts[name]->SetName("Text_" + name);
+	ECSHandler::Instance()->AddComponent(text, TransformComponent{ 1.f, 0.f, pos });
+	ECSHandler::Instance()->AddComponent(text, RenderComponent{ ResourceManager::GetShader("sprite") });
+	ECSHandler::Instance()->AddComponent(text, TextComponent{ input, font });
+
+	Texts[name] = text;
 }
 
-//Destroys text entities and clears the texts map.
+//Destroys & clears the respective objects.
 void ResourceManager::ClearTexts()
 {
-	for (std::map<std::string, SuText*>::iterator it = Texts.begin(); it != Texts.end(); it++)
+	for (std::map<std::string, ECSEntity>::iterator it = Texts.begin(); it != Texts.end(); it++)
 	{
-		delete it->second;
-		it->second = nullptr;
+		ECSHandler::Instance()->DestroyEntity(it->second);
+		//delete it->second;
 	}
+		//it->second = nullptr;
 	Texts.clear();
 }
-
 void ResourceManager::ClearText(std::string name)
 {
-	delete Texts[name];
-	Texts[name] = nullptr;
+	//delete Texts[name];
+	//Texts[name] = nullptr;
+	ECSHandler::Instance()->DestroyEntity(Texts[name]);
 	Texts.erase(name);
 }
-
-//Destroys all active entities.
 void ResourceManager::ClearEntities()
 {
 	for (auto* entity : Entity::GetAllEntities())
@@ -168,8 +168,9 @@ void ResourceManager::ClearEntities()
 	}
 }
 
-SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, SuFont font)
+SuTexture2D ResourceManager::LoadTextureFromFont(std::string text, bool alpha, SuFont font)
 {
+	SuTexture2D texture;
 	TTF_Font* ttffont = TTF_OpenFont(font.path, font.size);
 
 	if (alpha)
@@ -180,7 +181,7 @@ SuTexture2D ResourceManager::LoadTextureFromFont(const char* text, bool alpha, S
 
 	//Create SDL_Surface*, then apply a blend function to it, and generate a texture from it. Then free the surface and return the texture.
 	SDL_Surface* fontsurface;
-	fontsurface = TTF_RenderText_Blended(ttffont, text, font.textColor);
+	fontsurface = TTF_RenderText_Blended(ttffont, text.c_str(), font.textColor);
 	texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
 
 	SDL_FreeSurface(fontsurface);

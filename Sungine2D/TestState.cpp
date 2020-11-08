@@ -34,13 +34,13 @@ void TestState::Enter()
 	ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
 	ResourceManager::LoadTexture("res/img/player.png", true, "player");
 
-	ResourceManager::AddText("PlayerHP", "0", glm::vec2(0.f), ResourceManager::GetFont("playerHP"));
-	ResourceManager::AddText("EnemyHP", "0", glm::vec2(0.f), ResourceManager::GetFont("enemyHP"));
+	//ResourceManager::AddText("PlayerHP", "0", glm::vec2(0.f), ResourceManager::GetFont("playerHP"));
+	//ResourceManager::AddText("EnemyHP", "0", glm::vec2(0.f), ResourceManager::GetFont("enemyHP"));
 
-	playerHP = ECSHandler::Instance()->CreateEntity();
-	ECSHandler::Instance()->AddComponent(playerHP, TransformComponent{ 1.f, 0.f, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25) });
-	ECSHandler::Instance()->AddComponent(playerHP, RenderComponent{ shader });
-	ECSHandler::Instance()->AddComponent(playerHP, TextComponent{ "Press Enter To Start", ResourceManager::GetFont("CircularMedium") });
+	//playerHP = ECSHandler::Instance()->CreateEntity();
+	//ECSHandler::Instance()->AddComponent(playerHP, TransformComponent{ 1.f, 0.f, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25) });
+	//ECSHandler::Instance()->AddComponent(playerHP, RenderComponent{ shader });
+	//ECSHandler::Instance()->AddComponent(playerHP, TextComponent{ "Press Enter To Start", ResourceManager::GetFont("CircularMedium") });
 
 	texture = ResourceManager::GetTexture("enemy");
 	enemy = new Enemy(texture, glm::vec2(500.f, 200.f));
@@ -97,6 +97,8 @@ void TestState::Update(float deltaTime)
 		return;
 	}
 
+	Core::Instance()->GetSystem<TextSystem>()->Update();
+
 	State::Update(deltaTime);
 }
 
@@ -109,9 +111,12 @@ void TestState::Render()
 		if (enemy->GetDestroyed() == false)
 		{
 			enemy->Draw(*renderer);
-			ResourceManager::Texts["EnemyHP"]->ChangeText(std::to_string(enemy->GetHealth()));
-			ResourceManager::Texts["EnemyHP"]->Update(glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
-			ResourceManager::Texts["EnemyHP"]->Draw(*renderer);
+			//ResourceManager::Texts["EnemyHP"]->ChangeText(std::to_string(enemy->GetHealth()));
+			//ResourceManager::Texts["EnemyHP"]->Update(glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
+			//ResourceManager::Texts["EnemyHP"]->Draw(*renderer);
+
+			//ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["EnemyHP"]).output = std::to_string(enemy->GetHealth()).c_str();
+			//ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["EnemyHP"]).position = glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP");
 		}
 		else
 		{
@@ -122,9 +127,15 @@ void TestState::Render()
 	}
 
 	player->Draw(*renderer);
-	ResourceManager::Texts["PlayerHP"]->ChangeText(std::to_string(player->GetHealth()));
-	ResourceManager::Texts["PlayerHP"]->Update(glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
-	ResourceManager::Texts["PlayerHP"]->Draw(*renderer);
+
+	Core::Instance()->GetSystem<RenderSystem>()->Draw();
+
+	//ResourceManager::Texts["PlayerHP"]->ChangeText(std::to_string(player->GetHealth()));
+	//ResourceManager::Texts["PlayerHP"]->Update(glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
+	//ResourceManager::Texts["PlayerHP"]->Draw(*renderer);
+
+	//ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["PlayerHP"]).output = std::to_string(player->GetHealth()).c_str();
+	//ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP");
 
 	State::Render();
 }

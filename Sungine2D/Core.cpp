@@ -166,9 +166,9 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	GameInstance::Instance()->DumpStartupLog();
 	GameInstance::Instance()->AddLog("Welcome to Sungine2D.\n");
 
-	//Signature movementSignature;
-	Signature renderSignature;
-	Signature textSignature;
+	//Fonts.
+	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, { 0, 0, 0, 255 }, "CircularMedium");
+	ResourceManager::LoadFont("font/droid.ttf", 14, { 0, 0, 0, 255 }, "Droid");
 
 	ECSHandler::Instance()->Init();
 
@@ -177,26 +177,26 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	ECSHandler::Instance()->RegisterComponent<RenderComponent>();
 	ECSHandler::Instance()->RegisterComponent<TextComponent>();
 
-	//movement signature here
+	//Register systems.
+	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
+	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
 
+	Signature renderSignature;
 	renderSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
 	renderSignature.set(ECSHandler::Instance()->GetComponentType<RenderComponent>());
+	ECSHandler::Instance()->SetSystemSignature<RenderSystem>(renderSignature);
 
+	Signature textSignature;
 	textSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
 	textSignature.set(ECSHandler::Instance()->GetComponentType<RenderComponent>());
 	textSignature.set(ECSHandler::Instance()->GetComponentType<TextComponent>());
-
-	//Register systems.
-	//mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();
-	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
-	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
-	//ECSHandler::Instance()->SetSystemSignature<MovementSystem>(signature);
-	ECSHandler::Instance()->SetSystemSignature<RenderSystem>(renderSignature);
 	ECSHandler::Instance()->SetSystemSignature<TextSystem>(textSignature);
 
-	//mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
 	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
 	mpSystems.insert({ typeid(TextSystem).name(), mpTextSystem });
+
+	GetSystem<RenderSystem>()->Init();
+	GetSystem<TextSystem>()->Init();
 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();

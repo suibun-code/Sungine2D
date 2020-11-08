@@ -9,6 +9,8 @@
 #include "ShaderUtil.h"
 #include "SuTexture2D.h"
 
+#include "ECSEntityManager.h"
+
 //SDL
 #include "SDL_image.h"
 #include "SDL_ttf.h"
@@ -23,15 +25,13 @@ private:
 	static SuFont LoadFontFromFile(const char* path, int size, SDL_Color color);
 
 public:
-	static SuTexture2D texture;
-
 	//Resource storage.
 	static std::map<std::string, ShaderUtil> Shaders;
 	static std::map<std::string, SuTexture2D> Textures;
 	static std::map<std::string, SuFont> Fonts;
-	static std::map<std::string, SuText*> Texts;
+	static std::map<std::string, ECSEntity> Texts;
 
-	static SuTexture2D LoadTextureFromFont(const char* text, bool alpha, SuFont font);
+	static SuTexture2D LoadTextureFromFont(std::string text, bool alpha, SuFont font);
 
 	static ShaderUtil LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
 	static ShaderUtil GetShader(std::string name);
@@ -43,6 +43,7 @@ public:
 	static SuFont GetFont(std::string name);
 
 	static void AddText(std::string name, std::string input, glm::vec2 pos, SuFont font);
+
 	static void ClearTexts();
 	static void ClearText(std::string name);
 

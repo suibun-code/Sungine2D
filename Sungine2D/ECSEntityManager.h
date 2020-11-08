@@ -5,6 +5,7 @@
 #include <cassert>
 
 #include "Types.h"
+#include "GameInstance.h"
 
 class ECSEntityManager
 {

@@ -1,9 +1,10 @@
 #pragma once
 
 #include "SuFont.h"
+#include "ResourceManager.h"
 
 struct TextComponent
 {
-	const char* output = "Default";
-	SuFont font;
+	std::string output = "Default";
+	SuFont font = ResourceManager::GetFont("CircularMedium");
 };

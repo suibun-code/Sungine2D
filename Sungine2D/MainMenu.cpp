@@ -17,9 +17,6 @@
 //States
 #include "TestState.h"
 
-ECSEntity text;
-ECSEntity logo;
-
 void MainMenu::Enter()
 {
 	//Clear the screen with specific color.
@@ -31,20 +28,14 @@ void MainMenu::Enter()
 	Core::Instance()->GetAM()->LoadMusic("res/audio/music/CornerOfMemories.mp3");
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
 
-	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, { 0, 0, 0, 255 }, "CircularMedium");
 	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
-	ResourceManager::LoadTexture("res/img/grasstile1.png", true, "grass");
 
 	texture = ResourceManager::GetTexture("logo");
 	logo = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->AddComponent(logo, TransformComponent{ 1.f, 0.f, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (texture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (texture.Height / 2)), glm::vec2(1.f, 1.f) });
 	ECSHandler::Instance()->AddComponent(logo, RenderComponent{ shader, texture, glm::vec3(1.f) });
 
-	text = ECSHandler::Instance()->CreateEntity();
-	ECSHandler::Instance()->AddComponent(text, TransformComponent{ 1.f, 0.f, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25) });
-	ECSHandler::Instance()->AddComponent(text, RenderComponent{ shader });
-	ECSHandler::Instance()->AddComponent(text, TextComponent{ "Press Enter To Start", ResourceManager::GetFont("CircularMedium") });
-	ECSHandler::Instance()->GetComponent<TextComponent>(text).font.textColor = SDL_Color({ 190, 112, 128, 255 });
+	ResourceManager::AddText("enter", "Press Enter To Start", glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25), ResourceManager::GetFont("CircularMedium"));
 
 	State::Enter();
 }
@@ -57,8 +48,8 @@ void MainMenu::Update(float deltaTime)
 		return;
 	}
 
+	//Update the texts of all entities that contain a text component.
 	Core::Instance()->GetSystem<TextSystem>()->Update();
-	std::cout << "TEXTSYSTEM: " << Core::Instance()->GetSystem<TextSystem>()->mEntities.size() << "\n";
 
 	State::Update(deltaTime);
 }
@@ -69,7 +60,6 @@ void MainMenu::Render()
 
 	//Draw renderable entities.
 	Core::Instance()->GetSystem<RenderSystem>()->Draw();
-	std::cout << "RENDERSYSTEM: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
 
 	State::Render();
 }
@@ -79,10 +69,6 @@ void MainMenu::Exit()
 	Core::Instance()->GetAM()->ClearMusic();
 
 	ECSHandler::Instance()->DestroyEntity(logo);
-	ECSHandler::Instance()->DestroyEntity(text);
-
-	std::cout << "TEXTSYSTEM FINAL: " << Core::Instance()->GetSystem<TextSystem>()->mEntities.size() << "\n";
-	std::cout << "RENDERSYSTEM FINAL: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
 
 	//Destroy text entities and all other entities.
 	ResourceManager::ClearTexts();

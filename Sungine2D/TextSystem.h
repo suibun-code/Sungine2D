@@ -9,9 +9,6 @@
 
 class TextSystem : public ECSSystem
 {
-private:
-	unsigned int mQuadVAO, IBO, mVBO, mTVBO;
-
 public:
 	void Init();
 	void Update();

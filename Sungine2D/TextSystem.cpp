@@ -26,7 +26,7 @@ void TextSystem::Update()
 {
 	for (auto const& entity : mEntities)
 	{
-        auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
+		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
         auto& text = ECSHandler::Instance()->GetComponent<TextComponent>(entity);
 
         render.texture = ResourceManager::LoadTextureFromFont(text.output, true, text.font);

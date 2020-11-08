@@ -8,13 +8,13 @@
 //State
 void State::Enter()
 {
-	const char* msg[] = { "[ENTER] ", " '", mStateName, "'.\n" };
+	const char* msg[] = { "[ENTER] '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
 
 	renderer = new SuSpriteRenderer(shader);
 
-	Core::Instance()->GetSystem<RenderSystem>()->Init();
-	Core::Instance()->GetSystem<TextSystem>()->Init();
+	//Core::Instance()->GetSystem<RenderSystem>()->Init();
+	//Core::Instance()->GetSystem<TextSystem>()->Init();
 }
 
 void State::Update(float deltaTime)
@@ -33,7 +33,7 @@ void State::Render()
 
 void State::Exit()
 {
-	const char* msg[] = { "[EXIT] ", " '", mStateName, "'.\n" };
+	const char* msg[] = { "[EXIT] '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
 
 	//Destroy renderer.
