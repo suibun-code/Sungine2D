@@ -135,6 +135,9 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 		}
 	}
 
+	//Set random seed.
+	srand((unsigned)time(NULL));
+
 	//OpenGL configuration.
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
 	glEnable(GL_CULL_FACE);
@@ -156,13 +159,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	//Initialize ImGui.
 	InitImGui();
 
-	//Set random seed.
-	srand((unsigned)time(NULL));
-
-	//Start engine and enable the game instance.
-	mIsRunning = true;
-	mGameInstanceEnabled = false;
-
+	//Dump the items that were added to the GameInstance log before the GameInstance log was instantiated.
 	GameInstance::Instance()->DumpStartupLog();
 	GameInstance::Instance()->AddLog("Welcome to Sungine2D.\n");
 
@@ -180,13 +177,21 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Register components.
 	ECSHandler::Instance()->RegisterComponent<TransformComponent>();
+	ECSHandler::Instance()->RegisterComponent<MovementComponent>();
 	ECSHandler::Instance()->RegisterComponent<RenderComponent>();
 	ECSHandler::Instance()->RegisterComponent<TextComponent>();
 	ECSHandler::Instance()->RegisterComponent<EntityData>();
 
 	//Register systems.
+	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();
 	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
 	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
+
+	Signature movementSignature;
+	movementSignature.set(ECSHandler::Instance()->GetComponentType<MovementComponent>());
+	movementSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
+	movementSignature.set(ECSHandler::Instance()->GetComponentType<RenderComponent>());
+	ECSHandler::Instance()->SetSystemSignature<MovementSystem>(movementSignature);
 
 	Signature renderSignature;
 	renderSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
@@ -199,9 +204,11 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	textSignature.set(ECSHandler::Instance()->GetComponentType<TextComponent>());
 	ECSHandler::Instance()->SetSystemSignature<TextSystem>(textSignature);
 
+	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
 	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
 	mpSystems.insert({ typeid(TextSystem).name(), mpTextSystem });
 
+	GetSystem<MovementSystem>()->Init();
 	GetSystem<RenderSystem>()->Init();
 	GetSystem<TextSystem>()->Init();
 
@@ -211,6 +218,10 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpAM->SetMusicVolume(15);
 	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
 	mpFSM->ChangeState(new MainMenu());
+
+	//Start engine and enable the game instance.
+	mIsRunning = true;
+	mGameInstanceEnabled = true;
 
 	return true;
 }

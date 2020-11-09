@@ -14,7 +14,6 @@
 #include "MainMenu.h"
 
 Enemy* enemy;
-Player* player;
 
 ECSEntity playerHP;
 ECSEntity enemyHP;
@@ -36,15 +35,18 @@ void TestState::Enter()
 	texture = ResourceManager::GetTexture("enemy");
 	enemy = new Enemy(texture, glm::vec2(500.f, 200.f));
 
-	texture = ResourceManager::GetTexture("player");
-	player = new Player(texture, glm::vec2(200.f, 200.f));
+	playerHP = ECSHandler::Instance()->CreateEntity();
+	ECSHandler::Instance()->GetComponent<EntityData>(playerHP).name = "PlayerECS";
+	ECSHandler::Instance()->AddComponent(playerHP, TransformComponent{ 1.f, 0.f, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25) });
+	ECSHandler::Instance()->AddComponent(playerHP, RenderComponent{ shader, texture, glm::vec3(1.f) });
+	ECSHandler::Instance()->AddComponent(playerHP, MovementComponent { });
 
-	//playerHP = ECSHandler::Instance()->CreateEntity();
-	//ECSHandler::Instance()->GetComponent<EntityData>(playerHP).name = "PlayerECS";
-	//ECSHandler::Instance()->AddComponent(playerHP, TransformComponent{ 1.f, 0.f, glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25) });
-	//ECSHandler::Instance()->AddComponent(playerHP, RenderComponent{ shader, texture, glm::vec3(1.f) });
-
-	std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
+	//for (int i = 0; i < 100; i++)
+	//{
+	//	ECSHandler::Instance()->CreateEntity();
+	//	ECSHandler::Instance()->AddComponent(mEntities[i], TransformComponent{ 1.f, 0.f, glm::vec2(1.f + (float(rand() % 1280)), (float(rand() % 720))) });
+	//	ECSHandler::Instance()->AddComponent(mEntities[i], RenderComponent{ shader, texture, glm::vec3(1.f) });
+	//}
 
 	State::Enter();
 }
@@ -52,42 +54,21 @@ void TestState::Enter()
 void TestState::Update(float deltaTime)
 {
 	//Collisions.
-	if (enemy != nullptr)
-	{
-		if (Collision::CheckCollision(*player, *enemy))
-		{
-			GameInstance::Instance()->AddLog("Collided!\n");
+	//if (enemy != nullptr)
+	//{
+	//	if (Collision::CheckCollision(*player, *enemy))
+	//	{
+	//		GameInstance::Instance()->AddLog("Collided!\n");
 
-			if (enemy->GetHealth() > 0)
-				enemy->SetHealth(enemy->GetHealth() - 1);
-			else
-				enemy->SetDestroyed(true);
-		}
-	}
+	//		if (enemy->GetHealth() > 0)
+	//			enemy->SetHealth(enemy->GetHealth() - 1);
+	//		else
+	//			enemy->SetDestroyed(true);
+	//	}
+	//}
 
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_A))
-	{
-		player->SetDirection(-1);
-		player->MoveX(deltaTime);
-	}
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_D))
-	{
-		player->SetDirection(1);
-		player->MoveX(deltaTime);
-	}
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_W))
-	{
-		player->SetDirection(-1);
-		player->MoveY(deltaTime);
-	}
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_S))
-	{
-		player->SetDirection(1);
-		player->MoveY(deltaTime);
-	}
-
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
-		player->SetHealth(50);
+	//if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
+		//player->SetHealth(50);
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
 	{
@@ -96,6 +77,7 @@ void TestState::Update(float deltaTime)
 	}
 
 	Core::Instance()->GetSystem<TextSystem>()->Update();
+	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
 
 	State::Update(deltaTime);
 }
@@ -120,13 +102,11 @@ void TestState::Render()
 		}
 	}
 
-	player->Draw(*renderer);
-
-	ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["PlayerHP"]).output = std::to_string(player->GetHealth()).c_str();
-	ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP");
-
 	//Draw renderable entities.
 	Core::Instance()->GetSystem<RenderSystem>()->Draw();
+
+	ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["PlayerHP"]).output = "100";
+	ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<TransformComponent>(playerHP).position.x + 5, ECSHandler::Instance()->GetComponent<TransformComponent>(playerHP).position.y - 25), ResourceManager::GetFont("playerHP");
 
 	State::Render();
 }
@@ -145,8 +125,6 @@ void TestState::Exit()
 
 	mEntities.clear();
 
-	delete player;
-	player = nullptr;
 	delete enemy;
 	enemy = nullptr;
 

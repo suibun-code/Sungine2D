@@ -9,6 +9,8 @@
 
 class TextSystem : public ECSSystem
 {
+private:
+
 public:
 	void Init();
 	void Update();

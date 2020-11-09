@@ -5,7 +5,7 @@
 class Player : public Entity
 {
 private:
-	int mMaxHealt = 100, mHealth = 100;
+	int mMaxHealth = 100, mHealth = 100;
 	int mDirection = 1; //Negative for left, positive for right.
 	float mSpeed = 0.5f;
 

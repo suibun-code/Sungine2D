@@ -13,6 +13,7 @@
 
 //Components
 #include "TransformComponent.h"
+#include "MovementComponent.h"
 #include "RenderComponent.h"
 #include "TextComponent.h"
 #include "EntityData.h"
@@ -34,6 +35,7 @@ private:
 	std::map<std::string, std::shared_ptr<ECSSystem>> mpSystems;
 
 	//std::shared_ptr<MovementSystem> mpMovementSystem;
+	std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<RenderSystem> mpRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
 
