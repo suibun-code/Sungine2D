@@ -165,7 +165,7 @@ private:
 
 	//Variables for printing variables by turning them into a string and then into a const char*.
 	std::string s = "";
-	const char* c = "";
+	//const char* c = "";
 
 	// ImGui menu variables
 	bool mDisplayAbout = true;
@@ -189,6 +189,12 @@ public:
 		if (mspGameInstance == nullptr)
 			mspGameInstance = new GameInstance();
 		return mspGameInstance;
+	}
+
+	static void ResetInstance()
+	{
+		delete mspGameInstance;
+		mspGameInstance = nullptr;
 	}
 
 	GameInstance();

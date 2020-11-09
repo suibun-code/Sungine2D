@@ -21,8 +21,17 @@ public:
 	static ECSHandler* Instance()
 	{
 		if (mspHandlerInstance == nullptr)
+		{
+			std::cout << "Made new ECSHandler.\n";
 			mspHandlerInstance = new ECSHandler();
+		}
 		return mspHandlerInstance;
+	}
+
+	static void ResetInstance()
+	{
+		delete mspHandlerInstance;
+		mspHandlerInstance = nullptr;
 	}
 
 	void Init()

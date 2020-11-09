@@ -13,6 +13,7 @@ int main(int argc, char* args[])
 		if (Core::Instance()->Tick())
 		{
 			Core::Instance()->Update(Core::Instance()->GetDeltaTime());
+			//std::cout << "test: " << Core::Instance()->GetFSM()->GetStates().size() << "\n";
 			Core::Instance()->Render();
 		}
 	}

@@ -15,9 +15,9 @@ SuText::SuText(std::string input, glm::vec2 pos, SuFont font)
 
 void SuText::UpdateVars(glm::vec2 pos, SuFont font)
 {
-	mTexture = ResourceManager::LoadTextureFromFont(mOutput, true, font);
-	mTransform.position = pos;
-	mTransform.size = glm::vec2(mTexture.Width, mTexture.Height) * mTransform.scale;
+	//mTexture = ResourceManager::LoadTextureFromFont(mOutput, true, font);
+	//mTransform.position = pos;
+	//mTransform.size = glm::vec2(mTexture.Width, mTexture.Height) * mTransform.scale;
 }
 
 void SuText::Update(glm::vec2 pos, SuFont font)

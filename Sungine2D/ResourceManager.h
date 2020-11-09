@@ -31,15 +31,15 @@ public:
 	static std::map<std::string, SuFont> Fonts;
 	static std::map<std::string, ECSEntity> Texts;
 
-	static SuTexture2D LoadTextureFromFont(std::string text, bool alpha, SuFont font);
+	static void LoadTextureFromFont(SuTexture2D* texture, std::string text, bool alpha, SuFont font);
 
-	static ShaderUtil LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
+	static void LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
 	static ShaderUtil GetShader(std::string name);
 
-	static SuTexture2D LoadTexture(const char* file, bool alpha, std::string name);
+	static void LoadTexture(const char* file, bool alpha, std::string name);
 	static SuTexture2D GetTexture(std::string name);
 
-	static SuFont LoadFont(const char* path, int size, SDL_Color color, std::string name);
+	static void LoadFont(const char* path, int size, SDL_Color color, std::string name);
 	static SuFont GetFont(std::string name);
 
 	static void AddText(std::string name, std::string input, glm::vec2 pos, SuFont font);

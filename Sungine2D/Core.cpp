@@ -161,7 +161,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Start engine and enable the game instance.
 	mIsRunning = true;
-	mGameInstanceEnabled = true;
+	mGameInstanceEnabled = false;
 
 	GameInstance::Instance()->DumpStartupLog();
 	GameInstance::Instance()->AddLog("Welcome to Sungine2D.\n");
@@ -171,6 +171,10 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 175, 0, 255 }, "playerHP");
 	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 0, 175, 255 }, "enemyHP");
 	ResourceManager::LoadFont("font/droid.ttf", 14, { 0, 0, 0, 255 }, "Droid");
+
+	ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
+	ResourceManager::LoadTexture("res/img/player.png", true, "player");
+	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
 
 	ECSHandler::Instance()->Init();
 
@@ -442,8 +446,22 @@ void Core::Clean()
 	SDL_DestroyRenderer(mpSDLRenderer);
 	SDL_GL_DeleteContext(mGLContext);
 	SDL_DestroyWindow(mpSDLWindow);
+
+	delete mpFSM;
+	delete mpAM;
+
+	mpFSM = nullptr;
+	mpAM = nullptr;
+
+	delete mspInstance;
+	mspInstance = nullptr;
+
+	GameInstance::Instance()->ResetInstance();
+	ECSHandler::Instance()->ResetInstance();
+
 	mpSDLWindow = nullptr;
 	mpSDLRenderer = nullptr;
+
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();

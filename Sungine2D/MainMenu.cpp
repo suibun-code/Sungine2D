@@ -23,8 +23,6 @@ void MainMenu::Enter()
 	shader = ResourceManager::GetShader("sprite");
 	SuTexture2D texture;
 
-	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
-
 	texture = ResourceManager::GetTexture("logo");
 	ECSEntity logo = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(logo).name = "Logo";
@@ -42,7 +40,7 @@ void MainMenu::Update(float deltaTime)
 {
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
 	{
-		Core::Instance()->GetFSM()->ChangeState(new TestState);
+		Core::Instance()->GetFSM()->ChangeState(new TestState());
 		return;
 	}
 

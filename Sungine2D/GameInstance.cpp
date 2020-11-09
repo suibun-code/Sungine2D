@@ -80,16 +80,14 @@ void GameInstance::UpdateImGui()
 		ImGui::Begin("Entity List", &mDisplayEntityList, ImGuiWindowFlags_AlwaysAutoResize);
 
 		s = "Number of active entities: " + std::to_string(ECSHandler::Instance()->ActiveEntityCount());
-		c = s.c_str();
-		ImGui::Text(c); 
+		ImGui::Text(s.c_str());
 
 		ImGui::NewLine();
 
 		for (unsigned int i = 0; i < Core::Instance()->GetCurrentState()->GetEntities().size(); i++)
 		{
 			s = ECSHandler::Instance()->GetComponent<EntityData>(Core::Instance()->GetCurrentState()->GetEntities().at(i)).name;
-			c = s.c_str();
-			ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 0.95f), c);
+			ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 0.95f), s.c_str());
 		}
 
 		ImGui::End();
@@ -156,7 +154,7 @@ void GameInstance::DumpStartupLog()
 
 void GameInstance::LogBuffer(const char* arr[], int len)
 {
-	char buffer[256];
+	char buffer[256] = { 0 };
 
 	strncpy_s(buffer, arr[0], sizeof(buffer));
 

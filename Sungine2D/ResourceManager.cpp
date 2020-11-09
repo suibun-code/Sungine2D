@@ -97,30 +97,27 @@ SuFont ResourceManager::LoadFontFromFile(const char* path, int size, SDL_Color c
 	return font;
 }
 
-ShaderUtil ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
+void ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
 {
 	Shaders[name] = LoadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
-	return Shaders[name];
 }
 ShaderUtil ResourceManager::GetShader(std::string name)
 {
 	return Shaders[name];
 }
 
-SuTexture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
+void ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
 {
 	Textures[name] = LoadTextureFromFile(file, alpha);
-	return Textures[name];
 }
 SuTexture2D ResourceManager::GetTexture(std::string name)
 {
 	return Textures[name];
 }
 
-SuFont ResourceManager::LoadFont(const char* path, int size, SDL_Color color, std::string name)
+void ResourceManager::LoadFont(const char* path, int size, SDL_Color color, std::string name)
 {
 	Fonts[name] = LoadFontFromFile(path, size, color);
-	return Fonts[name];
 }
 SuFont ResourceManager::GetFont(std::string name)
 {
@@ -164,29 +161,26 @@ void ResourceManager::ClearEntities()
 		}
 }
 
-SuTexture2D ResourceManager::LoadTextureFromFont(std::string text, bool alpha, SuFont font)
+void ResourceManager::LoadTextureFromFont(SuTexture2D* texture, std::string text, bool alpha, SuFont font)
 {
-	SuTexture2D texture;
-	TTF_Font* ttffont = TTF_OpenFont(font.path, font.size);
+	SDL_Surface* fontsurface;
+	TTF_Font* ttffont;
+	ttffont = TTF_OpenFont(font.path, font.size);
 
 	if (alpha)
 	{
-		texture.Internal_Format = GL_RGBA;
-		texture.Image_Format = GL_RGBA;
+		texture->Internal_Format = GL_RGBA;
+		texture->Image_Format = GL_RGBA;
 	}
 
 	//Create SDL_Surface*, then apply a blend function to it, and generate a texture from it. Then free the surface and return the texture.
-	SDL_Surface* fontsurface;
 	fontsurface = TTF_RenderText_Blended(ttffont, text.c_str(), font.textColor);
-	texture.Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
-
-	SDL_FreeSurface(fontsurface);
-	fontsurface = nullptr;
 
 	TTF_CloseFont(ttffont);
-	ttffont = nullptr;
 
-	return texture;
+	texture->Generate(fontsurface->w, fontsurface->h, fontsurface->pixels);
+
+	SDL_FreeSurface(fontsurface);
 }
 
 void ResourceManager::Clear()

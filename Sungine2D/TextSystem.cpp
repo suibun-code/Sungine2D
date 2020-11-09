@@ -18,7 +18,7 @@ void TextSystem::Init()
 		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
 		auto& text = ECSHandler::Instance()->GetComponent<TextComponent>(entity);
 
-		render.texture = ResourceManager::LoadTextureFromFont(text.output, true, text.font);
+		ResourceManager::LoadTextureFromFont(&render.texture, text.output, true, text.font);
 	}
 }
 
@@ -29,6 +29,8 @@ void TextSystem::Update()
 		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
         auto& text = ECSHandler::Instance()->GetComponent<TextComponent>(entity);
 
-        render.texture = ResourceManager::LoadTextureFromFont(text.output, true, text.font);
+        ResourceManager::LoadTextureFromFont(&render.texture, text.output, true, text.font);
+		//render.texture = ResourceManager::GetTexture("logo");
+		//render.texture = SuTexture2D();
 	}
 }

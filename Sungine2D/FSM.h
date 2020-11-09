@@ -16,8 +16,8 @@ protected:
 
 	std::vector<ECSEntity> mEntities;
 
-	ShaderUtil shader;
-	SuSpriteRenderer* renderer;
+	ShaderUtil shader = ShaderUtil();
+	SuSpriteRenderer* renderer = nullptr;
 
 public:
 	State(const char* mStateName) : mStateName(mStateName) {}

@@ -30,9 +30,6 @@ void TestState::Enter()
 	shader = ResourceManager::GetShader("sprite");
 	SuTexture2D texture;
 
-	ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
-	ResourceManager::LoadTexture("res/img/player.png", true, "player");
-
 	ResourceManager::AddText("PlayerHP", "0", glm::vec2(0.f), ResourceManager::GetFont("playerHP"));
 	ResourceManager::AddText("EnemyHP", "0", glm::vec2(0.f), ResourceManager::GetFont("enemyHP"));
 
@@ -94,7 +91,7 @@ void TestState::Update(float deltaTime)
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
 	{
-		Core::Instance()->GetFSM()->ChangeState(new MainMenu);
+		Core::Instance()->GetFSM()->ChangeState(new MainMenu());
 		return;
 	}
 
@@ -112,10 +109,6 @@ void TestState::Render()
 		if (enemy->GetDestroyed() == false)
 		{
 			enemy->Draw(*renderer);
-			//ResourceManager::Texts["EnemyHP"]->ChangeText(std::to_string(enemy->GetHealth()));
-			//ResourceManager::Texts["EnemyHP"]->Update(glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP"));
-			//ResourceManager::Texts["EnemyHP"]->Draw(*renderer);
-
 			ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["EnemyHP"]).output = std::to_string(enemy->GetHealth()).c_str();
 			ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["EnemyHP"]).position = glm::vec2(enemy->GetPosition().x + 5, enemy->GetPosition().y - 25), ResourceManager::GetFont("enemyHP");
 		}
@@ -128,10 +121,6 @@ void TestState::Render()
 	}
 
 	player->Draw(*renderer);
-
-	//ResourceManager::Texts["PlayerHP"]->ChangeText(std::to_string(player->GetHealth()));
-	//ResourceManager::Texts["PlayerHP"]->Update(glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP"));
-	//ResourceManager::Texts["PlayerHP"]->Draw(*renderer);
 
 	ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["PlayerHP"]).output = std::to_string(player->GetHealth()).c_str();
 	ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(player->GetPosition().x + 5, player->GetPosition().y - 25), ResourceManager::GetFont("playerHP");
@@ -155,6 +144,11 @@ void TestState::Exit()
 			ECSHandler::Instance()->DestroyEntity(entity);
 
 	mEntities.clear();
+
+	delete player;
+	player = nullptr;
+	delete enemy;
+	enemy = nullptr;
 
 	ResourceManager::ClearEntities();
 

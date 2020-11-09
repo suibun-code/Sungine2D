@@ -84,7 +84,7 @@ private:
 	StateMachine* mpFSM = nullptr;
 	AudioManager* mpAM = nullptr;
 
-	State* mCurrentState;
+	State* mCurrentState = nullptr;
 
 public:
 	const char* mVersion = "v0.0.1";
@@ -96,7 +96,11 @@ public:
 	static Core* Instance()
 	{
 		if (mspInstance == nullptr)
+		{
 			mspInstance = new Core();
+			std::cout << "new core made.\n";
+		}
+		
 		return mspInstance;
 	}
 
