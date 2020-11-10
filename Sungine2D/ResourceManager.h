@@ -22,7 +22,7 @@ private:
 
 	static ShaderUtil LoadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile = nullptr);
 	static SuTexture2D LoadTextureFromFile(const char* file, bool alpha);
-	static SuFont LoadFontFromFile(const char* path, int size, SDL_Color color);
+	static SuFont LoadFontFromFile(const char* path, int size);
 
 public:
 	//Resource storage.
@@ -31,7 +31,7 @@ public:
 	static std::map<std::string, SuFont> Fonts;
 	static std::map<std::string, ECSEntity> Texts;
 
-	static void LoadTextureFromFont(SuTexture2D* texture, std::string text, bool alpha, SuFont font);
+	static void LoadTextureFromFont(SuTexture2D* texture, std::string text, bool alpha, SuFont font, SDL_Color color);
 
 	static void LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
 	static ShaderUtil GetShader(std::string name);
@@ -39,10 +39,10 @@ public:
 	static void LoadTexture(const char* file, bool alpha, std::string name);
 	static SuTexture2D GetTexture(std::string name);
 
-	static void LoadFont(const char* path, int size, SDL_Color color, std::string name);
+	static void LoadFont(const char* path, int size, std::string name);
 	static SuFont GetFont(std::string name);
 
-	static void AddText(std::string name, std::string input, glm::vec2 pos, SuFont font);
+	static void AddText(std::string name, std::string input, SuFont font, glm::vec2 pos = glm::vec2(1.f), SDL_Color color = { 0, 0, 0, 255 });
 
 	static void ClearTexts();
 	static void ClearText(std::string name);

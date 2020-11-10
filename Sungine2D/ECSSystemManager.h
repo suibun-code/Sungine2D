@@ -21,7 +21,7 @@ public:
 	{
 		const char* typeName = typeid(T).name();
 
-		//assert(mSystems.find(typeName) == mSystems.end() && "Registering system more than once.");
+		assert(mSystems.find(typeName) == mSystems.end() && "Registering system more than once.");
 
 		//Create a pointer to the system and return it so it can be used externally.
 		auto system = std::make_shared<T>();
@@ -34,7 +34,7 @@ public:
 	{
 		const char* typeName = typeid(T).name();
 
-		//assert(mSystems.find(typeName) != mSystems.end() && "System used before being registered.");
+		assert(mSystems.find(typeName) != mSystems.end() && "System used before being registered.");
 
 		//Set the signature of this system.
 		mSignatures.insert({ typeName, signature });

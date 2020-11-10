@@ -18,7 +18,7 @@ void TextSystem::Init()
 		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
 		auto& text = ECSHandler::Instance()->GetComponent<TextComponent>(entity);
 
-		ResourceManager::LoadTextureFromFont(&render.texture, text.output, true, text.font);
+		ResourceManager::LoadTextureFromFont(&render.texture, text.output, true, text.font, text.color);
 	}
 }
 
@@ -26,11 +26,13 @@ void TextSystem::Update()
 {
 	for (auto const& entity : mEntities)
 	{
+		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
 		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
         auto& text = ECSHandler::Instance()->GetComponent<TextComponent>(entity);
 
-        ResourceManager::LoadTextureFromFont(&text.fontTexture, text.output, true, text.font);
-
+        ResourceManager::LoadTextureFromFont(&text.fontTexture, text.output, true, text.font, text.color);
 		render.texture = text.fontTexture;
+
+		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 	}
 }

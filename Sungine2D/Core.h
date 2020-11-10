@@ -12,16 +12,19 @@
 #include "imgui.h"
 
 //Components
+#include "EntityData.h"
+#include "PlayerComponent.h"
 #include "TransformComponent.h"
 #include "MovementComponent.h"
 #include "RenderComponent.h"
 #include "TextComponent.h"
-#include "EntityData.h"
+#include "ColliderComponent.h"
 
 //Systems
 #include "MovementSystem.h"
 #include "RenderSystem.h"
 #include "TextSystem.h"
+#include "CollisionSystem.h"
 
 #include "FSM.h"
 #include "AudioManager.h"
@@ -38,6 +41,7 @@ private:
 	std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<RenderSystem> mpRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
+	std::shared_ptr<CollisionSystem> mpCollisionSystem;
 
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;

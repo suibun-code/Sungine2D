@@ -86,13 +86,13 @@ SuTexture2D ResourceManager::LoadTextureFromFile(const char* file, bool alpha)
 
 	return texture;
 }
-SuFont ResourceManager::LoadFontFromFile(const char* path, int size, SDL_Color color)
+SuFont ResourceManager::LoadFontFromFile(const char* path, int size)
 {
 	SuFont font;
 
 	font.path = path;
 	font.size = size;
-	font.textColor = color;
+	//font.textColor = color;
 
 	return font;
 }
@@ -115,22 +115,22 @@ SuTexture2D ResourceManager::GetTexture(std::string name)
 	return Textures[name];
 }
 
-void ResourceManager::LoadFont(const char* path, int size, SDL_Color color, std::string name)
+void ResourceManager::LoadFont(const char* path, int size, std::string name)
 {
-	Fonts[name] = LoadFontFromFile(path, size, color);
+	Fonts[name] = LoadFontFromFile(path, size);
 }
 SuFont ResourceManager::GetFont(std::string name)
 {
 	return Fonts[name];
 }
 
-void ResourceManager::AddText(std::string name, std::string input, glm::vec2 pos, SuFont font)
+void ResourceManager::AddText(std::string name, std::string input, SuFont font, glm::vec2 pos, SDL_Color color)
 {
 	ECSEntity text = ECSHandler::Instance()->CreateEntity();
 
 	ECSHandler::Instance()->AddComponent(text, TransformComponent{ 1.f, 0.f, pos });
 	ECSHandler::Instance()->AddComponent(text, RenderComponent{ ResourceManager::GetShader("sprite") });
-	ECSHandler::Instance()->AddComponent(text, TextComponent{ input, font });
+	ECSHandler::Instance()->AddComponent(text, TextComponent{ input, font, color });
 
 	ECSHandler::Instance()->GetComponent<EntityData>(text).name = "Text_" + name;
 	ECSHandler::Instance()->GetComponent<EntityData>(text).tag = "Text";
@@ -161,7 +161,7 @@ void ResourceManager::ClearEntities()
 		}
 }
 
-void ResourceManager::LoadTextureFromFont(SuTexture2D* texture, std::string text, bool alpha, SuFont font)
+void ResourceManager::LoadTextureFromFont(SuTexture2D* texture, std::string text, bool alpha, SuFont font, SDL_Color color)
 {
 	SDL_Surface* fontsurface;
 	TTF_Font* ttffont;
@@ -174,7 +174,7 @@ void ResourceManager::LoadTextureFromFont(SuTexture2D* texture, std::string text
 	}
 
 	//Create SDL_Surface*, then apply a blend function to it, and generate a texture from it. Then free the surface and return the texture.
-	fontsurface = TTF_RenderText_Blended(ttffont, text.c_str(), font.textColor);
+	fontsurface = TTF_RenderText_Blended(ttffont, text.c_str(), color);
 
 	TTF_CloseFont(ttffont);
 

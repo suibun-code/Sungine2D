@@ -164,28 +164,25 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	GameInstance::Instance()->AddLog("Welcome to Sungine2D.\n");
 
 	//Fonts.
-	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, { 0, 0, 0, 255 }, "CircularMedium");
-	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 175, 0, 255 }, "playerHP");
-	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, { 0, 0, 175, 255 }, "enemyHP");
-	ResourceManager::LoadFont("font/droid.ttf", 14, { 0, 0, 0, 255 }, "Droid");
-
-	ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
-	ResourceManager::LoadTexture("res/img/player.png", true, "player");
-	ResourceManager::LoadTexture("res/img/sunginelogo.png", true, "logo");
+	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, "CircularMedium");
+	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, "CircularBlack");
 
 	ECSHandler::Instance()->Init();
 
 	//Register components.
+	ECSHandler::Instance()->RegisterComponent<EntityData>();
+	ECSHandler::Instance()->RegisterComponent<PlayerComponent>();
 	ECSHandler::Instance()->RegisterComponent<TransformComponent>();
 	ECSHandler::Instance()->RegisterComponent<MovementComponent>();
 	ECSHandler::Instance()->RegisterComponent<RenderComponent>();
 	ECSHandler::Instance()->RegisterComponent<TextComponent>();
-	ECSHandler::Instance()->RegisterComponent<EntityData>();
+	ECSHandler::Instance()->RegisterComponent<ColliderComponent>();
 
 	//Register systems.
 	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();
 	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
 	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
+	mpCollisionSystem = ECSHandler::Instance()->RegisterSystem<CollisionSystem>();
 
 	Signature movementSignature;
 	movementSignature.set(ECSHandler::Instance()->GetComponentType<MovementComponent>());
@@ -204,20 +201,22 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	textSignature.set(ECSHandler::Instance()->GetComponentType<TextComponent>());
 	ECSHandler::Instance()->SetSystemSignature<TextSystem>(textSignature);
 
+	Signature collisionSignature;
+	collisionSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
+	collisionSignature.set(ECSHandler::Instance()->GetComponentType<ColliderComponent>());
+	ECSHandler::Instance()->SetSystemSignature<CollisionSystem>(collisionSignature);
+
 	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
 	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
 	mpSystems.insert({ typeid(TextSystem).name(), mpTextSystem });
-
-	GetSystem<MovementSystem>()->Init();
-	GetSystem<RenderSystem>()->Init();
-	GetSystem<TextSystem>()->Init();
+	mpSystems.insert({ typeid(CollisionSystem).name(), mpCollisionSystem });
 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
 	mpAM = new AudioManager();
 	mpAM->SetMusicVolume(15);
 	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
-	mpFSM->ChangeState(new MainMenu());
+	mpFSM->ChangeState(new TestState());
 
 	//Start engine and enable the game instance.
 	mIsRunning = true;

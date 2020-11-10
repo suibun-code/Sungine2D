@@ -63,6 +63,14 @@ void RenderSystem::Init()
 	//Unbind buffer and vertex array.
 	glBindBuffer(GL_ARRAY_BUFFER, NULL);
 	glBindVertexArray(NULL);
+
+	for (auto const& entity : mEntities)
+	{
+		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
+		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
+
+		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
+	}
 }
 
 void RenderSystem::Draw()
@@ -71,8 +79,6 @@ void RenderSystem::Draw()
 	{
 		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
 		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
-
-		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 
 		//Prepare transformations.
 		render.shaderUtil.Use();
@@ -87,7 +93,6 @@ void RenderSystem::Draw()
 		model = glm::translate(model, glm::vec3(-0.5f * transform.size.x, -0.5f * transform.size.y, 0.0f));
 
 		//Scale.
-		//size = glm::vec2(texture.Width, texture.Height) * size;
 		model = glm::scale(model, glm::vec3(transform.size, 1.0f));
 
 		render.shaderUtil.SetMatrix4("model", model);

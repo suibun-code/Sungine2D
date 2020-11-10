@@ -24,7 +24,7 @@ private:
 	{
 		const char* typeName = typeid(T).name();
 
-		//assert(mComponentTypes.find(typeName) != mComponentTypes.end() && "Component not registered before use.");
+		assert(mComponentTypes.find(typeName) != mComponentTypes.end() && "Component not registered before use.");
 
 		return std::static_pointer_cast<ECSComponentArray<T>>(mComponentArrays[typeName]);
 	}
@@ -35,7 +35,7 @@ public:
 	{
 		const char* typeName = typeid(T).name();
 
-		//assert(mComponentTypes.find(typeName) == mComponentTypes.end() && "Registering component type more than once.");
+		assert(mComponentTypes.find(typeName) == mComponentTypes.end() && "Registering component type more than once.");
 
 		//Add this component type to the component type map.
 		mComponentTypes.insert({ typeName, mNextComponentType });
@@ -52,7 +52,7 @@ public:
 	{
 		const char* typeName = typeid(T).name();
 
-		//assert(mComponentTypes.find(typeName) != mComponentTypes.end() && "Component not registered before use.");
+		assert(mComponentTypes.find(typeName) != mComponentTypes.end() && "Component not registered before use.");
 
 		//Return this component's type - used for creating signatures.
 		return mComponentTypes[typeName];
@@ -77,6 +77,12 @@ public:
 	{
 		//Get a reference to a component from the array for an entity
 		return GetComponentArray<T>()->GetData(entity);
+	}
+
+	template<typename T>
+	bool HasComponent(ECSEntity entity)
+	{
+		return GetComponentArray<T>()->HasData(entity);
 	}
 
 	void EntityDestroyed(ECSEntity entity)

@@ -174,6 +174,15 @@
     <ClInclude Include="MovementComponent.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -262,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="ECSHandler.cpp">
       <Filter>Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionSystem.cpp">
+      <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

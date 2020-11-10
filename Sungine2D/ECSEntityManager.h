@@ -30,7 +30,7 @@ public:
 
 	void DestroyEntity(ECSEntity entity)
 	{
-		//assert(entity < MAX_ENTITIES && "Entity out of range.");
+		assert(entity < MAX_ENTITIES && "Entity out of range.");
 
 		//Invalidate the destroyed entity's signature.
 		mSignatures[entity].reset();
@@ -54,7 +54,7 @@ public:
 
 	void SetSignature(ECSEntity entity, Signature signature)
 	{
-		//assert(entity < MAX_ENTITIES && "Entity out of range.");
+		assert(entity < MAX_ENTITIES && "Entity out of range.");
 
 		//Put this entity's signature into the array.
 		mSignatures[entity] = signature;
@@ -62,7 +62,7 @@ public:
 
 	Signature GetSignature(ECSEntity entity)
 	{
-		//assert(entity < MAX_ENTITIES && "Entity out of range.");
+		assert(entity < MAX_ENTITIES && "Entity out of range.");
 
 		//Get this entit's signature from the array.
 		return mSignatures[entity];

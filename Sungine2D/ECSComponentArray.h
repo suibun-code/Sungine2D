@@ -30,7 +30,7 @@ private:
 public:
 	void InsertData(ECSEntity entity, T component)
 	{
-		//assert(mEntityToIndexMap.find(entity) == mEntityToIndexMap.end() && "Component added to same entity more than once.");
+		assert(mEntityToIndexMap.find(entity) == mEntityToIndexMap.end() && "Component added to same entity more than once.");
 
 		//Put the new entry at the end and then update the maps.
 		size_t newIndex = mSize;
@@ -42,7 +42,7 @@ public:
 
 	void RemoveData(ECSEntity entity)
 	{
-		//assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Removing non-existent component.");
+		assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Removing non-existent component.");
 
 		//Copy element at end into deleted element's place to main density.
 		size_t indexOfRemovedEntity = mEntityToIndexMap[entity];
@@ -62,10 +62,19 @@ public:
 
 	T& GetData(ECSEntity entity)
 	{
-		//assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Retrieving non-existent component.");
+		assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Retrieving non-existent component.");
 
 		//Return a reference to the entity's component;
 		return mComponentArray[mEntityToIndexMap[entity]];
+	}
+
+	bool HasData(ECSEntity entity)
+	{
+		for (auto const& e : mEntityToIndexMap)
+			if (e.second == entity)
+				return true;
+
+		return false;
 	}
 
 	void EntityDestroyed(ECSEntity entity) override

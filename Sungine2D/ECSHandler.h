@@ -88,6 +88,12 @@ public:
 	}
 
 	template<typename T>
+	bool HasComponent(ECSEntity entity)
+	{
+		return mComponentManager->HasComponent<T>(entity);
+	}
+
+	template<typename T>
 	ECSComponentType GetComponentType()
 	{
 		return mComponentManager->GetComponentType<T>();
