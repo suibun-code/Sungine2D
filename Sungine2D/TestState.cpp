@@ -43,14 +43,14 @@ void TestState::Enter()
 
 	player = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
-	ECSHandler::Instance()->AddComponent(player, TransformComponent{ 1.f, 0.f, glm::vec2(300.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(player, TransformComponent{ 1.f, 0.f, glm::vec2(400.f, 500.f) });
 	ECSHandler::Instance()->AddComponent(player, RenderComponent{ shader, texture, glm::vec3(1.f) });
 	ECSHandler::Instance()->AddComponent(player, MovementComponent{ });
 	ECSHandler::Instance()->AddComponent(player, PlayerComponent{ });
-	ECSHandler::Instance()->AddComponent(player, ColliderComponent{ });
+	ECSHandler::Instance()->AddComponent(player, ColliderComponent{ true });
 
 	test = ECSHandler::Instance()->CreateEntity();
-	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "PlayerECS";
+	ECSHandler::Instance()->GetComponent<EntityData>(test).name = "TestCollisionEntity";
 	ECSHandler::Instance()->AddComponent(test, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
 	ECSHandler::Instance()->AddComponent(test, RenderComponent{ shader, texture, glm::vec3(1.f) });
 	ECSHandler::Instance()->AddComponent(test, ColliderComponent{ });
@@ -72,20 +72,6 @@ void TestState::Enter()
 
 void TestState::Update(float deltaTime)
 {
-	//Collisions.
-	//if (enemy != nullptr)
-	//{
-	//	if (Collision::CheckCollision(*player, *enemy))
-	//	{
-	//		GameInstance::Instance()->AddLog("Collided!\n");
-
-	//		if (enemy->GetHealth() > 0)
-	//			enemy->SetHealth(enemy->GetHealth() - 1);
-	//		else
-	//			enemy->SetDestroyed(true);
-	//	}
-	//}
-
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
 		ECSHandler::Instance()->GetComponent<PlayerComponent>(player).health = 50;
 

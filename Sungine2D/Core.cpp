@@ -214,7 +214,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
 	mpAM = new AudioManager();
-	mpAM->SetMusicVolume(15);
+	mpAM->SetMusicVolume(0);
 	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
 	mpFSM->ChangeState(new TestState());
 
