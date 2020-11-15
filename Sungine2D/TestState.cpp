@@ -7,6 +7,7 @@
 #include "Core.h"
 #include "GameInstance.h"
 #include "ResourceManager.h"
+#include "Level.h"
 
 //States
 #include "MainMenu.h"
@@ -29,14 +30,17 @@ void TestState::Enter()
 	//ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
 	ResourceManager::LoadTexture("res/img/player.png", true, "player");
 
-	//ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 175, 0, 255 });
-	//ResourceManager::AddText("EnemyHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 });
+	Level leveltest;
+	leveltest.Load("res/levels/first.txt");
+
+	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 175, 0, 255 });
+	ResourceManager::AddText("EnemyHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 });
 
 	texture = ResourceManager::GetTexture("player");
 	player = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
 	ECSHandler::Instance()->AddComponent(player, TransformComponent{ 1.f, 0.f, glm::vec2(400.f, 500.f) });
-	ECSHandler::Instance()->AddComponent(player, RenderComponent{ shader, texture, glm::vec3(1.f) });
+	ECSHandler::Instance()->AddComponent(player, RenderComponent{ shader, texture });
 	ECSHandler::Instance()->AddComponent(player, MovementComponent{ });
 	ECSHandler::Instance()->AddComponent(player, PlayerComponent{ });
 	ECSHandler::Instance()->AddComponent(player, ColliderComponent{ true });
@@ -44,13 +48,13 @@ void TestState::Enter()
 	enemy = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(enemy).name = "Enemy";
 	ECSHandler::Instance()->AddComponent(enemy, TransformComponent{ 1.f, 0.f, glm::vec2(300.f, 500.f) });
-	ECSHandler::Instance()->AddComponent(enemy, RenderComponent{ shader, texture, glm::vec3(.75f, .5f, .5f) });
+	ECSHandler::Instance()->AddComponent(enemy, RenderComponent{ shader, texture, true, glm::vec3(.75f, .5f, .5f) });
 	ECSHandler::Instance()->AddComponent(enemy, ColliderComponent{ });
 
 	test = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(test).name = "TestCollisionEntity";
 	ECSHandler::Instance()->AddComponent(test, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
-	ECSHandler::Instance()->AddComponent(test, RenderComponent{ shader, texture, glm::vec3(1.f) });
+	ECSHandler::Instance()->AddComponent(test, RenderComponent{ shader, texture });
 	ECSHandler::Instance()->AddComponent(test, ColliderComponent{ });
 
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
@@ -72,8 +76,11 @@ void TestState::Update(float deltaTime)
 		return;
 	}
 
-	//ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["EnemyHP"]).output = "100";
-	//ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["EnemyHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<TransformComponent>(enemy).position.x + 5, ECSHandler::Instance()->GetComponent<TransformComponent>(enemy).position.y - 25);
+	ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["PlayerHP"]).output = std::to_string(ECSHandler::Instance()->GetComponent<PlayerComponent>(player).health);
+	ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<TransformComponent>(player).position.x + 5, ECSHandler::Instance()->GetComponent<TransformComponent>(player).position.y - 25);
+
+	ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["EnemyHP"]).output = "100";
+	ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["EnemyHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<TransformComponent>(enemy).position.x + 5, ECSHandler::Instance()->GetComponent<TransformComponent>(enemy).position.y - 25);
 
 	Core::Instance()->GetSystem<TextSystem>()->Update();
 	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
@@ -95,9 +102,6 @@ void TestState::Render()
 	//		delete enemy;
 	//		enemy = nullptr;
 	//	}
-
-	//ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["player"]).output = std::to_string(ECSHandler::Instance()->GetComponent<PlayerComponent>(player).health);
-	//ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["player"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<TransformComponent>(player).position.x + 5, ECSHandler::Instance()->GetComponent<TransformComponent>(player).position.y - 25);
 
 	//Draw renderable entities.
 	Core::Instance()->GetSystem<RenderSystem>()->Draw();

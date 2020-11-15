@@ -142,6 +142,8 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_SCISSOR_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//ImGui.
@@ -152,9 +154,9 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Load shaders and attach variables/values to variables within the shader source code.
 	ResourceManager::LoadShader("shaders/sprite.vert", "shaders/sprite.frag", nullptr, "sprite");
-	glm::mat4 projection = projection = glm::ortho(0.f, 1280.f, 720.f, 0.f, -5.f, 5.f);
+	mProjection = glm::ortho(0.f, 1280.f, 720.f, 0.f, -5.f, 5.f);
 	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
-	ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
+	ResourceManager::GetShader("sprite").SetMatrix4("projection", mProjection);
 
 	//Initialize ImGui.
 	InitImGui();

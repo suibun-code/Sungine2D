@@ -92,7 +92,6 @@ SuFont ResourceManager::LoadFontFromFile(const char* path, int size)
 
 	font.path = path;
 	font.size = size;
-	//font.textColor = color;
 
 	return font;
 }

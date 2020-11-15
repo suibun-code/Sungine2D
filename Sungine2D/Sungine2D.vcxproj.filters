@@ -34,9 +34,6 @@
     <Filter Include="Game\States">
       <UniqueIdentifier>{cd3443a8-30e3-418d-80da-d5f0b5191a88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Entities">
-      <UniqueIdentifier>{43fdff5b-b568-4618-bc95-312f2d86068a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Systems">
       <UniqueIdentifier>{4eedfbdc-a418-490a-a6d3-d99a244a1ba5}</UniqueIdentifier>
     </Filter>
@@ -95,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameInstance.h">
       <Filter>Engine\Core</Filter>

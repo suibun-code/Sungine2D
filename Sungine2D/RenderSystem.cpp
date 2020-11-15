@@ -6,6 +6,8 @@
 #include "RenderComponent.h"
 #include "TransformComponent.h"
 
+#include "Core.h"
+
 void RenderSystem::Init()
 {
 	//Indices mapping.
@@ -70,18 +72,8 @@ void RenderSystem::Init()
 		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
 
 		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
-	}
-}
-
-void RenderSystem::Draw()
-{
-	for (auto const& entity : mEntities)
-	{
-		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
-		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
 
 		//Prepare transformations.
-		render.shaderUtil.Use();
 		glm::mat4 model = glm::mat4(1.0f);
 
 		//Translation.
@@ -95,10 +87,51 @@ void RenderSystem::Draw()
 		//Scale.
 		model = glm::scale(model, glm::vec3(transform.size, 1.0f));
 
-		render.shaderUtil.SetMatrix4("model", model);
+		glm::mat4 mvp = Core::Instance()->GetProjectionMatrix() * model;
 
 		//Render.
+		render.shaderUtil.SetMatrix4("model", model);
 		render.shaderUtil.SetVector3f("spriteColor", render.color);
+
+		render.shaderUtil.Use();
+
+		glActiveTexture(GL_TEXTURE0);
+		render.texture.Bind();
+
+		glBindVertexArray(mQuadVAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+		glBindVertexArray(0);
+	}
+}
+
+
+
+void RenderSystem::Draw()
+{
+	for (auto const& entity : mEntities)
+	{
+		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
+		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
+
+		//Prepare transformations.
+		glm::mat4 model = glm::mat4(1.0f);
+
+		//Translation.
+		model = glm::translate(model, glm::vec3(transform.position, 0.0f));
+
+		//Rotation.
+		model = glm::translate(model, glm::vec3(0.5f * transform.size.x, 0.5f * transform.size.y, 0.0f));
+		model = glm::rotate(model, glm::radians(transform.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(-0.5f * transform.size.x, -0.5f * transform.size.y, 0.0f));
+
+		//Scale.
+		model = glm::scale(model, glm::vec3(transform.size, 1.0f));
+
+		//Render.
+		render.shaderUtil.SetMatrix4("model", model);
+		render.shaderUtil.SetVector3f("spriteColor", render.color);
+
+		render.shaderUtil.Use();
 
 		glActiveTexture(GL_TEXTURE0);
 		render.texture.Bind();

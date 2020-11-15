@@ -46,6 +46,9 @@ private:
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;
 
+	//Matrix projection.
+	glm::mat4 mProjection;
+
 	//ImGui context.
 	ImGuiContext* mImGuiContext = nullptr;
 
@@ -121,6 +124,8 @@ public:
 
 	StateMachine* GetFSM() { return mpFSM; }
 	AudioManager* GetAM() { return mpAM; }
+
+	glm::mat4 GetProjectionMatrix() { return mProjection; }
 
 	Sint32 GetMousePosX() { return mMousePosX; }
 	Sint32 GetMousePosY() { return mMousePosY; }
