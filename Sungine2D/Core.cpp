@@ -216,7 +216,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpAM = new AudioManager();
 	mpAM->SetMusicVolume(0);
 	//mpAM->LoadSound("res/audio/effect/menubtn.wav");
-	mpFSM->ChangeState(new TestState());
+	mpFSM->ChangeState(new MainMenu());
 
 	//Start engine and enable the game instance.
 	mIsRunning = true;

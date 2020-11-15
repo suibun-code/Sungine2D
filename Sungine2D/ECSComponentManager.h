@@ -92,7 +92,6 @@ public:
 		for (auto const& pair : mComponentArrays)
 		{
 			auto const& component = pair.second;
-
 			component->EntityDestroyed(entity);
 		}
 	}

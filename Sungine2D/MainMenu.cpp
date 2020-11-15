@@ -29,7 +29,7 @@ void MainMenu::Enter()
 	ECSEntity logo = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(logo).name = "Logo";
 	ECSHandler::Instance()->AddComponent(logo, TransformComponent{ 1.f, 0.f, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (texture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (texture.Height / 2)), glm::vec2(1.f, 1.f) });
-	ECSHandler::Instance()->AddComponent(logo, RenderComponent{ shader, texture, glm::vec3(1.f)});
+	ECSHandler::Instance()->AddComponent(logo, RenderComponent{ shader, texture, glm::vec3(1.f) });
 
 	ResourceManager::AddText("enter", "Press Enter To Start", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25));
 
@@ -71,15 +71,20 @@ void MainMenu::Exit()
 	ResourceManager::ClearTexts();
 
 	//Destroy all active entities.
-	if (mEntities.size() > 0)
-		for (auto& entity : mEntities)
-			ECSHandler::Instance()->DestroyEntity(entity);
+	for (int i = mEntities.size() - 1; i >= 0; i--)
+	{
+		ECSHandler::Instance()->DestroyEntity(mEntities.at(i));
+		std::cout << "Destroyed.\n";
+	}
+	std::cout << "\n";
 
 	mEntities.clear();
 
 	ResourceManager::ClearEntities();
+	ResourceManager::DestroyTextures();
 
-	std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
+	//std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
+	std::cout << "RenderSystem entity count: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
 
 	State::Exit();
 }

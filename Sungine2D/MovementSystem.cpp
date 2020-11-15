@@ -18,16 +18,6 @@ void MovementSystem::Update(float deltaTime)
 		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
 		auto& movement = ECSHandler::Instance()->GetComponent<MovementComponent>(entity);
 
-		if (ECSHandler::Instance()->HasComponent<RenderComponent>(entity))
-		{
-			auto& collider = ECSHandler::Instance()->GetComponent<ColliderComponent>(entity);
-
-			if (collider.colliding == true)
-			{
-				continue;
-			}
-		}
-
 		movement.velocity = glm::vec2(0.f);
 
 		if (Core::Instance()->KeyDown(SDL_SCANCODE_A))

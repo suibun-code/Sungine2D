@@ -40,11 +40,11 @@ void CollisionSystem::Update()
 		{
 			if (entity != other)
 			{
+				if (collider.moveable == true)
+				{
 				auto& transformOther = ECSHandler::Instance()->GetComponent<TransformComponent>(other);
 				auto& colliderOther = ECSHandler::Instance()->GetComponent<ColliderComponent>(other);
 
-				if (collider.moveable == true)
-				{
 					//X-axis
 					bool collisionX = (transform.position.x + collider.offset.x) + collider.boundingBox.x >= (transformOther.position.x + colliderOther.offset.x) &&
 						(transformOther.position.x + colliderOther.offset.x) + colliderOther.boundingBox.x >= (transform.position.x + collider.offset.x);

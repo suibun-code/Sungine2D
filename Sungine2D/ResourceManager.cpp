@@ -199,3 +199,10 @@ void ResourceManager::Clear()
 	//Destroy all texts.
 	ClearTexts();
 }
+
+void ResourceManager::DestroyTextures()
+{
+	//Delete all textures.
+	for (auto iter : Textures)
+		glDeleteTextures(1, &iter.second.ID);
+}

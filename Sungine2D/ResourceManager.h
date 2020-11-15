@@ -51,6 +51,7 @@ public:
 
 	//De-allocates all loaded resources.
 	static void Clear();
+	static void DestroyTextures();
 
 	template<class T>
 	static inline void CleanVector(std::vector<T> vec)
