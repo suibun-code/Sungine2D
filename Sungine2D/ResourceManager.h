@@ -5,7 +5,6 @@
 #include <string>
 
 #include "SuFont.h"
-#include "SuText.h"
 #include "ShaderUtil.h"
 #include "SuTexture2D.h"
 
@@ -46,8 +45,6 @@ public:
 
 	static void ClearTexts();
 	static void ClearText(std::string name);
-
-	static void ClearEntities();
 
 	//De-allocates all loaded resources.
 	static void Clear();

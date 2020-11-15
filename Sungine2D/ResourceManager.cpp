@@ -151,15 +151,6 @@ void ResourceManager::ClearText(std::string name)
 	ECSHandler::Instance()->DestroyEntity(Texts[name]);
 	Texts.erase(name);
 }
-void ResourceManager::ClearEntities()
-{
-	for (auto* entity : Entity::GetAllEntities())
-		if (entity != nullptr)
-		{
-			delete entity;
-			entity = nullptr;
-		}
-}
 
 void ResourceManager::LoadTextureFromFont(SuTexture2D* texture, std::string text, bool alpha, SuFont font, SDL_Color color)
 {

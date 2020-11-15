@@ -2,9 +2,6 @@
 
 #include "FSM.h"
 
-#include "Player.h"
-#include "Enemy.h"
-
 #include "ECSEntityManager.h"
 
 class TestState : public State

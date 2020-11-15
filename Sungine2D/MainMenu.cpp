@@ -7,7 +7,6 @@
 #include "Core.h"
 #include "GameInstance.h"
 #include "ResourceManager.h"
-#include "SuSpriteRenderer.h"
 
 //States
 #include "TestState.h"
@@ -65,26 +64,8 @@ void MainMenu::Render()
 
 void MainMenu::Exit()
 {
-	Core::Instance()->GetAM()->ClearMusic();
-
-	//Clear texts map.
-	ResourceManager::ClearTexts();
-
-	//Destroy all active entities.
-	for (int i = mEntities.size() - 1; i >= 0; i--)
-	{
-		ECSHandler::Instance()->DestroyEntity(mEntities.at(i));
-		std::cout << "Destroyed.\n";
-	}
-	std::cout << "\n";
-
-	mEntities.clear();
-
-	ResourceManager::ClearEntities();
-	ResourceManager::DestroyTextures();
+	State::Exit();
 
 	//std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
 	std::cout << "RenderSystem entity count: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
-
-	State::Exit();
 }

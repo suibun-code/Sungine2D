@@ -7,8 +7,6 @@
 #include "Core.h"
 #include "GameInstance.h"
 #include "ResourceManager.h"
-#include "SuSpriteRenderer.h"
-#include "Collision.h"
 
 //States
 #include "MainMenu.h"
@@ -55,30 +53,10 @@ void TestState::Enter()
 	ECSHandler::Instance()->AddComponent(test, RenderComponent{ shader, texture, glm::vec3(1.f) });
 	ECSHandler::Instance()->AddComponent(test, ColliderComponent{ });
 
-	//ECSEntity lol = ECSHandler::Instance()->CreateEntity();
-	//ECSHandler::Instance()->AddComponent(lol, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
-	//ECSHandler::Instance()->AddComponent(lol, RenderComponent{ shader, texture, glm::vec3(1.f) });
-
-	//ECSEntity lol1 = ECSHandler::Instance()->CreateEntity();
-	//ECSHandler::Instance()->AddComponent(lol1, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
-	//ECSHandler::Instance()->AddComponent(lol1, RenderComponent{ shader, texture, glm::vec3(1.f) });
-
-	//ECSEntity lol2 = ECSHandler::Instance()->CreateEntity();
-	//ECSHandler::Instance()->AddComponent(lol2, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
-	//ECSHandler::Instance()->AddComponent(lol2, RenderComponent{ shader, texture, glm::vec3(1.f) });
-
-	//for (int i = 0; i < 100; i++)
-	//{
-	//	ECSHandler::Instance()->CreateEntity();
-	//	ECSHandler::Instance()->AddComponent(mEntities[i], TransformComponent{ 1.f, 0.f, glm::vec2(1.f + (float(rand() % 1280)), (float(rand() % 720))) });
-	//	ECSHandler::Instance()->AddComponent(mEntities[i], RenderComponent{ shader, texture, glm::vec3(1.f) });
-	//	ECSHandler::Instance()->AddComponent(mEntities[i], MovementComponent{});
-	//}
-
+	Core::Instance()->GetSystem<RenderSystem>()->Init();
+	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<MovementSystem>()->Init();
 	Core::Instance()->GetSystem<CollisionSystem>()->Init();
-	Core::Instance()->GetSystem<TextSystem>()->Init();
-	Core::Instance()->GetSystem<RenderSystem>()->Init();
 
 	State::Enter();
 }
@@ -129,26 +107,8 @@ void TestState::Render()
 
 void TestState::Exit()
 {
-	Core::Instance()->GetAM()->ClearMusic();
-
-	//Clear texts map.
-	ResourceManager::ClearTexts();
-
-	//Destroy all active entities.
-	for (int i = mEntities.size() - 1; i >= 0; i--)
-	{
-		ECSHandler::Instance()->DestroyEntity(mEntities.at(i));
-		std::cout << "Destroyed.\n";
-	}
-	std::cout << "\n";
-
-	mEntities.clear();
-
-	ResourceManager::ClearEntities();
-	ResourceManager::DestroyTextures();
+	State::Exit();
 
 	//std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
 	std::cout << "RenderSystem entity count: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
-
-	State::Exit();
 }

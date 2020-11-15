@@ -6,7 +6,7 @@
 //SDL
 #include "SDL.h"
 
-#include "SuSpriteRenderer.h"
+#include "ShaderUtil.h"
 #include "ECSEntityManager.h"
 
 class State
@@ -17,7 +17,6 @@ protected:
 	std::vector<ECSEntity> mEntities;
 
 	ShaderUtil shader = ShaderUtil();
-	SuSpriteRenderer* renderer = nullptr;
 
 public:
 	State(const char* mStateName) : mStateName(mStateName) {}

@@ -10,8 +10,6 @@ void State::Enter()
 {
 	const char* msg[] = { "[ENTER] '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
-
-	renderer = new SuSpriteRenderer(shader);
 }
 
 void State::Update(float deltaTime)
@@ -33,9 +31,20 @@ void State::Exit()
 	const char* msg[] = { "[EXIT] '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
 
-	//Destroy renderer.
-	delete renderer;
-	renderer = nullptr;
+	Core::Instance()->GetAM()->ClearMusic();
+
+	//Clear texts map.
+	ResourceManager::ClearTexts();
+
+	//Destroy all active entities.
+	for (int i = mEntities.size() - 1; i >= 0; i--)
+		ECSHandler::Instance()->DestroyEntity(mEntities.at(i));
+
+	std::cout << "\n";
+
+	mEntities.clear();
+
+	ResourceManager::DestroyTextures();
 }
 
 void State::AddEntity(ECSEntity entity)

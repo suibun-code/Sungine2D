@@ -70,8 +70,8 @@ public:
 
 	bool HasData(ECSEntity entity)
 	{
-		for (auto const& e : mEntityToIndexMap)
-			if (e.second == entity)
+		for (auto const& pair : mIndexToEntityMap)
+			if (pair.second == entity)
 				return true;
 
 		return false;

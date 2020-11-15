@@ -99,34 +99,16 @@
     <ClInclude Include="Transform.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Engine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Engine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SuText.h">
-      <Filter>Engine\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameInstance.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="Core.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="SuFont.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Engine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SuSpriteRenderer.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MovementSystem.h">
@@ -227,15 +209,6 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Engine\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Engine\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SuText.cpp">
-      <Filter>Engine\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
@@ -245,16 +218,7 @@
     <ClCompile Include="Core.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Engine\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SuSpriteRenderer.cpp">
       <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MovementSystem.cpp">
