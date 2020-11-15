@@ -21,12 +21,14 @@ private:
 
 	static ShaderUtil LoadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile = nullptr);
 	static SuTexture2D LoadTextureFromFile(const char* file, bool alpha);
+	static std::vector<SuTexture2D> LoadTexturesFromSheetFile(const char* file, bool alpha, unsigned int spriteWidth, unsigned int spriteHeight, unsigned int rows, unsigned int columns);
 	static SuFont LoadFontFromFile(const char* path, int size);
 
 public:
 	//Resource storage.
 	static std::map<std::string, ShaderUtil> Shaders;
 	static std::map<std::string, SuTexture2D> Textures;
+	static std::map<std::string, std::vector<SuTexture2D>> TextureSheets;
 	static std::map<std::string, SuFont> Fonts;
 	static std::map<std::string, ECSEntity> Texts;
 
@@ -37,6 +39,9 @@ public:
 
 	static void LoadTexture(const char* file, bool alpha, std::string name);
 	static SuTexture2D GetTexture(std::string name);
+
+	static void LoadTextureSheet(const char* file, bool alpha, unsigned int spriteWidth, unsigned int spriteHeight, unsigned int rows, unsigned int columns, std::string name);
+	static std::vector<SuTexture2D> GetTextureSheet(std::string name);
 
 	static void LoadFont(const char* path, int size, std::string name);
 	static SuFont GetFont(std::string name);

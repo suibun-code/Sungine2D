@@ -9,6 +9,7 @@
 //Instantiate static variables for keeping shaders and textures.
 std::map<std::string, ShaderUtil> ResourceManager::Shaders;
 std::map<std::string, SuTexture2D> ResourceManager::Textures;
+std::map<std::string, std::vector<SuTexture2D>> ResourceManager::TextureSheets;
 std::map<std::string, SuFont> ResourceManager::Fonts;
 std::map<std::string, ECSEntity> ResourceManager::Texts;
 
@@ -62,6 +63,7 @@ ShaderUtil ResourceManager::LoadShaderFromFile(const char* vShaderFile, const ch
 
 	return shader;
 }
+
 SuTexture2D ResourceManager::LoadTextureFromFile(const char* file, bool alpha)
 {
 	//Create texture object.
@@ -86,6 +88,43 @@ SuTexture2D ResourceManager::LoadTextureFromFile(const char* file, bool alpha)
 
 	return texture;
 }
+
+std::vector<SuTexture2D> ResourceManager::LoadTexturesFromSheetFile(const char* file, bool alpha, unsigned int spriteWidth, unsigned int spriteHeight, unsigned int rows, unsigned int columns)
+{
+	//Create texture object.
+	SuTexture2D texture;
+	std::vector<SuTexture2D> textures;
+
+	SDL_Surface* surf;
+
+	//Load the image.
+	surf = IMG_Load(file);
+
+	//for (unsigned int i = spriteHeight; i < (columns * spriteHeight); i += spriteHeight)
+	//{
+	//	for (unsigned int j = spriteWidth; j < (rows * spriteWidth); j += spriteWidth)
+	//	{
+			//Generate the texture using the SDL_Surface* properties.
+			//std::cout << "x: " << j << "\n";
+			//std::cout << "y: " << i << "\n\n";
+			texture.Generate(surf->w, surf->h, surf->pixels);
+
+			if (alpha)
+			{
+				texture.Internal_Format = GL_RGBA;
+				texture.Image_Format = GL_RGBA;
+			}
+
+			textures.push_back(texture);
+	//	}
+	//}
+
+	//Free the SDL_Surface*.
+	SDL_FreeSurface(surf);
+
+	return textures;
+}
+
 SuFont ResourceManager::LoadFontFromFile(const char* path, int size)
 {
 	SuFont font;
@@ -100,6 +139,7 @@ void ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderFil
 {
 	Shaders[name] = LoadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
 }
+
 ShaderUtil ResourceManager::GetShader(std::string name)
 {
 	return Shaders[name];
@@ -109,15 +149,27 @@ void ResourceManager::LoadTexture(const char* file, bool alpha, std::string name
 {
 	Textures[name] = LoadTextureFromFile(file, alpha);
 }
+
 SuTexture2D ResourceManager::GetTexture(std::string name)
 {
 	return Textures[name];
+}
+
+void ResourceManager::LoadTextureSheet(const char* file, bool alpha, unsigned int spriteWidth, unsigned int spriteHeight, unsigned int rows, unsigned int columns, std::string name)
+{
+	TextureSheets[name] = LoadTexturesFromSheetFile(file, alpha, spriteWidth, spriteHeight, rows, columns);
+}
+
+std::vector<SuTexture2D> ResourceManager::GetTextureSheet(std::string name)
+{
+	return TextureSheets[name];
 }
 
 void ResourceManager::LoadFont(const char* path, int size, std::string name)
 {
 	Fonts[name] = LoadFontFromFile(path, size);
 }
+
 SuFont ResourceManager::GetFont(std::string name)
 {
 	return Fonts[name];
@@ -137,7 +189,6 @@ void ResourceManager::AddText(std::string name, std::string input, SuFont font, 
 	Texts[name] = text;
 }
 
-//Destroys & clears the respective objects.
 void ResourceManager::ClearTexts()
 {
 	for (std::pair<std::string, ECSEntity> element : Texts)
@@ -145,6 +196,7 @@ void ResourceManager::ClearTexts()
 
 	Texts.clear();
 }
+
 void ResourceManager::ClearText(std::string name)
 {
 	ECSHandler::Instance()->DestroyEntity(Texts[name]);

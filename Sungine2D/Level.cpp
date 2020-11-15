@@ -26,7 +26,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 				texture = ResourceManager::GetTexture("grass");
 				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
 				ECSHandler::Instance()->AddComponent(tile, TransformComponent{ 1.f, 0.f, glm::vec2(j * tileWidth, i * tileHeight) });
-				ECSHandler::Instance()->AddComponent(tile, RenderComponent{shader, texture, false });
+				ECSHandler::Instance()->AddComponent(tile, RenderComponent{shader, texture});
 			}
 		}
 	}

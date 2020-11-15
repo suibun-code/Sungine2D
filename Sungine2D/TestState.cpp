@@ -48,7 +48,7 @@ void TestState::Enter()
 	enemy = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(enemy).name = "Enemy";
 	ECSHandler::Instance()->AddComponent(enemy, TransformComponent{ 1.f, 0.f, glm::vec2(300.f, 500.f) });
-	ECSHandler::Instance()->AddComponent(enemy, RenderComponent{ shader, texture, true, glm::vec3(.75f, .5f, .5f) });
+	ECSHandler::Instance()->AddComponent(enemy, RenderComponent{ shader, texture, glm::vec3(.75f, .5f, .5f) });
 	ECSHandler::Instance()->AddComponent(enemy, ColliderComponent{ });
 
 	test = ECSHandler::Instance()->CreateEntity();
