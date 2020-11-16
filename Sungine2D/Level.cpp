@@ -81,7 +81,6 @@ void Level::Load(const char* file)
 			levelHeight = tileData.size();
 		}
 
-		//should be 15 & 7 for first.txt
 		std::cout << "Level width: " << levelWidth << "\n";
 		std::cout << "Level height: " << levelHeight << "\n";
 

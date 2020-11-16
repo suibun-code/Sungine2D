@@ -2,6 +2,6 @@
 
 struct Movement
 {
-	float speed = 400.f;
+	float speed = 350.f;
 	glm::vec2 velocity = glm::vec2(0.f);
 };

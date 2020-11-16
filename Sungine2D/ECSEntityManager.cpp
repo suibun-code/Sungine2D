@@ -8,7 +8,7 @@
 ECSEntity ECSEntityManager::CreateEntity()
 {
 
-	assert(mLivingEntityCount < MAX_ENTITIES && "Too many entities exist.");
+	//assert(mLivingEntityCount < MAX_ENTITIES && "Too many entities exist.");
 
 	//Take an ID from the front of the queue.
 	ECSEntity id = mAvailableEntities.front();

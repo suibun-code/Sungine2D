@@ -68,6 +68,7 @@ private:
 	bool mIsRunning = false;
 	bool mGotTick = false;
 	bool mLMBState = false;
+	bool mLMBDown = false;
 	bool mMusicEnabled = false;
 
 	//Time.
@@ -144,6 +145,7 @@ public:
 	bool KeyDown(SDL_Scancode k);
 	bool KeyUp(SDL_Scancode k);
 	bool GetLMBState() { return mLMBState; }
+	bool GetLMBDown() { return mLMBDown; }
 
 	void SetGameInstance(bool gameInstanceEnabled) { mGameInstanceEnabled = gameInstanceEnabled; }
 	void WaitFor(int time);

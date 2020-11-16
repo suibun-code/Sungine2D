@@ -242,7 +242,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
 	mpAM = new AudioManager();
-	mpAM->SetMusicVolume(0);
+	mpAM->SetMusicVolume(15);
 	mpFSM->ChangeState(new MainMenu());
 
 	//Start engine and enable the game instance.
@@ -462,12 +462,17 @@ void Core::HandleEvents()
 		case SDL_MOUSEBUTTONDOWN:
 			if (mEvent.button.button == SDL_BUTTON_LEFT)
 				if (mEvent.button.state == SDL_PRESSED)
+				{
 					mLMBState = true;
+					mLMBDown = true;
+				}
 			break;
 
 		case SDL_MOUSEBUTTONUP:
 			if (mEvent.button.button == SDL_BUTTON_LEFT)
-				mLMBState = false;
+			{
+				mLMBDown = false;
+			}
 			break;
 
 		case SDL_MOUSEMOTION:

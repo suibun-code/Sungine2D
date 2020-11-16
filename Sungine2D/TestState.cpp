@@ -33,7 +33,7 @@ void TestState::Enter()
 	ResourceManager::LoadTexture("res/img/player.png", true, "char");
 
 	Level leveltest;
-	leveltest.Load("res/levels/first.txt");
+	leveltest.Load("res/levels/saved.txt");
 
 	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 });
 
@@ -47,11 +47,11 @@ void TestState::Enter()
 	ECSHandler::Instance()->AddComponent(player, Player{ });
 	ECSHandler::Instance()->AddComponent(player, Collider{ true });
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		ECSEntity enemy = ECSHandler::Instance()->CreateEntity();
 		ECSHandler::Instance()->GetComponent<EntityData>(enemy).tag = "Enemy";
-		ECSHandler::Instance()->AddComponent(enemy, Transform{ glm::vec2(200.f + (i * 38), 500.f) });
+		ECSHandler::Instance()->AddComponent(enemy, Transform{ glm::vec2(200.f + (i * 75), 60.f) });
 		ECSHandler::Instance()->AddComponent(enemy, Rendering{ shader, texture, glm::vec3(.75f, .5f, .5f) });
 		ECSHandler::Instance()->AddComponent(enemy, Collider{ });
 		ECSHandler::Instance()->AddComponent(enemy, Enemy{ });
