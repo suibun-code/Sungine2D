@@ -39,7 +39,7 @@ void TestState::Enter()
 	texture = ResourceManager::GetTexture("char");
 	player = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
-	ECSHandler::Instance()->AddComponent(player, Transform{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(player, Transform{ glm::vec2(500.f, 500.f) });
 	ECSHandler::Instance()->AddComponent(player, Rendering{ shader, texture });
 	ECSHandler::Instance()->AddComponent(player, Movement{ });
 	ECSHandler::Instance()->AddComponent(player, Player{ });
@@ -47,11 +47,12 @@ void TestState::Enter()
 
 	enemy = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(enemy).tag = "Enemy";
-	ECSHandler::Instance()->AddComponent(enemy, Transform{ 1.f, 0.f, glm::vec2(200.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(enemy, Transform{ glm::vec2(200.f, 500.f) });
 	ECSHandler::Instance()->AddComponent(enemy, Rendering{ shader, texture, glm::vec3(.75f, .5f, .5f) });
 	ECSHandler::Instance()->AddComponent(enemy, Collider{ });
 
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
+	Core::Instance()->GetSystem<PlayerSystem>()->Init();
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<MovementSystem>()->Init();
 	Core::Instance()->GetSystem<CollisionSystem>()->Init();
@@ -79,6 +80,7 @@ void TestState::Update(float deltaTime)
 	Core::Instance()->GetSystem<TextSystem>()->Update();
 	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<CollisionSystem>()->Update();
+	Core::Instance()->GetSystem<PlayerSystem>()->Update(deltaTime);
 
 	State::Update(deltaTime);
 }

@@ -172,10 +172,12 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="MovementSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerSystem.h" />
     <ClInclude Include="Rendering.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderUtil.h" />
+    <ClInclude Include="Shooter.h" />
     <ClInclude Include="SuFont.h" />
     <ClInclude Include="SuTexture2D.h" />
     <ClInclude Include="TestState.h" />
@@ -204,6 +206,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MappingState.cpp" />
     <ClCompile Include="MovementSystem.cpp" />
+    <ClCompile Include="PlayerSystem.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />

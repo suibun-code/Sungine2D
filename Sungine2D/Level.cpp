@@ -35,7 +35,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 			{
 				texture = ResourceManager::GetTexture("grass");
 				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
-				ECSHandler::Instance()->AddComponent(tile, Transform{ 1.f, 0.f, glm::vec2(j * tileWidth, i * tileHeight) });
+				ECSHandler::Instance()->AddComponent(tile, Transform{ glm::vec2(j * tileWidth, i * tileHeight) });
 				ECSHandler::Instance()->AddComponent(tile, Rendering{ shader, texture });
 			}
 			break;
@@ -44,7 +44,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 			{
 				texture = ResourceManager::GetTexture("wall");
 				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
-				ECSHandler::Instance()->AddComponent(tile, Transform{ 1.f, 0.f, glm::vec2(j * tileWidth, i * tileHeight) });
+				ECSHandler::Instance()->AddComponent(tile, Transform{ glm::vec2(j * tileWidth, i * tileHeight) });
 				ECSHandler::Instance()->AddComponent(tile, Rendering{ shader, texture });
 				ECSHandler::Instance()->AddComponent(tile, Collider{ });
 			}

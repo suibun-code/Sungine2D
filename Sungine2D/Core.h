@@ -25,6 +25,7 @@
 #include "RenderSystem.h"
 #include "TextSystem.h"
 #include "CollisionSystem.h"
+#include "PlayerSystem.h"
 
 #include "FSM.h"
 #include "AudioManager.h"
@@ -42,6 +43,7 @@ private:
 	std::shared_ptr<RenderSystem> mpRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
 	std::shared_ptr<CollisionSystem> mpCollisionSystem;
+	std::shared_ptr<PlayerSystem> mpPlayerSystem;
 
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;
@@ -134,6 +136,7 @@ public:
 	bool Tick();
 	bool GameInstanceEnabled() { return mGameInstanceEnabled; }
 	bool KeyDown(SDL_Scancode k);
+	bool KeyUp(SDL_Scancode k);
 	bool GetLMBState() { return mLMBState; }
 
 	void SetGameInstance(bool gameInstanceEnabled) { mGameInstanceEnabled = gameInstanceEnabled; }

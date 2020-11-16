@@ -18,34 +18,7 @@ void MovementSystem::Update(float deltaTime)
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(entity);
 
-		movement.velocity = glm::vec2(0.f);
-
-		if (Core::Instance()->KeyDown(SDL_SCANCODE_A))
-		{
-			movement.velocity.x -= movement.speed * deltaTime;
-
-			//transform.position.x -= movement.speed * deltaTime;
-		}
-		if (Core::Instance()->KeyDown(SDL_SCANCODE_D))
-		{
-			movement.velocity.x += movement.speed * deltaTime;
-
-			//transform.position.x += movement.speed * deltaTime;
-		}
-		if (Core::Instance()->KeyDown(SDL_SCANCODE_W))
-		{
-			movement.velocity.y -= movement.speed * deltaTime;
-
-			//transform.position.y -= movement.speed * deltaTime;
-		}
-		if (Core::Instance()->KeyDown(SDL_SCANCODE_S))
-		{
-			movement.velocity.y += movement.speed * deltaTime;
-
-			//transform.position.y += movement.speed * deltaTime;
-		}
-
-		transform.position += movement.velocity;
+		transform.position += (movement.velocity * deltaTime);
 	}
 }
 

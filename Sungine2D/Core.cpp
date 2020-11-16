@@ -185,6 +185,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
 	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
 	mpCollisionSystem = ECSHandler::Instance()->RegisterSystem<CollisionSystem>();
+	mpPlayerSystem = ECSHandler::Instance()->RegisterSystem<PlayerSystem>();
 
 	Signature movementSignature;
 	movementSignature.set(ECSHandler::Instance()->GetComponentType<Movement>());
@@ -208,10 +209,18 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	collisionSignature.set(ECSHandler::Instance()->GetComponentType<Collider>());
 	ECSHandler::Instance()->SetSystemSignature<CollisionSystem>(collisionSignature);
 
+	Signature playerSignature;
+	playerSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
+	playerSignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
+	playerSignature.set(ECSHandler::Instance()->GetComponentType<Movement>());
+	playerSignature.set(ECSHandler::Instance()->GetComponentType<Player>());
+	ECSHandler::Instance()->SetSystemSignature<PlayerSystem>(playerSignature);
+
 	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
 	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
 	mpSystems.insert({ typeid(TextSystem).name(), mpTextSystem });
 	mpSystems.insert({ typeid(CollisionSystem).name(), mpCollisionSystem });
+	mpSystems.insert({ typeid(PlayerSystem).name(), mpPlayerSystem });
 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
@@ -334,7 +343,7 @@ bool Core::Tick()
 {
 	mPreviousTime = mCurrentTime;
 	mCurrentTime = SDL_GetPerformanceCounter();
-	mDeltaTime = (float)((mCurrentTime - mPreviousTime) * 1000 / (float)SDL_GetPerformanceFrequency());
+	mDeltaTime = (float)((mCurrentTime - mPreviousTime) * 10 / (float)SDL_GetPerformanceFrequency());
 	mFramesPerSecond = 1000 / mDeltaTime;
 
 	auto duration = std::chrono::steady_clock::now().time_since_epoch();
@@ -364,6 +373,18 @@ bool Core::KeyDown(SDL_Scancode k)
 	return false;
 }
 
+bool Core::KeyUp(SDL_Scancode k)
+{
+	if (mpKeyStates != nullptr)
+	{
+		if (mpKeyStates[k] == 0)
+			return true;
+		else
+			return false;
+	}
+	return false;
+}
+
 void Core::WaitFor(int time)
 {
 	SDL_Delay(time);
@@ -382,6 +403,9 @@ void Core::Render()
 void Core::HandleEvents()
 {
 	ImGuiIO& io = ImGui::GetIO();
+
+	if (mLMBState == true)
+		mLMBState = false;
 
 	if (SDL_PollEvent(&mEvent))
 	{
@@ -436,6 +460,7 @@ void Core::HandleEvents()
 			break;
 		}
 	}
+
 	mpFSM->HandleStateEvents(&mEvent);
 }
 
