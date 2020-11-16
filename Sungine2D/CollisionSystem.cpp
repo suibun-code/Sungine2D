@@ -3,7 +3,6 @@
 #include "TransformComponent.h"
 #include "ColliderComponent.h"
 #include "RenderComponent.h"
-#include "MovementComponent.h"
 
 void CollisionSystem::Init()
 {
@@ -14,7 +13,6 @@ void CollisionSystem::Init()
 
 		if (ECSHandler::Instance()->HasComponent<RenderComponent>(entity))
 		{
-			//std::cout << "has\n";
 			auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
 
 			collider.boundingBox.x = (float)render.texture.Width;
@@ -25,27 +23,23 @@ void CollisionSystem::Init()
 
 void CollisionSystem::Update()
 {
-	depth = 0.f;
-	highestDepth = HighestDepth::RIGHT;
+	xDepth = 0.f;
+	xHighestDepth = HighestDepth::RIGHT;
+	yHighestDepth = HighestDepth::BOTTOM;
 
 	for (auto const& entity : mEntities)
 	{
 		auto& collider = ECSHandler::Instance()->GetComponent<ColliderComponent>(entity);
 
 		if (!collider.moveable)
-			return;
+			continue;
 
 		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
-		auto& movement = ECSHandler::Instance()->GetComponent<MovementComponent>(entity);
 
 		for (auto const& other : mEntities)
 		{
 			if (entity != other)
 			{
-				//std::cout << "depth: " << depth << "\n";
-				//std::cout << "posx " << transform.position.x << "\n";
-				//std::cout << "boundingx " << collider.boundingBox.x << "\n";
-
 				auto& transformOther = ECSHandler::Instance()->GetComponent<TransformComponent>(other);
 				auto& colliderOther = ECSHandler::Instance()->GetComponent<ColliderComponent>(other);
 
@@ -64,8 +58,8 @@ void CollisionSystem::Update()
 				//RIGHT SIDE WITH LEFT SIDE
 				if (transform.position.x + collider.boundingBox.x >= transformOther.position.x && transform.position.x <= transformOther.position.x && collisionY)
 				{
-					depth = (transform.position.x + collider.boundingBox.x) - transformOther.position.x;
-					highestDepth = HighestDepth::RIGHT;
+					xDepth = (transform.position.x + collider.boundingBox.x) - transformOther.position.x;
+					xHighestDepth = HighestDepth::RIGHT;
 
 					collider.colliding = true;
 				}
@@ -73,19 +67,8 @@ void CollisionSystem::Update()
 				//LEFT SIDE WITH RIGHT SIDE
 				if (transformOther.position.x + colliderOther.boundingBox.x >= transform.position.x && transformOther.position.x <= transform.position.x && collisionY)
 				{
-					if (depth != 0)
-					{
-						if (std::abs(depth) > std::abs((transformOther.position.x + colliderOther.boundingBox.x) - transform.position.x))
-						{
-							depth = (transformOther.position.x + colliderOther.boundingBox.x) - transform.position.x;
-							highestDepth = HighestDepth::LEFT;
-						}
-					}
-					else
-					{
-						depth = (transformOther.position.x + colliderOther.boundingBox.x) - transform.position.x;
-						highestDepth = HighestDepth::LEFT;
-					}
+					xDepth = (transformOther.position.x + colliderOther.boundingBox.x) - transform.position.x;
+					xHighestDepth = HighestDepth::LEFT;
 
 					collider.colliding = true;
 				}
@@ -93,19 +76,8 @@ void CollisionSystem::Update()
 				//BOTTOM SIDE WITH TOP SIDE
 				if (transform.position.y + collider.boundingBox.y >= transformOther.position.y && transform.position.y <= transformOther.position.y && collisionX)
 				{
-					if (depth != 0)
-					{
-						if (std::abs(depth) > std::abs((transform.position.y + collider.boundingBox.y) - transformOther.position.y))
-						{
-							depth = (transform.position.y + collider.boundingBox.y) - transformOther.position.y;
-							highestDepth = HighestDepth::TOP;
-						}
-					}
-					else
-					{
-						depth = (transform.position.y + collider.boundingBox.y) - transformOther.position.y;
-						highestDepth = HighestDepth::TOP;
-					}
+					yDepth = (transform.position.y + collider.boundingBox.y) - transformOther.position.y;
+					yHighestDepth = HighestDepth::TOP;
 
 					collider.colliding = true;
 				}
@@ -113,46 +85,70 @@ void CollisionSystem::Update()
 				//TOP SIDE WITH BOTTOM SIDE
 				if (transformOther.position.y + colliderOther.boundingBox.y >= transform.position.y && transformOther.position.y <= transform.position.y && collisionX)
 				{
-					if (depth != 0)
-					{
-						if (std::abs(depth) > std::abs((transformOther.position.y + colliderOther.boundingBox.y) - transform.position.y))
-						{
-							depth = (transformOther.position.y + colliderOther.boundingBox.y) - transform.position.y;
-							highestDepth = HighestDepth::BOTTOM;
-						}
-					}
-					else
-					{
-						depth = (transformOther.position.y + colliderOther.boundingBox.y) - transform.position.y;
-						highestDepth = HighestDepth::BOTTOM;
-					}
+					yDepth = (transformOther.position.y + colliderOther.boundingBox.y) - transform.position.y;
+					yHighestDepth = HighestDepth::BOTTOM;
 
 					collider.colliding = true;
 				}
 
-				//Stupid but this works for now. Margin of error to prevent extra collision after one is over.
-				depth += 0.01f;
+				//Stupid but this works for now. Pushes back a little farther to make sure the depth removal doesn't end at a spot where collision is still happening.
+				xDepth += 0.001f;
+				yDepth += 0.001f;
 
 				if (collider.colliding == true)
 				{
-					switch (highestDepth)
+					if (xDepth < yDepth)
 					{
-					case HighestDepth::LEFT:
-						//std::cout << "LEFT\n";
-						transform.position.x += depth;
-						break;
-					case HighestDepth::RIGHT:
-						//std::cout << "RIGHT\n";
-						transform.position.x -= depth;
-						break;
-					case HighestDepth::TOP:
-						//std::cout << "TOP\n";
-						transform.position.y -= depth;
-						break;
-					case HighestDepth::BOTTOM:
-						//std::cout << "BOTTOM\n";
-						transform.position.y += depth;
-						break;
+						switch (xHighestDepth)
+						{
+						case HighestDepth::LEFT:
+							//std::cout << "LEFT\n";
+							transform.position.x += xDepth;
+							break;
+						case HighestDepth::RIGHT:
+							//std::cout << "RIGHT\n";
+							transform.position.x -= xDepth;
+							break;
+						}
+					}
+					if (yDepth < xDepth)
+					{
+						switch (yHighestDepth)
+						{
+						case HighestDepth::TOP:
+							//std::cout << "TOP\n";
+							transform.position.y -= yDepth;
+							break;
+						case HighestDepth::BOTTOM:
+							//std::cout << "BOTTOM\n";
+							transform.position.y += yDepth;
+							break;
+						}
+					}
+					if ((xDepth - yDepth) < 1.0f)
+					{
+						//if (collider.colliding == true)
+						//{
+						//	switch (highestdepth)
+						//	{
+						//	case highestdepth::left:
+						//		//std::cout << "left\n";
+						//		transform.position.x += xdepth;
+						//		break;
+						//	case highestdepth::right:
+						//		//std::cout << "right\n";
+						//		transform.position.x -= xdepth;
+						//		break;
+						//	case highestdepth::top:
+						//		std::cout << "top\n";
+						//		transform.position.y -= ydepth;
+						//		break;
+						//	case highestdepth::bottom:
+						//		std::cout << "bottom\n";
+						//		transform.position.y += ydepth;
+						//		break;
+						//	}
+						//}
 					}
 				}
 

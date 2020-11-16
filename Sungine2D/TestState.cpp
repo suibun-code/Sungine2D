@@ -33,13 +33,13 @@ void TestState::Enter()
 	Level leveltest;
 	leveltest.Load("res/levels/first.txt");
 
-	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 175, 0, 255 });
+	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 });
 	ResourceManager::AddText("EnemyHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 });
 
 	texture = ResourceManager::GetTexture("player");
 	player = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
-	ECSHandler::Instance()->AddComponent(player, TransformComponent{ 1.f, 0.f, glm::vec2(400.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(player, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
 	ECSHandler::Instance()->AddComponent(player, RenderComponent{ shader, texture });
 	ECSHandler::Instance()->AddComponent(player, MovementComponent{ });
 	ECSHandler::Instance()->AddComponent(player, PlayerComponent{ });
@@ -47,15 +47,9 @@ void TestState::Enter()
 
 	enemy = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(enemy).name = "Enemy";
-	ECSHandler::Instance()->AddComponent(enemy, TransformComponent{ 1.f, 0.f, glm::vec2(300.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(enemy, TransformComponent{ 1.f, 0.f, glm::vec2(200.f, 500.f) });
 	ECSHandler::Instance()->AddComponent(enemy, RenderComponent{ shader, texture, glm::vec3(.75f, .5f, .5f) });
 	ECSHandler::Instance()->AddComponent(enemy, ColliderComponent{ });
-
-	test = ECSHandler::Instance()->CreateEntity();
-	ECSHandler::Instance()->GetComponent<EntityData>(test).name = "TestCollisionEntity";
-	ECSHandler::Instance()->AddComponent(test, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
-	ECSHandler::Instance()->AddComponent(test, RenderComponent{ shader, texture });
-	ECSHandler::Instance()->AddComponent(test, ColliderComponent{ });
 
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
 	Core::Instance()->GetSystem<TextSystem>()->Init();

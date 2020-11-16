@@ -15,8 +15,10 @@ enum class HighestDepth
 class CollisionSystem : public ECSSystem
 {
 private:
-	float depth = 0.f;
-	HighestDepth highestDepth = HighestDepth::RIGHT;
+	float xDepth = 0.f;
+	float yDepth = 0.f;
+	HighestDepth xHighestDepth = HighestDepth::RIGHT;
+	HighestDepth yHighestDepth = HighestDepth::BOTTOM;
 
 public:
 	void Init();
