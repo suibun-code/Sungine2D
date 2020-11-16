@@ -1,19 +1,19 @@
 #include "CollisionSystem.h"
 
-#include "TransformComponent.h"
-#include "ColliderComponent.h"
-#include "RenderComponent.h"
+#include "Transform.h"
+#include "Collider.h"
+#include "Rendering.h"
 
 void CollisionSystem::Init()
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
-		auto& collider = ECSHandler::Instance()->GetComponent<ColliderComponent>(entity);
+		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
+		auto& collider = ECSHandler::Instance()->GetComponent<Collider>(entity);
 
-		if (ECSHandler::Instance()->HasComponent<RenderComponent>(entity))
+		if (ECSHandler::Instance()->HasComponent<Rendering>(entity))
 		{
-			auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
+			auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
 
 			collider.boundingBox.x = (float)render.texture.Width;
 			collider.boundingBox.y = (float)render.texture.Height;
@@ -29,19 +29,19 @@ void CollisionSystem::Update()
 
 	for (auto const& entity : mEntities)
 	{
-		auto& collider = ECSHandler::Instance()->GetComponent<ColliderComponent>(entity);
+		auto& collider = ECSHandler::Instance()->GetComponent<Collider>(entity);
 
 		if (!collider.moveable)
 			continue;
 
-		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
+		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 
 		for (auto const& other : mEntities)
 		{
 			if (entity != other)
 			{
-				auto& transformOther = ECSHandler::Instance()->GetComponent<TransformComponent>(other);
-				auto& colliderOther = ECSHandler::Instance()->GetComponent<ColliderComponent>(other);
+				auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
+				auto& colliderOther = ECSHandler::Instance()->GetComponent<Collider>(other);
 
 				//X-axis
 				bool collisionX = (transform.position.x + collider.offset.x) + collider.boundingBox.x >= (transformOther.position.x + colliderOther.offset.x) &&

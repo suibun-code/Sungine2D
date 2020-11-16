@@ -27,8 +27,8 @@ void MainMenu::Enter()
 	texture = ResourceManager::GetTexture("logo");
 	ECSEntity logo = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(logo).name = "Logo";
-	ECSHandler::Instance()->AddComponent(logo, TransformComponent{ 1.f, 0.f, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (texture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (texture.Height / 2)), glm::vec2(1.f, 1.f) });
-	ECSHandler::Instance()->AddComponent(logo, RenderComponent{ shader, texture });
+	ECSHandler::Instance()->AddComponent(logo, Transform{ 1.f, 0.f, glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (texture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (texture.Height / 2)), glm::vec2(1.f, 1.f) });
+	ECSHandler::Instance()->AddComponent(logo, Rendering{ shader, texture });
 
 	ResourceManager::AddText("enter", "Press Enter To Start", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25));
 

@@ -14,14 +14,14 @@ void State::Enter()
 
 void State::Update(float deltaTime)
 {
-	//if (Core::Instance()->GameInstanceEnabled() == true)
-		//GameInstance::Instance()->Update(deltaTime);
+	if (Core::Instance()->GameInstanceEnabled() == true)
+		GameInstance::Instance()->Update(deltaTime);
 }
 
 void State::Render()
 {
-	//if (Core::Instance()->GameInstanceEnabled() == true)
-		//GameInstance::Instance()->Render();
+	if (Core::Instance()->GameInstanceEnabled() == true)
+		GameInstance::Instance()->Render();
 
 	SDL_GL_SwapWindow(Core::Instance()->GetWindow());
 }

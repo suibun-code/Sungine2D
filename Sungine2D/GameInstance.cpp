@@ -82,13 +82,13 @@ void GameInstance::UpdateImGui()
 		s = "Number of active entities: " + std::to_string(ECSHandler::Instance()->ActiveEntityCount());
 		ImGui::Text(s.c_str());
 
-		ImGui::NewLine();
+		//ImGui::NewLine();
 
-		for (unsigned int i = 0; i < Core::Instance()->GetCurrentState()->GetEntities().size(); i++)
-		{
-			s = ECSHandler::Instance()->GetComponent<EntityData>(Core::Instance()->GetCurrentState()->GetEntities().at(i)).name;
-			ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 0.95f), s.c_str());
-		}
+		//for (unsigned int i = 0; i < Core::Instance()->GetCurrentState()->GetEntities().size(); i++)
+		//{
+		//	s = ECSHandler::Instance()->GetComponent<EntityData>(Core::Instance()->GetCurrentState()->GetEntities().at(i)).name;
+		//	ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 0.95f), s.c_str());
+		//}
 
 		ImGui::End();
 	}

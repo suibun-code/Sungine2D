@@ -28,7 +28,7 @@ void TestState::Enter()
 	SuTexture2D texture;
 
 	//ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
-	ResourceManager::LoadTexture("res/img/player.png", true, "player");
+	ResourceManager::LoadTexture("res/img/player.png", true, "char");
 
 	Level leveltest;
 	leveltest.Load("res/levels/first.txt");
@@ -36,20 +36,20 @@ void TestState::Enter()
 	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 });
 	ResourceManager::AddText("EnemyHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 });
 
-	texture = ResourceManager::GetTexture("player");
+	texture = ResourceManager::GetTexture("char");
 	player = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
-	ECSHandler::Instance()->AddComponent(player, TransformComponent{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
-	ECSHandler::Instance()->AddComponent(player, RenderComponent{ shader, texture });
-	ECSHandler::Instance()->AddComponent(player, MovementComponent{ });
-	ECSHandler::Instance()->AddComponent(player, PlayerComponent{ });
-	ECSHandler::Instance()->AddComponent(player, ColliderComponent{ true });
+	ECSHandler::Instance()->AddComponent(player, Transform{ 1.f, 0.f, glm::vec2(500.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(player, Rendering{ shader, texture });
+	ECSHandler::Instance()->AddComponent(player, Movement{ });
+	ECSHandler::Instance()->AddComponent(player, Player{ });
+	ECSHandler::Instance()->AddComponent(player, Collider{ true });
 
 	enemy = ECSHandler::Instance()->CreateEntity();
-	ECSHandler::Instance()->GetComponent<EntityData>(enemy).name = "Enemy";
-	ECSHandler::Instance()->AddComponent(enemy, TransformComponent{ 1.f, 0.f, glm::vec2(200.f, 500.f) });
-	ECSHandler::Instance()->AddComponent(enemy, RenderComponent{ shader, texture, glm::vec3(.75f, .5f, .5f) });
-	ECSHandler::Instance()->AddComponent(enemy, ColliderComponent{ });
+	ECSHandler::Instance()->GetComponent<EntityData>(enemy).tag = "Enemy";
+	ECSHandler::Instance()->AddComponent(enemy, Transform{ 1.f, 0.f, glm::vec2(200.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(enemy, Rendering{ shader, texture, glm::vec3(.75f, .5f, .5f) });
+	ECSHandler::Instance()->AddComponent(enemy, Collider{ });
 
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
 	Core::Instance()->GetSystem<TextSystem>()->Init();
@@ -62,7 +62,7 @@ void TestState::Enter()
 void TestState::Update(float deltaTime)
 {
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
-		ECSHandler::Instance()->GetComponent<PlayerComponent>(player).health = 50;
+		ECSHandler::Instance()->GetComponent<Player>(player).health = 50;
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
 	{
@@ -70,11 +70,11 @@ void TestState::Update(float deltaTime)
 		return;
 	}
 
-	ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["PlayerHP"]).output = std::to_string(ECSHandler::Instance()->GetComponent<PlayerComponent>(player).health);
-	ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<TransformComponent>(player).position.x + 5, ECSHandler::Instance()->GetComponent<TransformComponent>(player).position.y - 25);
+	ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["PlayerHP"]).output = std::to_string(ECSHandler::Instance()->GetComponent<Player>(player).health);
+	ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(player).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(player).position.y - 25);
 
-	ECSHandler::Instance()->GetComponent<TextComponent>(ResourceManager::Texts["EnemyHP"]).output = "100";
-	ECSHandler::Instance()->GetComponent<TransformComponent>(ResourceManager::Texts["EnemyHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<TransformComponent>(enemy).position.x + 5, ECSHandler::Instance()->GetComponent<TransformComponent>(enemy).position.y - 25);
+	ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["EnemyHP"]).output = "100";
+	ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["EnemyHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(enemy).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(enemy).position.y - 25);
 
 	Core::Instance()->GetSystem<TextSystem>()->Update();
 	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);

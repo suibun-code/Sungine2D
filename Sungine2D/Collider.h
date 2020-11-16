@@ -2,7 +2,7 @@
 
 #include "glm/glm/glm.hpp"
 
-struct ColliderComponent
+struct Collider
 {
 	bool moveable = false;
 	glm::vec2 boundingBox = glm::vec2(1.f);

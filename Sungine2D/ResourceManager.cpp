@@ -179,9 +179,9 @@ void ResourceManager::AddText(std::string name, std::string input, SuFont font, 
 {
 	ECSEntity text = ECSHandler::Instance()->CreateEntity();
 
-	ECSHandler::Instance()->AddComponent(text, TransformComponent{ 1.f, 0.f, pos });
-	ECSHandler::Instance()->AddComponent(text, RenderComponent{ ResourceManager::GetShader("sprite") });
-	ECSHandler::Instance()->AddComponent(text, TextComponent{ input, font, color });
+	ECSHandler::Instance()->AddComponent(text, Transform{ 1.f, 0.f, pos });
+	ECSHandler::Instance()->AddComponent(text, Rendering{ ResourceManager::GetShader("sprite") });
+	ECSHandler::Instance()->AddComponent(text, Text{ input, font, color });
 
 	ECSHandler::Instance()->GetComponent<EntityData>(text).name = "Text_" + name;
 	ECSHandler::Instance()->GetComponent<EntityData>(text).tag = "Text";

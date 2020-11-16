@@ -3,8 +3,8 @@
 //GLM
 #include "glm/glm/glm.hpp"
 
-#include "RenderComponent.h"
-#include "TransformComponent.h"
+#include "Rendering.h"
+#include "Transform.h"
 
 #include "Core.h"
 
@@ -68,8 +68,8 @@ void RenderSystem::Init()
 
 	for (auto const& entity : mEntities)
 	{
-		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
-		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
+		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
+		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
 
 		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 
@@ -108,8 +108,8 @@ void RenderSystem::Draw()
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
-		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
+		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
+		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
 
 		//Prepare transformations.
 		glm::mat4 model = glm::mat4(1.0f);

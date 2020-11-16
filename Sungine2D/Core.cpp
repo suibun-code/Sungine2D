@@ -173,12 +173,12 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Register components.
 	ECSHandler::Instance()->RegisterComponent<EntityData>();
-	ECSHandler::Instance()->RegisterComponent<PlayerComponent>();
-	ECSHandler::Instance()->RegisterComponent<TransformComponent>();
-	ECSHandler::Instance()->RegisterComponent<MovementComponent>();
-	ECSHandler::Instance()->RegisterComponent<RenderComponent>();
-	ECSHandler::Instance()->RegisterComponent<TextComponent>();
-	ECSHandler::Instance()->RegisterComponent<ColliderComponent>();
+	ECSHandler::Instance()->RegisterComponent<Player>();
+	ECSHandler::Instance()->RegisterComponent<Transform>();
+	ECSHandler::Instance()->RegisterComponent<Movement>();
+	ECSHandler::Instance()->RegisterComponent<Rendering>();
+	ECSHandler::Instance()->RegisterComponent<Text>();
+	ECSHandler::Instance()->RegisterComponent<Collider>();
 
 	//Register systems.
 	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();
@@ -187,25 +187,25 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpCollisionSystem = ECSHandler::Instance()->RegisterSystem<CollisionSystem>();
 
 	Signature movementSignature;
-	movementSignature.set(ECSHandler::Instance()->GetComponentType<MovementComponent>());
-	movementSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
-	movementSignature.set(ECSHandler::Instance()->GetComponentType<RenderComponent>());
+	movementSignature.set(ECSHandler::Instance()->GetComponentType<Movement>());
+	movementSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
+	movementSignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
 	ECSHandler::Instance()->SetSystemSignature<MovementSystem>(movementSignature);
 
 	Signature renderSignature;
-	renderSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
-	renderSignature.set(ECSHandler::Instance()->GetComponentType<RenderComponent>());
+	renderSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
+	renderSignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
 	ECSHandler::Instance()->SetSystemSignature<RenderSystem>(renderSignature);
 
 	Signature textSignature;
-	textSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
-	textSignature.set(ECSHandler::Instance()->GetComponentType<RenderComponent>());
-	textSignature.set(ECSHandler::Instance()->GetComponentType<TextComponent>());
+	textSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
+	textSignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
+	textSignature.set(ECSHandler::Instance()->GetComponentType<Text>());
 	ECSHandler::Instance()->SetSystemSignature<TextSystem>(textSignature);
 
 	Signature collisionSignature;
-	collisionSignature.set(ECSHandler::Instance()->GetComponentType<TransformComponent>());
-	collisionSignature.set(ECSHandler::Instance()->GetComponentType<ColliderComponent>());
+	collisionSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
+	collisionSignature.set(ECSHandler::Instance()->GetComponentType<Collider>());
 	ECSHandler::Instance()->SetSystemSignature<CollisionSystem>(collisionSignature);
 
 	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });

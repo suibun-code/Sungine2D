@@ -3,9 +3,9 @@
 #include <iostream>
 
 #include "Core.h"
-#include "TransformComponent.h"
-#include "MovementComponent.h"
-#include "ColliderComponent.h"
+#include "Transform.h"
+#include "Movement.h"
+#include "Collider.h"
 
 void MovementSystem::Init()
 {
@@ -15,8 +15,8 @@ void MovementSystem::Update(float deltaTime)
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
-		auto& movement = ECSHandler::Instance()->GetComponent<MovementComponent>(entity);
+		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
+		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(entity);
 
 		movement.velocity = glm::vec2(0.f);
 

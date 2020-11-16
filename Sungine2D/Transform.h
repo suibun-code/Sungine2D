@@ -3,7 +3,7 @@
 //GLM
 #include "glm/glm/glm.hpp"
 
-struct TransformComponent
+struct Transform
 {
 	float scale = 1.f;
 	float rotation = 0.f;

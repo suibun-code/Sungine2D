@@ -1,6 +1,6 @@
 #pragma once
 
-struct PlayerComponent
+struct Player
 {
 	int maxHealth = 100;
 	int health = 100;

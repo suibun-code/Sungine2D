@@ -5,9 +5,9 @@
 
 #include "ResourceManager.h"
 
-#include "RenderComponent.h"
-#include "TransformComponent.h"
-#include "TextComponent.h"
+#include "Rendering.h"
+#include "Transform.h"
+#include "Text.h"
 
 #include <iostream>
 
@@ -15,8 +15,8 @@ void TextSystem::Init()
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
-		auto& text = ECSHandler::Instance()->GetComponent<TextComponent>(entity);
+		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
+		auto& text = ECSHandler::Instance()->GetComponent<Text>(entity);
 
 		ResourceManager::LoadTextureFromFont(&render.texture, text.output, true, text.font, text.color);
 	}
@@ -26,9 +26,9 @@ void TextSystem::Update()
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& transform = ECSHandler::Instance()->GetComponent<TransformComponent>(entity);
-		auto& render = ECSHandler::Instance()->GetComponent<RenderComponent>(entity);
-        auto& text = ECSHandler::Instance()->GetComponent<TextComponent>(entity);
+		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
+		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
+        auto& text = ECSHandler::Instance()->GetComponent<Text>(entity);
 
         ResourceManager::LoadTextureFromFont(&text.fontTexture, text.output, true, text.font, text.color);
 		render.texture = text.fontTexture;

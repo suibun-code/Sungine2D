@@ -108,12 +108,6 @@
     <ClInclude Include="MovementSystem.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="TransformComponent.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderComponent.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="RenderSystem.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
@@ -138,26 +132,35 @@
     <ClInclude Include="ECSHandler.h">
       <Filter>Engine\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="TextSystem.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
     <ClInclude Include="EntityData.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="MovementComponent.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerComponent.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderComponent.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionSystem.h">
       <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="MappingState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering.h">
+      <Filter>Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="CollisionSystem.cpp">
       <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="MappingState.cpp">
+      <Filter>Game\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

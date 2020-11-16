@@ -4,9 +4,9 @@
 #include <sstream>
 #include <iostream>
 
-#include "TransformComponent.h"
-#include "RenderComponent.h"
-#include "ColliderComponent.h"
+#include "Transform.h"
+#include "Rendering.h"
+#include "Collider.h"
 
 #include "ResourceManager.h"
 #include "ECSHandler.h"
@@ -27,20 +27,26 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 			{
 			case 0:
 			{
-				texture = ResourceManager::GetTexture("grass");
-				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
-				ECSHandler::Instance()->AddComponent(tile, TransformComponent{ 1.f, 0.f, glm::vec2(j * tileWidth, i * tileHeight) });
-				ECSHandler::Instance()->AddComponent(tile, RenderComponent{ shader, texture });
+
 			}
 			break;
 
 			case 1:
 			{
+				texture = ResourceManager::GetTexture("grass");
+				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
+				ECSHandler::Instance()->AddComponent(tile, Transform{ 1.f, 0.f, glm::vec2(j * tileWidth, i * tileHeight) });
+				ECSHandler::Instance()->AddComponent(tile, Rendering{ shader, texture });
+			}
+			break;
+
+			case 2:
+			{
 				texture = ResourceManager::GetTexture("wall");
 				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
-				ECSHandler::Instance()->AddComponent(tile, TransformComponent{ 1.f, 0.f, glm::vec2(j * tileWidth, i * tileHeight) });
-				ECSHandler::Instance()->AddComponent(tile, RenderComponent{ shader, texture });
-				ECSHandler::Instance()->AddComponent(tile, ColliderComponent{ });
+				ECSHandler::Instance()->AddComponent(tile, Transform{ 1.f, 0.f, glm::vec2(j * tileWidth, i * tileHeight) });
+				ECSHandler::Instance()->AddComponent(tile, Rendering{ shader, texture });
+				ECSHandler::Instance()->AddComponent(tile, Collider{ });
 			}
 			break;
 			}

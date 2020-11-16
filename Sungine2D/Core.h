@@ -13,12 +13,12 @@
 
 //Components
 #include "EntityData.h"
-#include "PlayerComponent.h"
-#include "TransformComponent.h"
-#include "MovementComponent.h"
-#include "RenderComponent.h"
-#include "TextComponent.h"
-#include "ColliderComponent.h"
+#include "Player.h"
+#include "Transform.h"
+#include "Movement.h"
+#include "Rendering.h"
+#include "Text.h"
+#include "Collider.h"
 
 //Systems
 #include "MovementSystem.h"

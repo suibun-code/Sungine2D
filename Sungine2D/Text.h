@@ -3,7 +3,7 @@
 #include "SuFont.h"
 #include "ResourceManager.h"
 
-struct TextComponent
+struct Text
 {
 	std::string output = "Default";
 	SuFont font = ResourceManager::GetFont("CircularMedium");
