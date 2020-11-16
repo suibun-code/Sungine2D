@@ -51,7 +51,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2692C5F21726464BA1DAC06A9868A60B"
+        "MsmKey" = "8:_31DDA929A17A4A41AE723D9B826B1CAA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3774BDA8BDEF4128A62FCAFFE0684DA3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -95,6 +101,12 @@
         {
         "MsmKey" = "8:_55F98A559AC23BEA4E1FF7694688C911"
         "OwnerKey" = "8:_52B8520D501E4856898FE1BAA1FFB548"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_60207387DDDD4FE2BBD7DDAF333C5A79"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -255,6 +267,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D551A24523CE43B6B521642D061F071F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D6E835707A68457FB99728D41ADF4C85"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -262,6 +280,12 @@
         "Entry"
         {
         "MsmKey" = "8:_DF412415A5B44F65829FEEA0B70A2ACC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E031903589AD47889049E293017A4436"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -289,6 +313,18 @@
         "OwnerKey" = "8:_52B8520D501E4856898FE1BAA1FFB548"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_F3AB8117600E4C2DBA4ED32BB7864F9D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FCB5ADA629F84BB6B8BA619BD8FA3F6B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -307,6 +343,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -323,6 +367,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -464,10 +516,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2692C5F21726464BA1DAC06A9868A60B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_31DDA929A17A4A41AE723D9B826B1CAA"
             {
-            "SourcePath" = "8:..\\Debug\\res\\img\\enemy.png"
-            "TargetName" = "8:enemy.png"
+            "SourcePath" = "8:..\\Sungine2D\\res\\img\\bullet3.png"
+            "TargetName" = "8:bullet3.png"
+            "Tag" = "8:"
+            "Folder" = "8:_08E69979E37A4AD0906E51814B78C765"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3774BDA8BDEF4128A62FCAFFE0684DA3"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\img\\grass.png"
+            "TargetName" = "8:grass.png"
             "Tag" = "8:"
             "Folder" = "8:_08E69979E37A4AD0906E51814B78C765"
             "Condition" = "8:"
@@ -602,6 +674,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_60207387DDDD4FE2BBD7DDAF333C5A79"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\audio\\effect\\lasershoot2.wav"
+            "TargetName" = "8:lasershoot2.wav"
+            "Tag" = "8:"
+            "Folder" = "8:_67F9FEEEBB4E44DE9F5812ED03FFC56A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_630149DC5B164BC980474F5A6B4593C7"
@@ -1124,6 +1216,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D551A24523CE43B6B521642D061F071F"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\levels\\first.txt"
+            "TargetName" = "8:first.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_A29A3DA41C3D47E1B8780B8EE488193A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6E835707A68457FB99728D41ADF4C85"
             {
             "SourcePath" = "8:..\\Debug\\zlib1.dll"
@@ -1150,6 +1262,26 @@
             "TargetName" = "8:libjpeg-9.dll"
             "Tag" = "8:"
             "Folder" = "8:_718A7CE1AFC742DEAFD0011A723BBE2E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E031903589AD47889049E293017A4436"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\audio\\music\\midnightcloset.mp3"
+            "TargetName" = "8:midnightcloset.mp3"
+            "Tag" = "8:"
+            "Folder" = "8:_FD36C3938FDC46B483689EF1F65CE4A4"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1242,6 +1374,46 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F3AB8117600E4C2DBA4ED32BB7864F9D"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\img\\wall.png"
+            "TargetName" = "8:wall.png"
+            "Tag" = "8:"
+            "Folder" = "8:_08E69979E37A4AD0906E51814B78C765"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FCB5ADA629F84BB6B8BA619BD8FA3F6B"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\levels\\saved.txt"
+            "TargetName" = "8:saved.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_A29A3DA41C3D47E1B8780B8EE488193A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }

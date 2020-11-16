@@ -26,7 +26,6 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 			{
 			case 0:
 			{
-				std::cout << "0\n";
 				if (entityData[i][j] != NULL)
 				{
 					ECSHandler::Instance()->DestroyEntity(entityData[i][j]);
@@ -37,8 +36,6 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 
 			case 1:
 			{
-				std::cout << "1\n";
-
 				texture = ResourceManager::GetTexture("grass");
 
 				if (entityData[i][j] != NULL)
@@ -57,8 +54,6 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 				}
 				else
 				{
-					std::cout << "1 else\n";
-
 					entityData[i][j] = ECSHandler::Instance()->CreateEntity();
 					ECSHandler::Instance()->AddComponent(entityData[i][j], Transform{ glm::vec2(j * 64, i * 64) });
 					ECSHandler::Instance()->AddComponent(entityData[i][j], Rendering{ shader, texture });
@@ -74,8 +69,6 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 
 			case 2:
 			{
-				std::cout << "2\n";
-
 				texture = ResourceManager::GetTexture("wall");
 
 				if (entityData[i][j] != NULL)
@@ -95,8 +88,6 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 				}
 				else
 				{
-					std::cout << "2 else\n";
-
 					entityData[i][j] = ECSHandler::Instance()->CreateEntity();
 					ECSHandler::Instance()->AddComponent(entityData[i][j], Transform{ glm::vec2(j * 64, i * 64) });
 					ECSHandler::Instance()->AddComponent(entityData[i][j], Rendering{ shader, texture });
@@ -163,8 +154,8 @@ void MappingState::LoadLevel(const char* file)
 			levelHeight = tileData.size();
 		}
 
-		std::cout << "Level width: " << levelWidth << "\n";
-		std::cout << "Level height: " << levelHeight << "\n";
+		//std::cout << "Level width: " << levelWidth << "\n";
+		//std::cout << "Level height: " << levelHeight << "\n";
 
 		if (tileData.size() > 0)
 			InitLevel(tileData, 20, 12);
