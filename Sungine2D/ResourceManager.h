@@ -46,7 +46,7 @@ public:
 	static void LoadFont(const char* path, int size, std::string name);
 	static SuFont GetFont(std::string name);
 
-	static void AddText(std::string name, std::string input, SuFont font, glm::vec2 pos = glm::vec2(1.f), SDL_Color color = { 0, 0, 0, 255 });
+	static ECSEntity AddText(std::string name, std::string input, SuFont font, glm::vec2 pos = glm::vec2(1.f), SDL_Color color = { 0, 0, 0, 255 });
 
 	static void ClearTexts();
 	static void ClearText(std::string name);

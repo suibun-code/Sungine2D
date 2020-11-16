@@ -28,6 +28,7 @@ void AudioManager::PlayMusic(int idx, int loops)
 
 void AudioManager::PlaySound(int idx, int channel, int loops)
 {
+	Mix_HaltChannel(channel);
 	Mix_PlayChannel(channel, mSounds[idx], loops);
 }
 

@@ -175,7 +175,7 @@ SuFont ResourceManager::GetFont(std::string name)
 	return Fonts[name];
 }
 
-void ResourceManager::AddText(std::string name, std::string input, SuFont font, glm::vec2 pos, SDL_Color color)
+ECSEntity ResourceManager::AddText(std::string name, std::string input, SuFont font, glm::vec2 pos, SDL_Color color)
 {
 	ECSEntity text = ECSHandler::Instance()->CreateEntity();
 
@@ -187,6 +187,7 @@ void ResourceManager::AddText(std::string name, std::string input, SuFont font, 
 	ECSHandler::Instance()->GetComponent<EntityData>(text).tag = "Text";
 
 	Texts[name] = text;
+	return Texts[name];
 }
 
 void ResourceManager::ClearTexts()

@@ -31,6 +31,7 @@ void State::Exit()
 	const char* msg[] = { "[EXIT] '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
 
+	Core::Instance()->GetAM()->ClearSounds();
 	Core::Instance()->GetAM()->ClearMusic();
 
 	//Clear texts map.

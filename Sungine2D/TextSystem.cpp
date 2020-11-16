@@ -26,13 +26,19 @@ void TextSystem::Update()
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
-		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
-        auto& text = ECSHandler::Instance()->GetComponent<Text>(entity);
+		auto& text = ECSHandler::Instance()->GetComponent<Text>(entity);
 
-        ResourceManager::LoadTextureFromFont(&text.fontTexture, text.output, true, text.font, text.color);
-		render.texture = text.fontTexture;
+		if (text.dirty == true)
+		{
+			auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
+			auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
 
-		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
+			ResourceManager::LoadTextureFromFont(&text.fontTexture, text.output, true, text.font, text.color);
+			render.texture = text.fontTexture;
+
+			transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
+
+			text.dirty = false;
+		}
 	}
 }

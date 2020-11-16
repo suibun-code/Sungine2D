@@ -10,6 +10,7 @@
 
 //States
 #include "TestState.h"
+#include "MappingState.h"
 
 void MainMenu::Enter()
 {
@@ -43,6 +44,12 @@ void MainMenu::Update(float deltaTime)
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
 	{
 		Core::Instance()->GetFSM()->ChangeState(new TestState());
+		return;
+	}
+
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_M))
+	{
+		Core::Instance()->GetFSM()->ChangeState(new MappingState());
 		return;
 	}
 

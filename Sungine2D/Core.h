@@ -14,11 +14,13 @@
 //Components
 #include "EntityData.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Transform.h"
 #include "Movement.h"
 #include "Rendering.h"
 #include "Text.h"
 #include "Collider.h"
+#include "Bullet.h"
 
 //Systems
 #include "MovementSystem.h"
@@ -26,6 +28,8 @@
 #include "TextSystem.h"
 #include "CollisionSystem.h"
 #include "PlayerSystem.h"
+#include "EnemySystem.h"
+#include "OverlapSystem.h"
 
 #include "FSM.h"
 #include "AudioManager.h"
@@ -44,6 +48,8 @@ private:
 	std::shared_ptr<TextSystem> mpTextSystem;
 	std::shared_ptr<CollisionSystem> mpCollisionSystem;
 	std::shared_ptr<PlayerSystem> mpPlayerSystem;
+	std::shared_ptr<EnemySystem> mpEnemySystem;
+	std::shared_ptr<OverlapSystem> mpOverlapSystem;
 
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;

@@ -1,8 +1,13 @@
 #include "CollisionSystem.h"
 
+#include "EntityData.h"
 #include "Transform.h"
 #include "Collider.h"
 #include "Rendering.h"
+#include "Bullet.h"
+#include "Enemy.h"
+
+#include "Core.h"
 
 void CollisionSystem::Init()
 {
@@ -40,8 +45,13 @@ void CollisionSystem::Update()
 		{
 			if (entity != other)
 			{
-				auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
 				auto& colliderOther = ECSHandler::Instance()->GetComponent<Collider>(other);
+
+				if (colliderOther.overlapper == true)
+					continue;
+
+				auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
+				auto& dataOther = ECSHandler::Instance()->GetComponent<EntityData>(other);
 
 				//X-axis
 				bool collisionX = (transform.position.x + collider.offset.x) + collider.boundingBox.x >= (transformOther.position.x + colliderOther.offset.x) &&
@@ -50,6 +60,46 @@ void CollisionSystem::Update()
 				//Y-axis
 				bool collisionY = (transform.position.y + collider.offset.y) + collider.boundingBox.y >= (transformOther.position.y + colliderOther.offset.y) &&
 					(transformOther.position.y + colliderOther.offset.y) + colliderOther.boundingBox.y >= (transform.position.y + collider.offset.y);
+
+				if (collider.overlapper == true)
+				{
+					if (ECSHandler::Instance()->HasComponent<Bullet>(entity))
+					{
+						if (collisionX && collisionY)
+						{
+							if (dataOther.tag == "Player")
+								return;
+
+							else if (dataOther.tag == "Enemy")
+							{
+								auto& enemyOther = ECSHandler::Instance()->GetComponent<Enemy>(other);
+
+								enemyOther.health -= 25;
+
+								if (enemyOther.health <= 0)
+								{
+									ResourceManager::ClearText(dataOther.name);
+									ECSHandler::Instance()->DestroyEntity(other);
+								}
+
+								ECSHandler::Instance()->DestroyEntity(entity);
+								return;
+							}
+							else
+							{
+								ECSHandler::Instance()->DestroyEntity(entity);
+								return;
+							}
+						}
+
+						if (transform.position.x < 0 || transform.position.x > Core::Instance()->GetWindowWidth() || transform.position.y < 0 || transform.position.y > Core::Instance()->GetWindowHeight())
+						{
+							ECSHandler::Instance()->DestroyEntity(entity);
+							return;
+						}
+					}
+					continue;
+				}
 
 				//No collision is detected. Continue to next entity before doing advanced checks as there is no need.
 				if (!(collisionX && collisionY))
