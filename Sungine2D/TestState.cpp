@@ -57,12 +57,13 @@ void TestState::Enter()
 		ECSHandler::Instance()->AddComponent(enemy, Enemy{ });
 	}
 
-	Core::Instance()->GetSystem<RenderSystem>()->Init();
 	Core::Instance()->GetSystem<PlayerSystem>()->Init();
 	Core::Instance()->GetSystem<EnemySystem>()->Init();
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<MovementSystem>()->Init();
 	Core::Instance()->GetSystem<CollisionSystem>()->Init();
+	Core::Instance()->GetSystem<RenderSystem>()->Init();
+
 	//Core::Instance()->GetSystem<OverlapSystem>()->Init();
 
 	State::Enter();
@@ -87,14 +88,17 @@ void TestState::Update(float deltaTime)
 	}
 
 	ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["PlayerHP"]).ChangeText(std::to_string(ECSHandler::Instance()->GetComponent<Player>(player).health));
-	ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["PlayerHP"]).position = glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(player).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(player).position.y - 25);
 
 	Core::Instance()->GetSystem<TextSystem>()->Update();
-	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
-	Core::Instance()->GetSystem<CollisionSystem>()->Update();
-	//Core::Instance()->GetSystem<OverlapSystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<PlayerSystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<EnemySystem>()->Update(deltaTime);
+	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
+	Core::Instance()->GetSystem<CollisionSystem>()->Update();
+
+	if (ECSHandler::Instance()->GetComponent<Transform>(player).IsDirty())
+		ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["PlayerHP"]).SetPosition(glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(player).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(player).position.y - 25));
+
+	//Core::Instance()->GetSystem<OverlapSystem>()->Update(deltaTime);
 
 	State::Update(deltaTime);
 }

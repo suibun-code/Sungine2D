@@ -16,6 +16,7 @@ void EnemySystem::Init()
 		auto& data = ECSHandler::Instance()->GetComponent<EntityData>(entity);
 
 		enemy.healthText = ResourceManager::AddText(data.name, "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 });;
+		ECSHandler::Instance()->GetComponent<Text>(enemy.healthText).ChangeText(std::to_string(enemy.health));
 	}
 }
 
@@ -26,8 +27,9 @@ void EnemySystem::Update(float deltaTime)
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& enemy = ECSHandler::Instance()->GetComponent<Enemy>(entity);
 
-		//ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["EnemyHP"]).output = "100";
 		ECSHandler::Instance()->GetComponent<Text>(enemy.healthText).ChangeText(std::to_string(enemy.health));
-		ECSHandler::Instance()->GetComponent<Transform>(enemy.healthText).position = glm::vec2(transform.position.x + 5, transform.position.y - 25);
+
+		if (transform.IsDirty())
+			ECSHandler::Instance()->GetComponent<Transform>(enemy.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
 	}
 }

@@ -9,4 +9,37 @@ struct Transform
 	glm::vec2 size = glm::vec2(1.f, 1.f);
 	float rotation = 0.f;
 	float scale = 1.f;
+	bool dirty = true;
+
+	bool IsDirty() { return dirty; }
+
+	void AddPosition(glm::vec2 position) 
+	{
+		this->position += position;
+		dirty = true; 
+	}
+
+	void SetPosition(glm::vec2 position) 
+	{
+		this->position = position;
+		dirty = true; 
+	}
+
+	void SetSize(glm::vec2 position) 
+	{ 
+		this->size = size;
+		dirty = true; 
+	}
+
+	void SetRotation(glm::vec2 position) 
+	{ 
+		this->rotation = rotation;
+		dirty = true; 
+	}
+
+	void SetScale(glm::vec2 position) 
+	{ 
+		this->scale = scale;
+		dirty = true; 
+	}
 };

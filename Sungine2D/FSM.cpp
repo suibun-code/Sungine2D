@@ -10,6 +10,8 @@ void State::Enter()
 {
 	const char* msg[] = { "[ENTER] '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
+
+	Update(Core::Instance()->GetDeltaTime());
 }
 
 void State::Update(float deltaTime)

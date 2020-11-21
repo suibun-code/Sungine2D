@@ -74,23 +74,23 @@ void RenderSystem::Init()
 		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 
 		//Prepare transformations.
-		glm::mat4 model = glm::mat4(1.0f);
+		render.model = glm::mat4(1.0f);
 
 		//Translation.
-		model = glm::translate(model, glm::vec3(transform.position, 0.0f));
+		render.model = glm::translate(render.model, glm::vec3(transform.position, 0.0f));
 
 		//Rotation.
-		model = glm::translate(model, glm::vec3(0.5f * transform.size.x, 0.5f * transform.size.y, 0.0f));
-		model = glm::rotate(model, glm::radians(transform.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::translate(model, glm::vec3(-0.5f * transform.size.x, -0.5f * transform.size.y, 0.0f));
+		render.model = glm::translate(render.model, glm::vec3(0.5f * transform.size.x, 0.5f * transform.size.y, 0.0f));
+		render.model = glm::rotate(render.model, glm::radians(transform.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+		render.model = glm::translate(render.model, glm::vec3(-0.5f * transform.size.x, -0.5f * transform.size.y, 0.0f));
 
 		//Scale.
-		model = glm::scale(model, glm::vec3(transform.size, 1.0f));
+		render.model = glm::scale(render.model, glm::vec3(transform.size, 1.0f));
 
-		glm::mat4 mvp = Core::Instance()->GetProjectionMatrix() * model;
+		glm::mat4 mvp = Core::Instance()->GetProjectionMatrix() * render.model;
 
 		//Render.
-		render.shaderUtil.SetMatrix4("model", model);
+		render.shaderUtil.SetMatrix4("model", render.model);
 		render.shaderUtil.SetVector3f("spriteColor", render.color);
 
 		render.shaderUtil.Use();
@@ -111,22 +111,27 @@ void RenderSystem::Draw()
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
 
-		//Prepare transformations.
-		glm::mat4 model = glm::mat4(1.0f);
+		if (transform.IsDirty())
+		{
+			//Prepare transformations.
+			render.model = glm::mat4(1.0f);
 
-		//Translation.
-		model = glm::translate(model, glm::vec3(transform.position, 0.0f));
+			//Translation.
+			render.model = glm::translate(render.model, glm::vec3(transform.position, 0.0f));
 
-		//Rotation.
-		model = glm::translate(model, glm::vec3(0.5f * transform.size.x, 0.5f * transform.size.y, 0.0f));
-		model = glm::rotate(model, glm::radians(transform.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::translate(model, glm::vec3(-0.5f * transform.size.x, -0.5f * transform.size.y, 0.0f));
+			//Rotation.
+			render.model = glm::translate(render.model, glm::vec3(0.5f * transform.size.x, 0.5f * transform.size.y, 0.0f));
+			render.model = glm::rotate(render.model, glm::radians(transform.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+			render.model = glm::translate(render.model, glm::vec3(-0.5f * transform.size.x, -0.5f * transform.size.y, 0.0f));
 
-		//Scale.
-		model = glm::scale(model, glm::vec3(transform.size, 1.0f));
+			//Scale.
+			render.model = glm::scale(render.model, glm::vec3(transform.size, 1.0f));
+
+			transform.dirty = false;
+		}
 
 		//Render.
-		render.shaderUtil.SetMatrix4("model", model);
+		render.shaderUtil.SetMatrix4("model", render.model);
 		render.shaderUtil.SetVector3f("spriteColor", render.color);
 
 		//render.shaderUtil.Use();

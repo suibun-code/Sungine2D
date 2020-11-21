@@ -27,18 +27,22 @@ void PlayerSystem::Update(float deltaTime)
 		if (Core::Instance()->KeyDown(SDL_SCANCODE_A))
 		{
 			movement.velocity.x = -movement.speed * deltaTime;
+			transform.dirty = true;
 		}
 		if (Core::Instance()->KeyDown(SDL_SCANCODE_D))
 		{
 			movement.velocity.x = movement.speed * deltaTime;
+			transform.dirty = true;
 		}
 		if (Core::Instance()->KeyDown(SDL_SCANCODE_W))
 		{
 			movement.velocity.y = -movement.speed * deltaTime;
+			transform.dirty = true;
 		}
 		if (Core::Instance()->KeyDown(SDL_SCANCODE_S))
 		{
 			movement.velocity.y = movement.speed * deltaTime;
+			transform.dirty = true;
 		}
 
 		if (Core::Instance()->GetLMBState())
