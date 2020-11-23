@@ -10,14 +10,16 @@ void State::Enter()
 {
 	const char* msg[] = { "[ENTER] '", mStateName, "'.\n" };
 	GameInstance::LogBuffer(msg, sizeof(msg) / sizeof(msg[0]));
-
-	Update(Core::Instance()->GetDeltaTime());
 }
 
 void State::Update(float deltaTime)
 {
 	if (Core::Instance()->GameInstanceEnabled() == true)
 		GameInstance::Instance()->Update(deltaTime);
+}
+
+void State::LateUpdate(float deltaTime)
+{
 }
 
 void State::Render()
@@ -43,7 +45,7 @@ void State::Exit()
 	for (int i = mEntities.size() - 1; i >= 0; i--)
 		ECSHandler::Instance()->DestroyEntity(mEntities.at(i));
 
-	std::cout << "\n";
+	//std::cout << "\n";
 
 	mEntities.clear();
 
@@ -86,6 +88,12 @@ void StateMachine::Update(float deltaTime)
 {
 	if (!mStates.empty())
 		mStates.back()->Update(deltaTime);
+}
+
+void StateMachine::LateUpdate(float deltaTime)
+{
+	if (!mStates.empty())
+		mStates.back()->LateUpdate(deltaTime);
 }
 
 void StateMachine::Render()
@@ -143,12 +151,12 @@ void StateMachine::Clean()
 		mStates.back() = nullptr;
 		mStates.pop_back();
 	}
-	std::cout << "state machine cleaned.\n";
+	//std::cout << "state machine cleaned.\n";
 }
 
 StateMachine::~StateMachine()
 {
-	std::cout << "destroying state machine.\n";
+	//std::cout << "destroying state machine.\n";
 	Clean();
 }
 //End StateMachine

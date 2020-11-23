@@ -23,6 +23,7 @@ public:
 
 	virtual void Enter() = 0;
 	virtual void Update(float deltaTime);
+	virtual void LateUpdate(float deltaTime);
 	virtual void Render();
 	virtual void HandleStateEvents(const SDL_Event* event);
 	virtual void Resume() = 0;
@@ -46,6 +47,7 @@ private:
 public:
 	~StateMachine();
 	void Update(float deltaTime);
+	void LateUpdate(float deltaTime);
 	void Render();
 	void HandleStateEvents(SDL_Event* event);
 	void PushState(State* pState);

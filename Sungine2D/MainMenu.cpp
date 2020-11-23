@@ -39,20 +39,13 @@ void MainMenu::Enter()
 	State::Enter();
 }
 
+void MainMenu::HandleStateEvents(const SDL_Event* event)
+{
+
+}
+
 void MainMenu::Update(float deltaTime)
 {
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
-	{
-		Core::Instance()->GetFSM()->ChangeState(new TestState());
-		return;
-	}
-
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_M))
-	{
-		Core::Instance()->GetFSM()->ChangeState(new MappingState());
-		return;
-	}
-
 	//Update the texts of all entities that contain a text component.
 	Core::Instance()->GetSystem<TextSystem>()->Update();
 
@@ -69,10 +62,25 @@ void MainMenu::Render()
 	State::Render();
 }
 
+void MainMenu::LateUpdate(float deltaTime)
+{
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
+	{
+		Core::Instance()->GetFSM()->ChangeState(new TestState());
+		return;
+	}
+
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_M))
+	{
+		Core::Instance()->GetFSM()->ChangeState(new MappingState());
+		return;
+	}
+}
+
 void MainMenu::Exit()
 {
 	State::Exit();
 
 	//std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
-	std::cout << "RenderSystem entity count: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
+	//std::cout << "RenderSystem entity count: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
 }

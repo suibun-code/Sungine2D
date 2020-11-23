@@ -63,7 +63,7 @@ void PlayerSystem::Update(float deltaTime)
 
 			//bullets.push_back(bullet);
 			glm::vec2 mousePos = glm::vec2(Core::Instance()->GetMousePosX(), Core::Instance()->GetMousePosY());
-			bulletTransform.size = glm::vec2(bulletRender.texture.Width, bulletRender.texture.Height) * bulletTransform.scale;
+			bulletTransform.SetSize(glm::vec2(bulletRender.texture.Width, bulletRender.texture.Height) * bulletTransform.scale);
 			bulletCollider.boundingBox = bulletTransform.size;
 
 			float vectorToTarget = glm::distance(bulletTransform.position, mousePos);
@@ -72,7 +72,9 @@ void PlayerSystem::Update(float deltaTime)
 			bulletMovement.velocity = glm::vec2(direction.x * bulletMovement.speed, direction.y * bulletMovement.speed);
 
 			float rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI;
-			bulletTransform.rotation = rotation;
+			bulletTransform.SetRotation(rotation);
+
+			std::cout << "bullet dirty? " << bulletTransform.IsDirty() << "\n";
 		}
 	}
 }

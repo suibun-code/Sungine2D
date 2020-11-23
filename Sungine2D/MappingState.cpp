@@ -3,6 +3,10 @@
 #include <fstream>
 #include <sstream>
 
+//IMGUI + OPENGL/SDL
+#include "imgui_impl_opengl3.h"
+#include "imgui_impl_sdl.h"
+
 #include "Core.h"
 #include "ResourceManager.h"
 #include "Level.h"
@@ -10,13 +14,42 @@
 //STATES
 #include "MainMenu.h"
 
+void MappingState::UpdateImGui()
+{
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame(Core::Instance()->GetWindow());
+	ImGui::NewFrame();
+
+	ImGui::SetNextWindowSize(ImVec2(1280, 250), 0);
+	ImGui::SetWindowPos(ImVec2(0, 470), true);
+
+	if (mDisplayMapper)
+	{
+		ImGui::Begin("Tile Mapper", &mDisplayMapper, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
+
+		if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetTexture("grass").ID, ImVec2(64, 64)))
+		{
+			currentTile = 1;
+			//std::cout << "Switched to 1.\n";
+		}
+		ImGui::SameLine();
+		if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetTexture("wall").ID, ImVec2(64, 64)))
+		{
+			currentTile = 2;
+			//std::cout << "Switched to 2.\n";
+		}
+
+		ImGui::End();
+	}
+
+	//ImGui::PopFont();
+	ImGui::EndFrame();
+}
+
 void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight)
 {
 	ShaderUtil shader = ResourceManager::GetShader("sprite");
 	SuTexture2D texture;
-
-	ResourceManager::LoadTexture("res/img/wall.png", false, "wall");
-	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
 
 	for (unsigned int i = 0; i < levelHeight; i++)
 	{
@@ -103,7 +136,7 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 
 			default:
 			{
-				std::cout << "DEFAULT\n";
+				//std::cout << "DEFAULT\n";
 			}
 			break;
 			}
@@ -226,13 +259,15 @@ void MappingState::Enter()
 	State::Enter();
 }
 
+void MappingState::HandleStateEvents(const SDL_Event* event)
+{
+
+}
+
 void MappingState::Update(float deltaTime)
 {
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
-	{
-		Core::Instance()->GetFSM()->ChangeState(new MainMenu());
-		return;
-	}
+	//std::cout << "update\n";
+
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_S))
 	{
 		std::ofstream file;
@@ -245,11 +280,11 @@ void MappingState::Update(float deltaTime)
 				if (j == 19)
 				{
 					file << std::to_string(tileData[i][j]);
-					std::cout << "Wrote: " << std::to_string(tileData[i][j]) << "\n";
+					//std::cout << "Wrote: " << std::to_string(tileData[i][j]) << "\n";
 					continue;
 				}
 				file << std::to_string(tileData[i][j]) + " ";
-				std::cout << "Wrote: " << std::to_string(tileData[i][j]) + " " << "\n";
+				//std::cout << "Wrote: " << std::to_string(tileData[i][j]) + " " << "\n";
 
 			}
 
@@ -339,7 +374,7 @@ void MappingState::Update(float deltaTime)
 
 			tileData[posY / 64][posX / 64] = currentTile;
 
-			//std::cout << "Mapped to: X " << posX / 64 << " Y " << posY / 64 << "\n";;
+			//std::cout << "Mapped to: X " << posX / 64 << " Y " << posY / 64 << "\n";
 
 			auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[posY / 64][posX / 64]);
 			auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[posY / 64][posX / 64]);
@@ -348,16 +383,34 @@ void MappingState::Update(float deltaTime)
 		}
 	}
 
+	UpdateImGui();
+
 	State::Update(deltaTime);
 }
 
 void MappingState::Render()
 {
+	//std::cout << "render\n";
+
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	Core::Instance()->GetSystem<RenderSystem>()->Draw();
 
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 	State::Render();
+}
+
+void MappingState::LateUpdate(float deltaTime)
+{
+	//std::cout << "LATE update\n";
+
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
+	{
+		Core::Instance()->GetFSM()->ChangeState(new MainMenu());
+		return;
+	}
 }
 
 void MappingState::Exit()

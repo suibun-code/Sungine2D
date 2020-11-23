@@ -9,6 +9,7 @@
 
 void MovementSystem::Init()
 {
+
 }
 
 void MovementSystem::Update(float deltaTime)
@@ -18,7 +19,7 @@ void MovementSystem::Update(float deltaTime)
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(entity);
 
-		if (transform.IsDirty())
+		if (transform.IsDirty() || movement.velocity.x != 0 || movement.velocity.y != 0)
 			transform.AddPosition(movement.velocity * deltaTime);
 	}
 }

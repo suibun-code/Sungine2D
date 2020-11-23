@@ -247,7 +247,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Start engine and enable the game instance.
 	mIsRunning = true;
-	mGameInstanceEnabled = true;
+	mGameInstanceEnabled = false;
 
 	return true;
 }
@@ -256,9 +256,11 @@ void Core::InitImGui()
 {
 	//*****Input*****
 
+	//Global ImGui font.
 	ImGuiIO& io = ImGui::GetIO();
-
-	GameInstance::Instance()->SetUIFont(io.Fonts->AddFontFromFileTTF("font/CircularStd-Black.ttf", 13.0f));
+	io.Fonts->AddFontFromFileTTF("font/CircularStd-Black.ttf", 13.0f);
+	//GameInstance::Instance()->SetUIFont(io.Fonts->AddFontFromFileTTF("font/CircularStd-Black.ttf", 13.0f));
+	//io.Fonts->Clear();
 
 	//keyboard mapping
 	//ImGui will use those indices to peek into the io.KeysDown[] array
@@ -359,13 +361,15 @@ bool Core::Tick()
 {
 	mPreviousTime = mCurrentTime;
 	mCurrentTime = SDL_GetPerformanceCounter();
-	mDeltaTime = (float)((mCurrentTime - mPreviousTime) * 10 / (float)SDL_GetPerformanceFrequency());
-	mFramesPerSecond = 1000 / mDeltaTime;
+	mDeltaTime = (float)((mCurrentTime - mPreviousTime) / (float)SDL_GetPerformanceFrequency());
+	mFramesPerSecond = 1.f / mDeltaTime;
 
-	auto duration = std::chrono::steady_clock::now().time_since_epoch();
-	auto count = std::chrono::duration_cast<std::chrono::microseconds>(duration).count();
+	//std::cout << "deltatime: " << mDeltaTime << "\n";
 
-	mTick = 1000000 / FPS;
+	//auto duration = std::chrono::steady_clock::now().time_since_epoch();
+	//auto count = std::chrono::duration_cast<std::chrono::microseconds>(duration).count();
+
+	//mTick = 1000000 / FPS;
 	//if (count % mTick < 325) // Margin of error for modulus.
 	//{
 	//	if (mGotTick == false) // Drops potential duplicate frames.
@@ -404,16 +408,6 @@ bool Core::KeyUp(SDL_Scancode k)
 void Core::WaitFor(int time)
 {
 	SDL_Delay(time);
-}
-
-void Core::Update(float DeltaTime)
-{
-	mpFSM->Update(mDeltaTime);
-}
-
-void Core::Render()
-{
-	mpFSM->Render();
 }
 
 void Core::HandleEvents()
@@ -483,6 +477,21 @@ void Core::HandleEvents()
 	}
 
 	mpFSM->HandleStateEvents(&mEvent);
+}
+
+void Core::Update(float deltaTime)
+{
+	mpFSM->Update(deltaTime);
+}
+
+void Core::Render()
+{
+	mpFSM->Render();
+}
+
+void Core::LateUpdate(float deltaTime)
+{
+	mpFSM->LateUpdate(deltaTime);
 }
 
 void Core::Quit()

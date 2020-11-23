@@ -5,7 +5,6 @@
 #include "imgui_impl_sdl.h"
 
 #include "Core.h"
-//#include "Entity.h"
 #include "ECSEntityManager.h"
 
 GameInstance::GameInstance()
@@ -109,7 +108,6 @@ void GameInstance::Render()
 	{
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		SDL_SetRenderDrawColor(Core::Instance()->GetRenderer(), 255, 255, 255, 255);
 	}
 }
 

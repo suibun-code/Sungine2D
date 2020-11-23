@@ -25,19 +25,19 @@ struct Transform
 		dirty = true; 
 	}
 
-	void SetSize(glm::vec2 position) 
+	void SetSize(glm::vec2 size) 
 	{ 
 		this->size = size;
 		dirty = true; 
 	}
 
-	void SetRotation(glm::vec2 position) 
+	void SetRotation(float rotation) 
 	{ 
 		this->rotation = rotation;
 		dirty = true; 
 	}
 
-	void SetScale(glm::vec2 position) 
+	void SetScale(float scale) 
 	{ 
 		this->scale = scale;
 		dirty = true; 

@@ -81,8 +81,8 @@ void Level::Load(const char* file)
 			levelHeight = tileData.size();
 		}
 
-		std::cout << "Level width: " << levelWidth << "\n";
-		std::cout << "Level height: " << levelHeight << "\n";
+		//std::cout << "Level width: " << levelWidth << "\n";
+		//std::cout << "Level height: " << levelHeight << "\n";
 
 		if (tileData.size() > 0)
 			Init(tileData, levelWidth, levelHeight);

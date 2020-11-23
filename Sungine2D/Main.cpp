@@ -14,6 +14,7 @@ int main(int argc, char* args[])
 		{
 			Core::Instance()->Update(Core::Instance()->GetDeltaTime());
 			Core::Instance()->Render();
+			Core::Instance()->LateUpdate(Core::Instance()->GetDeltaTime());
 		}
 	}
 

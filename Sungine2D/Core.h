@@ -114,10 +114,7 @@ public:
 	static Core* Instance()
 	{
 		if (mspInstance == nullptr)
-		{
 			mspInstance = new Core();
-			std::cout << "new core made.\n";
-		}
 		
 		return mspInstance;
 	}
@@ -149,9 +146,10 @@ public:
 
 	void SetGameInstance(bool gameInstanceEnabled) { mGameInstanceEnabled = gameInstanceEnabled; }
 	void WaitFor(int time);
-	void Update(float DeltaTime);
-	void Render();
 	void HandleEvents();
+	void Update(float deltaTime);
+	void Render();
+	void LateUpdate(float deltaTime);
 	void Quit();
 	void Clean();
 	void GetLogicalSize() { SDL_RenderGetLogicalSize(mpSDLRenderer, &mWindowWidth, &mWindowHeight); }

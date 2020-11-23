@@ -36,7 +36,7 @@ void TextSystem::Update()
 			ResourceManager::LoadTextureFromFont(&text.fontTexture, text.output, true, text.font, text.color);
 			render.texture = text.fontTexture;
 
-			transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
+			transform.SetSize(glm::vec2(render.texture.Width, render.texture.Height) * transform.scale);
 
 			text.dirty = false;
 		}

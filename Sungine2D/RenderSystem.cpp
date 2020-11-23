@@ -110,9 +110,12 @@ void RenderSystem::Draw()
 	{
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
+		//auto& data = ECSHandler::Instance()->GetComponent<EntityData>(entity);
 
 		if (transform.IsDirty())
 		{
+			//std::cout << "dirty name: " << data.name << "\n";
+
 			//Prepare transformations.
 			render.model = glm::mat4(1.0f);
 

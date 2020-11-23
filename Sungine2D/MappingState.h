@@ -9,6 +9,9 @@
 class MappingState : public State
 {
 private:
+	//IMGUI
+	bool mDisplayMapper = true;
+
 	SuTexture2D texture;
 	std::vector<unsigned int> row;
 	std::vector<std::vector<unsigned int>> tileData;
@@ -17,12 +20,15 @@ private:
 
 	void InitLevel(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight);
 	void LoadLevel(const char* file);
+	void UpdateImGui();
 
 public:
 	MappingState() : State("MappingState") {}
 	void Enter();
+	void HandleStateEvents(const SDL_Event* event);
 	void Update(float deltaTime);
 	void Render();
+	void LateUpdate(float deltaTime);
 	void Resume() {}
 	void Exit();
 };

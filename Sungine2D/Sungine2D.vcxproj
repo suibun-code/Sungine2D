@@ -87,7 +87,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\glew-2.1.0\include\GL;$(SolutionDir)include\;$(SolutionDir)include\SDL2-2.0.12\include\;$(SolutionDir)include\imgui-1.78\;$(SolutionDir)include\imgui_sdl\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\joopi\OneDrive\Desktop\Code\personal\Sungine2D\include\json-develop\single_include;C:\Users\joopi\OneDrive\Desktop\Code\personal\Sungine2D\include\json-develop\include;$(SolutionDir)include\glew-2.1.0\include\GL;$(SolutionDir)include\;$(SolutionDir)include\SDL2-2.0.12\include\;$(SolutionDir)include\imgui-1.78\;$(SolutionDir)include\imgui_sdl\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <PreprocessorDefinitions>WINDOWS_IGNORE_PACKING_MISMATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
