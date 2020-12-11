@@ -69,7 +69,7 @@ void TestState::Enter()
 	State::Enter();
 }
 
-void TestState::HandleStateEvents(const SDL_Event* event)
+void TestState::HandleStateEvents(SDL_Event* event)
 {
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
 		ECSHandler::Instance()->GetComponent<Player>(player).health = 50;
@@ -88,7 +88,7 @@ void TestState::Update(float deltaTime)
 	if (ECSHandler::Instance()->GetComponent<Transform>(player).IsDirty())
 		ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["PlayerHP"]).SetPosition(glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(player).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(player).position.y - 25));
 
-	Core::Instance()->GetSystem<OverlapSystem>()->Update(deltaTime);
+	//Core::Instance()->GetSystem<OverlapSystem>()->Update(deltaTime);
 
 	State::Update(deltaTime);
 }
@@ -107,7 +107,6 @@ void TestState::LateUpdate(float deltaTime)
 {
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
 	{
-		std::cout << "teststate\n";
 		Core::Instance()->GetFSM()->ChangeState(new MainMenu());
 		return;
 	}

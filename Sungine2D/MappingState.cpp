@@ -20,29 +20,33 @@ void MappingState::UpdateImGui()
 	ImGui_ImplSDL2_NewFrame(Core::Instance()->GetWindow());
 	ImGui::NewFrame();
 
-	ImGui::SetNextWindowSize(ImVec2(1280, 250), 0);
-	ImGui::SetWindowPos(ImVec2(0, 470), true);
+	ImGui::SetNextWindowSize(ImVec2(1280, 128), 0);
+	ImGui::SetWindowPos(ImVec2(0, 0), true);
 
 	if (mDisplayMapper)
 	{
-		ImGui::Begin("Tile Mapper", &mDisplayMapper, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
+		ImGui::Begin("Tile Mapper", &mDisplayMapper, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_HorizontalScrollbar);
 
-		if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetTexture("grass").ID, ImVec2(64, 64)))
+		ImGui::TextColored(ImVec4(0.9f, 0.9f, 0.9f, 0.95f), "To begin drawing: select a tile, collapse this window (top left), and hold left click over the canvas. Open this window again to select a new tile (or the eraser). Press 'S' to save, and 'L' to load.");
+		ImGui::Separator();
+		ImGui::NewLine();
+
+		for (unsigned int i = 0; i < mTextures.size(); i++)
 		{
-			currentTile = 1;
-			//std::cout << "Switched to 1.\n";
+			if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetTexture(mTextures.at(i)).ID, ImVec2(64, 64)))
+				currentTile = i;
+
+			ImGui::SameLine();
 		}
-		ImGui::SameLine();
-		if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetTexture("wall").ID, ImVec2(64, 64)))
-		{
-			currentTile = 2;
-			//std::cout << "Switched to 2.\n";
-		}
+
+		if (ImGui::IsWindowCollapsed())
+			mCollapsed = true;
+		else
+			mCollapsed = false;
 
 		ImGui::End();
 	}
 
-	//ImGui::PopFont();
 	ImGui::EndFrame();
 }
 
@@ -55,9 +59,7 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 	{
 		for (unsigned int j = 0; j < levelWidth; j++)
 		{
-			switch (tileData[i][j])
-			{
-			case 0:
+			if (tileData[i][j] == 0)
 			{
 				if (entityData[i][j] != NULL)
 				{
@@ -65,91 +67,35 @@ void MappingState::InitLevel(std::vector<std::vector<unsigned int>> tileData, un
 					entityData[i][j] = NULL;
 				}
 			}
-			break;
-
-			case 1:
+			else
 			{
-				texture = ResourceManager::GetTexture("grass");
+				texture = ResourceManager::GetTexture(mTextures.at(tileData[i][j]));
+
+				//std::cout << tileData[i][j] << "\n";
 
 				if (entityData[i][j] != NULL)
 				{
 					ECSHandler::Instance()->DestroyEntity(entityData[i][j]);
 					entityData[i][j] = NULL;
-
-					entityData[i][j] = ECSHandler::Instance()->CreateEntity();
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Transform{ glm::vec2(j * 64, i * 64) });
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Rendering{ shader, texture });
-
-					auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[i][j]);
-					auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[i][j]);
-
-					transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
-				}
-				else
-				{
-					entityData[i][j] = ECSHandler::Instance()->CreateEntity();
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Transform{ glm::vec2(j * 64, i * 64) });
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Rendering{ shader, texture });
-
-					auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[i][j]);
-					auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[i][j]);
-
-					transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 				}
 
+				entityData[i][j] = ECSHandler::Instance()->CreateEntity();
+				ECSHandler::Instance()->AddComponent(entityData[i][j], Transform{ glm::vec2(j * 64, i * 64) });
+				ECSHandler::Instance()->AddComponent(entityData[i][j], Rendering{ shader, texture });
+
+				auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[i][j]);
+				auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[i][j]);
+
+				transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 			}
-			break;
-
-			case 2:
-			{
-				texture = ResourceManager::GetTexture("wall");
-
-				if (entityData[i][j] != NULL)
-				{
-					ECSHandler::Instance()->DestroyEntity(entityData[i][j]);
-					entityData[i][j] = NULL;
-
-					entityData[i][j] = ECSHandler::Instance()->CreateEntity();
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Transform{ glm::vec2(j * 64, i * 64) });
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Rendering{ shader, texture });
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Collider{ });
-
-					auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[i][j]);
-					auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[i][j]);
-
-					transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
-				}
-				else
-				{
-					entityData[i][j] = ECSHandler::Instance()->CreateEntity();
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Transform{ glm::vec2(j * 64, i * 64) });
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Rendering{ shader, texture });
-					ECSHandler::Instance()->AddComponent(entityData[i][j], Collider{ });
-
-					auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[i][j]);
-					auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[i][j]);
-
-					transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
-				}
-			}
-			break;
-
-			default:
-			{
-				//std::cout << "DEFAULT\n";
-			}
-			break;
-			}
-			//std::cout << "j: " << j << "\n";
 		}
-		//std::cout << "i: " << i << "\n";
 	}
 }
 
 void MappingState::LoadLevel(const char* file)
 {
-	int levelWidth = 0;
-	int levelHeight = 0;
+	unsigned int levelWidth = 0;
+	unsigned int levelHeight = 0;
 	int tileCode;
 	std::string line;
 	std::ifstream fstream(file);
@@ -187,9 +133,6 @@ void MappingState::LoadLevel(const char* file)
 			levelHeight = tileData.size();
 		}
 
-		//std::cout << "Level width: " << levelWidth << "\n";
-		//std::cout << "Level height: " << levelHeight << "\n";
-
 		if (tileData.size() > 0)
 			InitLevel(tileData, 20, 12);
 	}
@@ -205,8 +148,9 @@ void MappingState::Enter()
 
 	shader = ResourceManager::GetShader("sprite");
 
-	ResourceManager::LoadTexture("res/img/wall.png", false, "wall");
+	ResourceManager::LoadTexture("res/img/destroy.png", true, "destroy");
 	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
+	ResourceManager::LoadTexture("res/img/wall.png", false, "wall");
 
 	for (unsigned int i = 0; i < 12; i++)
 	{
@@ -217,56 +161,42 @@ void MappingState::Enter()
 		tileData.push_back(row);
 	}
 
-	for (unsigned int i = 0; i < 12; i++)
-	{
-		for (unsigned int j = 0; j < 20; j++)
-		{
-			switch (tileData[i][j])
-			{
-			case 0:
-			{
-
-			}
-			break;
-
-			case 1:
-			{
-				texture = ResourceManager::GetTexture("grass");
-				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
-				ECSHandler::Instance()->AddComponent(tile, Transform{ glm::vec2(j * 64, i * 64) });
-				ECSHandler::Instance()->AddComponent(tile, Rendering{ shader, texture });
-				entityData[i][j] = tile;
-			}
-			break;
-
-			case 2:
-			{
-				texture = ResourceManager::GetTexture("wall");
-				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
-				ECSHandler::Instance()->AddComponent(tile, Transform{ glm::vec2(j * 64, i * 64) });
-				ECSHandler::Instance()->AddComponent(tile, Rendering{ shader, texture });
-				ECSHandler::Instance()->AddComponent(tile, Collider{ });
-				entityData[i][j] = tile;
-
-			}
-			break;
-			}
-		}
-	}
-
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
+
+	mTextures.push_back("destroy");
+	mTextures.push_back("grass");
+	mTextures.push_back("wall");
 
 	State::Enter();
 }
 
-void MappingState::HandleStateEvents(const SDL_Event* event)
+void MappingState::HandleStateEvents(SDL_Event* event)
 {
+	switch (event->type)
+	{
+	case SDL_MOUSEBUTTONDOWN:
+		if (event->button.button == SDL_BUTTON_MIDDLE)
+			if (event->button.state == SDL_PRESSED)
+				mMMBState = true;
+		break;
 
-}
+	case SDL_MOUSEBUTTONUP:
+		if (event->button.button == SDL_BUTTON_MIDDLE)
+			mMMBState = false;
+		break;
+	}
 
-void MappingState::Update(float deltaTime)
-{
-	//std::cout << "update\n";
+	if (mMMBState)
+	{
+		Core::Instance()->MoveView(glm::vec3(Core::Instance()->GetMouseRelX(), Core::Instance()->GetMouseRelY(), 0));
+	}
+
+	if (Core::Instance()->GetLMBDown())
+	{
+		//std::cout << "xrel:" << Core::Instance()->GetMouseRelX() << "\n";
+		//std::cout << "yrel:" << Core::Instance()->GetMouseRelY() << "\n";
+		//Core::Instance()->MoveView(glm::vec3(Core::Instance()->GetMouseRelX(), Core::Instance()->GetMouseRelY(), 0));
+	}
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_S))
 	{
@@ -296,102 +226,71 @@ void MappingState::Update(float deltaTime)
 
 		file.close();
 
-		std::cout << "Saved.\n";
+		//std::cout << "Saved.\n";
 	}
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_L))
 	{
 		LoadLevel("res/levels/saved.txt");
-	}
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_0))
-	{
-		currentTile = 0;
-		std::cout << "Switched to 0.\n";
-	}
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_1))
-	{
-		currentTile = 1;
-		std::cout << "Switched to 1.\n";
-	}
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_2))
-	{
-		currentTile = 2;
-		std::cout << "Switched to 2.\n";
+		//std::cout << "Loaded.\n";
 	}
 
-	if (Core::Instance()->GetLMBDown())
+	if (Core::Instance()->GetLMBDown() && mCollapsed == true)
 	{
-		//std::cout << "mouseposX: " << Core::Instance()->Round64(Core::Instance()->GetMousePosX()) << "\n";
-		//std::cout << "mouseposY: " << Core::Instance()->Round64(Core::Instance()->GetMousePosY()) << "\n\n";
-
 		int posX = Core::Instance()->Round64(Core::Instance()->GetMousePosX());
 		int posY = Core::Instance()->Round64(Core::Instance()->GetMousePosY());
+		int x = posX / 64;
+		int y = posY / 64;
 
-		switch (currentTile)
+		if (currentTile == 0)
 		{
-		case 0:
-		{
-			if (entityData[posY / 64][posX / 64] != NULL)
+			if (entityData[y][x] != NULL)
 			{
-				ECSHandler::Instance()->DestroyEntity(entityData[posY / 64][posX / 64]);
-				entityData[posY / 64][posX / 64] = NULL;
+				ECSHandler::Instance()->DestroyEntity(entityData[y][x]);
+				entityData[y][x] = NULL;
 
-				tileData[posY / 64][posX / 64] = currentTile;
+				tileData[y][x] = currentTile;
 
-				std::cout << "Destroyed entity\n";
+				//std::cout << "Destroyed entity\n";
 			}
 		}
-		break;
-		case 1:
+		else
 		{
-			texture = ResourceManager::GetTexture("grass");
-		}
-		break;
-		case 2:
-		{
-			texture = ResourceManager::GetTexture("wall");
-		}
-		break;
-		default:
-		{
-
-		}
-		break;
+			texture = ResourceManager::GetTexture(mTextures.at(currentTile));
 		}
 
 		if (currentTile != 0)
 		{
-			if (entityData[posY / 64][posX / 64] == NULL)
+			if (entityData[y][x] == NULL)
 			{
-				std::cout << "Created entity\n";
-				entityData[posY / 64][posX / 64] = ECSHandler::Instance()->CreateEntity();
-				ECSHandler::Instance()->AddComponent(entityData[posY / 64][posX / 64], Transform{ glm::vec2(posX, posY) });
-				ECSHandler::Instance()->AddComponent(entityData[posY / 64][posX / 64], Rendering{ shader, texture });
+				//std::cout << "Created entity\n";
+				entityData[y][x] = ECSHandler::Instance()->CreateEntity();
+				ECSHandler::Instance()->AddComponent(entityData[y][x], Transform{ glm::vec2(posX, posY) });
+				ECSHandler::Instance()->AddComponent(entityData[y][x], Rendering{ shader, texture });
 			}
 			else
 			{
-				auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[posY / 64][posX / 64]).texture = texture;
+				auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[y][x]).texture = texture;
 			}
 
-			tileData[posY / 64][posX / 64] = currentTile;
+			tileData[y][x] = currentTile;
 
-			//std::cout << "Mapped to: X " << posX / 64 << " Y " << posY / 64 << "\n";
-
-			auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[posY / 64][posX / 64]);
-			auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[posY / 64][posX / 64]);
+			auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entityData[y][x]);
+			auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entityData[y][x]);
 
 			transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 		}
 	}
+}
 
+void MappingState::Update(float deltaTime)
+{
 	UpdateImGui();
 
-	State::Update(deltaTime);
+	//State::Update(deltaTime);
 }
 
 void MappingState::Render()
 {
-	//std::cout << "render\n";
-
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	Core::Instance()->GetSystem<RenderSystem>()->Draw();
@@ -399,13 +298,12 @@ void MappingState::Render()
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-	State::Render();
+	SDL_GL_SwapWindow(Core::Instance()->GetWindow());
+	//State::Render();
 }
 
 void MappingState::LateUpdate(float deltaTime)
 {
-	//std::cout << "LATE update\n";
-
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_T))
 	{
 		Core::Instance()->GetFSM()->ChangeState(new MainMenu());

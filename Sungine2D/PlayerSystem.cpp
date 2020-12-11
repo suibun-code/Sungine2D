@@ -53,7 +53,7 @@ void PlayerSystem::Update(float deltaTime)
 			ECSHandler::Instance()->AddComponent(bullet, Bullet{ });
 			ECSHandler::Instance()->AddComponent(bullet, Transform{ glm::vec2(transform.position.x + (transform.size.x * .5f), transform.position.y + (transform.size.y * .2f)), glm::vec2(1.f), 90.f });
 			ECSHandler::Instance()->AddComponent(bullet, Rendering{ ResourceManager::GetShader("sprite"), texture });
-			ECSHandler::Instance()->AddComponent(bullet, Movement{ 50.f });
+			ECSHandler::Instance()->AddComponent(bullet, Movement{ 450.f });
 			ECSHandler::Instance()->AddComponent(bullet, Collider{ true, true });
 
 			auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(bullet);
@@ -74,7 +74,7 @@ void PlayerSystem::Update(float deltaTime)
 			float rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI;
 			bulletTransform.SetRotation(rotation);
 
-			std::cout << "bullet dirty? " << bulletTransform.IsDirty() << "\n";
+			//std::cout << "bullet dirty? " << bulletTransform.IsDirty() << "\n";
 		}
 	}
 }

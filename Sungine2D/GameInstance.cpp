@@ -23,9 +23,6 @@ void GameInstance::UpdateImGui()
 	ImGui_ImplSDL2_NewFrame(Core::Instance()->GetWindow());
 	ImGui::NewFrame();
 
-	if (mUIFont != nullptr)
-		ImGui::PushFont(mUIFont);
-
 	std::string windowString = "Game Instance";
 
 	ImGui::SetNextWindowSize(ImVec2(150, 100), 0);
@@ -59,7 +56,7 @@ void GameInstance::UpdateImGui()
 
 	if (mDisplayAbout)
 	{
-		ImGui::Begin("About", &mDisplayAbout, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Begin("About", &mDisplayAbout, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove);
 		ImGui::Separator();
 		ImGui::TextColored(ImVec4(0.55f, 0.235f, 0.75f, 0.95f), "Sungine2D");
 		ImGui::Text("Developed by Ramin Amiri");
@@ -76,7 +73,7 @@ void GameInstance::UpdateImGui()
 
 	if (mDisplayEntityList)
 	{
-		ImGui::Begin("Entity List", &mDisplayEntityList, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Begin("Entity List", &mDisplayEntityList, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove);
 
 		s = "Number of active entities: " + std::to_string(ECSHandler::Instance()->ActiveEntityCount());
 		ImGui::Text(s.c_str());
@@ -94,8 +91,6 @@ void GameInstance::UpdateImGui()
 
 	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
 	mLog.Draw("Log", &mDisplayLog);
-
-	ImGui::PopFont();
 
 	ImGui::End();
 	ImGui::EndFrame();

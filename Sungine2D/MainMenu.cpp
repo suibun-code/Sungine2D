@@ -39,7 +39,7 @@ void MainMenu::Enter()
 	State::Enter();
 }
 
-void MainMenu::HandleStateEvents(const SDL_Event* event)
+void MainMenu::HandleStateEvents(SDL_Event* event)
 {
 
 }

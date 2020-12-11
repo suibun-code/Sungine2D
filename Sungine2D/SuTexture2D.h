@@ -6,6 +6,7 @@ struct SuTexture2D
 {
 	//ID of texture used to reference this particular texture.
 	unsigned int ID;
+	unsigned int index;
 
 	//Texture dimensions in pixels.
 	unsigned int Width, Height;

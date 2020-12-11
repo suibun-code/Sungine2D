@@ -64,7 +64,7 @@ void State::RemoveEntity(ECSEntity entity)
 			mEntities.erase(mEntities.begin() + i);
 }
 
-void State::HandleStateEvents(const SDL_Event* event)
+void State::HandleStateEvents(SDL_Event* event)
 {
 	if (Core::Instance()->GameInstanceEnabled() == true)
 		GameInstance::Instance()->HandleEvents(event);

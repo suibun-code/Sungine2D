@@ -25,7 +25,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void LateUpdate(float deltaTime);
 	virtual void Render();
-	virtual void HandleStateEvents(const SDL_Event* event);
+	virtual void HandleStateEvents(SDL_Event* event);
 	virtual void Resume() = 0;
 	virtual void Exit() = 0;
 

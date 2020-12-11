@@ -11,12 +11,17 @@ class MappingState : public State
 private:
 	//IMGUI
 	bool mDisplayMapper = true;
+	bool mCollapsed = false;
+
+	bool mMMBState = false;
+
+	std::vector<std::string> mTextures;
 
 	SuTexture2D texture;
 	std::vector<unsigned int> row;
 	std::vector<std::vector<unsigned int>> tileData;
 	ECSEntity entityData[12][20];
-	unsigned int currentTile = 1;
+	unsigned int currentTile = 0;
 
 	void InitLevel(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight);
 	void LoadLevel(const char* file);
@@ -25,7 +30,7 @@ private:
 public:
 	MappingState() : State("MappingState") {}
 	void Enter();
-	void HandleStateEvents(const SDL_Event* event);
+	void HandleStateEvents(SDL_Event* event);
 	void Update(float deltaTime);
 	void Render();
 	void LateUpdate(float deltaTime);

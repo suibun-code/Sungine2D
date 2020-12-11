@@ -154,9 +154,16 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Load shaders and attach variables/values to variables within the shader source code.
 	ResourceManager::LoadShader("shaders/sprite.vert", "shaders/sprite.frag", nullptr, "sprite");
+
+	glMatrixMode(GL_MODELVIEW);
+
 	mProjection = glm::ortho(0.f, 1280.f, 720.f, 0.f, -5.f, 5.f);
 	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
 	ResourceManager::GetShader("sprite").SetMatrix4("projection", mProjection);
+
+	mView = glm::lookAt(glm::vec3(0, 0, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	mView = glm::translate(mView, glm::vec3(0, 0, 0));
+	ResourceManager::GetShader("sprite").SetMatrix4("view", mView);
 
 	//Initialize ImGui.
 	InitImGui();
@@ -247,7 +254,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Start engine and enable the game instance.
 	mIsRunning = true;
-	mGameInstanceEnabled = false;
+	mGameInstanceEnabled = true;
 
 	return true;
 }
@@ -357,6 +364,12 @@ void Core::InitImGui()
 	style.WindowBorderSize = 1.0f;
 }
 
+void Core::MoveView(glm::vec3 translate)
+{
+	mView = glm::translate(mView, translate);
+	ResourceManager::GetShader("sprite").SetMatrix4("view", mView);
+}
+
 bool Core::Tick()
 {
 	mPreviousTime = mCurrentTime;
@@ -460,6 +473,12 @@ void Core::HandleEvents()
 					mLMBState = true;
 					mLMBDown = true;
 				}
+
+			if (mEvent.button.button == SDL_BUTTON_MIDDLE)
+				if (mEvent.button.state == SDL_PRESSED)
+				{
+					//std::cout << "hi\n";
+				}
 			break;
 
 		case SDL_MOUSEBUTTONUP:
@@ -472,6 +491,8 @@ void Core::HandleEvents()
 		case SDL_MOUSEMOTION:
 			mMousePosX = mEvent.motion.x;
 			mMousePosY = mEvent.motion.y;
+			mMouseRelX = mEvent.motion.xrel;
+			mMouseRelY = mEvent.motion.yrel;
 			break;
 		}
 	}

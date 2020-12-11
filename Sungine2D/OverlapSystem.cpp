@@ -32,7 +32,7 @@ void OverlapSystem::Update(float deltaTime)
 			{
 				if (collisionX && collisionY)
 				{
-					std::cout << "bullet hit something\n";
+					//std::cout << "bullet hit something\n";
 				}
 			}
 		}

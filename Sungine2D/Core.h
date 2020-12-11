@@ -55,7 +55,8 @@ private:
 	SDL_GLContext mGLContext = NULL;
 
 	//Matrix projection.
-	glm::mat4 mProjection;
+	glm::mat4 mProjection = glm::mat4(1.f);
+	glm::mat4 mView = glm::mat4(1.f);
 
 	//ImGui context.
 	ImGuiContext* mImGuiContext = nullptr;
@@ -69,6 +70,7 @@ private:
 	bool mGotTick = false;
 	bool mLMBState = false;
 	bool mLMBDown = false;
+	bool mMMBState = false;
 	bool mMusicEnabled = false;
 
 	//Time.
@@ -85,6 +87,8 @@ private:
 	//Mouse position.
 	Sint32 mMousePosX = 0;
 	Sint32 mMousePosY = 0;
+	Sint32 mMouseRelX = 0;
+	Sint32 mMouseRelY = 0;
 
 	//Window dimensions.
 	int mWindowWidth = 1280;
@@ -132,9 +136,13 @@ public:
 	AudioManager* GetAM() { return mpAM; }
 
 	glm::mat4 GetProjectionMatrix() { return mProjection; }
+	glm::mat4 GetViewMatrix() { return mView; }
+	void MoveView(glm::vec3 translate);
 
 	Sint32 GetMousePosX() { return mMousePosX; }
 	Sint32 GetMousePosY() { return mMousePosY; }
+	Sint32 GetMouseRelX() { return mMouseRelX; }
+	Sint32 GetMouseRelY() { return mMouseRelY; }
 
 	bool IsRunning() { return mIsRunning; }
 	bool Tick();

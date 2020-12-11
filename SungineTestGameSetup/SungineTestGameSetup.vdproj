@@ -99,12 +99,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_63DA85712CE649388C33E7D3BE362335"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6FEE175901134A0490CEA441A7BA015F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -142,12 +136,6 @@
         "Entry"
         {
         "MsmKey" = "8:_93D0AB4947284EFAB5AA4E4E2137EBCD"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9C90813F8E1B4BDE9B0382DFDF818B65"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -207,6 +195,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B6EBCDCCDB90471FBC22B35269E438C9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B9C1F779793D48CCB8E10A8AE8FC10D5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BF820E9BFBB542ED9B45F018324A84C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -244,6 +244,12 @@
         "Entry"
         {
         "MsmKey" = "8:_E031903589AD47889049E293017A4436"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E15AAC27FE8B467E880B5CD150AAA39C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -618,26 +624,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_63DA85712CE649388C33E7D3BE362335"
-            {
-            "SourcePath" = "8:..\\Debug\\imgui.ini"
-            "TargetName" = "8:imgui.ini"
-            "Tag" = "8:"
-            "Folder" = "8:_718A7CE1AFC742DEAFD0011A723BBE2E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6FEE175901134A0490CEA441A7BA015F"
             {
             "SourcePath" = "8:..\\Debug\\font\\Roboto-Medium.ttf"
@@ -764,26 +750,6 @@
             "TargetName" = "8:sprite.frag"
             "Tag" = "8:"
             "Folder" = "8:_58F2636AFE8049E3A849B10EF47A061A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C90813F8E1B4BDE9B0382DFDF818B65"
-            {
-            "SourcePath" = "8:..\\Debug\\ucrtbased.dll"
-            "TargetName" = "8:ucrtbased.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_718A7CE1AFC742DEAFD0011A723BBE2E"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -978,6 +944,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B6EBCDCCDB90471FBC22B35269E438C9"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\img\\destroy.png"
+            "TargetName" = "8:destroy.png"
+            "Tag" = "8:"
+            "Folder" = "8:_08E69979E37A4AD0906E51814B78C765"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B9C1F779793D48CCB8E10A8AE8FC10D5"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\imgui.ini"
+            "TargetName" = "8:imgui.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_718A7CE1AFC742DEAFD0011A723BBE2E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF820E9BFBB542ED9B45F018324A84C1"
             {
             "SourcePath" = "8:..\\Debug\\libopusfile-0.dll"
@@ -1104,6 +1110,26 @@
             "TargetName" = "8:midnightcloset.mp3"
             "Tag" = "8:"
             "Folder" = "8:_FD36C3938FDC46B483689EF1F65CE4A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E15AAC27FE8B467E880B5CD150AAA39C"
+            {
+            "SourcePath" = "8:..\\Debug\\ucrtbased.dll"
+            "TargetName" = "8:ucrtbased.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_718A7CE1AFC742DEAFD0011A723BBE2E"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1354,7 +1380,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SungineTestGameSetup"
         "ProductCode" = "8:{7BCCC774-893B-4179-8DC1-84EBB7CCC0CA}"
-        "PackageCode" = "8:{61190671-F124-4046-910B-F8F1E50D79A3}"
+        "PackageCode" = "8:{DEF5EB30-45F4-4FCC-ADB2-E10AFE751396}"
         "UpgradeCode" = "8:{7D68C3F5-2387-41B5-B17D-C4D13C98CBBD}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
