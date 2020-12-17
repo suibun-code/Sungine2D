@@ -151,6 +151,7 @@ void MappingState::Enter()
 	ResourceManager::LoadTexture("res/img/destroy.png", true, "destroy");
 	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
 	ResourceManager::LoadTexture("res/img/wall.png", false, "wall");
+	ResourceManager::LoadTexture("res/img/mud.png", true, "mud");
 
 	for (unsigned int i = 0; i < 12; i++)
 	{
@@ -166,6 +167,7 @@ void MappingState::Enter()
 	mTextures.push_back("destroy");
 	mTextures.push_back("grass");
 	mTextures.push_back("wall");
+	mTextures.push_back("mud");
 
 	State::Enter();
 }

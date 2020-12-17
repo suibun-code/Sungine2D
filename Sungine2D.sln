@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sungine2D", "Sungine2D\Sungine2D.vcxproj", "{3A5E397D-DC1D-4058-AB1D-A7C91F572A47}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SungineTestGameSetup", "SungineTestGameSetup\SungineTestGameSetup.vdproj", "{F0BD0BA3-6A61-4A1F-96A1-F78839D07FBF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,10 +21,6 @@ Global
 		{3A5E397D-DC1D-4058-AB1D-A7C91F572A47}.Release|x64.Build.0 = Release|x64
 		{3A5E397D-DC1D-4058-AB1D-A7C91F572A47}.Release|x86.ActiveCfg = Release|Win32
 		{3A5E397D-DC1D-4058-AB1D-A7C91F572A47}.Release|x86.Build.0 = Release|Win32
-		{F0BD0BA3-6A61-4A1F-96A1-F78839D07FBF}.Debug|x64.ActiveCfg = Debug
-		{F0BD0BA3-6A61-4A1F-96A1-F78839D07FBF}.Debug|x86.ActiveCfg = Debug
-		{F0BD0BA3-6A61-4A1F-96A1-F78839D07FBF}.Release|x64.ActiveCfg = Release
-		{F0BD0BA3-6A61-4A1F-96A1-F78839D07FBF}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
