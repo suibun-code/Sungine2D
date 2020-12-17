@@ -92,7 +92,7 @@
       <PreprocessorDefinitions>WINDOWS_IGNORE_PACKING_MISMATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)include\glew-2.1.0\lib\Release\Win32;$(SolutionDir)include\SDL2-2.0.12\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -220,46 +220,12 @@
     <ClCompile Include="TextSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\img\sheetref.psd" />
     <None Include="shaders\sprite.frag">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
     <None Include="shaders\sprite.vert">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\img\bullet.png" />
-    <Image Include="res\img\bullet2.png" />
-    <Image Include="res\img\bullet3.png" />
-    <Image Include="res\img\cool.png" />
-    <Image Include="res\img\destroy.png" />
-    <Image Include="res\img\enemy.png" />
-    <Image Include="res\img\grass.png" />
-    <Image Include="res\img\grasstile1.png" />
-    <Image Include="res\img\grasstile2.png" />
-    <Image Include="res\img\icon.ico" />
-    <Image Include="res\img\icon.png" />
-    <Image Include="res\img\icon2.png" />
-    <Image Include="res\img\icon3.png" />
-    <Image Include="res\img\mud.png" />
-    <Image Include="res\img\mud1.png" />
-    <Image Include="res\img\mud2.png" />
-    <Image Include="res\img\mud3.png" />
-    <Image Include="res\img\mud4.png" />
-    <Image Include="res\img\mud5.png" />
-    <Image Include="res\img\mud6.png" />
-    <Image Include="res\img\mudleft.png" />
-    <Image Include="res\img\mudright.png" />
-    <Image Include="res\img\player.png" />
-    <Image Include="res\img\playerSheet.png" />
-    <Image Include="res\img\sample.png" />
-    <Image Include="res\img\sample2.png" />
-    <Image Include="res\img\settings_bg.png" />
-    <Image Include="res\img\sheetref.png" />
-    <Image Include="res\img\SimpleCharacter.png" />
-    <Image Include="res\img\sunginelogo.png" />
-    <Image Include="res\img\wall.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

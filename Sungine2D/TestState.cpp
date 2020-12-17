@@ -20,6 +20,8 @@ void TestState::Enter()
 	//Clear the screen with specific color.
 	glClearColor(.2f, .2f, .2f, 1.f);
 
+	Core::Instance()->MoveView(glm::vec3(0.f, -24.f, 0.f));
+
 	Core::Instance()->GetAM()->LoadSound("res/audio/effect/lasershoot2.wav");
 	Core::Instance()->GetAM()->SetSoundsVolume(0, 10);
 

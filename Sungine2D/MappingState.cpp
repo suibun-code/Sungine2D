@@ -36,7 +36,10 @@ void MappingState::UpdateImGui()
 			if (ImGui::ImageButton((void*)(intptr_t)ResourceManager::GetTexture(mTextures.at(i)).ID, ImVec2(64, 64)))
 				currentTile = i;
 
-			ImGui::SameLine();
+			if (i == 14)
+				ImGui::NewLine();
+			else
+				ImGui::SameLine();
 		}
 
 		if (ImGui::IsWindowCollapsed())
@@ -151,7 +154,28 @@ void MappingState::Enter()
 	ResourceManager::LoadTexture("res/img/destroy.png", true, "destroy");
 	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
 	ResourceManager::LoadTexture("res/img/wall.png", false, "wall");
-	ResourceManager::LoadTexture("res/img/mud.png", true, "mud");
+	ResourceManager::LoadTexture("res/img/mud/mud.png", true, "mud");
+	ResourceManager::LoadTexture("res/img/mud/mudleft.png", true, "mudleft");
+	ResourceManager::LoadTexture("res/img/mud/mudright.png", true, "mudright");
+	ResourceManager::LoadTexture("res/img/mud/mud1.png", true, "mud1");
+	ResourceManager::LoadTexture("res/img/mud/mud2.png", true, "mud2");
+	ResourceManager::LoadTexture("res/img/mud/mud3.png", true, "mud3");
+	ResourceManager::LoadTexture("res/img/mud/mud4.png", true, "mud4");
+	ResourceManager::LoadTexture("res/img/mud/mud5.png", true, "mud5");
+	ResourceManager::LoadTexture("res/img/mud/mud6.png", true, "mud6");
+	ResourceManager::LoadTexture("res/img/water/water.png", true, "water");
+	ResourceManager::LoadTexture("res/img/water/waterleft.png", true, "waterleft");
+	ResourceManager::LoadTexture("res/img/water/waterright.png", true, "waterright");
+	ResourceManager::LoadTexture("res/img/water/water1.png", true, "water1");
+	ResourceManager::LoadTexture("res/img/water/water2.png", true, "water2");
+	ResourceManager::LoadTexture("res/img/water/water3.png", true, "water3");
+	ResourceManager::LoadTexture("res/img/water/water4.png", true, "water4");
+	ResourceManager::LoadTexture("res/img/water/water5.png", true, "water5");
+	ResourceManager::LoadTexture("res/img/water/water6.png", true, "water6");
+	ResourceManager::LoadTexture("res/img/water/watercornerTL.png", true, "watercornerTL");
+	ResourceManager::LoadTexture("res/img/water/watercornerTR.png", true, "watercornerTR");
+	ResourceManager::LoadTexture("res/img/water/watercornerBL.png", true, "watercornerBL");
+	ResourceManager::LoadTexture("res/img/water/watercornerBR.png", true, "watercornerBR");
 
 	for (unsigned int i = 0; i < 12; i++)
 	{
@@ -168,6 +192,27 @@ void MappingState::Enter()
 	mTextures.push_back("grass");
 	mTextures.push_back("wall");
 	mTextures.push_back("mud");
+	mTextures.push_back("mudleft");
+	mTextures.push_back("mudright");
+	mTextures.push_back("mud1");
+	mTextures.push_back("mud2");
+	mTextures.push_back("mud3");
+	mTextures.push_back("mud4");
+	mTextures.push_back("mud5");
+	mTextures.push_back("mud6");
+	mTextures.push_back("water");
+	mTextures.push_back("waterleft");
+	mTextures.push_back("waterright");
+	mTextures.push_back("water1");
+	mTextures.push_back("water2");
+	mTextures.push_back("water3");
+	mTextures.push_back("water4");
+	mTextures.push_back("water5");
+	mTextures.push_back("water6");
+	mTextures.push_back("watercornerTL");
+	mTextures.push_back("watercornerTR");
+	mTextures.push_back("watercornerBL");
+	mTextures.push_back("watercornerBR");
 
 	State::Enter();
 }
@@ -212,11 +257,11 @@ void MappingState::HandleStateEvents(SDL_Event* event)
 				if (j == 19)
 				{
 					file << std::to_string(tileData[i][j]);
-					//std::cout << "Wrote: " << std::to_string(tileData[i][j]) << "\n";
+					std::cout << "Wrote: " << std::to_string(tileData[i][j]) << "\n";
 					continue;
 				}
 				file << std::to_string(tileData[i][j]) + " ";
-				//std::cout << "Wrote: " << std::to_string(tileData[i][j]) + " " << "\n";
+				std::cout << "Wrote: " << std::to_string(tileData[i][j]) + " " << "\n";
 
 			}
 
@@ -228,12 +273,12 @@ void MappingState::HandleStateEvents(SDL_Event* event)
 
 		file.close();
 
-		//std::cout << "Saved.\n";
+		std::cout << "Saved.\n";
 	}
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_L))
 	{
 		LoadLevel("res/levels/saved.txt");
-		//std::cout << "Loaded.\n";
+		std::cout << "Loaded.\n";
 	}
 
 	if (Core::Instance()->GetLMBDown() && mCollapsed == true)

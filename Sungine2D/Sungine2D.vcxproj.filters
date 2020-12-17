@@ -43,9 +43,6 @@
     <Filter Include="Engine\ECS">
       <UniqueIdentifier>{8868320f-1e38-4c81-8071-2fd428f06e61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="res">
-      <UniqueIdentifier>{21965951-8781-41ca-9c3c-4a74a1c2638b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\imgui-1.78\imconfig.h">
@@ -274,103 +271,5 @@
     <None Include="shaders\sprite.vert">
       <Filter>Engine\shaders</Filter>
     </None>
-    <None Include="res\img\sheetref.psd">
-      <Filter>res</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\img\bullet.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\bullet2.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\bullet3.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\cool.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\destroy.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\enemy.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\grass.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\grasstile1.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\grasstile2.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\icon.ico">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\icon.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\icon2.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\icon3.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mud.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mud1.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mud2.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mud3.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mud4.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mud5.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mud6.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mudleft.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\mudright.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\player.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\playerSheet.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\sample.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\sample2.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\settings_bg.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\sheetref.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\SimpleCharacter.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\sunginelogo.png">
-      <Filter>res</Filter>
-    </Image>
-    <Image Include="res\img\wall.png">
-      <Filter>res</Filter>
-    </Image>
   </ItemGroup>
 </Project>
