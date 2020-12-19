@@ -43,20 +43,28 @@ void TestState::Enter()
 	player = ECSHandler::Instance()->CreateEntity();
 	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
 	ECSHandler::Instance()->GetComponent<EntityData>(player).tag = "Player";
-	ECSHandler::Instance()->AddComponent(player, Transform{ glm::vec2(500.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(player, Transform{ glm::vec2(1200.f, 600.f) });
 	ECSHandler::Instance()->AddComponent(player, Rendering{ shader, texture });
 	ECSHandler::Instance()->AddComponent(player, Movement{ });
 	ECSHandler::Instance()->AddComponent(player, Player{ });
 	ECSHandler::Instance()->AddComponent(player, Collider{ true });
 
-	for (int i = 0; i < 11; i++)
+	glm::vec2 spawnLocations[5];
+	spawnLocations[0] = glm::vec2(200.f, 60.f);
+	spawnLocations[1] = glm::vec2(1000.f, 50.f);
+	spawnLocations[2] = glm::vec2(300.f, 65.f);
+	spawnLocations[3] = glm::vec2(550.f, 55.f);
+	spawnLocations[4] = glm::vec2(600.f, 45.f);
+
+	for (int i = 0; i < 5; i++)
 	{
 		ECSEntity enemy = ECSHandler::Instance()->CreateEntity();
 		ECSHandler::Instance()->GetComponent<EntityData>(enemy).tag = "Enemy";
-		ECSHandler::Instance()->AddComponent(enemy, Transform{ glm::vec2(200.f + (i * 75), 60.f) });
+		ECSHandler::Instance()->AddComponent(enemy, Transform{ spawnLocations[i] });
 		ECSHandler::Instance()->AddComponent(enemy, Rendering{ shader, texture, glm::vec3(.75f, .5f, .5f) });
-		ECSHandler::Instance()->AddComponent(enemy, Collider{ });
+		ECSHandler::Instance()->AddComponent(enemy, Collider{ true });
 		ECSHandler::Instance()->AddComponent(enemy, Enemy{ });
+		ECSHandler::Instance()->AddComponent(enemy, Movement{ });
 	}
 
 	Core::Instance()->GetSystem<PlayerSystem>()->Init();
@@ -118,6 +126,8 @@ void TestState::Exit()
 {
 	State::Exit();
 
-	//std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
-	//std::cout << "RenderSystem entity count: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
+	Core::Instance()->MoveView(glm::vec3(0.f, 24.f, 0.f));
+
+	std::cout << "FINAL ENTITIES: " << ECSHandler::Instance()->ActiveEntityCount() << "\n";
+	std::cout << "RenderSystem entity count: " << Core::Instance()->GetSystem<RenderSystem>()->mEntities.size() << "\n";
 }

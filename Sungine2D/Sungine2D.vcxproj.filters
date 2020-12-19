@@ -171,11 +171,11 @@
     <ClInclude Include="Enemy.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="EnemySystem.h">
-      <Filter>Engine\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySystem.h">
+      <Filter>Engine\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -261,7 +261,7 @@
       <Filter>Engine\Systems</Filter>
     </ClCompile>
     <ClCompile Include="EnemySystem.cpp">
-      <Filter>Engine\Source Files</Filter>
+      <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

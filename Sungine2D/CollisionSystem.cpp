@@ -61,6 +61,39 @@ void CollisionSystem::Update()
 				bool collisionY = (transform.position.y + collider.offset.y) + collider.boundingBox.y >= (transformOther.position.y + colliderOther.offset.y) &&
 					(transformOther.position.y + colliderOther.offset.y) + colliderOther.boundingBox.y >= (transform.position.y + collider.offset.y);
 
+				//if (ECSHandler::Instance()->HasComponent<Enemy>(entity))
+				//	if (ECSHandler::Instance()->HasComponent<Player>(other))
+				//	{
+				//		continue;
+				//	}
+
+				//if (ECSHandler::Instance()->HasComponent<Player>(entity))
+				//	if (ECSHandler::Instance()->HasComponent<Enemy>(other))
+				//	{
+				//		if (collisionX && collisionY)
+				//		{
+				//			ECSHandler::Instance()->GetComponent<Player>(other).health -= 1;
+				//		}
+				//		continue;
+				//	}
+
+				if (ECSHandler::Instance()->HasComponent<Player>(entity) || ECSHandler::Instance()->HasComponent<Enemy>(entity))
+				{
+					if (ECSHandler::Instance()->HasComponent<Player>(other))
+					{
+						if (collisionX && collisionY)
+						{
+							ECSHandler::Instance()->GetComponent<Player>(other).health -= 1;
+						}
+						continue;
+					}
+
+					if (ECSHandler::Instance()->HasComponent<Enemy>(other) && !ECSHandler::Instance()->HasComponent<Enemy>(entity))
+					{
+						continue;
+					}
+				}
+
 				if (collider.overlapper == true)
 				{
 					if (ECSHandler::Instance()->HasComponent<Bullet>(entity))
@@ -73,8 +106,15 @@ void CollisionSystem::Update()
 							else if (dataOther.tag == "Enemy")
 							{
 								auto& enemyOther = ECSHandler::Instance()->GetComponent<Enemy>(other);
+								auto& renderOther = ECSHandler::Instance()->GetComponent<Rendering>(other);
 
 								enemyOther.health -= 25;
+
+								if (enemyOther.health == 50)
+									renderOther.color = glm::vec3(1.f, 1.f, 0.f);
+
+								if (enemyOther.health == 25)
+									renderOther.color = glm::vec3(1.f, 0.f, 0.f);
 
 								if (enemyOther.health <= 0)
 								{

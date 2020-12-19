@@ -9,6 +9,8 @@
 #include "Core.h"
 #include "ResourceManager.h"
 
+ECSEntity PlayerSystem::player = ECSEntity();
+
 void PlayerSystem::Init()
 {
 	ResourceManager::LoadTexture("res/img/bullet3.png", true, "bullet");
@@ -19,6 +21,8 @@ void PlayerSystem::Update(float deltaTime)
 {
 	for (auto const& entity : mEntities)
 	{
+		player = entity;
+
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(entity);
 

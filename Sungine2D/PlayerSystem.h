@@ -12,6 +12,8 @@ private:
 	std::vector<ECSEntity> bullets;
 
 public:
+	static ECSEntity player;
+
 	void Init();
 	void Update(float deltaTime);
 };

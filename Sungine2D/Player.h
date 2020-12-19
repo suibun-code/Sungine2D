@@ -2,6 +2,6 @@
 
 struct Player
 {
-	int maxHealth = 100;
-	int health = 100;
+	int maxHealth = 500;
+	int health = 500;
 };
