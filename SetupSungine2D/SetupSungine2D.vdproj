@@ -99,6 +99,7 @@
         }
         "Entry"
         {
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
         "MsmKey" = "8:_420506494483435E8A31A00F51EB8022"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -106,6 +107,9 @@
         "Entry"
         {
         "MsmKey" = "8:_4A807735BC8A41EBBFCAD1BD0F590C0B"
+=======
+        "MsmKey" = "8:_6FEE175901134A0490CEA441A7BA015F"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -147,6 +151,7 @@
         }
         "Entry"
         {
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
         "MsmKey" = "8:_69E46FDF837F4B28BBB4FF9C964F6DB5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -154,6 +159,9 @@
         "Entry"
         {
         "MsmKey" = "8:_6AE12745EFB04C998C710A7562A3DD38"
+=======
+        "MsmKey" = "8:_9E0D13D282584446AFA661396E7E9A81"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -207,7 +215,23 @@
         }
         "Entry"
         {
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
         "MsmKey" = "8:_7E12A40EF8EB4BCC96560E5F77F73F6D"
+=======
+        "MsmKey" = "8:_B6EBCDCCDB90471FBC22B35269E438C9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B9C1F779793D48CCB8E10A8AE8FC10D5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BF820E9BFBB542ED9B45F018324A84C1"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -249,7 +273,17 @@
         }
         "Entry"
         {
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
         "MsmKey" = "8:_95134240C8A046FB8F93F20588D906F7"
+=======
+        "MsmKey" = "8:_E15AAC27FE8B467E880B5CD150AAA39C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E758878A6016444C8076AB658A02BFCF"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -712,6 +746,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_420506494483435E8A31A00F51EB8022"
             {
             "SourcePath" = "8:..\\Debug\\res\\img\\water\\water6.png"
@@ -733,6 +768,9 @@
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4A807735BC8A41EBBFCAD1BD0F590C0B"
+=======
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6FEE175901134A0490CEA441A7BA015F"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
             {
             "SourcePath" = "8:..\\Debug\\res\\img\\water\\watercornerBR.png"
             "TargetName" = "8:watercornerBR.png"
@@ -872,6 +910,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69E46FDF837F4B28BBB4FF9C964F6DB5"
             {
             "SourcePath" = "8:..\\Debug\\res\\img\\water\\watercornerBL.png"
@@ -893,6 +932,9 @@
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AE12745EFB04C998C710A7562A3DD38"
+=======
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E0D13D282584446AFA661396E7E9A81"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
             {
             "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mudright.png"
             "TargetName" = "8:mudright.png"
@@ -1072,7 +1114,51 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7E12A40EF8EB4BCC96560E5F77F73F6D"
+=======
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B6EBCDCCDB90471FBC22B35269E438C9"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\res\\img\\destroy.png"
+            "TargetName" = "8:destroy.png"
+            "Tag" = "8:"
+            "Folder" = "8:_08E69979E37A4AD0906E51814B78C765"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B9C1F779793D48CCB8E10A8AE8FC10D5"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\imgui.ini"
+            "TargetName" = "8:imgui.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_718A7CE1AFC742DEAFD0011A723BBE2E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF820E9BFBB542ED9B45F018324A84C1"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
             {
             "SourcePath" = "8:..\\Debug\\font\\Roboto-Regular.ttf"
             "TargetName" = "8:Roboto-Regular.ttf"
@@ -1212,7 +1298,31 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_95134240C8A046FB8F93F20588D906F7"
+=======
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E15AAC27FE8B467E880B5CD150AAA39C"
+            {
+            "SourcePath" = "8:..\\Debug\\ucrtbased.dll"
+            "TargetName" = "8:ucrtbased.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_718A7CE1AFC742DEAFD0011A723BBE2E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E758878A6016444C8076AB658A02BFCF"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
             {
             "SourcePath" = "8:..\\Debug\\res\\img\\water\\waterleft.png"
             "TargetName" = "8:waterleft.png"
@@ -1877,10 +1987,17 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
+<<<<<<< Updated upstream:SetupSungine2D/SetupSungine2D.vdproj
         "ProductName" = "8:SetupSungine2D"
         "ProductCode" = "8:{9299AB6B-56ED-41E7-8653-F42EA9DBED26}"
         "PackageCode" = "8:{A1FAB77D-7CC4-4FBE-89D6-5DA980950560}"
         "UpgradeCode" = "8:{7BA0D613-FACC-4EFB-807E-DF6C88468BD6}"
+=======
+        "ProductName" = "8:SungineTestGameSetup"
+        "ProductCode" = "8:{7BCCC774-893B-4179-8DC1-84EBB7CCC0CA}"
+        "PackageCode" = "8:{DEF5EB30-45F4-4FCC-ADB2-E10AFE751396}"
+        "UpgradeCode" = "8:{7D68C3F5-2387-41B5-B17D-C4D13C98CBBD}"
+>>>>>>> Stashed changes:SungineTestGameSetup/SungineTestGameSetup.vdproj
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
