@@ -8,6 +8,7 @@
 #include "GameInstance.h"
 #include "ResourceManager.h"
 #include "Level.h"
+#include "PlayerCharacter.h"
 
 //States
 #include "MainMenu.h"
@@ -34,20 +35,22 @@ void TestState::Enter()
 	//ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
 	ResourceManager::LoadTexture("res/img/player.png", true, "char");
 
-	Level leveltest;
-	leveltest.Load("res/levels/saved.txt");
+	Level levelTest;
+	levelTest.Load("res/levels/saved.txt");
 
 	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 });
 
+	PlayerCharacter *player = new PlayerCharacter();
+
 	texture = ResourceManager::GetTexture("char");
-	player = ECSHandler::Instance()->CreateEntity();
-	ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
-	ECSHandler::Instance()->GetComponent<EntityData>(player).tag = "Player";
-	ECSHandler::Instance()->AddComponent(player, Transform{ glm::vec2(1200.f, 600.f) });
-	ECSHandler::Instance()->AddComponent(player, Rendering{ shader, texture });
-	ECSHandler::Instance()->AddComponent(player, Movement{ });
-	ECSHandler::Instance()->AddComponent(player, Player{ });
-	ECSHandler::Instance()->AddComponent(player, Collider{ true });
+	//player = ECSHandler::Instance()->CreateEntity();
+	//ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
+	//ECSHandler::Instance()->GetComponent<EntityData>(player).tag = "Player";
+	//ECSHandler::Instance()->AddComponent(player, Transform{ glm::vec2(1200.f, 600.f) });
+	//ECSHandler::Instance()->AddComponent(player, Rendering{ shader, texture });
+	//ECSHandler::Instance()->AddComponent(player, Movement{ });
+	//ECSHandler::Instance()->AddComponent(player, Player{ });
+	//ECSHandler::Instance()->AddComponent(player, Collider{ true });
 
 	glm::vec2 spawnLocations[5];
 	spawnLocations[0] = glm::vec2(200.f, 60.f);

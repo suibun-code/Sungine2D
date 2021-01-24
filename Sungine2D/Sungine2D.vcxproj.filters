@@ -43,6 +43,9 @@
     <Filter Include="Engine\ECS">
       <UniqueIdentifier>{8868320f-1e38-4c81-8071-2fd428f06e61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Prefabs">
+      <UniqueIdentifier>{badcbe44-6352-4f58-9801-b75de7ad0583}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\imgui-1.78\imconfig.h">
@@ -171,11 +174,17 @@
     <ClInclude Include="Enemy.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="EnemySystem.h">
       <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Game\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCharacter.h">
+      <Filter>Game\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourScript.h">
+      <Filter>Engine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +271,15 @@
     </ClCompile>
     <ClCompile Include="EnemySystem.cpp">
       <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Game\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
+      <Filter>Game\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourScript.cpp">
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

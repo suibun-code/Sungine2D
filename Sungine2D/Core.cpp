@@ -21,6 +21,7 @@
 #include "GameInstance.h"
 #include "ResourceManager.h"
 #include "ECSHandler.h"
+
 #include "MainMenu.h"
 #include "TestState.h"
 
@@ -187,7 +188,6 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	ECSHandler::Instance()->RegisterComponent<Rendering>();
 	ECSHandler::Instance()->RegisterComponent<Text>();
 	ECSHandler::Instance()->RegisterComponent<Collider>();
-	ECSHandler::Instance()->RegisterComponent<Bullet>();
 
 	//Register systems.
 	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();

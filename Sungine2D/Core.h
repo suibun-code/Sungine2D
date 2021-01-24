@@ -20,7 +20,6 @@
 #include "Rendering.h"
 #include "Text.h"
 #include "Collider.h"
-#include "Bullet.h"
 
 //Systems
 #include "MovementSystem.h"

@@ -1,0 +1,44 @@
+﻿#include "PlayerCharacter.h"
+
+#include "ResourceManager.h"
+
+#include "Transform.h"
+#include "Rendering.h"
+#include "Movement.h"
+#include "Collider.h"
+#include "Player.h"
+
+SuTexture2D PlayerCharacter::mTexture;
+
+PlayerCharacter::PlayerCharacter()
+{
+	mTexture = mTexture = ResourceManager::GetTexture("char");
+
+	mEntity = ECSHandler::Instance()->CreateEntity();
+
+	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).name = "Player";
+	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Player";
+	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(1200.f, 600.f) });
+	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), mTexture });
+	ECSHandler::Instance()->AddComponent(mEntity, Movement{ });
+	ECSHandler::Instance()->AddComponent(mEntity, Player{ });
+	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
+
+	ECSHandler::Instance()->GetComponent<Collider>(mEntity).OnCollision = OnCollision;
+
+	//for (int i = 0; i < 20; i++)
+	//{
+	//	Bullet* bullet = new Bullet();
+	//	mBulletOP.push_back(bullet);
+	//}
+}
+
+ECSEntity PlayerCharacter::GetEntity()
+{
+	return mEntity;
+}
+
+void PlayerCharacter::OnCollision()
+{
+	//std::cout << "PlayerCharacter\n";
+}
