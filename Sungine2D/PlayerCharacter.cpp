@@ -12,6 +12,11 @@ SuTexture2D PlayerCharacter::mTexture;
 
 PlayerCharacter::PlayerCharacter()
 {
+	BehaviourScript::Generate();
+}
+
+void PlayerCharacter::Start()
+{
 	mTexture = mTexture = ResourceManager::GetTexture("char");
 
 	mEntity = ECSHandler::Instance()->CreateEntity();
@@ -31,13 +36,12 @@ PlayerCharacter::PlayerCharacter()
 	//	Bullet* bullet = new Bullet();
 	//	mBulletOP.push_back(bullet);
 	//}
-
-	BehaviourScript::Start();
+	
+	std::cout << "Made player\n";
 }
 
-void PlayerCharacter::Start()
+void PlayerCharacter::Destroy()
 {
-	std::cout << "Made player\n";
 }
 
 void PlayerCharacter::Update()
@@ -49,7 +53,7 @@ ECSEntity PlayerCharacter::GetEntity()
 	return mEntity;
 }
 
-void PlayerCharacter::OnCollision()
+void PlayerCharacter::OnCollision(ECSEntity other)
 {
-	//std::cout << "PlayerCharacter\n";
+	
 }

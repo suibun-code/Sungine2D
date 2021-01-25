@@ -18,8 +18,9 @@ public:
 	PlayerCharacter();
 
 	void Start() override;
+	void Destroy() override;
 	void Update() override;
 
 	ECSEntity GetEntity();
-	static void OnCollision();
+	static void OnCollision(ECSEntity other);
 };

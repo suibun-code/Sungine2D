@@ -12,9 +12,17 @@ SuTexture2D Bullet::mTexture;
 
 Bullet::Bullet()
 {
-	//std::cout << mAllBehaviourScripts.size() << "\n";
-	
-	if (mBulletCount == 0)
+	BehaviourScript::Generate();
+}
+
+Bullet::~Bullet()
+{
+	mBulletCount--;
+}
+
+void Bullet::Start()
+{
+		if (mBulletCount == 0)
 	{
 		ResourceManager::LoadTexture("res/img/bullet3.png", true, "bullet");
 		mTexture = ResourceManager::GetTexture("bullet");
@@ -32,18 +40,12 @@ Bullet::Bullet()
 	ECSHandler::Instance()->GetComponent<Collider>(mEntity).OnCollision = OnCollision;
 
 	mBulletCount++;
-
-	BehaviourScript::Start();
-}
-
-Bullet::~Bullet()
-{
-	mBulletCount--;
-}
-
-void Bullet::Start()
-{
+	
 	std::cout << "Made bullet\n";
+}
+
+void Bullet::Destroy()
+{
 }
 
 void Bullet::Update()
@@ -56,9 +58,9 @@ ECSEntity Bullet::GetEntity()
 	return mEntity;
 }
 
-void Bullet::OnCollision()
+void Bullet::OnCollision(ECSEntity other)
 {
-	//std::cout << "Bullet\n";
+	std::cout << "name: " << ECSHandler::Instance()->GetComponent<EntityData>(other).name << "\n";
 }
 
 

@@ -10,10 +10,11 @@ public:
 	BehaviourScript();
 	~BehaviourScript();
 
-	void AddToAll();
+	void Generate();
 	
-	virtual void Start();
-	virtual void Update();
+	virtual void Start() = 0;
+	virtual void Destroy() = 0;
+	virtual void Update() = 0;
 
 	static std::vector<BehaviourScript*> GetBehaviourScripts() { return mAllBehaviourScripts; }
 };

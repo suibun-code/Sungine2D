@@ -143,5 +143,5 @@ void CollisionSystem::Update()
 
 void CollisionSystem::OnCollision(ECSEntity entity, ECSEntity other)
 {
-	ECSHandler::Instance()->GetComponent<Collider>(entity).Call();
+	ECSHandler::Instance()->GetComponent<Collider>(entity).Call(other);
 }

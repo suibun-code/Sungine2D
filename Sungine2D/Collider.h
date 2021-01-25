@@ -21,11 +21,11 @@ struct Collider
 
 	//std::function<void()> OnCollision = nullptr;
 
-	void (*OnCollision)() = nullptr;
+	void (*OnCollision)(ECSEntity other) = nullptr;
 
-	void Call()
+	void Call(ECSEntity other)
 	{
 		if (OnCollision != nullptr)
-			OnCollision();
+			OnCollision(other);
 	}
 };
