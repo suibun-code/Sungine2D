@@ -3,13 +3,17 @@
 
 class BehaviourScript
 {
-private:
-	std::vector<BehaviourScript*> mAllBehaviourScripts;
+protected:
+	static std::vector<BehaviourScript*> mAllBehaviourScripts;
 	
 public:
 	BehaviourScript();
 	~BehaviourScript();
+
+	void AddToAll();
 	
-	void Start();
-	void Update();
+	virtual void Start();
+	virtual void Update();
+
+	static std::vector<BehaviourScript*> GetBehaviourScripts() { return mAllBehaviourScripts; }
 };

@@ -6,7 +6,7 @@
 
 #include "Bullet.h"
 
-class PlayerCharacter
+class PlayerCharacter : public BehaviourScript
 {
 private:
 	ECSEntity mEntity;
@@ -16,6 +16,9 @@ public:
 	static SuTexture2D mTexture;
 
 	PlayerCharacter();
+
+	void Start() override;
+	void Update() override;
 
 	ECSEntity GetEntity();
 	static void OnCollision();

@@ -31,6 +31,17 @@ PlayerCharacter::PlayerCharacter()
 	//	Bullet* bullet = new Bullet();
 	//	mBulletOP.push_back(bullet);
 	//}
+
+	BehaviourScript::Start();
+}
+
+void PlayerCharacter::Start()
+{
+	std::cout << "Made player\n";
+}
+
+void PlayerCharacter::Update()
+{
 }
 
 ECSEntity PlayerCharacter::GetEntity()

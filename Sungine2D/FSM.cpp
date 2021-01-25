@@ -14,6 +14,9 @@ void State::Enter()
 
 void State::Update(float deltaTime)
 {
+	for (unsigned int i = 0; i < BehaviourScript::GetBehaviourScripts().size(); i++)
+		BehaviourScript::GetBehaviourScripts().at(i)->Update();
+	
 	if (Core::Instance()->GameInstanceEnabled() == true)
 		GameInstance::Instance()->Update(deltaTime);
 }
