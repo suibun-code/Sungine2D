@@ -10,6 +10,7 @@
 
 #include "ResourceManager.h"
 #include "ECSHandler.h"
+#include "EntityData.h"
 
 void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight)
 {
@@ -60,6 +61,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 				case 2:
 				{
 					texture = ResourceManager::GetTexture("wall");
+					ECSHandler::Instance()->GetComponent<EntityData>(tile).tag = "wall";
 					ECSHandler::Instance()->AddComponent(tile, Collider{ });
 				}
 				break;

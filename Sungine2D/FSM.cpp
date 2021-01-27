@@ -4,6 +4,7 @@
 
 #include "Core.h"
 #include "GameInstance.h"
+#include "BehaviourScript.h"
 
 //State
 void State::Enter()

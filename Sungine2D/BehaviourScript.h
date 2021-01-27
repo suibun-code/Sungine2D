@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <vector>
 
+#include "Collision.h"
+#include "ECSSystem.h"
+
 class BehaviourScript
 {
 protected:
@@ -15,6 +18,9 @@ public:
 	virtual void Start() = 0;
 	virtual void Destroy() = 0;
 	virtual void Update() = 0;
+
+	//Return true if the owning entity was destroyed in this method.
+	virtual bool OnCollision(ECSEntity other);
 
 	static std::vector<BehaviourScript*> GetBehaviourScripts() { return mAllBehaviourScripts; }
 };

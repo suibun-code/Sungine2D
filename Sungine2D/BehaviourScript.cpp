@@ -22,4 +22,9 @@ void BehaviourScript::Generate()
 		mAllBehaviourScripts.back()->Start();
 }
 
+bool BehaviourScript::OnCollision(ECSEntity other)
+{
+	return false;
+}
+
 

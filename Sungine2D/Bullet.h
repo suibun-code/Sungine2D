@@ -23,5 +23,5 @@ public:
 	void Update() override;
 
 	ECSEntity GetEntity();
-	static void OnCollision(ECSEntity other);
+	bool OnCollision(ECSEntity other) override;
 };

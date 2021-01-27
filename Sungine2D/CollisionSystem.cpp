@@ -43,105 +43,113 @@ void CollisionSystem::Update()
 
 		for (auto const& other : mEntities)
 		{
-			if (entity != other)
+			if (entity == other)
+				continue;
+
+			auto& colliderOther = ECSHandler::Instance()->GetComponent<Collider>(other);
+
+			//This entity is tagged as an overlapper, meaning it does not check for collisions itself, therefore skips the next section.
+			if (colliderOther.overlapper == true)
+				continue;
+
+			auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
+			auto& dataOther = ECSHandler::Instance()->GetComponent<EntityData>(other);
+
+			//X-axis
+			bool collisionX = (transform.position.x + collider.offset.x) + collider.boundingBox.x >= (transformOther.position.x + colliderOther.offset.x) &&
+				(transformOther.position.x + colliderOther.offset.x) + colliderOther.boundingBox.x >= (transform.position.x + collider.offset.x);
+
+			//Y-axis
+			bool collisionY = (transform.position.y + collider.offset.y) + collider.boundingBox.y >= (transformOther.position.y + colliderOther.offset.y) &&
+				(transformOther.position.y + colliderOther.offset.y) + colliderOther.boundingBox.y >= (transform.position.y + collider.offset.y);
+
+			//No collision is detected. Continue to next entity before doing advanced checks as there is no need.
+			if (!(collisionX && collisionY))
 			{
-				auto& colliderOther = ECSHandler::Instance()->GetComponent<Collider>(other);
+				collider.colliding = false;
+				continue;
+			}
 
-				//This entity is tagged as an overlapper, meaning it does not check for collisions itself, therefore skips the next section.
-				if (colliderOther.overlapper == true)
-					continue;
+			collider.colliding = true;
 
-				auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
-				auto& dataOther = ECSHandler::Instance()->GetComponent<EntityData>(other);
+			if (OnCollision(entity, other) == true)
+				return;
 
-				//X-axis
-				bool collisionX = (transform.position.x + collider.offset.x) + collider.boundingBox.x >= (transformOther.position.x + colliderOther.offset.x) &&
-					(transformOther.position.x + colliderOther.offset.x) + colliderOther.boundingBox.x >= (transform.position.x + collider.offset.x);
+			//RIGHT SIDE WITH LEFT SIDE
+			if (transform.position.x + collider.boundingBox.x >= transformOther.position.x && transform.position.x <= transformOther.position.x && collisionY)
+			{
+				xDepth = (transform.position.x + collider.boundingBox.x) - transformOther.position.x;
+				xHighestDepth = HighestDepth::RIGHT;
+			}
+			//LEFT SIDE WITH RIGHT SIDE
+			if (transformOther.position.x + colliderOther.boundingBox.x >= transform.position.x && transformOther.position.x <= transform.position.x && collisionY)
+			{
+				xDepth = (transformOther.position.x + colliderOther.boundingBox.x) - transform.position.x;
+				xHighestDepth = HighestDepth::LEFT;
+			}
+			//BOTTOM SIDE WITH TOP SIDE
+			if (transform.position.y + collider.boundingBox.y >= transformOther.position.y && transform.position.y <= transformOther.position.y && collisionX)
+			{
+				yDepth = (transform.position.y + collider.boundingBox.y) - transformOther.position.y;
+				yHighestDepth = HighestDepth::TOP;
+			}
+			//TOP SIDE WITH BOTTOM SIDE
+			if (transformOther.position.y + colliderOther.boundingBox.y >= transform.position.y && transformOther.position.y <= transform.position.y && collisionX)
+			{
+				yDepth = (transformOther.position.y + colliderOther.boundingBox.y) - transform.position.y;
+				yHighestDepth = HighestDepth::BOTTOM;
+			}
 
-				//Y-axis
-				bool collisionY = (transform.position.y + collider.offset.y) + collider.boundingBox.y >= (transformOther.position.y + colliderOther.offset.y) &&
-					(transformOther.position.y + colliderOther.offset.y) + colliderOther.boundingBox.y >= (transform.position.y + collider.offset.y);
+			//Stupid but this works for now. Pushes back a little farther to make sure the depth removal doesn't end at a spot where collision is still happening.
+			xDepth += 0.001f;
+			yDepth += 0.001f;
 
-				//No collision is detected. Continue to next entity before doing advanced checks as there is no need.
-				if (!(collisionX && collisionY))
+			if (xDepth < yDepth)
+			{
+				switch (xHighestDepth)
 				{
-					collider.colliding = false;
-					continue;
+				case HighestDepth::LEFT:
+					transform.position.x += xDepth;
+					break;
+
+				case HighestDepth::RIGHT:
+					transform.position.x -= xDepth;
+					break;
+
+				default:
+					transform.position.x += xDepth;
+					break;
 				}
-
-				collider.colliding = true;
-
-				OnCollision(entity, other);
-
-				//RIGHT SIDE WITH LEFT SIDE
-				if (transform.position.x + collider.boundingBox.x >= transformOther.position.x && transform.position.x <= transformOther.position.x && collisionY)
+			}
+			if (yDepth < xDepth)
+			{
+				switch (yHighestDepth)
 				{
-					xDepth = (transform.position.x + collider.boundingBox.x) - transformOther.position.x;
-					xHighestDepth = HighestDepth::RIGHT;
-				}
-				//LEFT SIDE WITH RIGHT SIDE
-				if (transformOther.position.x + colliderOther.boundingBox.x >= transform.position.x && transformOther.position.x <= transform.position.x && collisionY)
-				{
-					xDepth = (transformOther.position.x + colliderOther.boundingBox.x) - transform.position.x;
-					xHighestDepth = HighestDepth::LEFT;
-				}
-				//BOTTOM SIDE WITH TOP SIDE
-				if (transform.position.y + collider.boundingBox.y >= transformOther.position.y && transform.position.y <= transformOther.position.y && collisionX)
-				{
-					yDepth = (transform.position.y + collider.boundingBox.y) - transformOther.position.y;
-					yHighestDepth = HighestDepth::TOP;
-				}
-				//TOP SIDE WITH BOTTOM SIDE
-				if (transformOther.position.y + colliderOther.boundingBox.y >= transform.position.y && transformOther.position.y <= transform.position.y && collisionX)
-				{
-					yDepth = (transformOther.position.y + colliderOther.boundingBox.y) - transform.position.y;
-					yHighestDepth = HighestDepth::BOTTOM;
-				}
+				case HighestDepth::TOP:
+					transform.position.y -= yDepth;
+					break;
 
-				//Stupid but this works for now. Pushes back a little farther to make sure the depth removal doesn't end at a spot where collision is still happening.
-				xDepth += 0.001f;
-				yDepth += 0.001f;
+				case HighestDepth::BOTTOM:
+					transform.position.y += yDepth;
+					break;
 
-				if (xDepth < yDepth)
-				{
-					switch (xHighestDepth)
-					{
-					case HighestDepth::LEFT:
-						transform.position.x += xDepth;
-						break;
-
-					case HighestDepth::RIGHT:
-						transform.position.x -= xDepth;
-						break;
-
-					default:
-						transform.position.x += xDepth;
-						break;
-					}
-				}
-				if (yDepth < xDepth)
-				{
-					switch (yHighestDepth)
-					{
-					case HighestDepth::TOP:
-						transform.position.y -= yDepth;
-						break;
-
-					case HighestDepth::BOTTOM:
-						transform.position.y += yDepth;
-						break;
-
-					default:
-						transform.position.y -= yDepth;
-						break;
-					}
+				default:
+					transform.position.y -= yDepth;
+					break;
 				}
 			}
 		}
 	}
 }
 
-void CollisionSystem::OnCollision(ECSEntity entity, ECSEntity other)
+bool CollisionSystem::OnCollision(ECSEntity entity, ECSEntity other)
 {
-	ECSHandler::Instance()->GetComponent<Collider>(entity).Call(other);
+	//Collision collision;
+	//collision.SetName(ECSHandler::Instance()->GetComponent<EntityData>(other).name);
+	//collision.SetTag(ECSHandler::Instance()->GetComponent<EntityData>(other).tag);
+
+	if (ECSHandler::Instance()->GetComponent<EntityData>(entity).script != nullptr)
+		return ECSHandler::Instance()->GetComponent<Collider>(entity).Call(other, entity);
+	else
+		return false;
 }

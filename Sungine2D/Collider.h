@@ -1,9 +1,13 @@
 #pragma once
 
 #include <functional>
-#include "Bullet.h"
+
+#include "ECSSystem.h"
+#include "BehaviourScript.h"
+#include "EntityData.h"
 
 //GLM
+#include "ECSHandler.h"
 #include "glm/glm/glm.hpp"
 
 struct Collider
@@ -14,18 +18,8 @@ struct Collider
 	glm::vec2 offset = glm::vec2(0.f);
 	bool colliding = false;
 
-	Collider(bool moveable = false, bool overlapper = false, glm::vec2 boundingBox = glm::vec2(1.f), glm::vec2 offset = glm::vec2(0.f), bool colliding = false) : moveable(moveable), overlapper(overlapper), boundingBox(boundingBox), offset(offset), colliding(colliding)
+	bool Call(ECSEntity other, ECSEntity entity)
 	{
-		
-	}
-
-	//std::function<void()> OnCollision = nullptr;
-
-	void (*OnCollision)(ECSEntity other) = nullptr;
-
-	void Call(ECSEntity other)
-	{
-		if (OnCollision != nullptr)
-			OnCollision(other);
+		return ECSHandler::Instance()->GetComponent<EntityData>(entity).script->OnCollision(other);
 	}
 };

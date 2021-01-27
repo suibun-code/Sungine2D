@@ -23,6 +23,6 @@ private:
 public:
 	void Init();
 	void Update();
-	void OnCollision(ECSEntity entity, ECSEntity other);
+	bool OnCollision(ECSEntity entity, ECSEntity other);
 };
 

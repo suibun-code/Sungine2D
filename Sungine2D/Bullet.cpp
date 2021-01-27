@@ -6,6 +6,7 @@
 #include "Rendering.h"
 #include "Movement.h"
 #include "Collider.h"
+#include "Enemy.h"
 
 int Bullet::mBulletCount = 0;
 SuTexture2D Bullet::mTexture;
@@ -22,7 +23,7 @@ Bullet::~Bullet()
 
 void Bullet::Start()
 {
-		if (mBulletCount == 0)
+	if (mBulletCount == 0)
 	{
 		ResourceManager::LoadTexture("res/img/bullet3.png", true, "bullet");
 		mTexture = ResourceManager::GetTexture("bullet");
@@ -31,13 +32,14 @@ void Bullet::Start()
 	mEntity = ECSHandler::Instance()->CreateEntity();
 
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Bullet";
+	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).script = this;
 
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{  });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), mTexture });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 450.f });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true, true });
 
-	ECSHandler::Instance()->GetComponent<Collider>(mEntity).OnCollision = OnCollision;
+	//ECSHandler::Instance()->GetComponent<Collider>(mEntity).OnCollision = OnCollision;
 
 	mBulletCount++;
 	
@@ -46,6 +48,7 @@ void Bullet::Start()
 
 void Bullet::Destroy()
 {
+	ECSHandler::Instance()->DestroyEntity(mEntity);
 }
 
 void Bullet::Update()
@@ -58,9 +61,17 @@ ECSEntity Bullet::GetEntity()
 	return mEntity;
 }
 
-void Bullet::OnCollision(ECSEntity other)
+bool Bullet::OnCollision(ECSEntity other)
 {
-	std::cout << "name: " << ECSHandler::Instance()->GetComponent<EntityData>(other).name << "\n";
+	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Enemy")
+	{
+		auto& enemyOther = ECSHandler::Instance()->GetComponent<Enemy>(other);
+		enemyOther.health -= 25;
+		ECSHandler::Instance()->DestroyEntity(mEntity);
+		return true;
+	}
+
+	return false;
 }
 
 
