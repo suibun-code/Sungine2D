@@ -167,6 +167,7 @@
     <ClInclude Include="ECSSystem.h" />
     <ClInclude Include="ECSSystemManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="EnemySystem.h" />
     <ClInclude Include="EntityData.h" />
     <ClInclude Include="FSM.h" />
@@ -176,10 +177,8 @@
     <ClInclude Include="MappingState.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="MovementSystem.h" />
-    <ClInclude Include="OverlapSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCharacter.h" />
-    <ClInclude Include="PlayerSystem.h" />
     <ClInclude Include="Rendering.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -208,6 +207,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="ECSEntityManager.cpp" />
     <ClCompile Include="ECSHandler.cpp" />
+    <ClCompile Include="EnemyCharacter.cpp" />
     <ClCompile Include="EnemySystem.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
@@ -216,9 +216,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MappingState.cpp" />
     <ClCompile Include="MovementSystem.cpp" />
-    <ClCompile Include="OverlapSystem.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
-    <ClCompile Include="PlayerSystem.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />

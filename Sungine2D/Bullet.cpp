@@ -39,11 +39,7 @@ void Bullet::Start()
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 450.f });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true, true });
 
-	//ECSHandler::Instance()->GetComponent<Collider>(mEntity).OnCollision = OnCollision;
-
 	mBulletCount++;
-	
-	std::cout << "Made bullet\n";
 }
 
 void Bullet::Destroy()
@@ -51,9 +47,9 @@ void Bullet::Destroy()
 	ECSHandler::Instance()->DestroyEntity(mEntity);
 }
 
-void Bullet::Update()
+void Bullet::Update(float deltaTime)
 {
-	//std::cout << "Bullet\n";
+	
 }
 
 ECSEntity Bullet::GetEntity()

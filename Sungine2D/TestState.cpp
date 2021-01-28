@@ -11,6 +11,7 @@
 #include "PlayerCharacter.h"
 
 //States
+#include "EnemyCharacter.h"
 #include "MainMenu.h"
 
 ECSEntity player;
@@ -30,7 +31,7 @@ void TestState::Enter()
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
 
 	shader = ResourceManager::GetShader("sprite");
-	SuTexture2D texture;
+	//SuTexture2D texture;
 
 	//ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
 	ResourceManager::LoadTexture("res/img/player.png", true, "char");
@@ -40,9 +41,7 @@ void TestState::Enter()
 
 	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 });
 
-	PlayerCharacter *player = new PlayerCharacter();
-
-	texture = ResourceManager::GetTexture("char");
+	//texture = ResourceManager::GetTexture("char");
 	//player = ECSHandler::Instance()->CreateEntity();
 	//ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
 	//ECSHandler::Instance()->GetComponent<EntityData>(player).tag = "Player";
@@ -59,25 +58,18 @@ void TestState::Enter()
 	spawnLocations[3] = glm::vec2(550.f, 55.f);
 	spawnLocations[4] = glm::vec2(600.f, 45.f);
 
-	for (int i = 0; i < 5; i++)
-	{
-		ECSEntity enemy = ECSHandler::Instance()->CreateEntity();
-		ECSHandler::Instance()->GetComponent<EntityData>(enemy).tag = "Enemy";
-		ECSHandler::Instance()->AddComponent(enemy, Transform{ spawnLocations[i] });
-		ECSHandler::Instance()->AddComponent(enemy, Rendering{ shader, texture, glm::vec3(.75f, .5f, .5f) });
-		ECSHandler::Instance()->AddComponent(enemy, Collider{ true });
-		ECSHandler::Instance()->AddComponent(enemy, Enemy{ });
-		ECSHandler::Instance()->AddComponent(enemy, Movement{ });
-	}
+	PlayerCharacter* player = new PlayerCharacter();
 
-	Core::Instance()->GetSystem<PlayerSystem>()->Init();
-	Core::Instance()->GetSystem<EnemySystem>()->Init();
+	//for (int i = 0; i < 1; i++)
+	//{
+	EnemyCharacter* enemy = new EnemyCharacter();
+	ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[0];
+	//}
+
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<MovementSystem>()->Init();
 	Core::Instance()->GetSystem<CollisionSystem>()->Init();
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
-
-	//Core::Instance()->GetSystem<OverlapSystem>()->Init();
 
 	State::Enter();
 }
@@ -93,15 +85,11 @@ void TestState::Update(float deltaTime)
 	ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["PlayerHP"]).ChangeText(std::to_string(ECSHandler::Instance()->GetComponent<Player>(player).health));
 
 	Core::Instance()->GetSystem<TextSystem>()->Update();
-	Core::Instance()->GetSystem<PlayerSystem>()->Update(deltaTime);
-	Core::Instance()->GetSystem<EnemySystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<CollisionSystem>()->Update();
 
 	if (ECSHandler::Instance()->GetComponent<Transform>(player).IsDirty())
 		ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["PlayerHP"]).SetPosition(glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(player).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(player).position.y - 25));
-
-	//Core::Instance()->GetSystem<OverlapSystem>()->Update(deltaTime);
 
 	State::Update(deltaTime);
 }

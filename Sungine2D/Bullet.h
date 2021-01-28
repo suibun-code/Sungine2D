@@ -20,7 +20,7 @@ public:
 
 	void Start() override;
 	void Destroy() override;
-	void Update() override;
+	void Update(float deltaTime) override;
 
 	ECSEntity GetEntity();
 	bool OnCollision(ECSEntity other) override;

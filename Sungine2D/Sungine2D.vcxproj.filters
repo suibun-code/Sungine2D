@@ -165,12 +165,6 @@
     <ClInclude Include="Rendering.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerSystem.h">
-      <Filter>Engine\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="OverlapSystem.h">
-      <Filter>Engine\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
@@ -188,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Engine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyCharacter.h">
+      <Filter>Game\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,12 +263,6 @@
     <ClCompile Include="MappingState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerSystem.cpp">
-      <Filter>Engine\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="OverlapSystem.cpp">
-      <Filter>Engine\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="EnemySystem.cpp">
       <Filter>Engine\Systems</Filter>
     </ClCompile>
@@ -286,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Engine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyCharacter.cpp">
+      <Filter>Game\Prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

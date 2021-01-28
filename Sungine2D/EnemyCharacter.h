@@ -1,16 +1,18 @@
 ﻿#pragma once
 
-#include "ECSHandler.h"
-#include "Bullet.h"
+#include "BehaviourScript.h"
+#include "Types.h"
 
-class PlayerCharacter : public BehaviourScript
+class EnemyCharacter : public BehaviourScript
 {
 private:
 	ECSEntity mEntity;
-	std::vector<Bullet*> mBulletOP;
-
+	
+	int health = 100;
+	ECSEntity healthText;
+	
 public:
-	PlayerCharacter();
+	EnemyCharacter();
 
 	void Start() override;
 	void Destroy() override;
@@ -18,4 +20,5 @@ public:
 
 	ECSEntity GetEntity();
 	bool OnCollision(ECSEntity other) override;
+	
 };

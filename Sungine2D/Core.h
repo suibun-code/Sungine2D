@@ -26,9 +26,6 @@
 #include "RenderSystem.h"
 #include "TextSystem.h"
 #include "CollisionSystem.h"
-#include "PlayerSystem.h"
-#include "EnemySystem.h"
-#include "OverlapSystem.h"
 
 #include "FSM.h"
 #include "AudioManager.h"
@@ -46,9 +43,6 @@ private:
 	std::shared_ptr<RenderSystem> mpRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
 	std::shared_ptr<CollisionSystem> mpCollisionSystem;
-	std::shared_ptr<PlayerSystem> mpPlayerSystem;
-	std::shared_ptr<EnemySystem> mpEnemySystem;
-	std::shared_ptr<OverlapSystem> mpOverlapSystem;
 
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;

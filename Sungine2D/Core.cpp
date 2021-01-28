@@ -194,9 +194,6 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
 	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
 	mpCollisionSystem = ECSHandler::Instance()->RegisterSystem<CollisionSystem>();
-	mpPlayerSystem = ECSHandler::Instance()->RegisterSystem<PlayerSystem>();
-	mpEnemySystem = ECSHandler::Instance()->RegisterSystem<EnemySystem>();
-	mpOverlapSystem = ECSHandler::Instance()->RegisterSystem<OverlapSystem>();
 
 	Signature movementSignature;
 	movementSignature.set(ECSHandler::Instance()->GetComponentType<Movement>());
@@ -220,31 +217,10 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	collisionSignature.set(ECSHandler::Instance()->GetComponentType<Collider>());
 	ECSHandler::Instance()->SetSystemSignature<CollisionSystem>(collisionSignature);
 
-	Signature overlapSignature;
-	overlapSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
-	overlapSignature.set(ECSHandler::Instance()->GetComponentType<Collider>());
-	ECSHandler::Instance()->SetSystemSignature<OverlapSystem>(overlapSignature);
-
-	Signature playerSignature;
-	playerSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
-	playerSignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
-	playerSignature.set(ECSHandler::Instance()->GetComponentType<Movement>());
-	playerSignature.set(ECSHandler::Instance()->GetComponentType<Player>());
-	ECSHandler::Instance()->SetSystemSignature<PlayerSystem>(playerSignature);
-
-	Signature enemySignature;
-	enemySignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
-	enemySignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
-	enemySignature.set(ECSHandler::Instance()->GetComponentType<Enemy>());
-	ECSHandler::Instance()->SetSystemSignature<EnemySystem>(enemySignature);
-
 	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
 	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
 	mpSystems.insert({ typeid(TextSystem).name(), mpTextSystem });
 	mpSystems.insert({ typeid(CollisionSystem).name(), mpCollisionSystem });
-	mpSystems.insert({ typeid(OverlapSystem).name(), mpCollisionSystem });
-	mpSystems.insert({ typeid(PlayerSystem).name(), mpPlayerSystem });
-	mpSystems.insert({ typeid(EnemySystem).name(), mpEnemySystem });
 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
