@@ -153,9 +153,6 @@
     <ClInclude Include="Text.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Movement.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
@@ -180,11 +177,14 @@
     <ClInclude Include="BehaviourScript.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Engine\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyCharacter.h">
       <Filter>Game\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Follow.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowSystem.h">
+      <Filter>Engine\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -275,11 +275,11 @@
     <ClCompile Include="BehaviourScript.cpp">
       <Filter>Engine\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Engine\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyCharacter.cpp">
       <Filter>Game\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowSystem.cpp">
+      <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

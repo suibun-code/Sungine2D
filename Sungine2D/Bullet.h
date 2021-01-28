@@ -9,7 +9,7 @@
 class Bullet : public BehaviourScript
 {
 private:
-	ECSEntity mEntity;
+	
 
 public:
 	static int mBulletCount;
@@ -21,7 +21,6 @@ public:
 	void Start() override;
 	void Destroy() override;
 	void Update(float deltaTime) override;
-
-	ECSEntity GetEntity();
+	
 	bool OnCollision(ECSEntity other) override;
 };

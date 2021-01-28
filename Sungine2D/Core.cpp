@@ -181,19 +181,20 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Register components.
 	ECSHandler::Instance()->RegisterComponent<EntityData>();
-	ECSHandler::Instance()->RegisterComponent<Player>();
 	ECSHandler::Instance()->RegisterComponent<Enemy>();
 	ECSHandler::Instance()->RegisterComponent<Transform>();
 	ECSHandler::Instance()->RegisterComponent<Movement>();
 	ECSHandler::Instance()->RegisterComponent<Rendering>();
 	ECSHandler::Instance()->RegisterComponent<Text>();
 	ECSHandler::Instance()->RegisterComponent<Collider>();
+	ECSHandler::Instance()->RegisterComponent<Follow>();
 
 	//Register systems.
 	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();
 	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
 	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
 	mpCollisionSystem = ECSHandler::Instance()->RegisterSystem<CollisionSystem>();
+	mpFollowSystem = ECSHandler::Instance()->RegisterSystem<FollowSystem>();
 
 	Signature movementSignature;
 	movementSignature.set(ECSHandler::Instance()->GetComponentType<Movement>());
@@ -217,10 +218,17 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	collisionSignature.set(ECSHandler::Instance()->GetComponentType<Collider>());
 	ECSHandler::Instance()->SetSystemSignature<CollisionSystem>(collisionSignature);
 
+	Signature followSignature;
+	followSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
+	followSignature.set(ECSHandler::Instance()->GetComponentType<Movement>());
+	followSignature.set(ECSHandler::Instance()->GetComponentType<Follow>());
+	ECSHandler::Instance()->SetSystemSignature<FollowSystem>(followSignature);
+
 	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
 	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
 	mpSystems.insert({ typeid(TextSystem).name(), mpTextSystem });
 	mpSystems.insert({ typeid(CollisionSystem).name(), mpCollisionSystem });
+	mpSystems.insert({ typeid(FollowSystem).name(), mpFollowSystem });
 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();

@@ -13,19 +13,20 @@
 
 //Components
 #include "EntityData.h"
-#include "Player.h"
 #include "Enemy.h"
 #include "Transform.h"
 #include "Movement.h"
 #include "Rendering.h"
 #include "Text.h"
 #include "Collider.h"
+#include "Follow.h"
 
 //Systems
 #include "MovementSystem.h"
 #include "RenderSystem.h"
 #include "TextSystem.h"
 #include "CollisionSystem.h"
+#include "FollowSystem.h"
 
 #include "FSM.h"
 #include "AudioManager.h"
@@ -43,6 +44,7 @@ private:
 	std::shared_ptr<RenderSystem> mpRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
 	std::shared_ptr<CollisionSystem> mpCollisionSystem;
+	std::shared_ptr<FollowSystem> mpFollowSystem;
 
 	//OpenGL context.
 	SDL_GLContext mGLContext = NULL;

@@ -59,34 +59,39 @@ void TestState::Enter()
 	spawnLocations[4] = glm::vec2(600.f, 45.f);
 
 	PlayerCharacter* player = new PlayerCharacter();
+	player->SetParent(player);
 
 	//for (int i = 0; i < 1; i++)
 	//{
 	EnemyCharacter* enemy = new EnemyCharacter();
+	enemy->SetParent(enemy);
 	ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[0];
+	ECSHandler::Instance()->AddComponent(enemy->GetEntity(), Follow{ player->GetEntity() });
 	//}
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<MovementSystem>()->Init();
 	Core::Instance()->GetSystem<CollisionSystem>()->Init();
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
+	Core::Instance()->GetSystem<FollowSystem>()->Init();
 
 	State::Enter();
 }
 
 void TestState::HandleStateEvents(SDL_Event* event)
 {
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
-		ECSHandler::Instance()->GetComponent<Player>(player).health = 50;
+	//if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
+		//ECSHandler::Instance()->GetComponent<Player>(player).health = 50;
 }
 
 void TestState::Update(float deltaTime)
 {
-	ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["PlayerHP"]).ChangeText(std::to_string(ECSHandler::Instance()->GetComponent<Player>(player).health));
+	//ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["PlayerHP"]).ChangeText(std::to_string(ECSHandler::Instance()->GetComponent<Player>(player).health));
 
 	Core::Instance()->GetSystem<TextSystem>()->Update();
 	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<CollisionSystem>()->Update();
+	Core::Instance()->GetSystem<FollowSystem>()->Update(deltaTime);
 
 	if (ECSHandler::Instance()->GetComponent<Transform>(player).IsDirty())
 		ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["PlayerHP"]).SetPosition(glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(player).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(player).position.y - 25));

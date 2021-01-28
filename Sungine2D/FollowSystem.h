@@ -1,13 +1,13 @@
-#pragma once
+﻿#pragma once
 
 #include "ECSSystem.h"
-#include "ECSHandler.h"
 
-class MovementSystem : public ECSSystem
+class FollowSystem : public ECSSystem
 {
 private:
 
 public:
 	void Init();
 	void Update(float deltaTime);
+	
 };

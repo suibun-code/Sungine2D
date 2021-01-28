@@ -1,13 +1,11 @@
 #pragma once
 
-#include <functional>
-
 #include "ECSSystem.h"
 #include "BehaviourScript.h"
 #include "EntityData.h"
+#include "ECSHandler.h"
 
 //GLM
-#include "ECSHandler.h"
 #include "glm/glm/glm.hpp"
 
 struct Collider

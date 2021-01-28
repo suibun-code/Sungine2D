@@ -144,10 +144,6 @@ void CollisionSystem::Update()
 
 bool CollisionSystem::OnCollision(ECSEntity entity, ECSEntity other)
 {
-	//Collision collision;
-	//collision.SetName(ECSHandler::Instance()->GetComponent<EntityData>(other).name);
-	//collision.SetTag(ECSHandler::Instance()->GetComponent<EntityData>(other).tag);
-
 	if (ECSHandler::Instance()->GetComponent<EntityData>(entity).script != nullptr)
 		return ECSHandler::Instance()->GetComponent<Collider>(entity).Call(other, entity);
 	else

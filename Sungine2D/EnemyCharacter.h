@@ -6,8 +6,6 @@
 class EnemyCharacter : public BehaviourScript
 {
 private:
-	ECSEntity mEntity;
-	
 	int health = 100;
 	ECSEntity healthText;
 	
@@ -17,8 +15,7 @@ public:
 	void Start() override;
 	void Destroy() override;
 	void Update(float deltaTime) override;
-
-	ECSEntity GetEntity();
+	
 	bool OnCollision(ECSEntity other) override;
 	
 };

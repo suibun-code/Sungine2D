@@ -157,7 +157,6 @@
     <ClInclude Include="BehaviourScript.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collider.h" />
-    <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="ECSComponentArray.h" />
@@ -170,6 +169,8 @@
     <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="EnemySystem.h" />
     <ClInclude Include="EntityData.h" />
+    <ClInclude Include="Follow.h" />
+    <ClInclude Include="FollowSystem.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="GameInstance.h" />
     <ClInclude Include="Level.h" />
@@ -177,7 +178,6 @@
     <ClInclude Include="MappingState.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="MovementSystem.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Rendering.h" />
     <ClInclude Include="RenderSystem.h" />
@@ -202,13 +202,13 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BehaviourScript.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="ECSEntityManager.cpp" />
     <ClCompile Include="ECSHandler.cpp" />
     <ClCompile Include="EnemyCharacter.cpp" />
     <ClCompile Include="EnemySystem.cpp" />
+    <ClCompile Include="FollowSystem.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameInstance.cpp" />
     <ClCompile Include="Level.cpp" />

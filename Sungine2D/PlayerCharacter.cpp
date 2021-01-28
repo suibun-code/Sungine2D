@@ -7,7 +7,6 @@
 #include "Movement.h"
 #include "Collider.h"
 #include "Core.h"
-#include "Player.h"
 
 PlayerCharacter::PlayerCharacter()
 {
@@ -25,7 +24,6 @@ void PlayerCharacter::Start()
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(1200.f, 600.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char") });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ });
-	ECSHandler::Instance()->AddComponent(mEntity, Player{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
 
 	//for (int i = 0; i < 20; i++)
@@ -74,6 +72,7 @@ void PlayerCharacter::Update(float deltaTime)
 		Core::Instance()->GetAM()->PlaySound(0);
 
 		Bullet* testbullet = new Bullet();
+		testbullet->SetParent(testbullet);
 
 		auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(testbullet->GetEntity());
 		auto& bulletRender = ECSHandler::Instance()->GetComponent<Rendering>(testbullet->GetEntity());
@@ -95,11 +94,6 @@ void PlayerCharacter::Update(float deltaTime)
 		bulletTransform.SetRotation(rotation);
 	}
 
-}
-
-ECSEntity PlayerCharacter::GetEntity()
-{
-	return mEntity;
 }
 
 bool PlayerCharacter::OnCollision(ECSEntity other)

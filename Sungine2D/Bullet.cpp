@@ -18,7 +18,7 @@ Bullet::Bullet()
 
 Bullet::~Bullet()
 {
-	mBulletCount--;
+	
 }
 
 void Bullet::Start()
@@ -44,17 +44,13 @@ void Bullet::Start()
 
 void Bullet::Destroy()
 {
-	ECSHandler::Instance()->DestroyEntity(mEntity);
+	mBulletCount--;
+	BehaviourScript::Destroy();
 }
 
 void Bullet::Update(float deltaTime)
 {
 	
-}
-
-ECSEntity Bullet::GetEntity()
-{
-	return mEntity;
 }
 
 bool Bullet::OnCollision(ECSEntity other)
@@ -63,7 +59,7 @@ bool Bullet::OnCollision(ECSEntity other)
 	{
 		auto& enemyOther = ECSHandler::Instance()->GetComponent<Enemy>(other);
 		enemyOther.health -= 25;
-		ECSHandler::Instance()->DestroyEntity(mEntity);
+		Destroy();
 		return true;
 	}
 

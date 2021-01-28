@@ -49,36 +49,10 @@ void EnemyCharacter::Update(float deltaTime)
 	if (enemy.health == 25)
 		movement.speed = 40000.f;
 
-	if (transform.position.x < glm::vec2(0, 0).x)
-	{
-		movement.velocity.x = movement.speed * deltaTime;
-		transform.dirty = true;
-	}
-	else if (transform.position.x > glm::vec2(0, 0).x)
-	{
-		movement.velocity.x = -movement.speed * deltaTime;
-		transform.dirty = true;
-	}
-	if (transform.position.y < glm::vec2(0, 0).y)
-	{
-		movement.velocity.y = movement.speed * deltaTime;
-		transform.dirty = true;
-	}
-	else if (transform.position.y > glm::vec2(0, 0).y)
-	{
-		movement.velocity.y = -movement.speed * deltaTime;
-		transform.dirty = true;
-	}
-
 	ECSHandler::Instance()->GetComponent<Text>(enemy.healthText).ChangeText(std::to_string(enemy.health));
 
 	if (transform.IsDirty())
 		ECSHandler::Instance()->GetComponent<Transform>(enemy.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
-}
-
-ECSEntity EnemyCharacter::GetEntity()
-{
-	return mEntity;
 }
 
 bool EnemyCharacter::OnCollision(ECSEntity other)
