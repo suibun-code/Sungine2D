@@ -13,7 +13,7 @@
 
 //Components
 #include "EntityData.h"
-#include "Enemy.h"
+#include "Character.h"
 #include "Transform.h"
 #include "Movement.h"
 #include "Rendering.h"
@@ -136,8 +136,10 @@ public:
 
 	Sint32 GetMousePosX() { return mMousePosX; }
 	Sint32 GetMousePosY() { return mMousePosY; }
+	glm::vec2 GetMousePos() { return glm::vec2(mMousePosX, mMousePosY); }
 	Sint32 GetMouseRelX() { return mMouseRelX; }
 	Sint32 GetMouseRelY() { return mMouseRelY; }
+	glm::vec2 GetMousePosRel() { return glm::vec2(mMouseRelX, mMouseRelY); }
 
 	bool IsRunning() { return mIsRunning; }
 	bool Tick();

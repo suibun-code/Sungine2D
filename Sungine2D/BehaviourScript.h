@@ -29,4 +29,5 @@ public:
 	virtual bool OnCollision(ECSEntity other);
 
 	static std::vector<BehaviourScript*> GetBehaviourScripts() { return mAllBehaviourScripts; }
+	static void ClearBehaviourScripts();
 };

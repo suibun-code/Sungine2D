@@ -181,7 +181,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Register components.
 	ECSHandler::Instance()->RegisterComponent<EntityData>();
-	ECSHandler::Instance()->RegisterComponent<Enemy>();
+	ECSHandler::Instance()->RegisterComponent<Character>();
 	ECSHandler::Instance()->RegisterComponent<Transform>();
 	ECSHandler::Instance()->RegisterComponent<Movement>();
 	ECSHandler::Instance()->RegisterComponent<Rendering>();
@@ -414,7 +414,7 @@ void Core::HandleEvents()
 	if (mLMBState == true)
 		mLMBState = false;
 
-	if (SDL_PollEvent(&mEvent))
+	while (SDL_PollEvent(&mEvent))
 	{
 		//Does most of the input/event processing.
 		ImGui_ImplSDL2_ProcessEvent(&mEvent);

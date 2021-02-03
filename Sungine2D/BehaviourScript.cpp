@@ -50,4 +50,15 @@ bool BehaviourScript::OnCollision(ECSEntity other)
 	return false;
 }
 
+void BehaviourScript::ClearBehaviourScripts()
+{
+	for (auto script : mAllBehaviourScripts)
+	{
+		delete script;
+		script = nullptr;
+	}
+
+	mAllBehaviourScripts.clear();
+}
+
 

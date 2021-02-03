@@ -6,7 +6,7 @@
 #include "Rendering.h"
 #include "Movement.h"
 #include "Collider.h"
-#include "Enemy.h"
+#include "Character.h"
 
 int Bullet::mBulletCount = 0;
 SuTexture2D Bullet::mTexture;
@@ -21,7 +21,7 @@ Bullet::~Bullet()
 	
 }
 
-void Bullet::Start()
+void Bullet::Start()  
 {
 	if (mBulletCount == 0)
 	{
@@ -55,15 +55,22 @@ void Bullet::Update(float deltaTime)
 
 bool Bullet::OnCollision(ECSEntity other)
 {
-	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Enemy")
+	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Character")
 	{
-		auto& enemyOther = ECSHandler::Instance()->GetComponent<Enemy>(other);
+		auto& enemyOther = ECSHandler::Instance()->GetComponent<Character>(other);
 		enemyOther.health -= 25;
-		Destroy();
-		return true;
+		//Destroy();
+		return false;
 	}
-
-	return false;
+	else if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Player")
+	{
+		return false;
+	}
+	else
+	{
+		//Destroy();
+		return false;
+	}
 }
 
 

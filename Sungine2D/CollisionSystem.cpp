@@ -5,7 +5,7 @@
 #include "Collider.h"
 #include "Rendering.h"
 #include "Bullet.h"
-#include "Enemy.h"
+#include "Character.h"
 
 #include "Core.h"
 
@@ -48,8 +48,8 @@ void CollisionSystem::Update()
 
 			auto& colliderOther = ECSHandler::Instance()->GetComponent<Collider>(other);
 
-			//This entity is tagged as an overlapper, meaning it does not check for collisions itself, therefore skips the next section.
-			if (colliderOther.overlapper == true)
+			//This entity is tagged as an trigger, meaning it does not check for collisions itself, therefore skips the next section.
+			if (colliderOther.trigger == true)
 				continue;
 
 			auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
@@ -73,6 +73,9 @@ void CollisionSystem::Update()
 			collider.colliding = true;
 
 			if (OnCollision(entity, other) == true)
+				return;
+
+			if (collider.trigger == true)
 				return;
 
 			//RIGHT SIDE WITH LEFT SIDE

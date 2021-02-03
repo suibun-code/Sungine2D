@@ -5,7 +5,7 @@
 
 #include "Transform.h"
 #include "Text.h"
-#include "Enemy.h"
+#include "Character.h"
 #include "Movement.h"
 #include "EntityData.h"
 
@@ -13,7 +13,7 @@ void EnemySystem::Init()
 {
 	//for (auto const& entity : mEntities)
 	//{
-	//	auto& enemy = ECSHandler::Instance()->GetComponent<Enemy>(entity);
+	//	auto& enemy = ECSHandler::Instance()->GetComponent<Character>(entity);
 	//	auto& data = ECSHandler::Instance()->GetComponent<EntityData>(entity);
 	//	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(entity);
 
@@ -29,7 +29,7 @@ void EnemySystem::Update(float deltaTime)
 	//for (auto const& entity : mEntities)
 	//{
 	//	auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
-	//	auto& enemy = ECSHandler::Instance()->GetComponent<Enemy>(entity);
+	//	auto& enemy = ECSHandler::Instance()->GetComponent<Character>(entity);
 	//	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(entity);
 
 	//	if (enemy.health == 50)

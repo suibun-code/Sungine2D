@@ -6,7 +6,8 @@
 class PlayerCharacter : public BehaviourScript
 {
 private:
-	std::vector<Bullet*> mBulletOP;
+	Bullet* testbullet = nullptr;
+	std::queue<Bullet*> mBulletOP;
 
 public:
 	PlayerCharacter();

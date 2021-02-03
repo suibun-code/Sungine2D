@@ -165,7 +165,7 @@
     <ClInclude Include="ECSHandler.h" />
     <ClInclude Include="ECSSystem.h" />
     <ClInclude Include="ECSSystemManager.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="EnemySystem.h" />
     <ClInclude Include="EntityData.h" />

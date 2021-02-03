@@ -34,7 +34,7 @@ void TestState::Enter()
 	//SuTexture2D texture;
 
 	//ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
-	ResourceManager::LoadTexture("res/img/player.png", true, "char");
+	ResourceManager::LoadTexture("res/img/character.png", true, "char");
 
 	Level levelTest;
 	levelTest.Load("res/levels/saved.txt");

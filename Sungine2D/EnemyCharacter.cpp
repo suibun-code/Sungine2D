@@ -2,7 +2,7 @@
 
 #include "Collider.h"
 #include "ECSHandler.h"
-#include "Enemy.h"
+#include "Character.h"
 #include "EntityData.h"
 #include "Movement.h"
 #include "Rendering.h"
@@ -20,11 +20,11 @@ void EnemyCharacter::Start()
 
 	mEntity = ECSHandler::Instance()->CreateEntity();
 	
-	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Enemy";
+	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Character";
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(.75f, .5f, .5f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
-	ECSHandler::Instance()->AddComponent(mEntity, Enemy{ });
+	ECSHandler::Instance()->AddComponent(mEntity, Character{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 20000.f });
 	
 	auto& data = ECSHandler::Instance()->GetComponent<EntityData>(mEntity);
@@ -35,24 +35,28 @@ void EnemyCharacter::Start()
 
 void EnemyCharacter::Destroy()
 {
+	BehaviourScript::Destroy();
 }
 
 void EnemyCharacter::Update(float deltaTime)
 {
 	auto& transform = ECSHandler::Instance()->GetComponent<Transform>(mEntity);
-	auto& enemy = ECSHandler::Instance()->GetComponent<Enemy>(mEntity);
+	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 
-	if (enemy.health == 50)
+	if (character.health == 50)
 		movement.speed = 30000.f;
 
-	if (enemy.health == 25)
+	else if (character.health == 25)
 		movement.speed = 40000.f;
 
-	ECSHandler::Instance()->GetComponent<Text>(enemy.healthText).ChangeText(std::to_string(enemy.health));
+	else if (character.health <= 0)
+		Destroy();
+
+	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
 
 	if (transform.IsDirty())
-		ECSHandler::Instance()->GetComponent<Transform>(enemy.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
+		ECSHandler::Instance()->GetComponent<Transform>(character.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
 }
 
 bool EnemyCharacter::OnCollision(ECSEntity other)

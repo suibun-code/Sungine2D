@@ -54,6 +54,8 @@ void State::Exit()
 	mEntities.clear();
 
 	ResourceManager::DestroyTextures();
+
+	BehaviourScript::ClearBehaviourScripts();
 }
 
 void State::AddEntity(ECSEntity entity)
