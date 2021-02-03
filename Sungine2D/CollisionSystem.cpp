@@ -48,12 +48,12 @@ void CollisionSystem::Update()
 
 			auto& colliderOther = ECSHandler::Instance()->GetComponent<Collider>(other);
 
-			//This entity is tagged as an trigger, meaning it does not check for collisions itself, therefore skips the next section.
+			//This entity is tagged as an trigger, meaning other entities don't check for collision with it when it is the "other" entity.
 			if (colliderOther.trigger == true)
 				continue;
 
 			auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
-			auto& dataOther = ECSHandler::Instance()->GetComponent<EntityData>(other);
+			//auto& dataOther = ECSHandler::Instance()->GetComponent<EntityData>(other);
 
 			//X-axis
 			bool collisionX = (transform.position.x + collider.offset.x) + collider.boundingBox.x >= (transformOther.position.x + colliderOther.offset.x) &&
@@ -76,7 +76,7 @@ void CollisionSystem::Update()
 				return;
 
 			if (collider.trigger == true)
-				return;
+				continue;
 
 			//RIGHT SIDE WITH LEFT SIDE
 			if (transform.position.x + collider.boundingBox.x >= transformOther.position.x && transform.position.x <= transformOther.position.x && collisionY)
