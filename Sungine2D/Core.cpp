@@ -96,8 +96,8 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	if (Mix_Init(MIX_INIT_MP3) != 0)
 	{
-		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
-		Mix_AllocateChannels(16);
+		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+		Mix_AllocateChannels(32);
 
 		GameInstance::Instance()->AddLog("[OK] SDL Mixer Initialization.");
 	}
