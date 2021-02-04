@@ -75,20 +75,9 @@ void PlayerCharacter::Update(float deltaTime)
 		transform.dirty = true;
 	}
 
-	if (ECSHandler::Instance()->GetComponent<Collider>(mBulletOP.front()->GetEntity()).colliding == true)
-	{
-		//auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(mBulletOP.front()->GetEntity());
-
-		//bulletTransform.SetPosition(glm::vec2(0, 0));
-		
-		mBulletOP.pop();
-		mBulletOP.push(testbullet);
-	}
-
 	if (Core::Instance()->GetLMBState())
 	{
 		Core::Instance()->GetAM()->PlaySound(0);
-
 		testbullet = mBulletOP.front();
 		testbullet->SetParent(testbullet);
 
@@ -98,18 +87,28 @@ void PlayerCharacter::Update(float deltaTime)
 		auto& bulletCollider = ECSHandler::Instance()->GetComponent<Collider>(testbullet->GetEntity());
 
 		bulletTransform = Transform{ glm::vec2(transform.position.x + (transform.size.x * .5f), transform.position.y + (transform.size.y * .2f)), glm::vec2(1.f), 90.f };
-
-		//glm::vec2 mousePos = glm::vec2(Core::Instance()->GetMousePosX(), Core::Instance()->GetMousePosY());
+		
 		bulletTransform.SetSize(glm::vec2(bulletRender.texture.Width, bulletRender.texture.Height) * bulletTransform.scale);
 		bulletCollider.boundingBox = bulletTransform.size;
 
-		//float vectorToTarget = glm::distance(bulletTransform.position, mousePos);
-
 		glm::vec2 direction = glm::normalize(Core::Instance()->GetMousePos() - bulletTransform.position);
 		bulletMovement.velocity = glm::vec2(direction.x * bulletMovement.speed, direction.y * bulletMovement.speed);
-
 		float rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI;
+		
 		bulletTransform.SetRotation(rotation);
+
+		mBulletOP.pop();
+		mBulletOP.push(testbullet);
+	}
+
+	if (ECSHandler::Instance()->GetComponent<Collider>(mBulletOP.front()->GetEntity()).colliding == true)
+	{
+		//auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(mBulletOP.front()->GetEntity());
+
+		//bulletTransform.SetPosition(glm::vec2(0, 0));
+
+		mBulletOP.pop();
+		mBulletOP.push(testbullet);
 	}
 }
 

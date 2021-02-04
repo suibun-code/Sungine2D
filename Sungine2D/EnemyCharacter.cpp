@@ -22,7 +22,7 @@ void EnemyCharacter::Start()
 	
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Character";
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ });
-	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(.75f, .5f, .5f) });
+	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(1.f, 0.f, 0.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
 	ECSHandler::Instance()->AddComponent(mEntity, Character{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 20000.f });

@@ -61,13 +61,14 @@ void TestState::Enter()
 	PlayerCharacter* player = new PlayerCharacter();
 	player->SetParent(player);
 
-	//for (int i = 0; i < 1; i++)
-	//{
+	//Spawn enemies at pre-determined locations from the spawnLocations array.
+	for (int i = 0; i < 2; i++)
+	{
 	EnemyCharacter* enemy = new EnemyCharacter();
 	enemy->SetParent(enemy);
-	ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[0];
+	ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[i];
 	ECSHandler::Instance()->AddComponent(enemy->GetEntity(), Follow{ player->GetEntity() });
-	//}
+	}
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<MovementSystem>()->Init();
