@@ -31,25 +31,11 @@ void TestState::Enter()
 	Core::Instance()->GetAM()->PlayMusic(0, -1);
 
 	shader = ResourceManager::GetShader("sprite");
-	//SuTexture2D texture;
-
-	//ResourceManager::LoadTexture("res/img/enemy.png", true, "enemy");
 	ResourceManager::LoadTexture("res/img/character.png", true, "char");
+	ResourceManager::LoadTexture("res/img/bullet3.png", true, "bullet");
 
 	Level levelTest;
 	levelTest.Load("res/levels/saved.txt");
-
-	ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 });
-
-	//texture = ResourceManager::GetTexture("char");
-	//player = ECSHandler::Instance()->CreateEntity();
-	//ECSHandler::Instance()->GetComponent<EntityData>(player).name = "Player";
-	//ECSHandler::Instance()->GetComponent<EntityData>(player).tag = "Player";
-	//ECSHandler::Instance()->AddComponent(player, Transform{ glm::vec2(1200.f, 600.f) });
-	//ECSHandler::Instance()->AddComponent(player, Rendering{ shader, texture });
-	//ECSHandler::Instance()->AddComponent(player, Movement{ });
-	//ECSHandler::Instance()->AddComponent(player, Player{ });
-	//ECSHandler::Instance()->AddComponent(player, Collider{ true });
 
 	glm::vec2 spawnLocations[5];
 	spawnLocations[0] = glm::vec2(200.f, 60.f);
@@ -81,21 +67,15 @@ void TestState::Enter()
 
 void TestState::HandleStateEvents(SDL_Event* event)
 {
-	//if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
-		//ECSHandler::Instance()->GetComponent<Player>(player).health = 50;
+	
 }
 
 void TestState::Update(float deltaTime)
 {
-	//ECSHandler::Instance()->GetComponent<Text>(ResourceManager::Texts["PlayerHP"]).ChangeText(std::to_string(ECSHandler::Instance()->GetComponent<Player>(player).health));
-
 	Core::Instance()->GetSystem<TextSystem>()->Update();
 	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<CollisionSystem>()->Update();
 	Core::Instance()->GetSystem<FollowSystem>()->Update(deltaTime);
-
-	if (ECSHandler::Instance()->GetComponent<Transform>(player).IsDirty())
-		ECSHandler::Instance()->GetComponent<Transform>(ResourceManager::Texts["PlayerHP"]).SetPosition(glm::vec2(ECSHandler::Instance()->GetComponent<Transform>(player).position.x + 5, ECSHandler::Instance()->GetComponent<Transform>(player).position.y - 25));
 
 	State::Update(deltaTime);
 }

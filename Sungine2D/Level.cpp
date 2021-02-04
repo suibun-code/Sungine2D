@@ -41,6 +41,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 	ResourceManager::LoadTexture("res/img/water/watercornerTR.png", true, "watercornerTR");
 	ResourceManager::LoadTexture("res/img/water/watercornerBL.png", true, "watercornerBL");
 	ResourceManager::LoadTexture("res/img/water/watercornerBR.png", true, "watercornerBR");
+	ResourceManager::LoadTexture("res/img/lava.png", true, "lava");
 
 	for (unsigned int i = 0; i < levelHeight; i++)
 	{
@@ -208,6 +209,11 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 				{
 					texture = ResourceManager::GetTexture("watercornerBR");
 					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+				}
+				case 25:
+				{
+					texture = ResourceManager::GetTexture("lava");
+					ECSHandler::Instance()->AddComponent(tile, Collider{ false, true });
 				}
 				break;
 

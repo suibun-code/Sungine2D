@@ -6,8 +6,7 @@
 class EnemyCharacter : public BehaviourScript
 {
 private:
-	int health = 100;
-	ECSEntity healthText;
+
 	
 public:
 	EnemyCharacter();

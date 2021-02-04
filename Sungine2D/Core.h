@@ -148,7 +148,7 @@ public:
 	bool KeyUp(SDL_Scancode k);
 	bool GetLMBState() { return mLMBState; }
 	bool GetLMBDown() { return mLMBDown; }
-
+	
 	void SetGameInstance(bool gameInstanceEnabled) { mGameInstanceEnabled = gameInstanceEnabled; }
 	void WaitFor(int time);
 	void HandleEvents();

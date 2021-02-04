@@ -13,7 +13,7 @@ private:
 
 public:
 	static int mBulletCount;
-	static SuTexture2D mTexture;
+	SuTexture2D mTexture;
 
 	Bullet();
 	~Bullet();

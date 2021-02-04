@@ -239,7 +239,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	//Start engine and enable the game instance.
 	mIsRunning = true;
 	mGameInstanceEnabled = true;
-
+	
 	return true;
 }
 

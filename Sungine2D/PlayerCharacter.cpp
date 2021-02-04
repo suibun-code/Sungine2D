@@ -26,7 +26,11 @@ void PlayerCharacter::Start()
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char") });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
-	ECSHandler::Instance()->AddComponent(mEntity, Character{ });
+	
+	ECSHandler::Instance()->AddComponent(mEntity, Character{ 100, ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 }) });
+
+	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
+	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(15));
 
 	//Bullet object pool.
 	for (int i = 0; i < 3; i++)
@@ -34,7 +38,6 @@ void PlayerCharacter::Start()
 		Bullet* bullet = new Bullet();
 		mBulletOP.push(bullet);
 	}
-
 	testbullet = mBulletOP.front();
 }
 
@@ -47,6 +50,12 @@ void PlayerCharacter::Update(float deltaTime)
 {
 	auto& transform = ECSHandler::Instance()->GetComponent<Transform>(mEntity);
 	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
+	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
+	
+	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(15));
+
+	if (ECSHandler::Instance()->GetComponent<Transform>(mEntity).IsDirty())
+		ECSHandler::Instance()->GetComponent<Transform>(character.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
 
 	movement.velocity = glm::vec2(0.f);
 
@@ -76,19 +85,6 @@ void PlayerCharacter::Update(float deltaTime)
 		movement.velocity.y = movement.speed * deltaTime;
 		transform.dirty = true;
 	}
-
-	//if (ECSHandler::Instance()->GetComponent<Collider>(testbullet->GetEntity()).colliding == true)
-	//{
-	//	if (ECSHandler::Instance()->GetComponent<EntityData>(ECSHandler::Instance()->GetComponent<Collider>(testbullet->GetEntity()).other).tag != "Player")
-	//	{
-	//		ECSHandler::Instance()->DisableComponent<Rendering>(testbullet->GetEntity());
-	//		mBulletOP.pop();
-	//		mBulletOP.push(testbullet);
-	//	}
-
-	//	//auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(mBulletOP.front()->GetEntity());
-	//	//bulletTransform.SetPosition(glm::vec2(0, 0));
-	//}
 
 	if (Core::Instance()->GetLMBState())
 	{

@@ -186,6 +186,9 @@
     <ClInclude Include="Character.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Game\Prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -280,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="FollowSystem.cpp">
       <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Game\Prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

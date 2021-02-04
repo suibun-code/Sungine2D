@@ -9,7 +9,6 @@
 #include "Character.h"
 
 int Bullet::mBulletCount = 0;
-SuTexture2D Bullet::mTexture;
 
 Bullet::Bullet()
 {
@@ -23,12 +22,8 @@ Bullet::~Bullet()
 
 void Bullet::Start()  
 {
-	if (mBulletCount == 0)
-	{
-		ResourceManager::LoadTexture("res/img/bullet3.png", true, "bullet");
-		mTexture = ResourceManager::GetTexture("bullet");
-	}
-
+	mTexture = ResourceManager::GetTexture("bullet");
+	
 	mEntity = ECSHandler::Instance()->CreateEntity();
 
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Bullet";

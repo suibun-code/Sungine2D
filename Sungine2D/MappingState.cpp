@@ -176,6 +176,7 @@ void MappingState::Enter()
 	ResourceManager::LoadTexture("res/img/water/watercornerTR.png", true, "watercornerTR");
 	ResourceManager::LoadTexture("res/img/water/watercornerBL.png", true, "watercornerBL");
 	ResourceManager::LoadTexture("res/img/water/watercornerBR.png", true, "watercornerBR");
+	ResourceManager::LoadTexture("res/img/lava.png", true, "lava");
 
 	for (unsigned int i = 0; i < 12; i++)
 	{
@@ -213,6 +214,7 @@ void MappingState::Enter()
 	mTextures.push_back("watercornerTR");
 	mTextures.push_back("watercornerBL");
 	mTextures.push_back("watercornerBR");
+	mTextures.push_back("lava");
 
 	State::Enter();
 }
