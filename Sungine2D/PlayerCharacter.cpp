@@ -34,6 +34,8 @@ void PlayerCharacter::Start()
 		Bullet* bullet = new Bullet();
 		mBulletOP.push(bullet);
 	}
+
+	testbullet = mBulletOP.front();
 }
 
 void PlayerCharacter::Destroy()
@@ -52,14 +54,14 @@ void PlayerCharacter::Update(float deltaTime)
 	glm::vec2 direction = glm::normalize(Core::Instance()->GetMousePos() - (transform.position));
 	float rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI + 90;
 	transform.SetRotation(rotation);
-	
+
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_A))
 	{
 		movement.velocity.x = -movement.speed * deltaTime;
 		transform.dirty = true;
 	}
 	else if (Core::Instance()->KeyDown(SDL_SCANCODE_D))
-	
+
 	{
 		movement.velocity.x = movement.speed * deltaTime;
 		transform.dirty = true;
@@ -75,9 +77,23 @@ void PlayerCharacter::Update(float deltaTime)
 		transform.dirty = true;
 	}
 
+	//if (ECSHandler::Instance()->GetComponent<Collider>(testbullet->GetEntity()).colliding == true)
+	//{
+	//	if (ECSHandler::Instance()->GetComponent<EntityData>(ECSHandler::Instance()->GetComponent<Collider>(testbullet->GetEntity()).other).tag != "Player")
+	//	{
+	//		ECSHandler::Instance()->DisableComponent<Rendering>(testbullet->GetEntity());
+	//		mBulletOP.pop();
+	//		mBulletOP.push(testbullet);
+	//	}
+
+	//	//auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(mBulletOP.front()->GetEntity());
+	//	//bulletTransform.SetPosition(glm::vec2(0, 0));
+	//}
+
 	if (Core::Instance()->GetLMBState())
 	{
 		Core::Instance()->GetAM()->PlaySound(0);
+
 		testbullet = mBulletOP.front();
 		testbullet->SetParent(testbullet);
 
@@ -87,26 +103,19 @@ void PlayerCharacter::Update(float deltaTime)
 		auto& bulletCollider = ECSHandler::Instance()->GetComponent<Collider>(testbullet->GetEntity());
 
 		bulletTransform = Transform{ glm::vec2(transform.position.x + (transform.size.x * .5f), transform.position.y + (transform.size.y * .2f)), glm::vec2(1.f), 90.f };
-		
+
 		bulletTransform.SetSize(glm::vec2(bulletRender.texture.Width, bulletRender.texture.Height) * bulletTransform.scale);
 		bulletCollider.boundingBox = bulletTransform.size;
 
 		glm::vec2 direction = glm::normalize(Core::Instance()->GetMousePos() - bulletTransform.position);
 		bulletMovement.velocity = glm::vec2(direction.x * bulletMovement.speed, direction.y * bulletMovement.speed);
 		float rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI;
-		
+
 		bulletTransform.SetRotation(rotation);
 
-		mBulletOP.pop();
-		mBulletOP.push(testbullet);
-	}
-
-	if (ECSHandler::Instance()->GetComponent<Collider>(mBulletOP.front()->GetEntity()).colliding == true)
-	{
-		//auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(mBulletOP.front()->GetEntity());
-
-		//bulletTransform.SetPosition(glm::vec2(0, 0));
-
+		ECSHandler::Instance()->EnableComponent<Rendering>(testbullet->GetEntity());
+		ECSHandler::Instance()->EnableComponent<Collider>(testbullet->GetEntity());
+		
 		mBulletOP.pop();
 		mBulletOP.push(testbullet);
 	}

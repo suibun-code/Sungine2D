@@ -73,7 +73,7 @@ void CollisionSystem::Update()
 			collider.colliding = true;
 
 			if (OnCollision(entity, other) == true)
-				continue; //Might want to change this to continue;.
+				return;
 
 			if (collider.trigger == true)
 				continue;

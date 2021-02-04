@@ -38,6 +38,7 @@ void Bullet::Start()
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), mTexture });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 450.f });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true, true });
+	//ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 
 	mBulletCount++;
 }
@@ -55,12 +56,13 @@ void Bullet::Update(float deltaTime)
 
 bool Bullet::OnCollision(ECSEntity other)
 {
-	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Character")
+	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Enemy")
 	{
 		auto& enemyOther = ECSHandler::Instance()->GetComponent<Character>(other);
 		enemyOther.health -= 25;
-		//Destroy();
-		return false;
+		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
+		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
+		return true;
 	}
 	else if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Player")
 	{

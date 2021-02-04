@@ -62,7 +62,7 @@ void TestState::Enter()
 	player->SetParent(player);
 
 	//Spawn enemies at pre-determined locations from the spawnLocations array.
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 1; i++)
 	{
 	EnemyCharacter* enemy = new EnemyCharacter();
 	enemy->SetParent(enemy);

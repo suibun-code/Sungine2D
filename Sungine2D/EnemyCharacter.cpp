@@ -20,7 +20,7 @@ void EnemyCharacter::Start()
 
 	mEntity = ECSHandler::Instance()->CreateEntity();
 	
-	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Character";
+	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Enemy";
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(1.f, 0.f, 0.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
