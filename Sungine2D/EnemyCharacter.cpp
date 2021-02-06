@@ -31,10 +31,7 @@ void EnemyCharacter::Start()
 
 	auto& data = ECSHandler::Instance()->GetComponent<EntityData>(mEntity);
 
-	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText(data.name, "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 }) });
-
-	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
-	//movement.acceleration.x += movement.speed * Core::Instance()->GetDeltaTime();
+	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText(data.name, "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 175, 175, 255 }) });
 
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
@@ -52,9 +49,6 @@ void EnemyCharacter::Update(float deltaTime)
 	auto& transform = ECSHandler::Instance()->GetComponent<Transform>(mEntity);
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	auto& rendering = ECSHandler::Instance()->GetComponent<Rendering>(mEntity);
-	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
-	
-	std::cout << "accel: " << movement.acceleration.x << "\n";
 
 	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
 

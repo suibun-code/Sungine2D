@@ -152,8 +152,8 @@ void MappingState::Enter()
 	shader = ResourceManager::GetShader("sprite");
 
 	ResourceManager::LoadTexture("res/img/destroy.png", true, "destroy");
-	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
-	ResourceManager::LoadTexture("res/img/wall.png", false, "wall");
+	ResourceManager::LoadTexture("res/img/grass1.png", true, "grass");
+	ResourceManager::LoadTexture("res/img/wall.png", true, "wall");
 	ResourceManager::LoadTexture("res/img/mud/mud.png", true, "mud");
 	ResourceManager::LoadTexture("res/img/mud/mudleft.png", true, "mudleft");
 	ResourceManager::LoadTexture("res/img/mud/mudright.png", true, "mudright");

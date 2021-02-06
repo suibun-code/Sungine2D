@@ -59,12 +59,11 @@ bool Bullet::OnCollision(ECSEntity other)
 	
 	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Enemy")
 	{
-		auto& enemyOther = ECSHandler::Instance()->GetComponent<Character>(other);
+		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 		auto& movementOther = ECSHandler::Instance()->GetComponent<Movement>(other);
 
-		movementOther.velocity += glm::vec2(50000.f * Core::Instance()->GetDeltaTime(), 0.f);
+		movementOther.velocity += movement.velocity * .55f;
 		
-		//enemyOther.health -= 25;
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);

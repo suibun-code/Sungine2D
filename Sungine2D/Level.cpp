@@ -17,8 +17,8 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 	ShaderUtil shader = ResourceManager::GetShader("sprite");
 	SuTexture2D texture;
 
-	ResourceManager::LoadTexture("res/img/wall.png", false, "wall");
-	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
+	ResourceManager::LoadTexture("res/img/wall.png", true, "wall");
+	ResourceManager::LoadTexture("res/img/grass1.png", true, "grass");
 	ResourceManager::LoadTexture("res/img/mud/mud.png", true, "mud");
 	ResourceManager::LoadTexture("res/img/mud/mudleft.png", true, "mudleft");
 	ResourceManager::LoadTexture("res/img/mud/mudright.png", true, "mudright");

@@ -50,9 +50,6 @@ void MovementSystem::Update(float deltaTime)
 				movement.acceleration.y *= .99f;
 			}
 		}
-
-		//if (movement.velocity.x < 0.1f)
-		//	movement.velocity.x = 0;
 	}
 }
 
