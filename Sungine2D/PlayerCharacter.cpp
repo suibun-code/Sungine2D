@@ -19,7 +19,7 @@ void PlayerCharacter::Start()
 
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(600.f, 450.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char") });
-	ECSHandler::Instance()->AddComponent(mEntity, Movement{ });
+	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 65000.f, true });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
 	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 }) });
 

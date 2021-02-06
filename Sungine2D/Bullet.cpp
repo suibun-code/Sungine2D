@@ -7,6 +7,7 @@
 #include "Movement.h"
 #include "Collider.h"
 #include "Character.h"
+#include "Core.h"
 
 int Bullet::mBulletCount = 0;
 
@@ -61,7 +62,7 @@ bool Bullet::OnCollision(ECSEntity other)
 		auto& enemyOther = ECSHandler::Instance()->GetComponent<Character>(other);
 		auto& movementOther = ECSHandler::Instance()->GetComponent<Movement>(other);
 
-		movementOther.acceleration += glm::vec2(0, -100.f);
+		movementOther.velocity += glm::vec2(50000.f * Core::Instance()->GetDeltaTime(), 0.f);
 		
 		//enemyOther.health -= 25;
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);

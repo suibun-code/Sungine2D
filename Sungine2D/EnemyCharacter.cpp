@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "ECSHandler.h"
 #include "Character.h"
+#include "Core.h"
 #include "EntityData.h"
 #include "Movement.h"
 #include "Rendering.h"
@@ -26,11 +27,14 @@ void EnemyCharacter::Start()
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(0.f, 0.f, 0.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
-	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 20000.f, glm::vec2(0.f), glm::vec2(-50.f, 0.f) });
+	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 20000.f, true });
 
 	auto& data = ECSHandler::Instance()->GetComponent<EntityData>(mEntity);
 
 	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText(data.name, "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 }) });
+
+	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
+	//movement.acceleration.x += movement.speed * Core::Instance()->GetDeltaTime();
 
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
@@ -48,6 +52,9 @@ void EnemyCharacter::Update(float deltaTime)
 	auto& transform = ECSHandler::Instance()->GetComponent<Transform>(mEntity);
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	auto& rendering = ECSHandler::Instance()->GetComponent<Rendering>(mEntity);
+	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
+	
+	std::cout << "accel: " << movement.acceleration.x << "\n";
 
 	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
 
