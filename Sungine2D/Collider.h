@@ -11,6 +11,7 @@
 struct Collider
 {
 	bool moveable = false;
+	bool solid = false;
 	bool trigger = false;
 	glm::vec2 boundingBox = glm::vec2(1.f);
 	glm::vec2 offset = glm::vec2(0.f);

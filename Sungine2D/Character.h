@@ -4,6 +4,6 @@
 
 struct Character
 {
-	int health = 100;
+	int health = 1000;
 	ECSEntity healthText;
 };

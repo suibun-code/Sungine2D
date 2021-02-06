@@ -17,13 +17,13 @@ Bullet::Bullet()
 
 Bullet::~Bullet()
 {
-	
+
 }
 
-void Bullet::Start()  
+void Bullet::Start()
 {
 	mTexture = ResourceManager::GetTexture("bullet");
-	
+
 	mEntity = ECSHandler::Instance()->CreateEntity();
 
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Bullet";
@@ -33,7 +33,6 @@ void Bullet::Start()
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), mTexture });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 450.f });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true, true });
-	//ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 
 	mBulletCount++;
 }
@@ -46,28 +45,35 @@ void Bullet::Destroy()
 
 void Bullet::Update(float deltaTime)
 {
-	
+
 }
 
 bool Bullet::OnCollision(ECSEntity other)
 {
+	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Player")
+		return false;
+
+	if (ECSHandler::Instance()->GetComponent<Collider>(other).trigger == true)
+		return false;
+	
 	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Enemy")
 	{
 		auto& enemyOther = ECSHandler::Instance()->GetComponent<Character>(other);
-		enemyOther.health -= 25;
+		auto& movementOther = ECSHandler::Instance()->GetComponent<Movement>(other);
+
+		movementOther.acceleration += glm::vec2(0, -100.f);
+		
+		//enemyOther.health -= 25;
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
+		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
 		return true;
 	}
-	else if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Player")
-	{
-		return false;
-	}
-	else
-	{
-		//Destroy();
-		return false;
-	}
+
+	ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
+	ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
+	ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
+	return true;
 }
 
 

@@ -2,11 +2,6 @@
 
 #include "ResourceManager.h"
 
-#include "Transform.h"
-#include "Rendering.h"
-#include "Movement.h"
-#include "Collider.h"
-#include "Character.h"
 #include "Core.h"
 
 PlayerCharacter::PlayerCharacter()
@@ -22,12 +17,11 @@ void PlayerCharacter::Start()
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Player";
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).script = this;
 
-	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(600.f, 500.f) });
+	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(600.f, 450.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char") });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
-	
-	ECSHandler::Instance()->AddComponent(mEntity, Character{ 100, ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 }) });
+	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 }) });
 
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(15));
@@ -49,10 +43,10 @@ void PlayerCharacter::Destroy()
 void PlayerCharacter::Update(float deltaTime)
 {
 	auto& transform = ECSHandler::Instance()->GetComponent<Transform>(mEntity);
-	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
+	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 	
-	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(15));
+	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
 
 	if (ECSHandler::Instance()->GetComponent<Transform>(mEntity).IsDirty())
 		ECSHandler::Instance()->GetComponent<Transform>(character.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
@@ -66,23 +60,22 @@ void PlayerCharacter::Update(float deltaTime)
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_A))
 	{
-		movement.velocity.x = -movement.speed * deltaTime;
+		movement.acceleration.x += -movement.speed * deltaTime;
 		transform.dirty = true;
 	}
 	else if (Core::Instance()->KeyDown(SDL_SCANCODE_D))
-
 	{
-		movement.velocity.x = movement.speed * deltaTime;
+		movement.acceleration.x += movement.speed * deltaTime;
 		transform.dirty = true;
 	}
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_W))
 	{
-		movement.velocity.y = -movement.speed * deltaTime;
+		movement.acceleration.y += -movement.speed * deltaTime;
 		transform.dirty = true;
 	}
 	else if (Core::Instance()->KeyDown(SDL_SCANCODE_S))
 	{
-		movement.velocity.y = movement.speed * deltaTime;
+		movement.acceleration.y += movement.speed * deltaTime;
 		transform.dirty = true;
 	}
 
@@ -111,6 +104,7 @@ void PlayerCharacter::Update(float deltaTime)
 
 		ECSHandler::Instance()->EnableComponent<Rendering>(testbullet->GetEntity());
 		ECSHandler::Instance()->EnableComponent<Collider>(testbullet->GetEntity());
+		ECSHandler::Instance()->EnableComponent<Movement>(testbullet->GetEntity());
 		
 		mBulletOP.pop();
 		mBulletOP.push(testbullet);
@@ -119,5 +113,8 @@ void PlayerCharacter::Update(float deltaTime)
 
 bool PlayerCharacter::OnCollision(ECSEntity other)
 {
+	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "DamageTile")
+		ECSHandler::Instance()->GetComponent<Character>(mEntity).health -= 1;
+	
 	return false;
 }

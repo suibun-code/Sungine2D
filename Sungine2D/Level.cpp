@@ -2,7 +2,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <iostream>
 
 #include "Transform.h"
 #include "Rendering.h"
@@ -11,6 +10,7 @@
 #include "ResourceManager.h"
 #include "ECSHandler.h"
 #include "EntityData.h"
+#include "Tile.h"
 
 void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight)
 {
@@ -49,178 +49,248 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 		{
 			if (tileData[i][j] > 0)
 			{
-				ECSEntity tile = ECSHandler::Instance()->CreateEntity();
-
 				switch (tileData[i][j])
 				{
 				case 1:
 				{
-					texture = ResourceManager::GetTexture("grass");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("grass");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 2:
 				{
-					texture = ResourceManager::GetTexture("wall");
-					ECSHandler::Instance()->GetComponent<EntityData>(tile).tag = "wall";
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("wall");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
 				}
 				break;
 
 				case 3:
 				{
-					texture = ResourceManager::GetTexture("mud");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mud");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 4:
 				{
-					texture = ResourceManager::GetTexture("mudleft");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mudleft");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 5:
 				{
-					texture = ResourceManager::GetTexture("mudright");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mudright");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 6:
 				{
-					texture = ResourceManager::GetTexture("mud1");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mud1");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 7:
 				{
-					texture = ResourceManager::GetTexture("mud2");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mud2");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 8:
 				{
-					texture = ResourceManager::GetTexture("mud3");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mud3");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 9:
 				{
-					texture = ResourceManager::GetTexture("mud4");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mud4");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 10:
 				{
-					texture = ResourceManager::GetTexture("mud5");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mud5");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 11:
 				{
-					texture = ResourceManager::GetTexture("mud6");
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("mud6");
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 12:
 				{
-					texture = ResourceManager::GetTexture("water");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("water");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 13:
 				{
-					texture = ResourceManager::GetTexture("waterleft");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("waterleft");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 14:
 				{
-					texture = ResourceManager::GetTexture("waterright");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("waterright");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 15:
 				{
-					texture = ResourceManager::GetTexture("water1");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("water1");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 16:
 				{
-					texture = ResourceManager::GetTexture("water2");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("water2");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 17:
 				{
-					texture = ResourceManager::GetTexture("water3");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("water3");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 18:
 				{
-					texture = ResourceManager::GetTexture("water4");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("water4");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 19:
 				{
-					texture = ResourceManager::GetTexture("water5");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("water5");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 20:
 				{
-					texture = ResourceManager::GetTexture("water6");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("water6");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 21:
 				{
-					texture = ResourceManager::GetTexture("watercornerTL");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("watercornerTL");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 22:
 				{
-					texture = ResourceManager::GetTexture("watercornerTR");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("watercornerTR");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 23:
 				{
-					texture = ResourceManager::GetTexture("watercornerBL");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("watercornerBL");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				break;
 
 				case 24:
 				{
-					texture = ResourceManager::GetTexture("watercornerBR");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("watercornerBR");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 				}
 				case 25:
 				{
-					texture = ResourceManager::GetTexture("lava");
-					ECSHandler::Instance()->AddComponent(tile, Collider{ false, true });
+					Tile* tile = new Tile();
+					tile->SetParent(tile);
+					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("lava");
+					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ false, false, true });
+					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
+					ECSHandler::Instance()->GetComponent<EntityData>(tile->GetEntity()).tag = "DamageTile";
 				}
 				break;
 
 				}
-
-				ECSHandler::Instance()->AddComponent(tile, Transform{ glm::vec2(j * tileWidth, i * tileHeight) });
-				ECSHandler::Instance()->AddComponent(tile, Rendering{ shader, texture });
 			}
 		}
 	}

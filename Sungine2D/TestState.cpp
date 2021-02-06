@@ -38,7 +38,7 @@ void TestState::Enter()
 	levelTest.Load("res/levels/saved.txt");
 
 	glm::vec2 spawnLocations[5];
-	spawnLocations[0] = glm::vec2(200.f, 60.f);
+	spawnLocations[0] = glm::vec2(500.f, 250.f);
 	spawnLocations[1] = glm::vec2(1000.f, 50.f);
 	spawnLocations[2] = glm::vec2(300.f, 65.f);
 	spawnLocations[3] = glm::vec2(550.f, 55.f);
@@ -53,7 +53,7 @@ void TestState::Enter()
 	EnemyCharacter* enemy = new EnemyCharacter();
 	enemy->SetParent(enemy);
 	ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[i];
-	ECSHandler::Instance()->AddComponent(enemy->GetEntity(), Follow{ player->GetEntity() });
+	//ECSHandler::Instance()->AddComponent(enemy->GetEntity(), Follow{ player->GetEntity() });
 	}
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();

@@ -18,7 +18,6 @@ BehaviourScript::~BehaviourScript()
 void BehaviourScript::Generate()
 {
 	mAllBehaviourScripts.push_back(this);
-	std::cout << "Behaviour scripts size: " << mAllBehaviourScripts.size() << "\n";
 
 	if (!mAllBehaviourScripts.empty())
 		mAllBehaviourScripts.back()->Start();

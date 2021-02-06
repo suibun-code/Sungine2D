@@ -46,6 +46,9 @@
     <Filter Include="Game\Prefabs">
       <UniqueIdentifier>{badcbe44-6352-4f58-9801-b75de7ad0583}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Prefabs\Tiles">
+      <UniqueIdentifier>{d7821e53-b556-4fd1-a885-d608084cf1db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\imgui-1.78\imconfig.h">
@@ -187,7 +190,7 @@
       <Filter>Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Game\Prefabs</Filter>
+      <Filter>Game\Prefabs\Tiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,7 +288,7 @@
       <Filter>Engine\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Game\Prefabs</Filter>
+      <Filter>Game\Prefabs\Tiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

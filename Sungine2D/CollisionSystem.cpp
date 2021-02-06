@@ -48,8 +48,8 @@ void CollisionSystem::Update()
 
 			auto& colliderOther = ECSHandler::Instance()->GetComponent<Collider>(other);
 
-			//This entity is tagged as an trigger, meaning other entities don't check for collision with it when it is the "other" entity.
-			if (colliderOther.trigger == true)
+			//This entity is tagged as an solid, meaning other entities don't check for collision with it when it is the "other" entity.
+			if (colliderOther.solid)
 				continue;
 
 			auto& transformOther = ECSHandler::Instance()->GetComponent<Transform>(other);
@@ -71,11 +71,14 @@ void CollisionSystem::Update()
 			}
 
 			collider.colliding = true;
-
+			
 			if (OnCollision(entity, other) == true)
 				return;
 
-			if (collider.trigger == true)
+			if (collider.solid)
+				continue;
+
+			if (colliderOther.trigger == true)
 				continue;
 
 			//RIGHT SIDE WITH LEFT SIDE

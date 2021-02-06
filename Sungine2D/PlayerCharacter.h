@@ -1,7 +1,16 @@
 ﻿#pragma once
 
+#include <chrono>
+#include <ctime>
+
 #include "ECSHandler.h"
 #include "Bullet.h"
+
+#include "Transform.h"
+#include "Rendering.h"
+#include "Movement.h"
+#include "Collider.h"
+#include "Character.h"
 
 class PlayerCharacter : public BehaviourScript
 {

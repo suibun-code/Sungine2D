@@ -2,6 +2,7 @@
 
 struct Movement
 {
-	float speed = 35000.f;
+	float speed = 65000.f;
 	glm::vec2 velocity = glm::vec2(0.f);
+	glm::vec2 acceleration = glm::vec2(0.f);
 };
