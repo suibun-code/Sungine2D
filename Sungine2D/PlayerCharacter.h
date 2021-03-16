@@ -15,7 +15,7 @@
 class PlayerCharacter : public BehaviourScript
 {
 private:
-	Bullet* testbullet = nullptr;
+	Bullet* tempBullet = nullptr;
 	std::queue<Bullet*> mBulletOP;
 
 public:

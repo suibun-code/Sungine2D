@@ -32,7 +32,7 @@ void PlayerCharacter::Start()
 		Bullet* bullet = new Bullet();
 		mBulletOP.push(bullet);
 	}
-	testbullet = mBulletOP.front();
+	tempBullet = mBulletOP.front();
 }
 
 void PlayerCharacter::Destroy()
@@ -83,13 +83,13 @@ void PlayerCharacter::Update(float deltaTime)
 	{
 		Core::Instance()->GetAM()->PlaySound(0);
 
-		testbullet = mBulletOP.front();
-		testbullet->SetParent(testbullet);
+		tempBullet = mBulletOP.front();
+		tempBullet->SetOwner(tempBullet);
 
-		auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(testbullet->GetEntity());
-		auto& bulletRender = ECSHandler::Instance()->GetComponent<Rendering>(testbullet->GetEntity());
-		auto& bulletMovement = ECSHandler::Instance()->GetComponent<Movement>(testbullet->GetEntity());
-		auto& bulletCollider = ECSHandler::Instance()->GetComponent<Collider>(testbullet->GetEntity());
+		auto& bulletTransform = ECSHandler::Instance()->GetComponent<Transform>(tempBullet->GetEntity());
+		auto& bulletRender = ECSHandler::Instance()->GetComponent<Rendering>(tempBullet->GetEntity());
+		auto& bulletMovement = ECSHandler::Instance()->GetComponent<Movement>(tempBullet->GetEntity());
+		auto& bulletCollider = ECSHandler::Instance()->GetComponent<Collider>(tempBullet->GetEntity());
 
 		bulletTransform = Transform{ glm::vec2(transform.position.x + (transform.size.x * .5f), transform.position.y + (transform.size.y * .2f)), glm::vec2(1.f), 90.f };
 
@@ -102,12 +102,12 @@ void PlayerCharacter::Update(float deltaTime)
 
 		bulletTransform.SetRotation(rotation);
 
-		ECSHandler::Instance()->EnableComponent<Rendering>(testbullet->GetEntity());
-		ECSHandler::Instance()->EnableComponent<Collider>(testbullet->GetEntity());
-		ECSHandler::Instance()->EnableComponent<Movement>(testbullet->GetEntity());
+		ECSHandler::Instance()->EnableComponent<Rendering>(tempBullet->GetEntity());
+		ECSHandler::Instance()->EnableComponent<Collider>(tempBullet->GetEntity());
+		ECSHandler::Instance()->EnableComponent<Movement>(tempBullet->GetEntity());
 		
 		mBulletOP.pop();
-		mBulletOP.push(testbullet);
+		mBulletOP.push(tempBullet);
 	}
 }
 

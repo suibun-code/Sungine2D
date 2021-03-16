@@ -23,7 +23,6 @@ void EnemyCharacter::Start()
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Enemy";
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).script = this;
 
-
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(0.f, 0.f, 0.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
@@ -64,7 +63,7 @@ void EnemyCharacter::Update(float deltaTime)
 bool EnemyCharacter::OnCollision(ECSEntity other)
 {
 	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "DamageTile")
-		ECSHandler::Instance()->GetComponent<Character>(mEntity).health -= 1;
+		ECSHandler::Instance()->GetComponent<Character>(mEntity).health -= 1;																																																
 
 	return false;
 }

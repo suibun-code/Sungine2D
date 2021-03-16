@@ -13,7 +13,7 @@ protected:
 	
 public:
 	BehaviourScript();
-	~BehaviourScript();
+	virtual ~BehaviourScript();
 
 	void Generate();
 	
@@ -21,7 +21,7 @@ public:
 	virtual void Destroy();
 	virtual void Update(float deltaTime) = 0;
 
-	void SetParent(BehaviourScript* parent);
+	void SetOwner(BehaviourScript* owner);
 
 	virtual ECSEntity GetEntity();
 

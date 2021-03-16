@@ -14,9 +14,6 @@
 #include "EnemyCharacter.h"
 #include "MainMenu.h"
 
-ECSEntity player;
-ECSEntity test;
-
 void TestState::Enter()
 {
 	//Clear the screen with specific color.
@@ -45,15 +42,15 @@ void TestState::Enter()
 	spawnLocations[4] = glm::vec2(600.f, 45.f);
 
 	PlayerCharacter* player = new PlayerCharacter();
-	player->SetParent(player);
+	player->SetOwner(player);
 
 	//Spawn enemies at pre-determined locations from the spawnLocations array.
 	for (int i = 0; i < 1; i++)
 	{
-	EnemyCharacter* enemy = new EnemyCharacter();
-	enemy->SetParent(enemy);
-	ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[i];
-	//ECSHandler::Instance()->AddComponent(enemy->GetEntity(), Follow{ player->GetEntity() });
+		EnemyCharacter* enemy = new EnemyCharacter();
+		enemy->SetOwner(enemy);
+		ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[i];
+		ECSHandler::Instance()->AddComponent(enemy->GetEntity(), Follow{ player->GetEntity() });
 	}
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();
@@ -67,7 +64,7 @@ void TestState::Enter()
 
 void TestState::HandleStateEvents(SDL_Event* event)
 {
-	
+
 }
 
 void TestState::Update(float deltaTime)

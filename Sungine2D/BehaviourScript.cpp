@@ -34,9 +34,9 @@ void BehaviourScript::Destroy()
 	mOwningObject = nullptr;
 }
 
-void BehaviourScript::SetParent(BehaviourScript* parent)
+void BehaviourScript::SetOwner(BehaviourScript* owner)
 {
-	mOwningObject = parent;
+	mOwningObject = owner;
 }
 
 ECSEntity BehaviourScript::GetEntity()
