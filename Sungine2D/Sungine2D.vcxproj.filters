@@ -192,6 +192,15 @@
     <ClInclude Include="Tile.h">
       <Filter>Game\Prefabs\Tiles</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleGenerator.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleRenderSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -290,12 +299,24 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Game\Prefabs\Tiles</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Engine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleRenderSystem.cpp">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\sprite.frag">
       <Filter>Engine\shaders</Filter>
     </None>
     <None Include="shaders\sprite.vert">
+      <Filter>Engine\shaders</Filter>
+    </None>
+    <None Include="shaders\followParticle.frag">
+      <Filter>Engine\shaders</Filter>
+    </None>
+    <None Include="shaders\followParticle.vert">
       <Filter>Engine\shaders</Filter>
     </None>
   </ItemGroup>

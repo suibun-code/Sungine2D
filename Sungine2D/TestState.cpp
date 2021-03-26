@@ -5,14 +5,17 @@
 
 //Misc
 #include "Core.h"
-#include "GameInstance.h"
 #include "ResourceManager.h"
 #include "Level.h"
 #include "PlayerCharacter.h"
+#include "ParticleGenerator.h"
 
 //States
 #include "EnemyCharacter.h"
 #include "MainMenu.h"
+
+PlayerCharacter* player;
+ParticleGenerator* particles;
 
 void TestState::Enter()
 {
@@ -41,7 +44,7 @@ void TestState::Enter()
 	spawnLocations[3] = glm::vec2(550.f, 55.f);
 	spawnLocations[4] = glm::vec2(600.f, 45.f);
 
-	PlayerCharacter* player = new PlayerCharacter();
+	player = new PlayerCharacter();
 	player->SetOwner(player);
 
 	//Spawn enemies at pre-determined locations from the spawnLocations array.
@@ -59,6 +62,10 @@ void TestState::Enter()
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
 	Core::Instance()->GetSystem<FollowSystem>()->Init();
 
+	//Particles
+	ResourceManager::LoadTexture("res/img/particle.png", false, "particle");
+	//particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("char"), 500);
+
 	State::Enter();
 }
 
@@ -74,6 +81,9 @@ void TestState::Update(float deltaTime)
 	Core::Instance()->GetSystem<CollisionSystem>()->Update();
 	Core::Instance()->GetSystem<FollowSystem>()->Update(deltaTime);
 
+	//Particles
+	//particles->Update(deltaTime, player->GetEntity(), 2);
+
 	State::Update(deltaTime);
 }
 
@@ -82,7 +92,10 @@ void TestState::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//Draw renderable entities.
-	Core::Instance()->GetSystem<RenderSystem>()->Draw();
+	//Core::Instance()->GetSystem<RenderSystem>()->Draw();
+
+	//Particles
+	//particles->Draw();
 
 	State::Render();
 }

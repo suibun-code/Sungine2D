@@ -20,10 +20,12 @@
 #include "Text.h"
 #include "Collider.h"
 #include "Follow.h"
+#include "Particle.h"
 
 //Systems
 #include "MovementSystem.h"
 #include "RenderSystem.h"
+#include "ParticleRenderSystem.h"
 #include "TextSystem.h"
 #include "CollisionSystem.h"
 #include "FollowSystem.h"
@@ -42,6 +44,7 @@ private:
 	//std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<RenderSystem> mpRenderSystem;
+	std::shared_ptr<ParticleRenderSystem> mParticleRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
 	std::shared_ptr<CollisionSystem> mpCollisionSystem;
 	std::shared_ptr<FollowSystem> mpFollowSystem;

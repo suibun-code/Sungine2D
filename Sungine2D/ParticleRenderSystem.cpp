@@ -1,4 +1,4 @@
-#include "RenderSystem.h"
+#include "ParticleRenderSystem.h"
 
 //GLM
 #include "glm/glm/glm.hpp"
@@ -8,7 +8,7 @@
 
 #include "Core.h"
 
-void RenderSystem::Init()
+void ParticleRenderSystem::Init()
 {
 	//Indices mapping.
 	GLuint indexData[] =
@@ -104,7 +104,7 @@ void RenderSystem::Init()
 	}
 }
 
-void RenderSystem::Draw()
+void ParticleRenderSystem::Draw()
 {
 	for (auto const& entity : mEntities)
 	{

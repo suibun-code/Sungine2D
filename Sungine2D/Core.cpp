@@ -155,16 +155,20 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Load shaders and attach variables/values to variables within the shader source code.
 	ResourceManager::LoadShader("shaders/sprite.vert", "shaders/sprite.frag", nullptr, "sprite");
+	ResourceManager::LoadShader("shaders/followParticle.vert", "shaders/followParticle.frag", nullptr, "particle");
 
 	glMatrixMode(GL_MODELVIEW);
 
 	mProjection = glm::ortho(0.f, 1280.f, 720.f, 0.f, -5.f, 5.f);
 	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
 	ResourceManager::GetShader("sprite").SetMatrix4("projection", mProjection);
+	ResourceManager::GetShader("particle").Use().SetInteger("sprite", 0);
+	ResourceManager::GetShader("particle").SetMatrix4("projection", mProjection);
 
 	mView = glm::lookAt(glm::vec3(0, 0, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	mView = glm::translate(mView, glm::vec3(0, 0, 0));
 	ResourceManager::GetShader("sprite").SetMatrix4("view", mView);
+	ResourceManager::GetShader("projection").SetMatrix4("view", mView);
 
 	//Initialize ImGui.
 	InitImGui();
@@ -188,6 +192,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	ECSHandler::Instance()->RegisterComponent<Text>();
 	ECSHandler::Instance()->RegisterComponent<Collider>();
 	ECSHandler::Instance()->RegisterComponent<Follow>();
+	ECSHandler::Instance()->RegisterComponent<Particle>();
 
 	//Register systems.
 	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();

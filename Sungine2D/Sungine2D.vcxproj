@@ -179,6 +179,9 @@
     <ClInclude Include="MappingState.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="MovementSystem.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleGenerator.h" />
+    <ClInclude Include="ParticleRenderSystem.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Rendering.h" />
     <ClInclude Include="RenderSystem.h" />
@@ -218,6 +221,8 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MappingState.cpp" />
     <ClCompile Include="MovementSystem.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
+    <ClCompile Include="ParticleRenderSystem.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -228,6 +233,8 @@
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\followParticle.frag" />
+    <None Include="shaders\followParticle.vert" />
     <None Include="shaders\sprite.frag">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
