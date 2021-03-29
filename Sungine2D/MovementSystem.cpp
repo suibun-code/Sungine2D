@@ -19,7 +19,7 @@ void MovementSystem::Update(float deltaTime)
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(entity);
 
-		movement.velocity += movement.acceleration * deltaTime;
+		movement.velocity += movement.acceleration;
 
 		if (transform.IsDirty() || movement.velocity.x != 0 || movement.velocity.y != 0)
 			transform.AddPosition(movement.velocity * deltaTime);

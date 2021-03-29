@@ -23,22 +23,22 @@ void FollowSystem::Update(float deltaTime)
 
 		if (transform.position.x < target.position.x)
 		{
-			movement.acceleration.x = movement.speed * deltaTime;
+			movement.acceleration.x += movement.speed * deltaTime;
 			transform.dirty = true;
 		}
 		else if (transform.position.x > target.position.x)
 		{
-			movement.acceleration.x = -movement.speed * deltaTime;
+			movement.acceleration.x += -movement.speed * deltaTime;
 			transform.dirty = true;
 		}
 		if (transform.position.y < target.position.y)
 		{
-			movement.acceleration.y = movement.speed * deltaTime;
+			movement.acceleration.y += movement.speed * deltaTime;
 			transform.dirty = true;
 		}
 		else if (transform.position.y > target.position.y)
 		{
-			movement.acceleration.y = -movement.speed * deltaTime;
+			movement.acceleration.y += -movement.speed * deltaTime;
 			transform.dirty = true;
 		}
 	}

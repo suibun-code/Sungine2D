@@ -71,6 +71,21 @@ void RenderSystem::Init()
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
 
+		if (ECSHandler::Instance()->GetComponent<EntityData>(entity).script != nullptr)
+			if (ECSHandler::Instance()->GetComponent<Rendering>(entity).Call(entity) == true)
+			{
+				glActiveTexture(GL_TEXTURE0);
+				render.texture.Bind();
+
+				glBindVertexArray(mQuadVAO);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+				glBindVertexArray(0);
+
+				continue;
+			}
+
+		render.shaderUtil.Use();
+
 		transform.size = glm::vec2(render.texture.Width, render.texture.Height) * transform.scale;
 
 		//Prepare transformations.
@@ -93,8 +108,6 @@ void RenderSystem::Init()
 		render.shaderUtil.SetMatrix4("model", render.model);
 		render.shaderUtil.SetVector3f("spriteColor", render.color);
 
-		render.shaderUtil.Use();
-
 		glActiveTexture(GL_TEXTURE0);
 		render.texture.Bind();
 
@@ -110,6 +123,25 @@ void RenderSystem::Draw()
 	{
 		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
+
+		if (ECSHandler::Instance()->GetComponent<EntityData>(entity).script != nullptr)
+		{
+			if (render.Call(entity) == true)
+			{
+				glActiveTexture(GL_TEXTURE0);
+				render.texture.Bind();
+
+				glBindVertexArray(mQuadVAO);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+				glBindVertexArray(0);
+
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+				continue;
+			}
+		}
+
+		render.shaderUtil.Use();
 
 		if (transform.IsDirty())
 		{
@@ -133,8 +165,6 @@ void RenderSystem::Draw()
 		//Render.
 		render.shaderUtil.SetMatrix4("model", render.model);
 		render.shaderUtil.SetVector3f("spriteColor", render.color);
-
-		render.shaderUtil.Use();
 
 		glActiveTexture(GL_TEXTURE0);
 		render.texture.Bind();

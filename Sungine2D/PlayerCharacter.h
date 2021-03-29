@@ -22,8 +22,8 @@ public:
 	PlayerCharacter();
 
 	void Start() override;
-	void Destroy() override;
 	void Update(float deltaTime) override;
+	void Destroy() override;
 	
 	bool OnCollision(ECSEntity other) override;
 };

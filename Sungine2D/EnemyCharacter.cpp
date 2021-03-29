@@ -25,8 +25,8 @@ void EnemyCharacter::Start()
 
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(0.f, 0.f, 0.f) });
+	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 650.f, true });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
-	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 20000.f, true });
 
 	auto& data = ECSHandler::Instance()->GetComponent<EntityData>(mEntity);
 
@@ -48,11 +48,14 @@ void EnemyCharacter::Update(float deltaTime)
 	auto& transform = ECSHandler::Instance()->GetComponent<Transform>(mEntity);
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	auto& rendering = ECSHandler::Instance()->GetComponent<Rendering>(mEntity);
+	auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 
 	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
 
 	if (transform.IsDirty())
 		ECSHandler::Instance()->GetComponent<Transform>(character.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
+
+	movement.velocity = glm::vec2(0.f);
 
 	rendering.color = glm::vec3((float)character.health / 1000, 0.f, 0.f);
 
@@ -62,8 +65,11 @@ void EnemyCharacter::Update(float deltaTime)
 
 bool EnemyCharacter::OnCollision(ECSEntity other)
 {
-	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "DamageTile")
-		ECSHandler::Instance()->GetComponent<Character>(mEntity).health -= 1;																																																
+	auto& tag = ECSHandler::Instance()->GetComponent<EntityData>(other).tag;
+	auto& player = ECSHandler::Instance()->GetComponent<Character>(mEntity);
+
+	if (tag == "DamageTile")
+		player.health -= 1;
 
 	return false;
 }

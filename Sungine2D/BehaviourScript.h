@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <SDL_stdinc.h>
 #include <vector>
 
 #include "ECSSystem.h"
@@ -27,6 +28,7 @@ public:
 
 	//Return true if the owning entity was destroyed in this method.
 	virtual bool OnCollision(ECSEntity other);
+	virtual bool OnRender(ECSEntity entity);
 
 	static std::vector<BehaviourScript*> GetBehaviourScripts() { return mAllBehaviourScripts; }
 	static void ClearBehaviourScripts();

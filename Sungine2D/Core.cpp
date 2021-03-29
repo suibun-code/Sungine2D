@@ -1,7 +1,6 @@
 #include "Core.h"
 
 #include <iostream>
-#include <chrono>
 #include <ctime>
 
 //SDL
@@ -24,6 +23,8 @@
 
 #include "MainMenu.h"
 #include "TestState.h"
+
+typedef std::chrono::high_resolution_clock Clock;
 
 //Initialzie singleton instances.
 Core* Core::mspInstance = nullptr;
@@ -143,9 +144,9 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_SCISSOR_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_SCISSOR_TEST);
 
 	//ImGui.
 	mImGuiContext = ImGui::CreateContext();
@@ -160,15 +161,15 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	glMatrixMode(GL_MODELVIEW);
 
 	mProjection = glm::ortho(0.f, 1280.f, 720.f, 0.f, -5.f, 5.f);
-	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
-	ResourceManager::GetShader("sprite").SetMatrix4("projection", mProjection);
 	ResourceManager::GetShader("particle").Use().SetInteger("sprite", 0);
 	ResourceManager::GetShader("particle").SetMatrix4("projection", mProjection);
+	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
+	ResourceManager::GetShader("sprite").SetMatrix4("projection", mProjection);
 
 	mView = glm::lookAt(glm::vec3(0, 0, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	mView = glm::translate(mView, glm::vec3(0, 0, 0));
+	ResourceManager::GetShader("particle").SetMatrix4("view", mView);
 	ResourceManager::GetShader("sprite").SetMatrix4("view", mView);
-	ResourceManager::GetShader("projection").SetMatrix4("view", mView);
 
 	//Initialize ImGui.
 	InitImGui();
@@ -197,6 +198,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	//Register systems.
 	mpMovementSystem = ECSHandler::Instance()->RegisterSystem<MovementSystem>();
 	mpRenderSystem = ECSHandler::Instance()->RegisterSystem<RenderSystem>();
+	mpParticleRenderSystem = ECSHandler::Instance()->RegisterSystem<ParticleRenderSystem>();
 	mpTextSystem = ECSHandler::Instance()->RegisterSystem<TextSystem>();
 	mpCollisionSystem = ECSHandler::Instance()->RegisterSystem<CollisionSystem>();
 	mpFollowSystem = ECSHandler::Instance()->RegisterSystem<FollowSystem>();
@@ -211,6 +213,12 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	renderSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
 	renderSignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
 	ECSHandler::Instance()->SetSystemSignature<RenderSystem>(renderSignature);
+
+	Signature particleRenderSignature;
+	particleRenderSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
+	particleRenderSignature.set(ECSHandler::Instance()->GetComponentType<Rendering>());
+	particleRenderSignature.set(ECSHandler::Instance()->GetComponentType<Particle>());
+	ECSHandler::Instance()->SetSystemSignature<ParticleRenderSystem>(particleRenderSignature);
 
 	Signature textSignature;
 	textSignature.set(ECSHandler::Instance()->GetComponentType<Transform>());
@@ -231,6 +239,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	mpSystems.insert({ typeid(MovementSystem).name(), mpMovementSystem });
 	mpSystems.insert({ typeid(RenderSystem).name(), mpRenderSystem });
+	mpSystems.insert({ typeid(ParticleRenderSystem).name(), mpParticleRenderSystem });
 	mpSystems.insert({ typeid(TextSystem).name(), mpTextSystem });
 	mpSystems.insert({ typeid(CollisionSystem).name(), mpCollisionSystem });
 	mpSystems.insert({ typeid(FollowSystem).name(), mpFollowSystem });
@@ -361,9 +370,9 @@ void Core::MoveView(glm::vec3 translate)
 
 bool Core::Tick()
 {
+	mCurrentTime = SDL_GetTicks();
+	mDeltaTime = (float)(mCurrentTime - mPreviousTime) / 1000;
 	mPreviousTime = mCurrentTime;
-	mCurrentTime = SDL_GetPerformanceCounter();
-	mDeltaTime = (float)((mCurrentTime - mPreviousTime) / (float)SDL_GetPerformanceFrequency());
 	mFramesPerSecond = 1.f / mDeltaTime;
 
 	//std::cout << "deltatime: " << mDeltaTime << "\n";

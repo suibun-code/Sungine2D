@@ -1,99 +1,149 @@
 #include "ParticleGenerator.h"
 
-#include "ECSHandler.h"
+//Components
+#include "EntityData.h"
+#include "Rendering.h"
 #include "Movement.h"
+#include "Particle.h"
 #include "Transform.h"
-//
-//ParticleGenerator::ParticleGenerator(ShaderUtil shader, SuTexture2D texture, unsigned int amount)
-//    : shader(shader), texture(texture), amount(amount)
-//{
-//    this->Init();
-//}
-//
-//void ParticleGenerator::Update(float dt, ECSEntity object, unsigned int newParticles, glm::vec2 offset)
-//{
-//    // add new particles 
-//    for (unsigned int i = 0; i < newParticles; ++i)
-//    {
-//        int unusedParticle = this->FirstUnusedParticle();
-//        this->RespawnParticle(this->particles[unusedParticle], object, offset);
-//    }
-//    // update all particles
-//    for (unsigned int i = 0; i < this->amount; ++i)
-//    {
-//        Particle& p = this->particles[i];
-//        p.Life -= dt; // reduce life
-//        if (p.Life > 0.0f)
-//        {	// particle is alive, thus update
-//            p.Position -= p.Velocity * dt;
-//            p.Color.a -= dt * 2.5f;
-//        }
-//    }
-//}
-//
-//// render all particles
-//void ParticleGenerator::Draw()
-//{
-//    // use additive blending to give it a 'glow' effect
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-//    this->shader.Use();
-//	
-//    for (Particle particle : this->particles)
-//    {
-//        if (particle.Life > 0.0f)
-//        {
-//            this->shader.SetVector2f("offset", particle.Position);
-//            this->shader.SetVector4f("color", particle.Color);
-//            this->texture.Bind();
-//            glBindVertexArray(this->VAO);
-//            glDrawArrays(GL_TRIANGLES, 0, 6);
-//            glBindVertexArray(0);
-//        }
-//    }
-//	
-//    // don't forget to reset to default blending mode
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//}
-//
-//void ParticleGenerator::Init()
-//{
-//    // create this->amount default particle instances
-//    for (unsigned int i = 0; i < this->amount; ++i)
-//        this->particles.push_back(Particle());
-//}
-//
-//// stores the index of the last particle used (for quick access to next dead particle)
-//unsigned int lastUsedParticle = 0;
-//unsigned int ParticleGenerator::FirstUnusedParticle()
-//{
-//    // first search from last used particle, this will usually return almost instantly
-//    for (unsigned int i = lastUsedParticle; i < this->amount; ++i) {
-//        if (this->particles[i].Life <= 0.0f) {
-//            lastUsedParticle = i;
-//            return i;
-//        }
-//    }
-//    // otherwise, do a linear search
-//    for (unsigned int i = 0; i < lastUsedParticle; ++i) {
-//        if (this->particles[i].Life <= 0.0f) {
-//            lastUsedParticle = i;
-//            return i;
-//        }
-//    }
-//    // all particles are taken, override the first one (note that if it repeatedly hits this case, more particles should be reserved)
-//    lastUsedParticle = 0;
-//    return 0;
-//}
-//
-//void ParticleGenerator::RespawnParticle(Particle& particle, ECSEntity object, glm::vec2 offset)
-//{
-//    float random = ((rand() % 100) - 50) / 10.0f;
-//    float rColor = 0.5f + ((rand() % 100) / 100.0f);
-//    particle.Position = ECSHandler::Instance()->GetComponent<Transform>(object).position + random + offset;
-//    particle.Color = glm::vec4(rColor, rColor, rColor, 1.0f);
-//    particle.Life = 5.0f;
-//    particle.Velocity = ECSHandler::Instance()->GetComponent<Movement>(object).velocity * 0.1f;
-//
-//    std::cout << "posx: " << particle.Position.x << "\n";
-//    std::cout << "posy: " << particle.Position.y << "\n\n";
-//}
+
+#include "ECSHandler.h"
+#include "ResourceManager.h"
+
+unsigned int lastUsedParticle = 0;
+
+ParticleGenerator::ParticleGenerator(unsigned int amount, unsigned int newParticles, ECSEntity followEntity, glm::vec2 offset) : amount(amount), newParticles(newParticles), followEntity(followEntity), offset(offset)
+{
+    BehaviourScript::Generate();
+    Start();
+}
+
+void ParticleGenerator::Start()
+{
+    mEntity = ECSHandler::Instance()->CreateEntity();
+	
+    ECSHandler::Instance()->GetComponent<EntityData>(mEntity).script = this;
+    ECSHandler::Instance()->GetComponent<EntityData>(mEntity).name = "FollowParticles";
+    ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "ParticleGenerator";
+	
+    ResourceManager::LoadTexture("res/img/particle.png", true, "particle");
+
+    // create amount default particle instances
+    for (unsigned int i = 0; i < amount; ++i)
+    {
+        ECSEntity particle = ECSHandler::Instance()->CreateEntity();
+        ECSHandler::Instance()->GetComponent<EntityData>(particle).script = this;
+        ECSHandler::Instance()->GetComponent<EntityData>(particle).name = "particle";
+        ECSHandler::Instance()->GetComponent<EntityData>(particle).tag = "Particle";
+        ECSHandler::Instance()->AddComponent(particle, Transform{ });
+        ECSHandler::Instance()->AddComponent(particle, Rendering{ ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle") });
+        ECSHandler::Instance()->AddComponent(particle, Particle{});
+
+        particles.push_back(particle);
+    }
+}
+
+void ParticleGenerator::Update(float deltaTime)
+{
+    //Add new particles.
+    for (unsigned int i = 0; i < newParticles; ++i)
+    {
+        int unusedParticle = FirstUnusedParticle();
+        RespawnParticle(particles[unusedParticle], offset);
+    }
+
+    //Update all particles.
+    for (unsigned int i = 0; i < amount; ++i)
+    {
+        ECSEntity& particle = particles[i];
+
+        auto& p = ECSHandler::Instance()->GetComponent<Particle>(particle);
+
+        p.life -= deltaTime; // reduce life
+        if (p.life > 0.0f)
+        {	// particle is alive, thus update
+            p.position -= p.velocity * deltaTime;
+            p.color.a -= deltaTime * 1.75f;
+        }
+    }
+}
+
+void ParticleGenerator::Destroy()
+{
+    BehaviourScript::Destroy();
+}
+
+void ParticleGenerator::FollowEntity(ECSEntity entityToFollow)
+{
+    followEntity = entityToFollow;
+}
+
+void ParticleGenerator::SetOffset(glm::vec2 offset)
+{
+    this->offset = offset;
+}
+
+//Stores the index of the last particle used (for quick access to next dead particle).
+unsigned int ParticleGenerator::FirstUnusedParticle()
+{
+    //First search from last used particle, this will usually return almost instantly.
+    for (unsigned int i = lastUsedParticle; i < amount; ++i) 
+    {
+        auto& particleComponent = ECSHandler::Instance()->GetComponent<Particle>(particles[i]);
+    	
+        if (particleComponent.life <= 0.0f) 
+        {
+            lastUsedParticle = i;
+            return i;
+        }
+    }
+	
+    //Otherwise, do a linear search.
+    for (unsigned int i = 0; i < lastUsedParticle; ++i) 
+    {
+        auto& particleComponent = ECSHandler::Instance()->GetComponent<Particle>(particles[i]);
+    	
+        if (particleComponent.life <= 0.0f) 
+        {
+            lastUsedParticle = i;
+            return i;
+        }
+    }
+	
+    //All particles are taken, override the first one (note that if it repeatedly hits this case, more particles should be reserved).
+    lastUsedParticle = 0;
+    return 0;
+}
+
+void ParticleGenerator::RespawnParticle(ECSEntity particle, glm::vec2 offset)
+{
+    auto& particleComponent = ECSHandler::Instance()->GetComponent<Particle>(particle);
+	
+    float random = ((rand() % 100) - 50) / 10.0f;
+    float rColor = 0.5f + ((rand() % 100) / 100.0f);
+	
+    particleComponent.position = ECSHandler::Instance()->GetComponent<Transform>(followEntity).position + random + offset;
+    particleComponent.color = glm::vec4(rColor, rColor, rColor, 1.0f);
+    particleComponent.life = 0.75f;
+    particleComponent.velocity = ECSHandler::Instance()->GetComponent<Movement>(followEntity).velocity * 0.1f;
+}
+
+bool ParticleGenerator::OnRender(ECSEntity entity)
+{
+    auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
+    auto& particle = ECSHandler::Instance()->GetComponent<Particle>(entity);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    render.shaderUtil.Use();
+
+    if (particle.life < 0.0f)
+    {
+        return false;
+    }
+
+    //Render.
+    render.shaderUtil.SetVector2f("offset", particle.position);
+    render.shaderUtil.SetVector4f("color", particle.color);
+
+    return true;
+}

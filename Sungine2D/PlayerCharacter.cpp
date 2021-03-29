@@ -19,7 +19,7 @@ void PlayerCharacter::Start()
 
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(600.f, 450.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char") });
-	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 65000.f, true });
+	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 950.f, true });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
 	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 }) });
 
@@ -33,11 +33,6 @@ void PlayerCharacter::Start()
 		mBulletOP.push(bullet);
 	}
 	tempBullet = mBulletOP.front();
-}
-
-void PlayerCharacter::Destroy()
-{
-	BehaviourScript::Destroy();
 }
 
 void PlayerCharacter::Update(float deltaTime)
@@ -79,6 +74,7 @@ void PlayerCharacter::Update(float deltaTime)
 		transform.dirty = true;
 	}
 
+	//Shooting bullets
 	if (Core::Instance()->GetLMBState())
 	{
 		Core::Instance()->GetAM()->PlaySound(0);
@@ -111,10 +107,35 @@ void PlayerCharacter::Update(float deltaTime)
 	}
 }
 
+void PlayerCharacter::Destroy()
+{
+	BehaviourScript::Destroy();
+}
+
 bool PlayerCharacter::OnCollision(ECSEntity other)
 {
-	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "DamageTile")
-		ECSHandler::Instance()->GetComponent<Character>(mEntity).health -= 1;
+	auto& tag = ECSHandler::Instance()->GetComponent<EntityData>(other).tag;
+	auto& player = ECSHandler::Instance()->GetComponent<Character>(mEntity);
+	
+	if (tag == "DamageTile")
+		player.health -= 1;
+
+	if (tag == "Enemy")
+	{
+		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
+		auto& movementOther = ECSHandler::Instance()->GetComponent<Movement>(other);
+
+		if (std::abs(movement.velocity.x + movement.velocity.y) > std::abs(movementOther.velocity.x + movementOther.velocity.y))
+		{
+			movementOther.acceleration += movement.acceleration * 1.5f;
+			movement.acceleration *= 0.f;
+		}
+		else
+		{
+			movement.acceleration += movementOther.acceleration * 1.5f;
+			movementOther.acceleration *= 0.f;
+		}
+	}
 	
 	return false;
 }

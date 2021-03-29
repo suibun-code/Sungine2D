@@ -192,14 +192,14 @@
     <ClInclude Include="Tile.h">
       <Filter>Game\Prefabs\Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleGenerator.h">
-      <Filter>Engine\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="ParticleRenderSystem.h">
       <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGenerator.h">
+      <Filter>Game\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,11 +299,11 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Game\Prefabs\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleGenerator.cpp">
-      <Filter>Engine\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleRenderSystem.cpp">
       <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Game\Prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

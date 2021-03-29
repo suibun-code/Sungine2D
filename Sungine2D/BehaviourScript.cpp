@@ -49,6 +49,12 @@ bool BehaviourScript::OnCollision(ECSEntity other)
 	return false;
 }
 
+bool BehaviourScript::OnRender(ECSEntity entity)
+{
+	return false;
+}
+
+
 void BehaviourScript::ClearBehaviourScripts()
 {
 	for (auto script : mAllBehaviourScripts)

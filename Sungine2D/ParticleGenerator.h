@@ -3,38 +3,36 @@
 #include <vector>
 
 //GLM
+#include "BehaviourScript.h"
 #include "glm/glm/glm.hpp"
 
 #include "ShaderUtil.h"
 #include "SuTexture2D.h"
 #include "Types.h"
 
-//struct Particle {
-//	glm::vec2 Position, Velocity;
-//	glm::vec4 Color;
-//	float     Life;
-//
-//	Particle() : Position(0.0f), Velocity(0.0f), Color(1.0f), Life(0.0f) { }
-//};
-
-class ParticleGenerator
+class ParticleGenerator : public BehaviourScript
 {
-//private:
-//	std::vector<ECSEntity> particles;
-//	unsigned int amount;
-//
-//	ShaderUtil shader;
-//	SuTexture2D texture;
-//	unsigned int VAO;
-//
-//	void Init();
-//	unsigned int FirstUnusedParticle();
-//	void RespawnParticle(/*Particle& particle*/ ECSEntity object, glm::vec2 offset = glm::vec2(0.0f, 0.0f));
-//
-//public:
-//
-//	ParticleGenerator(ShaderUtil shader, SuTexture2D texture, unsigned int amount);
-//
-//	void Update(float dt, ECSEntity object, unsigned int newParticles, glm::vec2 offset = glm::vec2(0.0f, 0.0f));
-//	void Draw();
+private:
+	std::vector<ECSEntity> particles;
+	ECSEntity followEntity = NULL;
+
+	glm::vec2 offset = glm::vec2(0);
+	
+	unsigned int newParticles = 0;
+	unsigned int amount;
+	
+	unsigned int FirstUnusedParticle();
+	void RespawnParticle(ECSEntity particle, glm::vec2 offset = glm::vec2(0.0f, 0.0f));
+
+public:
+	ParticleGenerator(unsigned int amount, unsigned int newParticles, ECSEntity followEntity = NULL, glm::vec2 offset = glm::vec2(0));
+	
+	void Start() override;
+	void Update(float deltaTime) override;
+	void Destroy() override;
+
+	void FollowEntity(ECSEntity entityToFollow);
+	void SetOffset(glm::vec2 offset);
+
+	bool OnRender(ECSEntity entity) override;
 };

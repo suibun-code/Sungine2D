@@ -62,7 +62,7 @@ bool Bullet::OnCollision(ECSEntity other)
 		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 		auto& movementOther = ECSHandler::Instance()->GetComponent<Movement>(other);
 
-		movementOther.velocity += movement.velocity * .55f;
+		movementOther.acceleration += movement.velocity * .55f;
 		
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);

@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <map>
+#include <chrono>
 
 //SDL
 #include "SDL.h"
@@ -41,10 +42,9 @@ private:
 
 	std::map<std::string, std::shared_ptr<ECSSystem>> mpSystems;
 
-	//std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<MovementSystem> mpMovementSystem;
 	std::shared_ptr<RenderSystem> mpRenderSystem;
-	std::shared_ptr<ParticleRenderSystem> mParticleRenderSystem;
+	std::shared_ptr<ParticleRenderSystem> mpParticleRenderSystem;
 	std::shared_ptr<TextSystem> mpTextSystem;
 	std::shared_ptr<CollisionSystem> mpCollisionSystem;
 	std::shared_ptr<FollowSystem> mpFollowSystem;
@@ -72,8 +72,8 @@ private:
 	bool mMusicEnabled = false;
 
 	//Time.
-	Uint64 mCurrentTime = SDL_GetPerformanceCounter();
-	Uint64 mPreviousTime = 0;
+	Uint64 mCurrentTime;
+	Uint64 mPreviousTime;
 	float mDeltaTime = 0;
 	float mFramesPerSecond = 0;
 
