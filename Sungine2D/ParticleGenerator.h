@@ -16,6 +16,7 @@ private:
 	std::vector<ECSEntity> particles;
 	ECSEntity followEntity = NULL;
 
+	glm::vec4 color = glm::vec4(1.f);
 	glm::vec2 offset = glm::vec2(0);
 	
 	unsigned int newParticles = 0;
@@ -25,7 +26,7 @@ private:
 	void RespawnParticle(ECSEntity particle, glm::vec2 offset = glm::vec2(0.0f, 0.0f));
 
 public:
-	ParticleGenerator(unsigned int amount, unsigned int newParticles, ECSEntity followEntity = NULL, glm::vec2 offset = glm::vec2(0));
+	ParticleGenerator(unsigned int amount, unsigned int newParticles, glm::vec4 color, glm::vec2 offset = glm::vec2(0), ECSEntity followEntity = NULL);
 	
 	void Start() override;
 	void Update(float deltaTime) override;

@@ -13,7 +13,6 @@
 //States
 #include "EnemyCharacter.h"
 #include "MainMenu.h"
-ParticleGenerator* particles;
 
 void TestState::Enter()
 {
@@ -32,9 +31,11 @@ void TestState::Enter()
 	ResourceManager::LoadTexture("res/img/character.png", true, "char");
 	ResourceManager::LoadTexture("res/img/bullet3.png", true, "bullet");
 
+	//Loading the level.
 	Level levelTest;
 	levelTest.Load("res/levels/saved.txt");
 
+	//Spawn locations for the player.
 	glm::vec2 spawnLocations[5];
 	spawnLocations[0] = glm::vec2(500.f, 250.f);
 	spawnLocations[1] = glm::vec2(1000.f, 50.f);
@@ -42,16 +43,23 @@ void TestState::Enter()
 	spawnLocations[3] = glm::vec2(550.f, 55.f);
 	spawnLocations[4] = glm::vec2(600.f, 45.f);
 
-	//Particles
-	particles = new ParticleGenerator(100, 1);
+	//Particles for the player.
+	ParticleGenerator* particles;
+	particles = new ParticleGenerator(100, 1, glm::vec4(.0f, .0f, 1.f, 1.f), glm::vec2(10.f, -10.f));
 	particles->SetOwner(particles);
 	
+	//Particles for the enemy.
+	ParticleGenerator* particlesEnemy;
+	particlesEnemy = new ParticleGenerator(100, 1, glm::vec4(1.f, .0f, .0f, 1.f), glm::vec2(10.f, -10.f));
+	particles->SetOwner(particlesEnemy);
+
+	//Player.
 	PlayerCharacter* player;
 	player = new PlayerCharacter();
 	player->SetOwner(player);
 
+	//Tell the particles to follow the player.
 	particles->FollowEntity(player->GetEntity());
-	particles->SetOffset(glm::vec2(10.f, -10.f));
 
 	//Spawn enemies at pre-determined locations from the spawnLocations array.
 	for (int i = 0; i < 1; i++)
@@ -60,6 +68,9 @@ void TestState::Enter()
 		enemy->SetOwner(enemy);
 		ECSHandler::Instance()->GetComponent<Transform>(enemy->GetEntity()).position = spawnLocations[i];
 		ECSHandler::Instance()->AddComponent(enemy->GetEntity(), Follow{ player->GetEntity() });
+
+		//Tell the particles to follow the enemy.
+		particlesEnemy->FollowEntity(enemy->GetEntity());
 	}
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();

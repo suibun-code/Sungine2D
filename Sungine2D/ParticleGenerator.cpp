@@ -12,7 +12,7 @@
 
 unsigned int lastUsedParticle = 0;
 
-ParticleGenerator::ParticleGenerator(unsigned int amount, unsigned int newParticles, ECSEntity followEntity, glm::vec2 offset) : amount(amount), newParticles(newParticles), followEntity(followEntity), offset(offset)
+ParticleGenerator::ParticleGenerator(unsigned int amount, unsigned int newParticles, glm::vec4 color, glm::vec2 offset, ECSEntity followEntity) : amount(amount), newParticles(newParticles), color(color), offset(offset), followEntity(followEntity)
 {
     BehaviourScript::Generate();
     Start();
@@ -80,7 +80,7 @@ void ParticleGenerator::FollowEntity(ECSEntity entityToFollow)
 
 void ParticleGenerator::SetOffset(glm::vec2 offset)
 {
-    this->offset = offset;
+	offset = offset;
 }
 
 //Stores the index of the last particle used (for quick access to next dead particle).
@@ -120,10 +120,10 @@ void ParticleGenerator::RespawnParticle(ECSEntity particle, glm::vec2 offset)
     auto& particleComponent = ECSHandler::Instance()->GetComponent<Particle>(particle);
 	
     float random = ((rand() % 100) - 50) / 10.0f;
-    float rColor = 0.5f + ((rand() % 100) / 100.0f);
+    //float rColor = 0.5f + ((rand() % 100) / 100.0f);
 	
     particleComponent.position = ECSHandler::Instance()->GetComponent<Transform>(followEntity).position + random + offset;
-    particleComponent.color = glm::vec4(rColor, rColor, rColor, 1.0f);
+    particleComponent.color = color;
     particleComponent.life = 0.75f;
     particleComponent.velocity = ECSHandler::Instance()->GetComponent<Movement>(followEntity).velocity * 0.1f;
 }
