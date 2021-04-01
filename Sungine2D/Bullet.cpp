@@ -51,19 +51,33 @@ void Bullet::Update(float deltaTime)
 
 bool Bullet::OnCollision(ECSEntity other)
 {
-	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Player")
+	auto& dataOther = ECSHandler::Instance()->GetComponent<EntityData>(other);
+	
+	if (dataOther.tag == "Player")
 		return false;
 
 	if (ECSHandler::Instance()->GetComponent<Collider>(other).trigger == true)
 		return false;
 	
-	if (ECSHandler::Instance()->GetComponent<EntityData>(other).tag == "Enemy")
+	if (dataOther.tag == "Enemy")
 	{
 		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 		auto& movementOther = ECSHandler::Instance()->GetComponent<Movement>(other);
 
 		movementOther.acceleration += movement.velocity * .55f;
 		
+		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
+		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
+		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
+		return true;
+	}
+
+	if (dataOther.tag == "Wall")
+	{
+		std::cout << "Bullet hit wall\n";
+		
+		ECSHandler::Instance()->DestroyEntity(other);
+
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);

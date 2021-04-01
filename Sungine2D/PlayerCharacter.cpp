@@ -74,7 +74,7 @@ void PlayerCharacter::Update(float deltaTime)
 		transform.dirty = true;
 	}
 
-	//Shooting bullets
+	//Shooting bullets.
 	if (Core::Instance()->GetLMBState())
 	{
 		Core::Instance()->GetAM()->PlaySound(0);
@@ -104,6 +104,14 @@ void PlayerCharacter::Update(float deltaTime)
 		
 		mBulletOP.pop();
 		mBulletOP.push(tempBullet);
+	}
+
+	//Spawning breakable wall.
+	if (Core::Instance()->GetRMBState())
+	{
+		Core::Instance()->GetAM()->PlaySound(0);
+
+		
 	}
 }
 

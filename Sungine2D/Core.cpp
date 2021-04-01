@@ -428,6 +428,9 @@ void Core::HandleEvents()
 	if (mLMBState == true)
 		mLMBState = false;
 
+	if (mRMBState == true)
+		mRMBState = false;
+
 	while (SDL_PollEvent(&mEvent))
 	{
 		//Does most of the input/event processing.
@@ -472,6 +475,12 @@ void Core::HandleEvents()
 					mLMBDown = true;
 				}
 
+			if (mEvent.button.button == SDL_BUTTON_RIGHT)
+			{
+				mRMBState = true;
+				mRMBDown = true;
+			}
+			
 			if (mEvent.button.button == SDL_BUTTON_MIDDLE)
 				if (mEvent.button.state == SDL_PRESSED)
 				{
@@ -483,6 +492,10 @@ void Core::HandleEvents()
 			if (mEvent.button.button == SDL_BUTTON_LEFT)
 			{
 				mLMBDown = false;
+			}
+			if (mEvent.button.button == SDL_BUTTON_RIGHT)
+			{
+				mRMBDown = false;
 			}
 			break;
 
