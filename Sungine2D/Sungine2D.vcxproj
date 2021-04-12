@@ -156,6 +156,7 @@
     <ClInclude Include="..\include\imgui_sdl\imgui_sdl.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BehaviourScript.h" />
+    <ClInclude Include="BreakableWall.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionSystem.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="..\include\imgui_sdl\imgui_sdl.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BehaviourScript.cpp" />
+    <ClCompile Include="BreakableWall.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Core.cpp" />

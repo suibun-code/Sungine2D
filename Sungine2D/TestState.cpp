@@ -30,6 +30,7 @@ void TestState::Enter()
 	shader = ResourceManager::GetShader("sprite");
 	ResourceManager::LoadTexture("res/img/character.png", true, "char");
 	ResourceManager::LoadTexture("res/img/bullet3.png", true, "bullet");
+	ResourceManager::LoadTexture("res/img/wall_breakable.png", true, "wall_breakable");
 
 	//Loading the level.
 	Level levelTest;

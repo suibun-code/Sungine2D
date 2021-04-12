@@ -8,9 +8,6 @@
 
 class Bullet : public BehaviourScript
 {
-private:
-	
-
 public:
 	static int mBulletCount;
 	SuTexture2D mTexture;

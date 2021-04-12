@@ -74,14 +74,19 @@ bool Bullet::OnCollision(ECSEntity other)
 
 	if (dataOther.tag == "Wall")
 	{
-		std::cout << "Bullet hit wall\n";
-		
 		ECSHandler::Instance()->DestroyEntity(other);
 
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
 		return true;
+	}
+
+	if (dataOther.tag == "Breakable")
+	{
+		std::cout << "bullet hit this wall\n";
+
+		ECSHandler::Instance()->GetComponent<EntityData>(other).script->Destroy();
 	}
 
 	ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);

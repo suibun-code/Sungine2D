@@ -1,5 +1,6 @@
 ﻿#include "PlayerCharacter.h"
 
+#include "BreakableWall.h"
 #include "ResourceManager.h"
 
 #include "Core.h"
@@ -88,7 +89,6 @@ void PlayerCharacter::Update(float deltaTime)
 		auto& bulletCollider = ECSHandler::Instance()->GetComponent<Collider>(tempBullet->GetEntity());
 
 		bulletTransform = Transform{ glm::vec2(transform.position.x + (transform.size.x * .5f), transform.position.y + (transform.size.y * .2f)), glm::vec2(1.f), 90.f };
-
 		bulletTransform.SetSize(glm::vec2(bulletRender.texture.Width, bulletRender.texture.Height) * bulletTransform.scale);
 		bulletCollider.boundingBox = bulletTransform.size;
 
@@ -111,7 +111,15 @@ void PlayerCharacter::Update(float deltaTime)
 	{
 		Core::Instance()->GetAM()->PlaySound(0);
 
-		
+		BreakableWall* wall = new BreakableWall();
+
+		auto& wallTransform = ECSHandler::Instance()->GetComponent<Transform>(wall->GetEntity());
+		auto& wallRender = ECSHandler::Instance()->GetComponent<Rendering>(wall->GetEntity());
+		auto& wallCollider = ECSHandler::Instance()->GetComponent<Collider>(wall->GetEntity());
+
+		wallTransform = Transform{ glm::vec2(transform.position.x + 25, transform.position.y + 25) };
+		wallTransform.SetSize(glm::vec2(wallRender.texture.Width, wallRender.texture.Height) * wallTransform.scale);
+		wallCollider.boundingBox = wallTransform.size;
 	}
 }
 
