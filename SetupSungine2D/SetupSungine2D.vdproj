@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0B7D1595B1284A21A9722C854213BBCA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_11D740F98C4D4E4685C1262EC341A8DE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -40,12 +34,6 @@
         "Entry"
         {
         "MsmKey" = "8:_1E18A54A937B4FF39BD04DBCE5DC78B5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1F7983A54CD94A508051C907C506E5AD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,12 +69,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3CAD06DB7B334E63A87F2BFAAAF05C83"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3F16CF44BD9E48248C8B0D1AD0B59862"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,24 +76,6 @@
         "Entry"
         {
         "MsmKey" = "8:_3F280AED7B6B41B1918E1CAECA5B97CC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_420506494483435E8A31A00F51EB8022"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4A807735BC8A41EBBFCAD1BD0F590C0B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4C5B54E68B004F4296021BB759DB8B68"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -129,12 +93,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_562FCB30E28743C3A012EA87721B2842"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5846F4F9988F4C67A4800576FCC0594F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -147,37 +105,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_69E46FDF837F4B28BBB4FF9C964F6DB5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6AE12745EFB04C998C710A7562A3DD38"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6AFC88799BB0443288FCFE8D4C7F90C7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6B4F3DC1065E4DE79EBA24DEE39411F3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6CD09DE2700643088EA869CA87C5DE6D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6D184EBB7E64402B91D14E998B010039"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -207,12 +135,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7DAEB0AC0D9C4216BC98B3DF4A9BACAA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_7E12A40EF8EB4BCC96560E5F77F73F6D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -225,12 +147,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_81F9D220E7B3461AA348FF940CF83DE6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_853B07BF9EA64FAE98B71406CABEFA17"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -238,6 +154,12 @@
         "Entry"
         {
         "MsmKey" = "8:_87D0A263976C498B9AD93FF1DC316AC9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8961FD026CA143E6AEFC91E164F4DD58"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -261,12 +183,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_95134240C8A046FB8F93F20588D906F7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_96E8ED8313BB4A788C7A98816307AB41"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -279,25 +195,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_99A2E68941104C5BB401BF8C20812CC4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9AF85D7824EA4A5E949AB2AEF29B68FF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9C224B1940A140299AF04A6C7BACB897"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9D7B93667AFB4AD2B4BE93E73A0EBC81"
+        "MsmKey" = "8:_9B716BFEC19740CA844AE9B4B06E3C39"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -345,6 +249,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D088170DE3734D26A7CE903E5B1F1F97"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D0E82ED5811649518DBF55D6230E2402"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -357,7 +267,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DFDFE47B71154DBB89551858033716B9"
+        "MsmKey" = "8:_D6D4A0AA1E0C4A3C912AB1E0180936C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -375,31 +285,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EC93696F129148269ACBD95FFDD1326A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F01E49E33DF7456EBCA0A245EF2AED3D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F56D291FB3D94D4C81F2425A9B7DC63F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F8D395C9B34845BFA078A022844C9430"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FA102BB9DECD4C76B3556D6C887B6D09"
+        "MsmKey" = "8:_F5033099653044BBB7C2BF0FF79E9CD0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -466,6 +358,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -488,26 +388,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B7D1595B1284A21A9722C854213BBCA"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\water1.png"
-            "TargetName" = "8:water1.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11D740F98C4D4E4685C1262EC341A8DE"
             {
             "SourcePath" = "8:..\\Debug\\SDL2_ttf.dll"
@@ -554,26 +434,6 @@
             "TargetName" = "8:libmpg123-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_C39D804D916A4515BC3058EBC8AFA677"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F7983A54CD94A508051C907C506E5AD"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mud3.png"
-            "TargetName" = "8:mud3.png"
-            "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -688,26 +548,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3CAD06DB7B334E63A87F2BFAAAF05C83"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\water4.png"
-            "TargetName" = "8:water4.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3F16CF44BD9E48248C8B0D1AD0B59862"
             {
             "SourcePath" = "8:..\\Debug\\imgui.ini"
@@ -748,66 +588,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_420506494483435E8A31A00F51EB8022"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\water6.png"
-            "TargetName" = "8:water6.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4A807735BC8A41EBBFCAD1BD0F590C0B"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\watercornerBR.png"
-            "TargetName" = "8:watercornerBR.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4C5B54E68B004F4296021BB759DB8B68"
-            {
-            "SourcePath" = "8:..\\Sungine2D\\res\\img\\grass.png"
-            "TargetName" = "8:grass.png"
-            "Tag" = "8:"
-            "Folder" = "8:_593001E0D2B242359BAF5998440466B5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4CC29E53BA4249F9A2D8A9F8806EED08"
             {
             "SourcePath" = "8:..\\Debug\\libopus-0.dll"
@@ -832,26 +612,6 @@
             {
             "SourcePath" = "8:..\\Debug\\res\\audio\\music\\musikkperautomatikk.mp3"
             "TargetName" = "8:musikkperautomatikk.mp3"
-            "Tag" = "8:"
-            "Folder" = "8:_6374B8494EC145129DA191987DCEB539"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_562FCB30E28743C3A012EA87721B2842"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\audio\\music\\CornerOfMemories.mp3"
-            "TargetName" = "8:CornerOfMemories.mp3"
             "Tag" = "8:"
             "Folder" = "8:_6374B8494EC145129DA191987DCEB539"
             "Condition" = "8:"
@@ -908,112 +668,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69E46FDF837F4B28BBB4FF9C964F6DB5"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\watercornerBL.png"
-            "TargetName" = "8:watercornerBL.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AE12745EFB04C998C710A7562A3DD38"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mudright.png"
-            "TargetName" = "8:mudright.png"
-            "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AFC88799BB0443288FCFE8D4C7F90C7"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\water2.png"
-            "TargetName" = "8:water2.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B4F3DC1065E4DE79EBA24DEE39411F3"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mud1.png"
-            "TargetName" = "8:mud1.png"
-            "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6CD09DE2700643088EA869CA87C5DE6D"
             {
             "SourcePath" = "8:..\\Debug\\res\\audio\\music\\midnightcloset.mp3"
             "TargetName" = "8:midnightcloset.mp3"
             "Tag" = "8:"
             "Folder" = "8:_6374B8494EC145129DA191987DCEB539"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D184EBB7E64402B91D14E998B010039"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mud6.png"
-            "TargetName" = "8:mud6.png"
-            "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1108,26 +768,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7DAEB0AC0D9C4216BC98B3DF4A9BACAA"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\water3.png"
-            "TargetName" = "8:water3.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7E12A40EF8EB4BCC96560E5F77F73F6D"
             {
             "SourcePath" = "8:..\\Debug\\font\\Roboto-Regular.ttf"
@@ -1168,26 +808,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_81F9D220E7B3461AA348FF940CF83DE6"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mud4.png"
-            "TargetName" = "8:mud4.png"
-            "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_853B07BF9EA64FAE98B71406CABEFA17"
             {
             "SourcePath" = "8:..\\Debug\\res\\img\\bullet3.png"
@@ -1214,6 +834,26 @@
             "TargetName" = "8:ucrtbased.dll"
             "Tag" = "8:"
             "Folder" = "8:_C39D804D916A4515BC3058EBC8AFA677"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8961FD026CA143E6AEFC91E164F4DD58"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\shaders\\followParticle.frag"
+            "TargetName" = "8:followParticle.frag"
+            "Tag" = "8:"
+            "Folder" = "8:_E79E7864B1954B2495B274EF791DDFBA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1288,26 +928,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_95134240C8A046FB8F93F20588D906F7"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\waterleft.png"
-            "TargetName" = "8:waterleft.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_96E8ED8313BB4A788C7A98816307AB41"
             {
             "SourcePath" = "8:..\\Debug\\SDL2.dll"
@@ -1348,26 +968,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_99A2E68941104C5BB401BF8C20812CC4"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mudleft.png"
-            "TargetName" = "8:mudleft.png"
-            "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9AF85D7824EA4A5E949AB2AEF29B68FF"
             {
             "SourcePath" = "8:..\\Debug\\libwebp-7.dll"
@@ -1388,32 +988,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C224B1940A140299AF04A6C7BACB897"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B716BFEC19740CA844AE9B4B06E3C39"
             {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mud2.png"
-            "TargetName" = "8:mud2.png"
+            "SourcePath" = "8:..\\Sungine2D\\res\\img\\wall_breakable.png"
+            "TargetName" = "8:wall_breakable.png"
             "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9D7B93667AFB4AD2B4BE93E73A0EBC81"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\watercornerTR.png"
-            "TargetName" = "8:watercornerTR.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
+            "Folder" = "8:_593001E0D2B242359BAF5998440466B5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1568,6 +1148,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D088170DE3734D26A7CE903E5B1F1F97"
+            {
+            "SourcePath" = "8:..\\Sungine2D\\shaders\\followParticle.vert"
+            "TargetName" = "8:followParticle.vert"
+            "Tag" = "8:"
+            "Folder" = "8:_E79E7864B1954B2495B274EF791DDFBA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D0E82ED5811649518DBF55D6230E2402"
             {
             "SourcePath" = "8:..\\Debug\\glew32.dll"
@@ -1608,12 +1208,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DFDFE47B71154DBB89551858033716B9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6D4A0AA1E0C4A3C912AB1E0180936C1"
             {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\watercornerTL.png"
-            "TargetName" = "8:watercornerTL.png"
+            "SourcePath" = "8:..\\Sungine2D\\res\\img\\particle.png"
+            "TargetName" = "8:particle.png"
             "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
+            "Folder" = "8:_593001E0D2B242359BAF5998440466B5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1668,26 +1268,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC93696F129148269ACBD95FFDD1326A"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\water5.png"
-            "TargetName" = "8:water5.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F01E49E33DF7456EBCA0A245EF2AED3D"
             {
             "SourcePath" = "8:..\\Debug\\res\\img\\sunginelogo.png"
@@ -1708,52 +1288,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F56D291FB3D94D4C81F2425A9B7DC63F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5033099653044BBB7C2BF0FF79E9CD0"
             {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mud5.png"
-            "TargetName" = "8:mud5.png"
+            "SourcePath" = "8:..\\Sungine2D\\res\\audio\\music\\CornerOfMemories.mp3"
+            "TargetName" = "8:CornerOfMemories.mp3"
             "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F8D395C9B34845BFA078A022844C9430"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\mud\\mud.png"
-            "TargetName" = "8:mud.png"
-            "Tag" = "8:"
-            "Folder" = "8:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA102BB9DECD4C76B3556D6C887B6D09"
-            {
-            "SourcePath" = "8:..\\Debug\\res\\img\\water\\waterright.png"
-            "TargetName" = "8:waterright.png"
-            "Tag" = "8:"
-            "Folder" = "8:_A9A1DFF9E7BF431D863CB2EA768ED628"
+            "Folder" = "8:_6374B8494EC145129DA191987DCEB539"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1888,17 +1428,6 @@
                             "Property" = "8:_719C0D8291DE476A92A345C8D6B7DF61"
                                 "Folders"
                                 {
-                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_25B4A0CB03BE49FD9FE72F3FB25BD601"
-                                    {
-                                    "Name" = "8:mud"
-                                    "AlwaysCreate" = "11:FALSE"
-                                    "Condition" = "8:"
-                                    "Transitive" = "11:FALSE"
-                                    "Property" = "8:_6F95F84E1E6E4DDEB7C048F32AC405EB"
-                                        "Folders"
-                                        {
-                                        }
-                                    }
                                     "{9EF0B969-E518-4E46-987F-47570745A589}:_A9A1DFF9E7BF431D863CB2EA768ED628"
                                     {
                                     "Name" = "8:water"
@@ -1955,7 +1484,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SetupSungine2D"
         "ProductCode" = "8:{9299AB6B-56ED-41E7-8653-F42EA9DBED26}"
-        "PackageCode" = "8:{8DF22046-57BE-4D77-BEB7-F3AEBFE92E85}"
+        "PackageCode" = "8:{EFAE7BA3-A4E3-488D-AF07-59520C0286C6}"
         "UpgradeCode" = "8:{7BA0D613-FACC-4EFB-807E-DF6C88468BD6}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

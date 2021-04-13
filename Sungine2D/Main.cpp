@@ -19,6 +19,6 @@ int main(int argc, char* args[])
 	}
 
 	Core::Instance()->Clean();
-
+	
 	return 0;
 }
