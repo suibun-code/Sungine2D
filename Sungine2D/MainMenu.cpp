@@ -11,6 +11,7 @@
 //States
 #include "TestState.h"
 #include "MappingState.h"
+#include "TwoPlayerMode.h"
 
 void MainMenu::Enter()
 {
@@ -31,7 +32,10 @@ void MainMenu::Enter()
 	ECSHandler::Instance()->AddComponent(logo, Transform{ glm::vec2((Core::Instance()->GetWindowWidth() / 2) - (texture.Width / 2), (Core::Instance()->GetWindowHeight() / 2) - (texture.Height / 2)) });
 	ECSHandler::Instance()->AddComponent(logo, Rendering{ shader, texture });
 
-	ResourceManager::AddText("enter", "Press Enter To Start", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2, (Core::Instance()->GetWindowHeight() / 2) + 25));
+	ResourceManager::AddText("choose", "Choose the mode you wish to play.", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 120.f, (Core::Instance()->GetWindowHeight() / 2) + 50), { 175, 175, 175, 255 });
+	
+	ResourceManager::AddText("singleplayer", "'1': Singleplayer Against AI", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 100.f, (Core::Instance()->GetWindowHeight() / 2) + 75), { 0, 165, 100, 255 });
+	ResourceManager::AddText("twoplayer", "'2': 1 vs 1 Two-Player", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 100.f, (Core::Instance()->GetWindowHeight() / 2) + 100), { 0, 0, 200, 255 });
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
@@ -64,9 +68,15 @@ void MainMenu::Render()
 
 void MainMenu::LateUpdate(float deltaTime)
 {
-	if (Core::Instance()->KeyDown(SDL_SCANCODE_RETURN))
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_1))
 	{
 		Core::Instance()->GetFSM()->ChangeState(new TestState());
+		return;
+	}
+
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_2))
+	{
+		Core::Instance()->GetFSM()->ChangeState(new TwoPlayerMode());
 		return;
 	}
 

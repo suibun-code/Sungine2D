@@ -69,6 +69,9 @@ bool Bullet::OnCollision(ECSEntity other)
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
+
+		Core::Instance()->GetAM()->PlaySound(1);
+
 		return true;
 	}
 
@@ -79,19 +82,29 @@ bool Bullet::OnCollision(ECSEntity other)
 		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
 		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
+		
 		return true;
 	}
 
 	if (dataOther.tag == "Breakable")
 	{
-		std::cout << "bullet hit this wall\n";
+		dataOther.script->Destroy();
 
-		ECSHandler::Instance()->GetComponent<EntityData>(other).script->Destroy();
+		ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
+		ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
+		ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
+
+		Core::Instance()->GetAM()->PlaySound(3);
+		
+		return true;
 	}
 
 	ECSHandler::Instance()->DisableComponent<Rendering>(mEntity);
 	ECSHandler::Instance()->DisableComponent<Collider>(mEntity);
 	ECSHandler::Instance()->DisableComponent<Movement>(mEntity);
+
+	Core::Instance()->GetAM()->PlaySound(4);
+	
 	return true;
 }
 

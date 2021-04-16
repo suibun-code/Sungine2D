@@ -18,8 +18,8 @@ void PlayerCharacter::Start()
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).tag = "Player";
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).script = this;
 
-	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(600.f, 450.f) });
-	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char") });
+	ECSHandler::Instance()->AddComponent(mEntity, Transform{ glm::vec2(310.f, 360.f) });
+	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec4(1.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 950.f, true });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
 	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText("PlayerHP", "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 255, 125, 0, 255 }) });
@@ -49,9 +49,9 @@ void PlayerCharacter::Update(float deltaTime)
 
 	movement.velocity = glm::vec2(0.f);
 
-	//Set the rotation of the character to face towards the mouse cursor.
+	//Set the rotation of the character to face towards the mouse cursoar.
 	glm::vec2 direction = glm::normalize(Core::Instance()->GetMousePos() - (transform.position));
-	float rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI + 90;
+	rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI + 90;
 	transform.SetRotation(rotation);
 
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_A))
@@ -95,7 +95,7 @@ void PlayerCharacter::Update(float deltaTime)
 		glm::vec2 direction = glm::normalize(Core::Instance()->GetMousePos() - bulletTransform.position);
 		bulletMovement.velocity = glm::vec2(direction.x * bulletMovement.speed, direction.y * bulletMovement.speed);
 		float rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI;
-
+		
 		bulletTransform.SetRotation(rotation);
 
 		ECSHandler::Instance()->EnableComponent<Rendering>(tempBullet->GetEntity());
@@ -109,7 +109,7 @@ void PlayerCharacter::Update(float deltaTime)
 	//Spawning breakable wall.
 	if (Core::Instance()->GetRMBState())
 	{
-		Core::Instance()->GetAM()->PlaySound(0);
+		Core::Instance()->GetAM()->PlaySound(2);
 
 		BreakableWall* wall = new BreakableWall();
 
@@ -117,8 +117,27 @@ void PlayerCharacter::Update(float deltaTime)
 		auto& wallRender = ECSHandler::Instance()->GetComponent<Rendering>(wall->GetEntity());
 		auto& wallCollider = ECSHandler::Instance()->GetComponent<Collider>(wall->GetEntity());
 
-		wallTransform = Transform{ glm::vec2(transform.position.x + 25, transform.position.y + 25) };
-		wallTransform.SetSize(glm::vec2(wallRender.texture.Width, wallRender.texture.Height) * wallTransform.scale);
+		if (rotation > -45.f && rotation < 45.f) // Up
+		{
+			wallTransform = Transform{ glm::vec2(transform.position.x - 14.f, transform.position.y - 30.f) };
+			wallTransform.SetSize(glm::vec2(wallRender.texture.Width, wallRender.texture.Height) * wallTransform.scale);
+		}
+		else if (rotation > 45.f && rotation < 135.f) // Right
+		{
+			wallTransform = Transform{ glm::vec2(transform.position.x + 46.f, transform.position.y - 14.f)};
+			wallTransform.SetSize(glm::vec2(wallRender.texture.Height, wallRender.texture.Width) * wallTransform.scale);
+		}
+		else if (rotation > 135.f && rotation < 225.f) // Down
+		{
+			wallTransform = Transform{ glm::vec2(transform.position.x - 14.f, transform.position.y + 46.f) };
+			wallTransform.SetSize(glm::vec2(wallRender.texture.Width, wallRender.texture.Height) * wallTransform.scale);
+		}
+		else if (rotation > 225.f && rotation < 270.f || rotation > -90.f && rotation < -45.f) // Left
+		{
+			wallTransform = Transform{ glm::vec2(transform.position.x - 30.f, transform.position.y - 14.f) };
+			wallTransform.SetSize(glm::vec2(wallRender.texture.Height, wallRender.texture.Width) * wallTransform.scale);
+		}
+		
 		wallCollider.boundingBox = wallTransform.size;
 	}
 }
@@ -151,6 +170,8 @@ bool PlayerCharacter::OnCollision(ECSEntity other)
 			movement.acceleration += movementOther.acceleration * 1.5f;
 			movementOther.acceleration *= 0.f;
 		}
+
+		Core::Instance()->GetAM()->PlaySound(1);
 	}
 	
 	return false;

@@ -49,8 +49,6 @@ void State::Exit()
 	for (int i = mEntities.size() - 1; i >= 0; i--)
 		ECSHandler::Instance()->DestroyEntity(mEntities.at(i));
 
-	//std::cout << "\n";
-
 	mEntities.clear();
 
 	ResourceManager::DestroyTextures();
@@ -116,6 +114,8 @@ void StateMachine::HandleStateEvents(SDL_Event* event)
 
 void StateMachine::PushState(State* pState)
 {
+	Core::Instance()->SetCurrentState(pState);
+
 	mStates.push_back(pState);
 	mStates.back()->Enter();
 }
@@ -145,6 +145,7 @@ void StateMachine::PopState()
 		mStates.back() = nullptr;
 		mStates.pop_back();
 	}
+	Core::Instance()->SetCurrentState(mStates.back());
 	mStates.back()->Resume();
 }
 

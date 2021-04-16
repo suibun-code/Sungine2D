@@ -24,13 +24,13 @@ void EnemyCharacter::Start()
 	ECSHandler::Instance()->GetComponent<EntityData>(mEntity).script = this;
 
 	ECSHandler::Instance()->AddComponent(mEntity, Transform{ });
-	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec3(0.f, 0.f, 0.f) });
+	ECSHandler::Instance()->AddComponent(mEntity, Rendering{ ResourceManager::GetShader("sprite"), ResourceManager::GetTexture("char"), glm::vec4(0.f, 0.f, 0.f, 1.f) });
 	ECSHandler::Instance()->AddComponent(mEntity, Movement{ 650.f, true });
 	ECSHandler::Instance()->AddComponent(mEntity, Collider{ true });
 
 	auto& data = ECSHandler::Instance()->GetComponent<EntityData>(mEntity);
 
-	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText(data.name, "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 175, 175, 255 }) });
+	ECSHandler::Instance()->AddComponent(mEntity, Character{ 1000, ResourceManager::AddText(data.name, "0", ResourceManager::GetFont("CircularBlack"), glm::vec2(0.f), { 0, 0, 175, 255 }) });
 
 	auto& character = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 	ECSHandler::Instance()->GetComponent<Text>(character.healthText).ChangeText(std::to_string(character.health));
@@ -57,7 +57,7 @@ void EnemyCharacter::Update(float deltaTime)
 
 	movement.velocity = glm::vec2(0.f);
 
-	rendering.color = glm::vec3((float)character.health / 1000, 0.f, 0.f);
+	rendering.color = glm::vec4((float)character.health / 1000, 0.f, 0.f, 1.f);
 
 	if (character.health <= 0)
 		Destroy();
@@ -65,11 +65,21 @@ void EnemyCharacter::Update(float deltaTime)
 
 bool EnemyCharacter::OnCollision(ECSEntity other)
 {
-	auto& tag = ECSHandler::Instance()->GetComponent<EntityData>(other).tag;
+	auto& dataOther = ECSHandler::Instance()->GetComponent<EntityData>(other);
 	auto& player = ECSHandler::Instance()->GetComponent<Character>(mEntity);
 
-	if (tag == "DamageTile")
+	if (dataOther.tag == "DamageTile")
 		player.health -= 1;
+
+	if (dataOther.tag == "Breakable")
+	{
+		dataOther.script->Destroy();
+
+		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
+		movement.acceleration = glm::vec2(0.f);
+		
+		return true;
+	}
 
 	return false;
 }

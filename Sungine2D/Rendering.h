@@ -9,7 +9,7 @@ struct Rendering
 {
 	ShaderUtil shaderUtil;
 	SuTexture2D texture = SuTexture2D();
-	glm::vec3 color = glm::vec3(1.f);
+	glm::vec4 color = glm::vec4(1.f);
 	glm::mat4 model = glm::mat4(1.0f);
 
 	bool Call(ECSEntity entity)

@@ -18,6 +18,8 @@ private:
 	Bullet* tempBullet = nullptr;
 	std::queue<Bullet*> mBulletOP;
 
+	float rotation = 0.f;
+
 public:
 	PlayerCharacter();
 

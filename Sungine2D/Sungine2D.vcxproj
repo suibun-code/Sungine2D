@@ -183,10 +183,12 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleRenderSystem.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Rendering.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SecondPlayerCharacter.h" />
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="SuFont.h" />
     <ClInclude Include="SuTexture2D.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="TextSystem.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="TwoPlayerMode.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
@@ -225,14 +228,17 @@
     <ClCompile Include="MovementSystem.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ParticleRenderSystem.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="SecondPlayerCharacter.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="SuTexture2D.cpp" />
     <ClCompile Include="TestState.cpp" />
     <ClCompile Include="TextSystem.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TwoPlayerMode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\followParticle.frag" />

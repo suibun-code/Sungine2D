@@ -247,7 +247,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 	mpKeyStates = SDL_GetKeyboardState(nullptr);
 	mpFSM = new StateMachine();
 	mpAM = new AudioManager();
-	mpAM->SetMusicVolume(15);
+	mpAM->SetMusicVolume(25);
 	mpFSM->ChangeState(new MainMenu());
 
 	//Start engine and enable the game instance.

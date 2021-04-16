@@ -204,6 +204,15 @@
     <ClInclude Include="BreakableWall.h">
       <Filter>Game\Prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoPlayerMode.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondPlayerCharacter.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -310,6 +319,15 @@
     </ClCompile>
     <ClCompile Include="BreakableWall.cpp">
       <Filter>Game\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="TwoPlayerMode.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondPlayerCharacter.cpp">
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

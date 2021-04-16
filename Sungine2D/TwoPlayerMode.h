@@ -1,13 +1,13 @@
-#pragma once
+﻿#pragma once
 
 #include "FSM.h"
 
 #include "ECSEntityManager.h"
 
-class TestState : public State
+class TwoPlayerMode : public State
 {
 public:
-	TestState() : State("Test") {}
+	TwoPlayerMode() : State("TwoPlayer") {}
 	void Enter();
 	void HandleStateEvents(SDL_Event* event);
 	void Update(float deltaTime);

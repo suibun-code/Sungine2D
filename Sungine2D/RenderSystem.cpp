@@ -106,7 +106,7 @@ void RenderSystem::Init()
 
 		//Render.
 		render.shaderUtil.SetMatrix4("model", render.model);
-		render.shaderUtil.SetVector3f("spriteColor", render.color);
+		render.shaderUtil.SetVector4f("spriteColor", render.color);
 
 		glActiveTexture(GL_TEXTURE0);
 		render.texture.Bind();
@@ -121,10 +121,26 @@ void RenderSystem::Draw()
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
+		auto& data = ECSHandler::Instance()->GetComponent<EntityData>(entity);
 		auto& render = ECSHandler::Instance()->GetComponent<Rendering>(entity);
 
-		if (ECSHandler::Instance()->GetComponent<EntityData>(entity).script != nullptr)
+		if (data.name == "Tile")
+		{
+			//Render.
+			render.shaderUtil.SetMatrix4("model", render.model);
+			render.shaderUtil.SetVector4f("spriteColor", render.color);
+
+			glActiveTexture(GL_TEXTURE0);
+			render.texture.Bind();
+
+			glBindVertexArray(mQuadVAO);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+			glBindVertexArray(0);
+
+			continue;
+		}
+
+		if (data.script != nullptr)
 		{
 			if (render.Call(entity) == true)
 			{
@@ -142,6 +158,8 @@ void RenderSystem::Draw()
 		}
 
 		render.shaderUtil.Use();
+
+		auto& transform = ECSHandler::Instance()->GetComponent<Transform>(entity);
 
 		if (transform.IsDirty())
 		{
@@ -164,7 +182,7 @@ void RenderSystem::Draw()
 
 		//Render.
 		render.shaderUtil.SetMatrix4("model", render.model);
-		render.shaderUtil.SetVector3f("spriteColor", render.color);
+		render.shaderUtil.SetVector4f("spriteColor", render.color);
 
 		glActiveTexture(GL_TEXTURE0);
 		render.texture.Bind();
@@ -172,6 +190,5 @@ void RenderSystem::Draw()
 		glBindVertexArray(mQuadVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 		glBindVertexArray(0);
-
 	}
 }

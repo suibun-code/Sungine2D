@@ -2,12 +2,10 @@
 
 #include "FSM.h"
 
-#include "ECSEntityManager.h"
-
-class TestState : public State
+class PauseState : public State
 {
 public:
-	TestState() : State("Test") {}
+	PauseState() : State("PauseState") {}
 	void Enter();
 	void HandleStateEvents(SDL_Event* event);
 	void Update(float deltaTime);
@@ -16,3 +14,4 @@ public:
 	void Resume() {}
 	void Exit();
 };
+

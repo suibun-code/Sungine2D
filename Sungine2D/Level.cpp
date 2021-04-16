@@ -17,10 +17,10 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 	ShaderUtil shader = ResourceManager::GetShader("sprite");
 	SuTexture2D texture;
 
-	ResourceManager::LoadTexture("res/img/grass1.png", true, "grass");
-	ResourceManager::LoadTexture("res/img/wall.png", true, "wall");
-	ResourceManager::LoadTexture("res/img/lava.png", true, "lava");
-	ResourceManager::LoadTexture("res/img/wall_breakable.png", true, "wall_breakable");
+	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
+	ResourceManager::LoadTexture("res/img/brickWall.png", false, "wall");
+	ResourceManager::LoadTexture("res/img/lava2.png", true, "lava");
+	ResourceManager::LoadTexture("res/img/shield_breakable.png", true, "wall_breakable");
 
 	for (unsigned int i = 0; i < levelHeight; i++)
 	{
@@ -34,6 +34,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 				{
 					Tile* tile = new Tile();
 					tile->SetOwner(tile);
+					ECSHandler::Instance()->GetComponent<EntityData>(tile->GetEntity()).name = "Tile";
 					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("grass");
 				}
@@ -43,6 +44,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 				{
 					Tile* tile = new Tile();
 					tile->SetOwner(tile);
+					ECSHandler::Instance()->GetComponent<EntityData>(tile->GetEntity()).name = "Tile";
 					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("wall");
 					ECSHandler::Instance()->AddComponent(tile->GetEntity(), Collider{ });
@@ -53,6 +55,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 				{
 					Tile* tile = new Tile();
 					tile->SetOwner(tile);
+					ECSHandler::Instance()->GetComponent<EntityData>(tile->GetEntity()).name = "Tile";
 					ECSHandler::Instance()->GetComponent<EntityData>(tile->GetEntity()).tag = "DamageTile";
 					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
 					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("lava");
@@ -64,6 +67,7 @@ void Level::Init(std::vector<std::vector<unsigned int>> tileData, unsigned int l
 				{
 					Tile* tile = new Tile();
 					tile->SetOwner(tile);
+					ECSHandler::Instance()->GetComponent<EntityData>(tile->GetEntity()).name = "Tile";
 					ECSHandler::Instance()->GetComponent<EntityData>(tile->GetEntity()).tag = "Breakable";
 					ECSHandler::Instance()->GetComponent<Rendering>(tile->GetEntity()).texture = ResourceManager::GetTexture("wall_breakable");
 					ECSHandler::Instance()->GetComponent<Transform>(tile->GetEntity()).position = glm::vec2(j * tileWidth, i * tileHeight);
