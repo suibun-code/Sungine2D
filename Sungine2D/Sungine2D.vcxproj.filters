@@ -211,7 +211,7 @@
       <Filter>Game\States</Filter>
     </ClInclude>
     <ClInclude Include="SecondPlayerCharacter.h">
-      <Filter>Engine\Header Files</Filter>
+      <Filter>Game\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -327,7 +327,7 @@
       <Filter>Game\States</Filter>
     </ClCompile>
     <ClCompile Include="SecondPlayerCharacter.cpp">
-      <Filter>Engine\Source Files</Filter>
+      <Filter>Game\Prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

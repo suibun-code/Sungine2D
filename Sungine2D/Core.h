@@ -69,11 +69,11 @@ private:
 	
 	bool mLMBState = false;
 	bool mLMBDown = false;
-
 	bool mRMBState = false;
 	bool mRMBDown = false;
-	
 	bool mMMBState = false;
+	bool mSpaceState = false;
+	bool mEnterState = false;
 	
 	bool mMusicEnabled = false;
 
@@ -159,6 +159,8 @@ public:
 	bool GetLMBDown() { return mLMBDown; }
 	bool GetRMBState() { return mRMBState; }
 	bool GetRMBDown() { return mRMBDown; }
+	bool GetSpaceState() { return mSpaceState; }
+	bool GetEnterState() { return mEnterState; }
 	
 	void SetGameInstance(bool gameInstanceEnabled) { mGameInstanceEnabled = gameInstanceEnabled; }
 	void WaitFor(int time);

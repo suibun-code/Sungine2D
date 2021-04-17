@@ -49,7 +49,7 @@ void PlayerCharacter::Update(float deltaTime)
 
 	movement.velocity = glm::vec2(0.f);
 
-	//Set the rotation of the character to face towards the mouse cursoar.
+	//Set the rotation of the character to face towards the mouse cursor.
 	glm::vec2 direction = glm::normalize(Core::Instance()->GetMousePos() - (transform.position));
 	rotation = std::atan2(direction.y, direction.x) * 180.f / (float)M_PI + 90;
 	transform.SetRotation(rotation);

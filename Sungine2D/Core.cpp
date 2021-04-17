@@ -431,6 +431,12 @@ void Core::HandleEvents()
 	if (mRMBState == true)
 		mRMBState = false;
 
+	if (mEnterState == true)
+		mEnterState = false;
+
+	if (mSpaceState == true)
+		mSpaceState = false;
+
 	while (SDL_PollEvent(&mEvent))
 	{
 		//Does most of the input/event processing.
@@ -504,6 +510,18 @@ void Core::HandleEvents()
 			mMousePosY = mEvent.motion.y;
 			mMouseRelX = mEvent.motion.xrel;
 			mMouseRelY = mEvent.motion.yrel;
+			break;
+
+		case SDL_KEYDOWN:
+			switch(mEvent.key.keysym.sym)
+			{
+			case SDLK_SPACE:
+				mSpaceState = true;
+				break;
+			case SDLK_RETURN:
+				mEnterState = true;
+				break;
+			}
 			break;
 		}
 	}

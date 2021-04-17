@@ -7,6 +7,7 @@
 #include "PauseState.h"
 #include "PlayerCharacter.h"
 #include "ResourceManager.h"
+#include "SecondPlayerCharacter.h"
 
 void TwoPlayerMode::Enter()
 {
@@ -41,8 +42,8 @@ void TwoPlayerMode::Enter()
 	particles->SetOwner(particles);
 
 	//Player.
-	PlayerCharacter* player;
-	player = new PlayerCharacter();
+	SecondPlayerCharacter* player;
+	player = new SecondPlayerCharacter();
 	player->SetOwner(player);
 
 	//Tell the particles to follow the player.
