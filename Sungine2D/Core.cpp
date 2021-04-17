@@ -180,6 +180,7 @@ bool Core::InitAll(const char* title, const int xpos, const int ypos, const int 
 
 	//Fonts.
 	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 14, "CircularMedium");
+	ResourceManager::LoadFont("font/CircularStd-Medium.ttf", 28, "CircularMediumLarge");
 	ResourceManager::LoadFont("font/CircularStd-Black.ttf", 14, "CircularBlack");
 
 	ECSHandler::Instance()->Init();
@@ -437,6 +438,12 @@ void Core::HandleEvents()
 	if (mSpaceState == true)
 		mSpaceState = false;
 
+	if (mLCtrlState == true)
+		mLCtrlState = false;
+
+	if (mRShiftState == true)
+		mRShiftState = false;
+
 	while (SDL_PollEvent(&mEvent))
 	{
 		//Does most of the input/event processing.
@@ -520,6 +527,12 @@ void Core::HandleEvents()
 				break;
 			case SDLK_RETURN:
 				mEnterState = true;
+				break;
+			case SDLK_LCTRL:
+				mLCtrlState = true;
+				break;
+			case SDLK_RSHIFT:
+				mRShiftState = true;
 				break;
 			}
 			break;

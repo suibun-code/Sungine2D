@@ -8,6 +8,10 @@
 #include "PlayerCharacter.h"
 #include "ResourceManager.h"
 #include "SecondPlayerCharacter.h"
+#include "WinState.h"
+
+SecondPlayerCharacter* player;
+SecondPlayerCharacter* player2;
 
 void TwoPlayerMode::Enter()
 {
@@ -36,18 +40,31 @@ void TwoPlayerMode::Enter()
 	Level levelTest;
 	levelTest.Load("res/levels/saved.txt");
 
+	//PLAYER ONE
 	//Particles for the player.
 	ParticleGenerator* particles;
 	particles = new ParticleGenerator(100, 1, glm::vec4(.0f, .0f, 1.f, 1.f), glm::vec2(10.f, -10.f));
 	particles->SetOwner(particles);
 
 	//Player.
-	SecondPlayerCharacter* player;
-	player = new SecondPlayerCharacter();
+	player = new SecondPlayerCharacter(0, glm::vec2(310.f, 360.f));
 	player->SetOwner(player);
 
 	//Tell the particles to follow the player.
 	particles->FollowEntity(player->GetEntity());
+
+	//PLAYER TWO
+	//Particles for the player.
+	ParticleGenerator* particles2;
+	particles2 = new ParticleGenerator(100, 1, glm::vec4(1.0f, .0f, 1.f, 1.f), glm::vec2(10.f, -10.f));
+	particles2->SetOwner(particles2);
+
+	//Player.
+	player2 = new SecondPlayerCharacter(1, glm::vec2(970.f, 360.f));
+	player2->SetOwner(player2);
+
+	//Tell the particles to follow the player.
+	particles2->FollowEntity(player2->GetEntity());
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<MovementSystem>()->Init();
@@ -68,6 +85,17 @@ void TwoPlayerMode::Update(float deltaTime)
 	Core::Instance()->GetSystem<MovementSystem>()->Update(deltaTime);
 	Core::Instance()->GetSystem<CollisionSystem>()->Update();
 	Core::Instance()->GetSystem<FollowSystem>()->Update(deltaTime);
+
+	if (ECSHandler::Instance()->GetComponent<Character>(player->GetEntity()).health <= 0)
+	{
+		Core::Instance()->GetFSM()->ChangeState(new WinState("Player Two (Purple)"));
+		return;
+	}
+	if (ECSHandler::Instance()->GetComponent<Character>(player2->GetEntity()).health <= 0)
+	{
+		Core::Instance()->GetFSM()->ChangeState(new WinState("Player One (Blue)"));
+		return;
+	}
 
 	State::Update(deltaTime);
 }

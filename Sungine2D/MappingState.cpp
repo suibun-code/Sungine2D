@@ -27,7 +27,7 @@ void MappingState::UpdateImGui()
 	{
 		ImGui::Begin("Tile Mapper", &mDisplayMapper, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_HorizontalScrollbar);
 
-		ImGui::TextColored(ImVec4(0.9f, 0.9f, 0.9f, 0.95f), "To begin drawing: select a tile, collapse this window (top left), and hold left click over the canvas. Open this window again to select a new tile (or the eraser). Press 'S' to save, and 'L' to load.");
+		ImGui::TextColored(ImVec4(0.9f, 0.9f, 0.9f, 0.95f), "To begin drawing: select a tile, collapse this window (top left), and hold left click over the canvas. Open this window again to select a new tile (or the eraser). Press 'S' to save, and 'L' to load. Press 'T' to return to the main menu.");
 		ImGui::Separator();
 		ImGui::NewLine();
 
@@ -151,10 +151,10 @@ void MappingState::Enter()
 
 	shader = ResourceManager::GetShader("sprite");
 
+	ResourceManager::LoadTexture("res/img/destroy.png", true, "destroy");
 	ResourceManager::LoadTexture("res/img/grass.png", false, "grass");
 	ResourceManager::LoadTexture("res/img/brickWall.png", false, "wall");
 	ResourceManager::LoadTexture("res/img/lava2.png", true, "lava");
-	ResourceManager::LoadTexture("res/img/shield_breakable.png", true, "wall_breakable");
 
 	for (unsigned int i = 0; i < 12; i++)
 	{

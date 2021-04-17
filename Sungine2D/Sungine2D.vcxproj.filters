@@ -213,6 +213,9 @@
     <ClInclude Include="SecondPlayerCharacter.h">
       <Filter>Game\Prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="WinState.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp">
@@ -328,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="SecondPlayerCharacter.cpp">
       <Filter>Game\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="WinState.cpp">
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

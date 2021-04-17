@@ -12,6 +12,7 @@
 #include "TestState.h"
 #include "MappingState.h"
 #include "TwoPlayerMode.h"
+#include "WinState.h"
 
 void MainMenu::Enter()
 {
@@ -35,7 +36,8 @@ void MainMenu::Enter()
 	ResourceManager::AddText("choose", "Choose the mode you wish to play.", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 120.f, (Core::Instance()->GetWindowHeight() / 2) + 50), { 175, 175, 175, 255 });
 	
 	ResourceManager::AddText("singleplayer", "'1': Singleplayer Against AI", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 100.f, (Core::Instance()->GetWindowHeight() / 2) + 75), { 0, 165, 100, 255 });
-	ResourceManager::AddText("twoplayer", "'2': 1 vs 1 Two-Player", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 100.f, (Core::Instance()->GetWindowHeight() / 2) + 100), { 0, 0, 200, 255 });
+	ResourceManager::AddText("twoplayer", "'2': 1 vs 1 Two-Player", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 100.f, (Core::Instance()->GetWindowHeight() / 2) + 100), { 200, 0, 200, 255 });
+	ResourceManager::AddText("mapping", "'M': Create A Map!", ResourceManager::GetFont("CircularMedium"), glm::vec2(Core::Instance()->GetWindowWidth() / 2 - 100.f, (Core::Instance()->GetWindowHeight() / 2) + 125), { 175, 175, 175, 255 });
 
 	Core::Instance()->GetSystem<TextSystem>()->Init();
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
@@ -83,6 +85,12 @@ void MainMenu::LateUpdate(float deltaTime)
 	if (Core::Instance()->KeyDown(SDL_SCANCODE_M))
 	{
 		Core::Instance()->GetFSM()->ChangeState(new MappingState());
+		return;
+	}
+
+	if (Core::Instance()->KeyDown(SDL_SCANCODE_H))
+	{
+		Core::Instance()->GetFSM()->ChangeState(new WinState("yo"));
 		return;
 	}
 }

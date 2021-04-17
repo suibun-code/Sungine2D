@@ -19,7 +19,7 @@ void PauseState::Enter()
 
 	Core::Instance()->GetSystem<RenderSystem>()->Init();
 
-	std::cout << "name: " << ECSHandler::Instance()->GetComponent<EntityData>(mEntities.back()).name << "\n";
+	Core::Instance()->GetAM()->PauseMusic();
 	
 	State::Enter();
 }
@@ -62,8 +62,8 @@ void PauseState::LateUpdate(float deltaTime)
 
 void PauseState::Exit()
 {
-	std::cout << "exit pause\n";
-
+	Core::Instance()->GetAM()->ResumeMusic();
+	
 	//Destroy all active entities.
 	for (int i = mEntities.size() - 1; i >= 0; i--)
 		ECSHandler::Instance()->DestroyEntity(mEntities.at(i));

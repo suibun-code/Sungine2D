@@ -59,7 +59,7 @@ bool Bullet::OnCollision(ECSEntity other)
 	if (ECSHandler::Instance()->GetComponent<Collider>(other).trigger == true)
 		return false;
 	
-	if (dataOther.tag == "Enemy")
+	if (dataOther.tag == "Enemy" || dataOther.tag == "SecondPlayer")
 	{
 		auto& movement = ECSHandler::Instance()->GetComponent<Movement>(mEntity);
 		auto& movementOther = ECSHandler::Instance()->GetComponent<Movement>(other);

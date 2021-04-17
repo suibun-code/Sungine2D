@@ -55,6 +55,14 @@ void EnemyCharacter::Update(float deltaTime)
 	if (transform.IsDirty())
 		ECSHandler::Instance()->GetComponent<Transform>(character.healthText).SetPosition(glm::vec2(transform.position.x + 5, transform.position.y - 25));
 
+	//Set the rotation of the character to face towards where the player is moving towards.
+	if (movement.velocity != glm::vec2(0))
+	{
+		std::cout << "yo\n";
+		float angle = std::atan2(movement.velocity.y, movement.velocity.x) * 180.f / (float)M_PI + 90;
+		transform.SetRotation(angle);
+	}
+	
 	movement.velocity = glm::vec2(0.f);
 
 	rendering.color = glm::vec4((float)character.health / 1000, 0.f, 0.f, 1.f);

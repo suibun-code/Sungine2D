@@ -199,6 +199,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TwoPlayerMode.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\imgui-1.78\imgui.cpp" />
@@ -239,6 +240,7 @@
     <ClCompile Include="TextSystem.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TwoPlayerMode.cpp" />
+    <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\followParticle.frag" />
